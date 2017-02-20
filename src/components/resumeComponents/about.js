@@ -12,7 +12,7 @@ const style = {
 const About = ({ content }) => {
   return (
     <section id="about">
-      <Paper style={style} zDepth={1} />
+      {/* <Paper style={style} zDepth={1} /> */}
       <a className="smoothscroll" href="#work">
         <h1 className="center shadow">
           {content.text}

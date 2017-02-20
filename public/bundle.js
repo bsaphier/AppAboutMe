@@ -32671,7 +32671,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(456);
+	__webpack_require__(474);
 	
 	var Routes = function Routes() {
 	  return _react2.default.createElement(
@@ -32680,7 +32680,7 @@
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: _Main2.default },
-	      _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/my-site' }),
+	      _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/my-site/#' }),
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: 'my-site', component: _SectionWrapper2.default },
@@ -39743,10 +39743,11 @@
 	
 	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
+	var _resumeComponents = __webpack_require__(456);
+	
+	var _resumeComponents2 = _interopRequireDefault(_resumeComponents);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import ResumeComponents from './resumeComponents';
-	
 	
 	var Resume = function Resume(_ref) {
 	  var resume = _ref.resume;
@@ -39761,8 +39762,16 @@
 	      _react2.default.createElement(_Banner2.default, {
 	        title: resume.basics,
 	        text: resume.text
-	      })
-	    )
+	      }),
+	      _react2.default.createElement(_ChangeSection2.default, { link: 'about' })
+	    ),
+	    _react2.default.createElement(_resumeComponents2.default, {
+	      work: resume.work,
+	      basics: resume.basics,
+	      skills: resume.skills,
+	      education: resume.education,
+	      portfolio: resume.portfolio
+	    })
 	  );
 	};
 	
@@ -39927,9 +39936,8 @@
 	        var navItemTitle = navbar[navLink];
 	        return navItemTitle === navbar.root ? null : _react2.default.createElement(_navItem2.default, {
 	          link: navLink,
-	          name: navItemTitle,
 	          key: 'nav' + idx,
-	          rootPath: navbar.root
+	          name: navItemTitle
 	        });
 	      })
 	    )
@@ -39952,18 +39960,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(382);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var NavItem = function NavItem(_ref) {
 	  var link = _ref.link,
-	      name = _ref.name,
-	      rootPath = _ref.rootPath;
+	      name = _ref.name;
 	
 	  var linkLink = link === 'home' ? _react2.default.createElement(
-	    _reactRouter.Link,
-	    { to: rootPath, className: 'smoothscroll shadow' },
+	    'a',
+	    { className: 'smoothscroll shadow', href: '#' },
 	    name
 	  ) : _react2.default.createElement(
 	    'a',
@@ -40015,13 +40020,702 @@
 /* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _work = __webpack_require__(457);
+	
+	var _work2 = _interopRequireDefault(_work);
+	
+	var _about = __webpack_require__(458);
+	
+	var _about2 = _interopRequireDefault(_about);
+	
+	var _skills = __webpack_require__(470);
+	
+	var _skills2 = _interopRequireDefault(_skills);
+	
+	var _footer = __webpack_require__(471);
+	
+	var _footer2 = _interopRequireDefault(_footer);
+	
+	var _education = __webpack_require__(472);
+	
+	var _education2 = _interopRequireDefault(_education);
+	
+	var _portfolio = __webpack_require__(473);
+	
+	var _portfolio2 = _interopRequireDefault(_portfolio);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ResumeComponents = function ResumeComponents(_ref) {
+	  var work = _ref.work,
+	      basics = _ref.basics,
+	      skills = _ref.skills,
+	      education = _ref.education,
+	      portfolio = _ref.portfolio;
+	
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'resume-home' },
+	    _react2.default.createElement(_about2.default, { content: basics }),
+	    _react2.default.createElement(_work2.default, { content: work }),
+	    _react2.default.createElement(_education2.default, { content: education }),
+	    _react2.default.createElement(_skills2.default, { content: skills }),
+	    _react2.default.createElement(_portfolio2.default, { content: portfolio }),
+	    _react2.default.createElement(_footer2.default, { content: basics })
+	  );
+	};
+	
+	exports.default = ResumeComponents;
+
+/***/ },
+/* 457 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Work = function Work(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    "section",
+	    { id: "work" },
+	    _react2.default.createElement(
+	      "a",
+	      { className: "smoothscroll", href: "#education" },
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "center shadow" },
+	        content.text
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	    )
+	  );
+	};
+	
+	exports.default = Work;
+
+/***/ },
+/* 458 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Paper = __webpack_require__(459);
+	
+	var _Paper2 = _interopRequireDefault(_Paper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var style = {
+	  height: 100,
+	  width: 100,
+	  margin: 20,
+	  textAlign: 'center',
+	  display: 'inline-block'
+	};
+	
+	var About = function About(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    'section',
+	    { id: 'about' },
+	    _react2.default.createElement(
+	      'a',
+	      { className: 'smoothscroll', href: '#work' },
+	      _react2.default.createElement(
+	        'h1',
+	        { className: 'center shadow' },
+	        content.text
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	    )
+	  );
+	};
+	
+	exports.default = About;
+
+/***/ },
+/* 459 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+	
+	var _Paper = __webpack_require__(460);
+	
+	var _Paper2 = _interopRequireDefault(_Paper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _Paper2.default;
+
+/***/ },
+/* 460 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends2 = __webpack_require__(461);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _objectWithoutProperties2 = __webpack_require__(466);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _getPrototypeOf = __webpack_require__(354);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(346);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(357);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(361);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(362);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _simpleAssign = __webpack_require__(467);
+	
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(468);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _transitions = __webpack_require__(469);
+	
+	var _transitions2 = _interopRequireDefault(_transitions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function getStyles(props, context) {
+	  var rounded = props.rounded,
+	      circle = props.circle,
+	      transitionEnabled = props.transitionEnabled,
+	      zDepth = props.zDepth;
+	  var _context$muiTheme = context.muiTheme,
+	      baseTheme = _context$muiTheme.baseTheme,
+	      paper = _context$muiTheme.paper;
+	
+	
+	  return {
+	    root: {
+	      color: paper.color,
+	      backgroundColor: paper.backgroundColor,
+	      transition: transitionEnabled && _transitions2.default.easeOut(),
+	      boxSizing: 'border-box',
+	      fontFamily: baseTheme.fontFamily,
+	      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+	      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0 depth papers
+	      borderRadius: circle ? '50%' : rounded ? '2px' : '0px'
+	    }
+	  };
+	}
+	
+	var Paper = function (_Component) {
+	  (0, _inherits3.default)(Paper, _Component);
+	
+	  function Paper() {
+	    (0, _classCallCheck3.default)(this, Paper);
+	    return (0, _possibleConstructorReturn3.default)(this, (Paper.__proto__ || (0, _getPrototypeOf2.default)(Paper)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3.default)(Paper, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          children = _props.children,
+	          circle = _props.circle,
+	          rounded = _props.rounded,
+	          style = _props.style,
+	          transitionEnabled = _props.transitionEnabled,
+	          zDepth = _props.zDepth,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['children', 'circle', 'rounded', 'style', 'transitionEnabled', 'zDepth']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+	
+	      var styles = getStyles(this.props, this.context);
+	
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+	        children
+	      );
+	    }
+	  }]);
+	  return Paper;
+	}(_react.Component);
+	
+	Paper.defaultProps = {
+	  circle: false,
+	  rounded: true,
+	  transitionEnabled: true,
+	  zDepth: 1
+	};
+	Paper.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? Paper.propTypes = {
+	  /**
+	   * Children passed into the paper element.
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * Set to true to generate a circlular paper container.
+	   */
+	  circle: _react.PropTypes.bool,
+	  /**
+	   * By default, the paper container will have a border radius.
+	   * Set this to false to generate a container with sharp corners.
+	   */
+	  rounded: _react.PropTypes.bool,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * Set to false to disable CSS transitions for the paper element.
+	   */
+	  transitionEnabled: _react.PropTypes.bool,
+	  /**
+	   * This number represents the zDepth of the paper shadow.
+	   */
+	  zDepth: _propTypes2.default.zDepth
+	} : void 0;
+	exports.default = Paper;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 461 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _assign = __webpack_require__(462);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _assign2.default || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];
+	
+	    for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }
+	
+	  return target;
+	};
+
+/***/ },
+/* 462 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(463), __esModule: true };
+
+/***/ },
+/* 463 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(464);
+	module.exports = __webpack_require__(228).Object.assign;
+
+/***/ },
+/* 464 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(226);
+	
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(465)});
+
+/***/ },
+/* 465 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var getKeys  = __webpack_require__(247)
+	  , gOPS     = __webpack_require__(293)
+	  , pIE      = __webpack_require__(294)
+	  , toObject = __webpack_require__(263)
+	  , IObject  = __webpack_require__(250)
+	  , $assign  = Object.assign;
+	
+	// should work with symbols and should have deterministic property order (V8 bug)
+	module.exports = !$assign || __webpack_require__(237)(function(){
+	  var A = {}
+	    , B = {}
+	    , S = Symbol()
+	    , K = 'abcdefghijklmnopqrst';
+	  A[S] = 7;
+	  K.split('').forEach(function(k){ B[k] = k; });
+	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+	  var T     = toObject(target)
+	    , aLen  = arguments.length
+	    , index = 1
+	    , getSymbols = gOPS.f
+	    , isEnum     = pIE.f;
+	  while(aLen > index){
+	    var S      = IObject(arguments[index++])
+	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+	  } return T;
+	} : $assign;
+
+/***/ },
+/* 466 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	exports.default = function (obj, keys) {
+	  var target = {};
+	
+	  for (var i in obj) {
+	    if (keys.indexOf(i) >= 0) continue;
+	    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+	    target[i] = obj[i];
+	  }
+	
+	  return target;
+	};
+
+/***/ },
+/* 467 */
+/***/ function(module, exports) {
+
+	module.exports = function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];
+	    for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }
+	  return target;
+	};
+
+
+/***/ },
+/* 468 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var horizontal = _react.PropTypes.oneOf(['left', 'middle', 'right']);
+	var vertical = _react.PropTypes.oneOf(['top', 'center', 'bottom']);
+	
+	exports.default = {
+	
+	  corners: _react.PropTypes.oneOf(['bottom-left', 'bottom-right', 'top-left', 'top-right']),
+	
+	  horizontal: horizontal,
+	
+	  vertical: vertical,
+	
+	  origin: _react.PropTypes.shape({
+	    horizontal: horizontal,
+	    vertical: vertical
+	  }),
+	
+	  cornersAndCenter: _react.PropTypes.oneOf(['bottom-center', 'bottom-left', 'bottom-right', 'top-center', 'top-left', 'top-right']),
+	
+	  stringOrNumber: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
+	
+	  zDepth: _react.PropTypes.oneOf([0, 1, 2, 3, 4, 5])
+	
+	};
+
+/***/ },
+/* 469 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	
+	  easeOutFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
+	  easeInOutFunction: 'cubic-bezier(0.445, 0.05, 0.55, 0.95)',
+	
+	  easeOut: function easeOut(duration, property, delay, easeFunction) {
+	    easeFunction = easeFunction || this.easeOutFunction;
+	
+	    if (property && Object.prototype.toString.call(property) === '[object Array]') {
+	      var transitions = '';
+	      for (var i = 0; i < property.length; i++) {
+	        if (transitions) transitions += ',';
+	        transitions += this.create(duration, property[i], delay, easeFunction);
+	      }
+	
+	      return transitions;
+	    } else {
+	      return this.create(duration, property, delay, easeFunction);
+	    }
+	  },
+	  create: function create(duration, property, delay, easeFunction) {
+	    duration = duration || '450ms';
+	    property = property || 'all';
+	    delay = delay || '0ms';
+	    easeFunction = easeFunction || 'linear';
+	
+	    return property + ' ' + duration + ' ' + easeFunction + ' ' + delay;
+	  }
+	};
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Skills = function Skills(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    "section",
+	    { id: "skills" },
+	    _react2.default.createElement(
+	      "a",
+	      { className: "smoothscroll", href: "#portfolio" },
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "center shadow" },
+	        content.text
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	    )
+	  );
+	};
+	
+	exports.default = Skills;
+
+/***/ },
+/* 471 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Footer = function Footer(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    "footer",
+	    null,
+	    _react2.default.createElement(
+	      "div",
+	      { id: "go-top" },
+	      _react2.default.createElement(
+	        "a",
+	        { className: "smoothscroll", title: "Back to Top", href: "#" },
+	        _react2.default.createElement(
+	          "h2",
+	          { className: "shadow" },
+	          "Footer"
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Footer;
+
+/***/ },
+/* 472 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Education = function Education(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    "section",
+	    { id: "education" },
+	    _react2.default.createElement(
+	      "a",
+	      { className: "smoothscroll", href: "#skills" },
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "center shadow" },
+	        content.text
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	    )
+	  );
+	};
+	
+	exports.default = Education;
+
+/***/ },
+/* 473 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Portfolio = function Portfolio(_ref) {
+	  var content = _ref.content;
+	
+	  return _react2.default.createElement(
+	    "section",
+	    { id: "portfolio" },
+	    _react2.default.createElement(
+	      "a",
+	      { className: "smoothscroll", href: "#" },
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "center shadow" },
+	        content.text
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	    )
+	  );
+	};
+	
+	exports.default = Portfolio;
+
+/***/ },
+/* 474 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(457);
+	var content = __webpack_require__(475);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(459)(content, {});
+	var update = __webpack_require__(477)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -40038,21 +40732,21 @@
 	}
 
 /***/ },
-/* 457 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(458)();
+	exports = module.exports = __webpack_require__(476)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(180deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(180deg); } }\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background: transparent; }\n\nbody {\n  background-color: #2a2a2a;\n  -webkit-animation: hueShift 29s infinite linear; }\n\nmain {\n  background: linear-gradient(to left top, #CCCFFF, 5%, #999FFF, #222);\n  background-size: 162%;\n  display: inline-block; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Roboto', sans-serif; }\n\na {\n  color: inherit;\n  font-family: 'Roboto Condensed', sans-serif; }\n\np {\n  font-family: 'Roboto Condensed', sans-serif; }\n\n.menu-item {\n  font-family: 'Roboto', sans-serif; }\n\n/**\n * Basic typography style for copy text\n */\nh1 {\n  line-height: 42px; }\n\nh2 {\n  line-height: 36px; }\n\nh3 {\n  line-height: 30px; }\n\nh4 {\n  line-height: 30px; }\n\nh5 {\n  line-height: 30px; }\n\nh6 {\n  line-height: 30px; }\n\nh1, h2, h3, h4, h5, h6 {\n  margin: auto; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99;\n  position: relative; }\n\n.center {\n  text-align: center; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n.appear-enter {\n  transition-duration: 20s;\n  transition-property: opacity;\n  transition-timing-function: ease-out;\n  opacity: 0; }\n\n.appear-enter.appear-enter-active {\n  opacity: 1; }\n\n.appear-leave {\n  opacity: 0; }\n\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\nheader {\n  position: relative;\n  height: 800px;\n  min-height: 500px;\n  width: 100vw;\n  background-size: cover !important;\n  -webkit-background-size: cover !important;\n  text-align: center;\n  overflow: hidden; }\n\n/* vertically center banner section */\n#work:before,\n#about:before,\n#skills:before,\n#contact:before,\n#education:before,\n#portfolio:before,\nheader:before {\n  content: '';\n  display: inline-block;\n  vertical-align: middle;\n  height: 100vh;\n  margin: 0 auto;\n  text-align: center; }\n\nheader .banner {\n  display: inline-block;\n  vertical-align: middle;\n  margin: 0 auto;\n  width: 62%;\n  padding-bottom: 30px;\n  text-align: center; }\n\nheader .banner-text {\n  width: 100%; }\n\nheader .banner-text h1 {\n  color: #fff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h1:hover {\n  color: #444FFF; }\n\nheader .banner-text h2 {\n  color: #fff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h2:hover {\n  color: #444FFF; }\n\n/* header social links */\n/* scrolldown link */\nheader .scrolldown a {\n  position: absolute;\n  bottom: 30px;\n  left: 50%;\n  margin-left: -29px;\n  color: #fff;\n  display: block;\n  height: 42px;\n  width: auto;\n  color: #fff;\n  border-radius: 100%;\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .scrolldown a:hover {\n  color: #444FFF; }\n\n#about {\n  background: linear-gradient(to left bottom, #349, #237, 38%, rgba(13, 13, 13, 0.8));\n  background-size: 162%;\n  background-position: bottom; }\n\n#work {\n  background: linear-gradient(to right bottom, #349, #444FFF, 38%, #CEE, #EEE);\n  background-size: 162%;\n  background-position: bottom; }\n\n#education {\n  background: linear-gradient(to left top, #444FFF, #349, 38%, #2a2a2a, rgba(13, 13, 13, 0.8));\n  background-size: 162%;\n  background-position: top; }\n\n#skills {\n  background: linear-gradient(to right top, #349, #444FFF, 38%, #CEE, #EEE, #EFF);\n  background-size: 162%;\n  background-position: top; }\n\n#portfolio {\n  background: linear-gradient(to left top, #349, #237, 62%, rgba(13, 13, 13, 0.8));\n  background-size: 162%;\n  background-position: auto; }\n\n#contact {\n  background: #191919;\n  background-size: 162%;\n  background-position: auto;\n  color: #636363; }\n\n#contact .section-head {\n  margin-bottom: 42px; }\n\nfooter {\n  padding-top: 48px;\n  margin-bottom: 48px;\n  color: #303030;\n  font-size: 14px;\n  text-align: center;\n  position: relative; }\n\nfooter a, footer a:visited {\n  color: #2a2a2a; }\n\nfooter a:hover, footer a:focus {\n  color: #444FFF; }\n\n#nav-wrap ul, #nav-wrap li, #nav-wrap a {\n  margin: 0;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n/* nav-wrap */\n#nav-wrap {\n  font: 12px 'opensans-bold', sans-serif;\n  width: 100%;\n  text-transform: uppercase;\n  letter-spacing: 2.5px;\n  margin: 0 auto;\n  z-index: 999;\n  position: fixed;\n  left: 0;\n  top: 0; }\n\n.opaque {\n  background-color: rgba(13, 13, 13, 0.8); }\n\n/* hide toggle button */\n#nav-wrap > a.mobile-btn {\n  display: none; }\n\nul#nav {\n  min-height: 48px;\n  width: auto;\n  /* center align the menu */\n  text-align: center; }\n\nul#nav li {\n  position: relative;\n  list-style: none;\n  height: 48px;\n  display: inline-block; }\n\n/* Links */\nul#nav li a {\n  /* 8px padding top + 8px padding bottom + 32px line-height = 48px */\n  display: inline-block;\n  padding: 8px 13px;\n  line-height: 32px;\n  text-decoration: none;\n  text-align: left;\n  color: #444FFF;\n  -webkit-transition: color .2s ease-in-out;\n  -moz-transition: color .2s ease-in-out;\n  -ms-transition: color .2s ease-in-out;\n  transition: color .2s ease-in-out; }\n\nul#nav li a:active {\n  background-color: transparent !important; }\n\nul#nav li.current a {\n  color: #F06000; }\n\n/* Position and sizing of burger button */\n.bm-burger-button {\n  z-index: 9991 !important;\n  position: fixed;\n  width: 34px;\n  height: 21px;\n  left: 3vh;\n  top: 3vh; }\n\n/* Color/shape of burger icon bars */\n.bm-burger-bars {\n  background: #444FFF; }\n\n/* Position and sizing of clickable cross button */\n.bm-cross-button {\n  height: 24px;\n  width: 24px; }\n\n/* Color/shape of close button cross */\n.bm-cross {\n  background: #444FFF; }\n\n/* General sidebar styles */\n.bm-menu {\n  background: linear-gradient(13deg, rgba(13, 13, 13, 0.8), #2a2a2a);\n  background-size: 666% 666%;\n  background-position: top;\n  padding: 2.5em 1.5em 0; }\n\n/* Wrapper for item list */\n.bm-item-list {\n  color: #2a2a2a;\n  padding: 0.9em; }\n\n/* Styling of overlay */\n.bm-overlay {\n  background: rgba(0, 0, 0, 0.1); }\n\n/* Morph shape necessary with bubble or elastic */\n.menu-item {\n  text-align: center;\n  border-width: 2px;\n  border-style: solid;\n  border-radius: 5px;\n  border-color: #444FFF;\n  padding: 13px 21px;\n  margin: 8px auto; }\n\n#sidebar {\n  z-index: 9999 !important; }\n\n#particles-js {\n  top: 0;\n  left: 0;\n  z-index: 0;\n  color: #444FFF;\n  position: absolute; }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444FFF;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
+	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(180deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(180deg); } }\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0; }\n\nbody {\n  background-color: #2a2a2a;\n  -webkit-animation: hueShift 29s infinite linear; }\n\nmain {\n  background: linear-gradient(to left top, #CCCFFF, 5%, #999FFF, #222);\n  display: inline-block; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 38vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n.appear-enter {\n  transition-duration: 2s;\n  transition-property: opacity;\n  transition-timing-function: ease-out;\n  opacity: 0; }\n\n.appear-enter.appear-enter-active {\n  opacity: 1; }\n\n.appear-leave {\n  opacity: 0; }\n\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\nheader {\n  width: 100vw;\n  height: 800px;\n  overflow: hidden;\n  min-height: 500px;\n  position: relative;\n  text-align: center;\n  background-size: cover !important; }\n\n/* vertically center banner section */\nheader:before {\n  content: '';\n  height: 50vh;\n  margin: 0 auto;\n  text-align: center;\n  display: inline-block; }\n\nheader .banner {\n  margin: 0 auto;\n  width: 62%;\n  padding-bottom: 30px;\n  text-align: center; }\n\nheader .banner-text {\n  width: 100%; }\n\nheader .banner-text h1 {\n  color: #fff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h1:hover {\n  color: #444FFF; }\n\nheader .banner-text h2 {\n  color: #fff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h2:hover {\n  color: #444FFF; }\n\n/* header social links */\n/* scrolldown link */\nheader .scrolldown a {\n  position: absolute;\n  bottom: 30px;\n  left: 50%;\n  margin-left: -29px;\n  color: #fff;\n  display: block;\n  height: 42px;\n  width: auto;\n  color: #fff;\n  border-radius: 100%;\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .scrolldown a:hover {\n  color: #444FFF; }\n\n#work,\n#about,\n#skills,\n#contact,\n#education,\n#portfolio {\n  text-align: center;\n  height: 100vh;\n  display: inline-block;\n  background-size: 162%; }\n\n#about {\n  background: linear-gradient(to left bottom, #349, #237, 38%, #0d0d0d);\n  background-position: bottom; }\n\n#work {\n  background: linear-gradient(to right bottom, #349, #444FFF, 38%, #CEE, #EEE);\n  background-position: bottom; }\n\n#education {\n  background: linear-gradient(to left top, #444FFF, #349, 38%, #2a2a2a, #0d0d0d);\n  background-position: top; }\n\n#skills {\n  background: linear-gradient(to right top, #349, #444FFF, 38%, #CEE, #EEE, #EFF);\n  background-position: top; }\n\n#portfolio {\n  background: linear-gradient(to left top, #349, #237, 62%, #0d0d0d);\n  background-position: auto; }\n\n#contact {\n  background: #191919;\n  background-position: auto;\n  color: #636363; }\n\n#contact .section-head {\n  margin-bottom: 42px; }\n\nfooter {\n  padding-top: 48px;\n  margin-bottom: 48px;\n  color: #303030;\n  font-size: 14px;\n  text-align: center; }\n\nfooter a, footer a:visited {\n  color: #2a2a2a; }\n\nfooter a:hover, footer a:focus {\n  color: #444FFF; }\n\n#nav-wrap ul, #nav-wrap li, #nav-wrap a {\n  margin: 0;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n/* nav-wrap */\n#nav-wrap {\n  font: 12px 'opensans-bold', sans-serif;\n  width: 100%;\n  text-transform: uppercase;\n  letter-spacing: 2.5px;\n  margin: 0 auto;\n  z-index: 999;\n  position: fixed;\n  left: 0;\n  top: 0; }\n\n.opaque {\n  background-color: #0d0d0d; }\n\n/* hide toggle button */\n#nav-wrap > a.mobile-btn {\n  display: none; }\n\nul#nav {\n  min-height: 48px;\n  width: auto;\n  /* center align the menu */\n  text-align: center; }\n\nul#nav li {\n  position: relative;\n  list-style: none;\n  height: 48px;\n  display: inline-block; }\n\n/* Links */\nul#nav li a {\n  /* 8px padding top + 8px padding bottom + 32px line-height = 48px */\n  display: inline-block;\n  padding: 8px 13px;\n  line-height: 32px;\n  text-decoration: none;\n  text-align: left;\n  color: #444FFF;\n  -webkit-transition: color .2s ease-in-out;\n  -moz-transition: color .2s ease-in-out;\n  -ms-transition: color .2s ease-in-out;\n  transition: color .2s ease-in-out; }\n\nul#nav li a:active {\n  background-color: transparent !important; }\n\nul#nav li.current a {\n  color: #F06000; }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444FFF;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 458 */
+/* 476 */
 /***/ function(module, exports) {
 
 	/*
@@ -40108,7 +40802,7 @@
 
 
 /***/ },
-/* 459 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

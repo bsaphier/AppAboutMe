@@ -1,17 +1,15 @@
 .top {
   z-index: 99;
-  position: relative;
 }
 
 .center {
-  // line-height: 100vh;
-  text-align: center;
+  margin-top: 38vh
 }
 
 
 /*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/
 .appear-enter {
-  transition-duration: 20s;
+  transition-duration: 2s;
   transition-property: opacity;
   transition-timing-function: ease-out;
   opacity: 0;
@@ -27,37 +25,26 @@
 
 /*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/
 header {
-   position: relative;
-   height: 800px;
-   min-height: 500px;
-   width: 100vw;
-  //  background: #161415 url(../images/background.jpg) no-repeat top center;
-   background-size: cover !important;
-	-webkit-background-size: cover !important;
-   text-align: center;
-   overflow: hidden;
+  width: 100vw;
+  height: 800px;
+  overflow: hidden;
+  min-height: 500px;
+  position: relative;
+  text-align: center;
+  background-size: cover !important;
+	// -webkit-background-size: cover !important;
 }
 
 /* vertically center banner section */
-#work:before,
-#about:before,
-#skills:before,
-#contact:before,
-#education:before,
-#portfolio:before,
 header:before {
   content: '';
-  display: inline-block;
-  vertical-align: middle;
-  height: 100vh;
-  // width:  100vw;
+  height: 50vh;
   margin: 0 auto;
   text-align: center;
+  display: inline-block;
 }
 
 header .banner {
-  display: inline-block;
-  vertical-align: middle;
   margin: 0 auto;
   width: 62%;
   padding-bottom: 30px;
@@ -67,7 +54,6 @@ header .banner {
 header .banner-text { width: 100%; }
 header .banner-text h1 {
   color: #fff;
-  // letter-spacing: -2px;
   margin: 0 auto 18px auto;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 
@@ -80,7 +66,6 @@ header .banner-text h1:hover {
 }
 header .banner-text h2 {
   color: #fff;
-  // letter-spacing: -2px;
   margin: 0 auto 18px auto;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 
@@ -134,8 +119,6 @@ header .scrolldown a {
   display: block;
   height: 42px;
   width: auto;
-  // font-size: 42px;
-  // line-height: 42px;
   color: #fff;
   border-radius: 100%;
 
@@ -143,58 +126,49 @@ header .scrolldown a {
   -moz-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
 }
+
 header .scrolldown a:hover { color: $menu-text; }
+
+#work,
+#about,
+#skills,
+#contact,
+#education,
+#portfolio {
+  text-align: center;
+  height: 100vh;
+  display: inline-block;
+  background-size: 162%;
+}
 
 #about {
   background: $section0-grad;
-  background-size: 162%;
   background-position: bottom;
-  // padding-top: 96px;
-  // padding-bottom: 66px;
-  // overflow: hidden;
 }
 
 #work {
   background: $section1-grad;
-  background-size: 162%;
   background-position: bottom;
-  // padding-top: 90px;
-  // padding-bottom: 0px;
-  // overflow: hidden;
 }
 
 #education {
   background: $section2-grad;
-  background-size: 162%;
   background-position: top;
-  // padding-top: 72px;
-  // padding-bottom: 0px;
-  // overflow: hidden;
 }
 
 #skills {
   background: $section3-grad;
-  background-size: 162%;
   background-position: top;
-  // padding-top: 72px;
-  // padding-bottom: 20px;
-  // overflow: hidden;
 }
 
 #portfolio {
   background: $section4-grad;
-  background-size: 162%;
   background-position: auto;
-  // padding-top: 90px;
-  // padding-bottom: 60px;
 }
 
 #contact {
   background: #191919;
-  background-size: 162%;
   background-position: auto;
-  // padding-top: 96px;
-  // padding-bottom: 102px;
   color: #636363;
 }
 #contact .section-head { margin-bottom: 42px; }
@@ -205,12 +179,12 @@ footer {
   color: #303030;
   font-size: 14px;
   text-align: center;
-  position: relative;
 }
 
 footer a, footer a:visited {
   color: $menu-dark;
 }
+
 footer a:hover, footer a:focus {
   color: $menu-text;
 }

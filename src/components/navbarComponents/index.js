@@ -12,9 +12,8 @@ const Navbar = ({ navbar }) => {
             null :
             (<NavItem
               link={navLink}
-              name={navItemTitle}
               key={`nav${idx}`}
-              rootPath={navbar.root}
+              name={navItemTitle}
             />);
         })}
       </ul>

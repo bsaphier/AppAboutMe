@@ -1,19 +1,7 @@
-
-
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .menu-item {
   font-family: 'Roboto', sans-serif;
 }
 
-a {
-  color: inherit;
+a, p {
   font-family: 'Roboto Condensed', sans-serif;
-}
-
-p {
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-.menu-item {
-  // font-size: 1.25rem;
-  font-family: 'Roboto', sans-serif;
 }

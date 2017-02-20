@@ -17,7 +17,7 @@ require('./stylesheets/main.scss');
 const Routes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-      <IndexRedirect to="/my-site" />
+      <IndexRedirect to="/my-site/#" />
       <Route path="my-site" component={SectionWrapper}>
         <IndexRoute component={ResumeContainer} />
       </Route>
