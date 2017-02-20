@@ -1,0 +1,73 @@
+{
+  "name": "Benjamin Saphier",
+  "resume":
+    {
+      "about": "a string about me",
+      "experience": [
+        {
+          "business": "Audio Engineer & Consultant",
+          "title": "Freelance",
+          "location": "New York, NY",
+          "duration": "2016 - present",
+          "description": [
+            "bullet1",
+            "bullet2",
+            "bullet3"
+          ]
+        }, {
+          "business": "Man Made Music",
+          "title": "Freelance",
+          "location": "New York, NY",
+          "duration": "October 2016 - June 2016",
+          "description": [
+            "bullet1",
+            "bullet2",
+            "bullet3"
+          ]
+        }
+      ],
+      "skills":
+        {
+          "proficient": [
+            "a",
+            "list",
+            "of",
+            "skills"
+          ],
+          "knowledgeable": [
+            "another",
+            "list",
+            "of",
+            "skills"
+          ]
+        },
+      "education": [
+        {
+          "school": "Fullstack Academy",
+          "location": "New York, NY",
+          "duration": "2016 - 2017",
+          "description": [
+            "bullet1",
+            "bullet2"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "title": "react-redux-webaudio",
+          "date": "December 2016 - Present",
+          "role": "Sole Developer",
+          "description": [
+            "bullet1",
+            "bullet2"
+          ]
+        }
+      ],
+      "interests": [
+        "a",
+        "list",
+        "of",
+        "interests"
+      ]
+    }
+}
