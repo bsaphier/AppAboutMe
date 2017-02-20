@@ -1,34 +1,10 @@
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -.038em;
+}
+
  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
    font-weight: inherit;
  }
- h1 {
-  //  font-size: 5rem;
-  //  margin-bottom: 12px;
- }
- h2 {
-  //  font-size: 4rem;
-  //  margin-bottom: 6px;
- }
- h3 {
-  //  font-size: 22px;
-  //  margin-bottom: 12px;
- }
- h4 {
-  //  font-size: 20px;
-  //  margin-bottom: 6px;
- }
- h5 {
-  //  font-size: 18px;
- }
- h6 {
-  //  font-size: 14px;
- }
-
-h1, h2, h3, h4, h5, h6 {
-  // font-weight: 100;
-  letter-spacing: -.038em;
-  // margin: auto;
-}
 
 a {
   text-decoration: none;

@@ -1,13 +1,13 @@
 const initialState = {
-  navbar: {
-    root: '/my-site/',
-    home: 'Home',
-    about: 'About',
-    work: 'Work',
-    education: 'Education',
-    skills: 'Skills',
-    portfolio: 'Portfolio'
-  },
+  // navbar: {
+  //   root: '/my-site/',
+  //   home: 'Home',
+  //   about: 'About',
+  //   work: 'Work',
+  //   education: 'Education',
+  //   skills: 'Skills',
+  //   portfolio: 'Portfolio'
+  // },
   work: { text: 'work' },
   basics: {
     name: 'Benjamin Saphier',

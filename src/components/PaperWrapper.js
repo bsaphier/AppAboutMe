@@ -10,6 +10,7 @@ const styles = {
   }
 };
 
+
 class PaperWrapper extends React.Component {
 
   componentDidMount () {

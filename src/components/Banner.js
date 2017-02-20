@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Banner = ({ title, text }) => {
+
+const Banner = ({ title }) => {
   return (
     <div className="banner">
       <div className="banner-text">

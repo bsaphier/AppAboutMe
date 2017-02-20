@@ -1,33 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import Header from '../containers/Header';
-
+import Header from './Header';
 import Banner from './Banner';
+import Loading from './Loading';
 import Navbar from './navbarComponents';
 import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 
-
-const Resume = ({ resume }) => {
-  return (
-    <div>
-      <Header id={ 'resume-home' }>
-        <Navbar navbar={ resume.navbar } />
-        <Banner
-          title={ resume.basics }
-          text={ resume.text }
-        />
-        <ChangeSection link="about" />
-      </Header>
-      <ResumeComponents
-        work={ resume.work }
-        basics={ resume.basics }
-        skills={ resume.skills }
-        education={ resume.education }
-        portfolio={ resume.portfolio }
-      />
-    </div>
-  );
+const navbar = {
+  home: 'Home',
+  about: 'About',
+  work: 'Work',
+  education: 'Education',
+  skills: 'Skills',
+  portfolio: 'Portfolio'
 };
 
-export default Resume;
+const welcome = {
+  name: 'Benjamin Saphier',
+  text: 'My site is currently under construction. Come back soon!'
+};
+
+
+const Resume = ({ app, resume }) => {
+  return app.isLoading
+    ? <Loading />
+    : (<div>
+        <Header id="resume-home">
+          <Navbar navLinks={ navbar } />
+          <Banner title={ welcome } />
+          <ChangeSection link="about" />
+        </Header>
+
+        <ResumeComponents
+          work={ resume.work }
+          basics={ resume.basics }
+          skills={ resume.skills }
+          education={ resume.education }
+          portfolio={ resume.portfolio }
+        />
+      </div>
+    );
+};
+
+const mapStateToProps = ({ app, resume }) => ({
+  app,
+  resume
+});
+
+export default connect(mapStateToProps)(Resume);
