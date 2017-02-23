@@ -20,7 +20,7 @@ require('./stylesheets/main.scss');
 const getResumeData = () => store.dispatch(fetchData());
 
 // 5 seconds is probably too long!
-const fakeDelay = () => setTimeout(getResumeData, 5000);
+const fakeDelay = () => setTimeout(getResumeData, 1000);
 
 
 const Routes = () => (

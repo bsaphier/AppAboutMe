@@ -3,7 +3,7 @@
 }
 
 .center {
-  margin-top: 38vh
+  margin-top: 34vh
 }
 
 
@@ -26,12 +26,12 @@
 /*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/
 header {
   width: 100vw;
-  height: 800px;
+  // height: 800px;
   overflow: hidden;
   min-height: 500px;
   position: relative;
   text-align: center;
-  background-size: cover !important;
+  // background-size: cover !important;
 	// -webkit-background-size: cover !important;
 }
 
@@ -46,14 +46,14 @@ header:before {
 
 header .banner {
   margin: 0 auto;
-  width: 62%;
+  width: 100vw;
   padding-bottom: 30px;
   text-align: center;
 }
 
-header .banner-text { width: 100%; }
+// header .banner-text { width: 100vw; }
 header .banner-text h1 {
-  color: #fff;
+  color: #eef;
   margin: 0 auto 18px auto;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 
@@ -65,7 +65,7 @@ header .banner-text h1:hover {
   color: $menu-text;
 }
 header .banner-text h2 {
-  color: #fff;
+  color: #eef;
   margin: 0 auto 18px auto;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 
@@ -85,7 +85,7 @@ header .banner-text h2:hover {
 // }
 // header .banner-text h3 span,
 // header .banner-text h3 a {
-//   color: #fff;
+//   color: #eef;
 // }
 // header .banner-text hr {
 //   width: 60%;
@@ -115,11 +115,11 @@ header .scrolldown a {
   bottom: 30px;
   left: 50%;
   margin-left: -29px;
-  color: #fff;
+  color: #eef;
   display: block;
   height: 42px;
   width: auto;
-  color: #fff;
+  color: #eef;
   border-radius: 100%;
 
   -webkit-transition: all .3s ease-in-out;
@@ -135,40 +135,33 @@ header .scrolldown a:hover { color: $menu-text; }
 #contact,
 #education,
 #portfolio {
-  text-align: center;
+  width: 100vw;
   height: 100vh;
   display: inline-block;
-  background-size: 162%;
 }
 
 #about {
-  background: $section0-grad;
-  background-position: bottom;
+  background-image: $section0-grad;
 }
 
 #work {
-  background: $section1-grad;
-  background-position: bottom;
+  background-image: $section1-grad;
 }
 
 #education {
-  background: $section2-grad;
-  background-position: top;
+  background-image: $section2-grad;
 }
 
 #skills {
-  background: $section3-grad;
-  background-position: top;
+  background-image: $section3-grad;
 }
 
 #portfolio {
-  background: $section4-grad;
-  background-position: auto;
+  background-image: $section4-grad;
 }
 
 #contact {
   background: #191919;
-  background-position: auto;
   color: #636363;
 }
 #contact .section-head { margin-bottom: 42px; }

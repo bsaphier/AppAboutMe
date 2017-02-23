@@ -15,6 +15,7 @@ $rgba-primary-3: rgba( 47,  4, 70, 1);
 $rgba-primary-4: rgba( 28,  2, 41, 1);
 $rgba-primary-5: rgba( 10,  0, 23, 1);
 
+$transp: rgba(255, 255, 255, 0);
 $menu-transp: rgba(13, 13, 13, 1);
 $menu-dark: rgba(42, 42, 42, 1);
 $menu-text: #444FFF;
@@ -26,19 +27,19 @@ $bg-gradient: linear-gradient(162deg, $lighter-color, $color-primary-1, $other-c
 
 $menu-gradient: linear-gradient(13deg, $menu-transp, $menu-dark);
 
-$background-grad: linear-gradient(to left top, #CCCFFF, 5%, #999FFF, #222);
+$background-grad: linear-gradient(to left top, $transp, $menu-dark);
 
 /*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/
-$section0-grad: linear-gradient(to left bottom, #349, #237, 38%, $menu-transp);
+$section0-grad: linear-gradient(to left bottom, $transp, $menu-dark);
 
 /*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/
-$section1-grad: linear-gradient(to right bottom, #349, #444FFF, 38%, #CEE,  #EEE);
+$section1-grad: linear-gradient(to right bottom, $transp,  #EEF);
 
 /*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/
-$section2-grad: linear-gradient(to left top, #444FFF, #349, 38%, $menu-dark, $menu-transp);
+$section2-grad: linear-gradient(to left top, $transp, $menu-dark);
 
 /*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/
-$section3-grad: linear-gradient(to right top, #349, #444FFF, 38%, #CEE, #EEE, #EFF);
+$section3-grad: linear-gradient(to right top, $transp, #EEF);
 
 /*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/
-$section4-grad: linear-gradient(to left top, #349, #237, 62%, $menu-transp);
+$section4-grad: linear-gradient(to left top, $transp, $menu-dark);

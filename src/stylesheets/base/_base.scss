@@ -17,12 +17,12 @@ time, mark, audio, video {
 }
 
 body {
-  background-color: $menu-dark;
-  -webkit-animation: hueShift 29s infinite linear;
+  background-color: $menu-text;
+  // -webkit-animation: hueShift 13s infinite linear;
 }
 
 main {
-  background: $background-grad;
+  // background: $background-grad;
   // background-size: 162%;
-  display: inline-block;
+  // display: inline-block;
 }

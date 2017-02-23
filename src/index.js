@@ -7,14 +7,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 import store from './store';
-import Routes from './Routes';
+import App from './App';
 
 injectTapEventPlugin();
 
 render(
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
     <Provider store={store}>
-      <Routes />
+      <App />
     </Provider>
   </MuiThemeProvider>,
   document.getElementById('app')

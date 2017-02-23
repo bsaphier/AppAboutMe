@@ -1,28 +1,7 @@
 @charset 'UTF-8';
-// --------------------------------------
-// import in the following order
-// --------------------------------------
-// 1. Configuration and helpers - abstracts
-// 2. Vendors - vendor
-// 3. Base stuff - base
-// 4. Layout-related sections - layout
-// 5. Components - components
-// 6. Page-specific styles - pages
-// 7. Themes - themes
 
 @import 'abstracts/all';
-
-// @import 'vendor/all';
-
 @import 'base/all';
-
 @import 'layout/all';
 
-// @import 'components/all';
-
-// @import 'pages/all';
-
-// @import 'themes/all';
-
-// import the temporary *~shame~* stylesheets which should be reorganised
 @import '/shame';

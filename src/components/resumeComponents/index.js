@@ -10,7 +10,7 @@ import Portfolio from './portfolio';
 
 const ResumeComponents = ({ work, basics, skills, education, portfolio }) => {
   return (
-    <div id="resume-home">
+    <div>
       <About content={ basics } />
       <Work content={ work } />
       <Education content={ education } />
