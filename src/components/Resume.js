@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Banner from './Banner';
+import Navbar from './Navbar';
 import Loading from './Loading';
-import Navbar from './navbarComponents';
 import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 

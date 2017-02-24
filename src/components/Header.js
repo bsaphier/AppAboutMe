@@ -33,6 +33,7 @@ class Header extends Component {
 
   render() {
     const style = {
+      width: this.state.window.width,
       height: this.state.window.height
     };
 

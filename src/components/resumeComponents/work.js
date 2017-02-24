@@ -15,7 +15,7 @@ const list = content =>
   content.map( job => {
     return (
       <SectionItem key={job.business}>
-        <h2>{ job.business }</h2>
+        <h1>{ job.business }</h1>
         <h2>{ job.title }</h2>
         <p>{ job.location }</p>
         <p>{ job.duration }</p>
