@@ -11,7 +11,7 @@ import ResumeComponents from './resumeComponents';
 const navbar = {
   home: 'Home',
   about: 'About',
-  work: 'Work',
+  work: 'Experience',
   education: 'Education',
   skills: 'Skills',
   portfolio: 'Portfolio'

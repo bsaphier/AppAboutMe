@@ -8,20 +8,20 @@
 
 
 /*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/
-.appear-enter {
-  transition-duration: 2s;
-  transition-property: opacity;
-  transition-timing-function: ease-out;
-  opacity: 0;
-}
-
-.appear-enter.appear-enter-active {
-  opacity: 1;
-}
-
-.appear-leave {
-  opacity: 0;
-}
+// .appear-enter {
+//   transition-duration: 2s;
+//   transition-property: opacity;
+//   transition-timing-function: ease-out;
+//   opacity: 0;
+// }
+//
+// .appear-enter.appear-enter-active {
+//   opacity: 1;
+// }
+//
+// .appear-leave {
+//   opacity: 0;
+// }
 
 /*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/
 header {
