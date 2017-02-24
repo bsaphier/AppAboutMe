@@ -17,28 +17,23 @@ const navbar = {
   portfolio: 'Portfolio'
 };
 
-const welcome = {
-  name: 'Benjamin Saphier',
-  text: 'My site is currently under construction. Come back soon!'
-};
 
-
-const Resume = ({ app, resume }) => {
+const Resume = ({ app, resume: { name, resume } }) => {
   return app.isLoading
     ? <Loading />
     : (<div>
         <Header id="resume-home">
-          <Navbar navLinks={ navbar } />
-          <Banner title={ welcome } />
-          <ChangeSection link="about" />
+          <Navbar navLinks={navbar} />
+          <Banner name={name} />
+          <ChangeSection link="about" text="ABOUT ME" />
         </Header>
 
         <ResumeComponents
-          work={ resume.work }
-          basics={ resume.basics }
-          skills={ resume.skills }
-          education={ resume.education }
-          portfolio={ resume.portfolio }
+          basics={resume.about}
+          skills={resume.skills}
+          work={resume.experience}
+          portfolio={resume.projects}
+          education={resume.education}
         />
       </div>
     );

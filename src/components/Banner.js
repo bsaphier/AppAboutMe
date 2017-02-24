@@ -1,12 +1,12 @@
 import React from 'react';
 
 
-const Banner = ({ title }) => {
+const Banner = ({ name }) => {
   return (
     <div className="banner">
       <div className="banner-text">
-        <h1 className="top responsive-headline">{title.name}</h1>
-        <h2 className="top responsive-headline">{title.text}</h2>
+        <h1>{name}</h1>
+        <h2>My site is currently under construction. Come back soon!</h2>
       </div>
     </div>
   );

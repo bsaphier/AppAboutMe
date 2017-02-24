@@ -74,7 +74,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _App = __webpack_require__(686);
+	var _App = __webpack_require__(383);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -32653,26 +32653,21 @@
 	  value: true
 	});
 	var DATA_LOADED = exports.DATA_LOADED = 'DATA_LOADED';
+	var LOAD_RESUME = exports.LOAD_RESUME = 'LOAD_RESUME';
 
 /***/ },
 /* 382 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _constants = __webpack_require__(381);
+	
 	var initialState = {
-	  // navbar: {
-	  //   root: '/my-site/',
-	  //   home: 'Home',
-	  //   about: 'About',
-	  //   work: 'Work',
-	  //   education: 'Education',
-	  //   skills: 'Skills',
-	  //   portfolio: 'Portfolio'
-	  // },
 	  work: { text: 'work' },
 	  basics: {
 	    name: 'Benjamin Saphier',
@@ -32685,11 +32680,89 @@
 	
 	exports.default = function () {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  return state;
+	  var action = arguments[1];
+	
+	  var nextState = Object.assign({}, state);
+	
+	  switch (action.type) {
+	    case _constants.LOAD_RESUME:
+	      nextState.name = action.name;
+	      nextState.resume = action.resume;
+	      nextState.contact = action.contact;
+	      return nextState;
+	    default:
+	      return state;
+	  }
 	};
 
 /***/ },
-/* 383 */,
+/* 383 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRouter = __webpack_require__(384);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _store = __webpack_require__(371);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(437);
+	
+	var _Main = __webpack_require__(438);
+	
+	var _Main2 = _interopRequireDefault(_Main);
+	
+	var _Resume = __webpack_require__(439);
+	
+	var _Resume2 = _interopRequireDefault(_Resume);
+	
+	var _SectionWrapper = __webpack_require__(672);
+	
+	var _SectionWrapper2 = _interopRequireDefault(_SectionWrapper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// this tells webpack to include all the Sass styling
+	__webpack_require__(682);
+	
+	var getResumeData = function getResumeData() {
+	  return _store2.default.dispatch((0, _actions.fetchData)());
+	};
+	
+	// 5 seconds is probably too long!
+	var fakeDelay = function fakeDelay() {
+	  return setTimeout(getResumeData, 1000);
+	};
+	
+	var Routes = function Routes() {
+	  return _react2.default.createElement(
+	    _reactRouter.Router,
+	    { history: _reactRouter.browserHistory },
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: '/', component: _Main2.default },
+	      _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/my-site' }),
+	      _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: 'my-site', component: _SectionWrapper2.default, onEnter: fakeDelay },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Resume2.default })
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Routes;
+
+/***/ },
 /* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37605,7 +37678,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.fetchData = exports.didLoad = undefined;
+	exports.fetchData = exports.loadResume = exports.didLoad = undefined;
 	
 	var _constants = __webpack_require__(381);
 	
@@ -37615,14 +37688,27 @@
 	  };
 	};
 	
+	var loadResume = exports.loadResume = function loadResume(_ref) {
+	  var name = _ref.name,
+	      contact = _ref.contact,
+	      resume = _ref.resume;
+	  return {
+	    type: _constants.LOAD_RESUME,
+	    name: name,
+	    resume: resume,
+	    contact: contact
+	  };
+	};
+	
 	var fetchData = exports.fetchData = function fetchData() {
 	  // make a backend route to retrieve this instead of accessing the filepath
 	  return function (dispatch) {
 	    fetch('/public/resume.json').then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
-	      console.log(json);
-	      dispatch(didLoad());
+	      return dispatch(loadResume(json));
+	    }).then(function () {
+	      return dispatch(didLoad());
 	    });
 	  };
 	};
@@ -37709,14 +37795,11 @@
 	  portfolio: 'Portfolio'
 	};
 	
-	var welcome = {
-	  name: 'Benjamin Saphier',
-	  text: 'My site is currently under construction. Come back soon!'
-	};
-	
 	var Resume = function Resume(_ref) {
 	  var app = _ref.app,
-	      resume = _ref.resume;
+	      _ref$resume = _ref.resume,
+	      name = _ref$resume.name,
+	      resume = _ref$resume.resume;
 	
 	  return app.isLoading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
 	    'div',
@@ -37725,15 +37808,15 @@
 	      _Header2.default,
 	      { id: 'resume-home' },
 	      _react2.default.createElement(_navbarComponents2.default, { navLinks: navbar }),
-	      _react2.default.createElement(_Banner2.default, { title: welcome }),
-	      _react2.default.createElement(_ChangeSection2.default, { link: 'about' })
+	      _react2.default.createElement(_Banner2.default, { name: name }),
+	      _react2.default.createElement(_ChangeSection2.default, { link: 'about', text: 'ABOUT ME' })
 	    ),
 	    _react2.default.createElement(_resumeComponents2.default, {
-	      work: resume.work,
-	      basics: resume.basics,
+	      basics: resume.about,
 	      skills: resume.skills,
-	      education: resume.education,
-	      portfolio: resume.portfolio
+	      work: resume.experience,
+	      portfolio: resume.projects,
+	      education: resume.education
 	    })
 	  );
 	};
@@ -37850,7 +37933,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Banner = function Banner(_ref) {
-	  var title = _ref.title;
+	  var name = _ref.name;
 	
 	  return _react2.default.createElement(
 	    "div",
@@ -37860,13 +37943,13 @@
 	      { className: "banner-text" },
 	      _react2.default.createElement(
 	        "h1",
-	        { className: "top responsive-headline" },
-	        title.name
+	        null,
+	        name
 	      ),
 	      _react2.default.createElement(
 	        "h2",
-	        { className: "top responsive-headline" },
-	        title.text
+	        null,
+	        "My site is currently under construction. Come back soon!"
 	      )
 	    )
 	  );
@@ -70148,7 +70231,7 @@
 /* 664 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -70160,16 +70243,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var styles = {
+	  button: {
+	    textAlign: 'center'
+	  }
+	};
+	
 	var ChangeSection = function ChangeSection(_ref) {
-	  var link = _ref.link;
+	  var link = _ref.link,
+	      text = _ref.text;
 	
 	  return _react2.default.createElement(
-	    "p",
-	    { className: "scrolldown" },
+	    'div',
+	    { style: styles.button },
 	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", href: "#" + link },
-	      "ABOUT ME"
+	      'p',
+	      { className: 'scrolldown' },
+	      _react2.default.createElement(
+	        'a',
+	        { className: 'smoothscroll', href: '#' + link },
+	        text
+	      )
 	    )
 	  );
 	};
@@ -70241,7 +70335,7 @@
 /* 666 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -70251,28 +70345,73 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _SectionItem = __webpack_require__(686);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _ChangeSection = __webpack_require__(664);
+	
+	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var description = function description(bulletPoints) {
+	  return bulletPoints.map(function (bullet) {
+	    return _react2.default.createElement(
+	      'li',
+	      { key: bullet.slice(0, 5) },
+	      bullet
+	    );
+	  });
+	};
+	
+	var list = function list(content) {
+	  return content.map(function (job) {
+	    return _react2.default.createElement(
+	      _SectionItem2.default,
+	      { key: job.business },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        job.business
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        job.title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        job.location
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        job.duration
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        description(job.description)
+	      )
+	    );
+	  });
+	};
 	
 	var Work = function Work(_ref) {
 	  var content = _ref.content;
 	
 	  return _react2.default.createElement(
-	    "section",
-	    { id: "work" },
+	    'section',
+	    { id: 'work' },
 	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", href: "#education" },
-	      _react2.default.createElement(
-	        "h1",
-	        { className: "center shadow" },
-	        content.text
-	      )
+	      'h1',
+	      { className: 'shadow' },
+	      'EXPERIENCE'
 	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-	    )
+	    list(content),
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'education', text: 'NEXT' })
 	  );
 	};
 	
@@ -70292,18 +70431,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _materialUi = __webpack_require__(443);
+	var _SectionItem = __webpack_require__(686);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _ChangeSection = __webpack_require__(664);
+	
+	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var style = {
-	  height: '62vh',
-	  width: '20vw',
-	  margin: 20,
-	  marginTop: 68,
-	  textAlign: 'center',
-	  display: 'inline-block'
-	};
 	
 	var About = function About(_ref) {
 	  var content = _ref.content;
@@ -70312,23 +70448,20 @@
 	    'section',
 	    { id: 'about' },
 	    _react2.default.createElement(
-	      _materialUi.Paper,
-	      { style: style, zDepth: 1, rounded: false },
-	      _react2.default.createElement(
-	        'a',
-	        { className: 'smoothscroll', href: '#work' },
-	        _react2.default.createElement(
-	          'h1',
-	          { className: 'shadow' },
-	          content.text
-	        )
-	      ),
+	      'h1',
+	      { className: 'shadow' },
+	      'ABOUT'
+	    ),
+	    _react2.default.createElement(
+	      _SectionItem2.default,
+	      null,
 	      _react2.default.createElement(
 	        'p',
 	        null,
-	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	        content
 	      )
-	    )
+	    ),
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'work', text: 'NEXT' })
 	  );
 	};
 	
@@ -70338,7 +70471,7 @@
 /* 668 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -70348,28 +70481,37 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _SectionItem = __webpack_require__(686);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _ChangeSection = __webpack_require__(664);
+	
+	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Skills = function Skills(_ref) {
 	  var content = _ref.content;
 	
 	  return _react2.default.createElement(
-	    "section",
-	    { id: "skills" },
+	    'section',
+	    { id: 'skills' },
 	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", href: "#portfolio" },
-	      _react2.default.createElement(
-	        "h1",
-	        { className: "center shadow" },
-	        content.text
-	      )
+	      'h1',
+	      { className: 'shadow' },
+	      'SKILLS'
 	    ),
 	    _react2.default.createElement(
-	      "p",
+	      _SectionItem2.default,
 	      null,
-	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-	    )
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	      )
+	    ),
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'portfolio', text: 'NEXT' })
 	  );
 	};
 	
@@ -70398,16 +70540,12 @@
 	    "footer",
 	    null,
 	    _react2.default.createElement(
-	      "div",
-	      { id: "go-top" },
+	      "a",
+	      { className: "smoothscroll", title: "Back to Top", href: "#" },
 	      _react2.default.createElement(
-	        "a",
-	        { className: "smoothscroll", title: "Back to Top", href: "#" },
-	        _react2.default.createElement(
-	          "h2",
-	          { className: "shadow" },
-	          "Footer"
-	        )
+	        "h2",
+	        { className: "shadow" },
+	        "Footer"
 	      )
 	    )
 	  );
@@ -70419,7 +70557,7 @@
 /* 670 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -70429,28 +70567,68 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _SectionItem = __webpack_require__(686);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _ChangeSection = __webpack_require__(664);
+	
+	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var description = function description(bulletPoints) {
+	  return bulletPoints.map(function (bullet) {
+	    return _react2.default.createElement(
+	      'li',
+	      { key: bullet.slice(0, 5) },
+	      bullet
+	    );
+	  });
+	};
+	
+	var list = function list(content) {
+	  return content.map(function (school) {
+	    return _react2.default.createElement(
+	      _SectionItem2.default,
+	      { key: school.school },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        school.school
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        school.location
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        school.duration
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        description(school.description)
+	      )
+	    );
+	  });
+	};
 	
 	var Education = function Education(_ref) {
 	  var content = _ref.content;
 	
 	  return _react2.default.createElement(
-	    "section",
-	    { id: "education" },
+	    'section',
+	    { id: 'education' },
 	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", href: "#skills" },
-	      _react2.default.createElement(
-	        "h1",
-	        { className: "center shadow" },
-	        content.text
-	      )
+	      'h1',
+	      { className: 'shadow' },
+	      'EDUCATION'
 	    ),
-	    _react2.default.createElement(
-	      "p",
-	      null,
-	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-	    )
+	    list(content),
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'skills', text: 'NEXT' })
 	  );
 	};
 	
@@ -70460,7 +70638,7 @@
 /* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -70470,28 +70648,37 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _SectionItem = __webpack_require__(686);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _ChangeSection = __webpack_require__(664);
+	
+	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Portfolio = function Portfolio(_ref) {
 	  var content = _ref.content;
 	
 	  return _react2.default.createElement(
-	    "section",
-	    { id: "portfolio" },
+	    'section',
+	    { id: 'portfolio' },
 	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", href: "#" },
-	      _react2.default.createElement(
-	        "h1",
-	        { className: "center shadow" },
-	        content.text
-	      )
+	      'h1',
+	      { className: 'shadow' },
+	      'PORTFOLIO'
 	    ),
 	    _react2.default.createElement(
-	      "p",
+	      _SectionItem2.default,
 	      null,
-	      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-	    )
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	      )
+	    ),
+	    _react2.default.createElement(_ChangeSection2.default, { link: '', text: 'TO THE TOP' })
 	  );
 	};
 	
@@ -72167,7 +72354,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0; }\n\nbody {\n  background-color: #444FFF; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n.appear-enter {\n  transition-duration: 2s;\n  transition-property: opacity;\n  transition-timing-function: ease-out;\n  opacity: 0; }\n\n.appear-enter.appear-enter-active {\n  opacity: 1; }\n\n.appear-leave {\n  opacity: 0; }\n\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\nheader {\n  width: 100vw;\n  overflow: hidden;\n  min-height: 500px;\n  position: relative;\n  text-align: center; }\n\n/* vertically center banner section */\nheader:before {\n  content: '';\n  height: 50vh;\n  margin: 0 auto;\n  text-align: center;\n  display: inline-block; }\n\nheader .banner {\n  margin: 0 auto;\n  width: 100vw;\n  padding-bottom: 30px;\n  text-align: center; }\n\nheader .banner-text h1 {\n  color: #eef;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h1:hover {\n  color: #444FFF; }\n\nheader .banner-text h2 {\n  color: #eef;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h2:hover {\n  color: #444FFF; }\n\n/* header social links */\n/* scrolldown link */\nheader .scrolldown a {\n  position: absolute;\n  bottom: 30px;\n  left: 50%;\n  margin-left: -29px;\n  color: #eef;\n  display: block;\n  height: 42px;\n  width: auto;\n  color: #eef;\n  border-radius: 100%;\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .scrolldown a:hover {\n  color: #444FFF; }\n\n#work,\n#about,\n#skills,\n#contact,\n#education,\n#portfolio {\n  width: 100vw;\n  height: 100vh;\n  display: inline-block; }\n\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #2a2a2a); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), #EEF); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #2a2a2a); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), #EEF); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #2a2a2a); }\n\n#contact {\n  background: #191919;\n  color: #636363; }\n\n#contact .section-head {\n  margin-bottom: 42px; }\n\nfooter {\n  padding-top: 48px;\n  margin-bottom: 48px;\n  color: #303030;\n  font-size: 14px;\n  text-align: center; }\n\nfooter a, footer a:visited {\n  color: #2a2a2a; }\n\nfooter a:hover, footer a:focus {\n  color: #444FFF; }\n\n#nav-wrap ul, #nav-wrap li, #nav-wrap a {\n  margin: 0;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n/* nav-wrap */\n#nav-wrap {\n  font: 12px 'opensans-bold', sans-serif;\n  width: 100%;\n  text-transform: uppercase;\n  letter-spacing: 2.5px;\n  margin: 0 auto;\n  z-index: 999;\n  position: fixed;\n  left: 0;\n  top: 0; }\n\n.opaque {\n  background-color: #0d0d0d; }\n\n/* hide toggle button */\n#nav-wrap > a.mobile-btn {\n  display: none; }\n\nul#nav {\n  min-height: 48px;\n  width: auto;\n  /* center align the menu */\n  text-align: center; }\n\nul#nav li {\n  position: relative;\n  list-style: none;\n  height: 48px;\n  display: inline-block; }\n\n/* Links */\nul#nav li a {\n  /* 8px padding top + 8px padding bottom + 32px line-height = 48px */\n  display: inline-block;\n  padding: 8px 13px;\n  line-height: 32px;\n  text-decoration: none;\n  text-align: left;\n  color: #444FFF;\n  -webkit-transition: color .2s ease-in-out;\n  -moz-transition: color .2s ease-in-out;\n  -ms-transition: color .2s ease-in-out;\n  transition: color .2s ease-in-out; }\n\nul#nav li a:active {\n  background-color: transparent !important; }\n\nul#nav li.current a {\n  color: #F06000; }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444FFF;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
+	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\nabbr, address, cite, code,\ndel, dfn, em, img, ins, kbd, q, samp,\nsmall, strong, sub, sup, var,\nb, i,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0; }\n\nbody {\n  background-color: #fafaff; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n.appear-enter {\n  transition-duration: 2s;\n  transition-property: opacity;\n  transition-timing-function: ease-out;\n  opacity: 0; }\n\n.appear-enter.appear-enter-active {\n  opacity: 1; }\n\n.appear-leave {\n  opacity: 0; }\n\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\nheader {\n  width: 100vw;\n  overflow: hidden;\n  min-height: 500px;\n  position: relative;\n  text-align: center; }\n\n/* vertically center banner section */\nheader:before {\n  content: '';\n  height: 50vh;\n  margin: 0 auto;\n  text-align: center;\n  display: inline-block; }\n\nheader .banner {\n  margin: 0 auto;\n  width: 100vw;\n  padding-bottom: 30px;\n  text-align: center; }\n\nheader .banner-text h1 {\n  color: #fafaff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h1:hover {\n  color: #444dff; }\n\nheader .banner-text h2 {\n  color: #fafaff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h2:hover {\n  color: #444dff; }\n\n/* scrolldown link */\nheader .scrolldown a {\n  position: absolute;\n  bottom: 30px;\n  left: 50%;\n  margin-left: -29px;\n  color: #fafaff;\n  display: block;\n  height: 42px;\n  width: auto;\n  color: #fafaff;\n  border-radius: 100%;\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .scrolldown a:hover {\n  color: #444dff; }\n\n#work,\n#about,\n#skills,\n#contact,\n#education,\n#portfolio {\n  width: 100vw;\n  height: 90vh;\n  padding-top: 10vh;\n  display: inline-block; }\n\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #595959); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), #fafaff); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), #fafaff); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n#contact {\n  background: #191919;\n  color: #636363; }\n\n#contact .section-head {\n  margin-bottom: 42px; }\n\nfooter {\n  padding-top: 48px;\n  margin-bottom: 48px;\n  color: #303030;\n  font-size: 14px;\n  text-align: center; }\n\nfooter a, footer a:visited {\n  color: #595959; }\n\nfooter a:hover, footer a:focus {\n  color: #444dff; }\n\n#nav-wrap ul, #nav-wrap li, #nav-wrap a {\n  margin: 0;\n  padding: 0;\n  border: none;\n  outline: none; }\n\n/* nav-wrap */\n#nav-wrap {\n  width: 100%;\n  text-transform: uppercase;\n  letter-spacing: 2.5px;\n  margin: 0 auto;\n  z-index: 999;\n  position: fixed;\n  left: 0;\n  top: 0; }\n\n.opaque {\n  background-image: linear-gradient(#595959, #262626); }\n\n/* hide toggle button */\n#nav-wrap > a.mobile-btn {\n  display: none; }\n\nul#nav {\n  min-height: 48px;\n  width: auto;\n  /* center align the menu */\n  text-align: center; }\n\nul#nav li {\n  position: relative;\n  list-style: none;\n  height: 48px;\n  display: inline-block; }\n\n/* Links */\nul#nav li a {\n  /* 8px padding top + 8px padding bottom + 32px line-height = 48px */\n  display: inline-block;\n  padding: 8px 13px;\n  line-height: 32px;\n  text-decoration: none;\n  text-align: left;\n  color: #444dff;\n  -webkit-transition: color .2s ease-in-out;\n  -moz-transition: color .2s ease-in-out;\n  -ms-transition: color .2s ease-in-out;\n  transition: color .2s ease-in-out; }\n\nul#nav li a:active {\n  background-color: transparent !important; }\n\nul#nav li.current a {\n  color: #F06000; }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444dff;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
 	
 	// exports
 
@@ -72490,62 +72677,32 @@
 	  value: true
 	});
 	
-	var _reactRouter = __webpack_require__(384);
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _store = __webpack_require__(371);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _actions = __webpack_require__(437);
-	
-	var _Main = __webpack_require__(438);
-	
-	var _Main2 = _interopRequireDefault(_Main);
-	
-	var _Resume = __webpack_require__(439);
-	
-	var _Resume2 = _interopRequireDefault(_Resume);
-	
-	var _SectionWrapper = __webpack_require__(672);
-	
-	var _SectionWrapper2 = _interopRequireDefault(_SectionWrapper);
+	var _materialUi = __webpack_require__(443);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// this tells webpack to include all the Sass styling
-	__webpack_require__(682);
-	
-	var getResumeData = function getResumeData() {
-	  return _store2.default.dispatch((0, _actions.fetchData)());
+	var style = {
+	  margin: 20,
+	  padding: 20,
+	  marginTop: 68,
+	  textAlign: 'center',
+	  display: 'inline-block'
 	};
 	
-	// 5 seconds is probably too long!
-	var fakeDelay = function fakeDelay() {
-	  return setTimeout(getResumeData, 1000);
-	};
-	
-	var Routes = function Routes() {
+	var SectionItem = function SectionItem(_ref) {
+	  var children = _ref.children;
 	  return _react2.default.createElement(
-	    _reactRouter.Router,
-	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(
-	      _reactRouter.Route,
-	      { path: '/', component: _Main2.default },
-	      _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/my-site' }),
-	      _react2.default.createElement(
-	        _reactRouter.Route,
-	        { path: 'my-site', component: _SectionWrapper2.default, onEnter: fakeDelay },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _Resume2.default })
-	      )
-	    )
+	    _materialUi.Paper,
+	    { style: style, zDepth: 1, rounded: false },
+	    children
 	  );
 	};
 	
-	exports.default = Routes;
+	exports.default = SectionItem;
 
 /***/ }
 /******/ ]);

@@ -16,30 +16,32 @@ $rgba-primary-4: rgba( 28,  2, 41, 1);
 $rgba-primary-5: rgba( 10,  0, 23, 1);
 
 $transp: rgba(255, 255, 255, 0);
-$menu-transp: rgba(13, 13, 13, 1);
-$menu-dark: rgba(42, 42, 42, 1);
-$menu-text: #444FFF;
+$menu-transp: rgba(38, 38, 38, 0.62);
+$menu-dark: rgba(38, 38, 38, 1);
+$base-dark: rgba(89, 89, 89, 1);
+$base-color: rgba(68, 77, 255, 1);
+$base-light: rgba(250, 250, 255, 1);
 
 
 // used in wavy--shit
 $bg-gradient: linear-gradient(162deg, $lighter-color, $color-primary-1, $other-color);
 
 
-$menu-gradient: linear-gradient(13deg, $menu-transp, $menu-dark);
+$menu-gradient: linear-gradient($base-dark, $menu-dark);
 
-$background-grad: linear-gradient(to left top, $transp, $menu-dark);
+$background-grad: linear-gradient(to left top, $transp, $base-dark);
 
 /*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/
-$section0-grad: linear-gradient(to left bottom, $transp, $menu-dark);
+$section0-grad: linear-gradient(to left bottom, $transp, $base-dark);
 
 /*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/
-$section1-grad: linear-gradient(to right bottom, $transp,  #EEF);
+$section1-grad: linear-gradient(to right bottom, $transp,  $base-light);
 
 /*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/
-$section2-grad: linear-gradient(to left top, $transp, $menu-dark);
+$section2-grad: $background-grad;
 
 /*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/
-$section3-grad: linear-gradient(to right top, $transp, #EEF);
+$section3-grad: linear-gradient(to right top, $transp, $base-light);
 
 /*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/
-$section4-grad: linear-gradient(to left top, $transp, $menu-dark);
+$section4-grad: $background-grad;
