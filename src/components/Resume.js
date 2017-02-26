@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import Banner from './Banner';
+import Welcome from './Welcome';
 import Navbar from './Navbar';
-import Loading from './Loading';
 import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 
@@ -16,28 +15,24 @@ const navItems = {
 };
 
 
-const Resume = ({ app, resume: { name, resume } }) => {
-  return app.isLoading
-    ? <Loading />
-    : (<div>
-        <Header>
-          <Navbar navLinks={navItems} />
-          <Banner name={name} />
-          <ChangeSection link="about" text="ABOUT ME" />
-        </Header>
+const Resume = ({ resume: { resume } }) => {
+  return (
+    <div>
+      <Header>
+        <Navbar navLinks={navItems} />
+        <Welcome />
+        <ChangeSection link="about" text="ABOUT ME" />
+      </Header>
 
-        <ResumeComponents
-          about={resume.about}
-          skills={resume.skills}
-          projects={resume.projects}
-        />
-      </div>
-    );
+      <ResumeComponents
+        about={resume.about}
+        skills={resume.skills}
+        projects={resume.projects}
+      />
+    </div>
+  );
 };
 
-const mapStateToProps = ({ app, resume }) => ({
-  app,
-  resume
-});
+const mapStateToProps = ({ resume }) => ({ resume });
 
 export default connect(mapStateToProps)(Resume);

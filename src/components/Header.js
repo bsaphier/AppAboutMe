@@ -5,16 +5,15 @@ import React, { Component } from 'react';
 const styles = {
   before: {
     height: '50vh',
-    margin: '0 auto',
+    margin: '0',
     textAlign: 'center',
     display: 'inline-block'
   },
   header: {
-    width: '100vw',
     overflow: 'hidden',
     minHeight: '500px',
-    position: 'relative',
-    textAlign: 'center'
+    textAlign: 'center',
+    position: 'relative'
   }
 };
 
@@ -44,16 +43,22 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    // I need to complement this with a componentWillUnMount
-    // to remove the listener
     return window.addEventListener('resize', this.updateDimensions);
   }
 
+  componentWillUnmount() {
+    return window.removeEventListener('resize', this.updateDimensions);
+  }
+
   render() {
-    const style = Object.assign(styles.header, {
+    const style = {
+      overflow: 'hidden',
+      minHeight: '500px',
+      textAlign: 'center',
+      position: 'relative',
       width: this.state.window.width,
       height: this.state.window.height
-    });
+    };
 
     return (
       <header id={this.props.id} style={style}>

@@ -1,8 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = {
   button: {
-    textAlign: 'center'
+    // textAlign: 'center',
+    top: '50vh',
+    display: 'block',
+    color: 'rgb(68, 77, 255)',
+    margin: '0 20px 18px 20px',
+    WebkitTransition: 'all .3s ease-in-out',
+    MozTransition: 'all .3s ease-in-out',
+    transition: 'all .3s ease-in-out'
   },
   link: {
     // position: 'absolute',
@@ -12,11 +20,8 @@ const styles = {
     // display: 'block',
     // height: '42px',
     // width: 'auto',
+    top: '50vh',
     borderRadius: '100%',
-    color: 'rgb(68, 77, 255)',
-    WebkitTransition: 'all .3s ease-in-out',
-    MozTransition: 'all .3s ease-in-out',
-    transition: 'all .3s ease-in-out'
   }
 };
 
@@ -30,17 +35,12 @@ const leave = event => {
 
 const ChangeSection = ({ link, text }) => {
   return (
-    <div style={styles.button}>
-      <p
-        className="scrolldown"
-        style={styles.link}
-        onMouseEnter={hover}
-        onMouseLeave={leave}
-      >
-        <a href={`#${link}`} className="smoothscroll">
-          { text }
-        </a>
-      </p>
+    <div
+      style={styles.button}
+      onMouseEnter={hover}
+      onMouseLeave={leave}
+    >
+      <Link to={`/${link}`} style={styles.button}>{ text }</Link>
     </div>
   );
 };

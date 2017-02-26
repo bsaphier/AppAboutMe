@@ -1,23 +1,17 @@
-import {
-  LOAD_RESUME
-} from '../constants';
+import { DATA_LOADED } from '../constants';
 
 const initialState = {
-  work: { text: 'work' },
-  basics: {
-    name: 'Benjamin Saphier',
-    text: 'My site is currently under construction. Come back soon!'
-  },
-  skills: { text: 'skills' },
-  education: { text: 'education' },
-  portfolio: { text: 'portfolio' }
+  name: '',
+  contact: {},
+  reume: {},
+  portfolio: {}
 };
 
 export default (state = initialState, action) => {
   const nextState = Object.assign({}, state);
 
   switch (action.type) {
-    case LOAD_RESUME:
+    case DATA_LOADED:
       nextState.name = action.name;
       nextState.resume = action.resume;
       nextState.contact = action.contact;

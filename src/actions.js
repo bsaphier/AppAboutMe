@@ -1,19 +1,19 @@
-import {
-  DATA_LOADED,
-  LOAD_RESUME
-} from './constants';
+import { DATA_LOADED } from './constants';
 
 
-export const didLoad = () => ({
-  type: DATA_LOADED
-});
-
-export const loadResume = ({ name, contact, resume }) => ({
-  type: LOAD_RESUME,
+export const didLoad = ({ name, contact, resume }) => ({
+  type: DATA_LOADED,
   name,
   resume,
   contact
 });
+
+// export const loadResume = () => ({
+//   type: LOAD_RESUME,
+//   name,
+//   resume,
+//   contact
+// });
 
 
 export const fetchData = () => {
@@ -21,7 +21,9 @@ export const fetchData = () => {
   return dispatch => {
     fetch('/public/resume.json')
       .then( response => response.json() )
-      .then( json => dispatch(loadResume(json)) )
-      .then( () => dispatch(didLoad()) );
+      .then( json => dispatch(didLoad(json)) )
+      .catch( err =>
+        console.log(`There was an error fetching the data. ERROR: ${err}`)
+      );
   };
 };
