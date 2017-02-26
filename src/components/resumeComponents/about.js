@@ -3,14 +3,14 @@ import React from 'react';
 import SectionItem from '../SectionItem';
 import ChangeSection from '../ChangeSection';
 
-const About = ({ content }) => {
+const About = ({ content, styling }) => {
   return (
-    <section id="about">
-      <h1 className="shadow">ABOUT</h1>
+    <section id="about" style={styling.section}>
+      <h1 className="shadow" style={styling.title}>ABOUT</h1>
       <SectionItem>
         <p>{content}</p>
       </SectionItem>
-      <ChangeSection link="work" text="NEXT" />
+      <ChangeSection link="skills" text="NEXT" />
     </section>
   );
 };

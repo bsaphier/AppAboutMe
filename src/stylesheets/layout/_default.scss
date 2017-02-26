@@ -24,86 +24,74 @@
 // }
 
 /*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/
-header {
-  width: 100vw;
-  overflow: hidden;
-  min-height: 500px;
-  position: relative;
-  text-align: center;
-}
-
-/* vertically center banner section */
-header:before {
-  content: '';
-  height: 50vh;
-  margin: 0 auto;
-  text-align: center;
-  display: inline-block;
-}
-
-header .banner {
-  margin: 0 auto;
-  width: 100vw;
-  padding-bottom: 30px;
-  text-align: center;
-}
-
-header .banner-text h1 {
-  color: $base-light;
-  margin: 0 auto 18px auto;
-  text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
-
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-}
-header .banner-text h1:hover {
-  color: $base-color;
-}
-header .banner-text h2 {
-  color: $base-light;
-  margin: 0 auto 18px auto;
-  text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
-
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-}
-header .banner-text h2:hover {
-  color: $base-color;
-}
-
+// header {
+//   width: 100vw;
+//   overflow: hidden;
+//   min-height: 500px;
+//   position: relative;
+//   text-align: center;
+// }
+//
+// /* vertically center banner section */
+// header:before {
+//   content: '';
+//   height: 50vh;
+//   margin: 0 auto;
+//   text-align: center;
+//   display: inline-block;
+// }
+//
+// header .banner {
+//   margin: 0 auto;
+//   width: 100vw;
+//   padding-bottom: 30px;
+//   text-align: center;
+// }
+//
+// header .banner-text h1 {
+//   color: $base-light;
+//   margin: 0 auto 18px auto;
+//   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
+//
+//   -webkit-transition: all .3s ease-in-out;
+//   -moz-transition: all .3s ease-in-out;
+//   transition: all .3s ease-in-out;
+// }
+// header .banner-text h1:hover {
+//   color: $base-color;
+// }
+// header .banner-text h2 {
+//   color: $base-light;
+//   margin: 0 auto 18px auto;
+//   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
+//
+//   -webkit-transition: all .3s ease-in-out;
+//   -moz-transition: all .3s ease-in-out;
+//   transition: all .3s ease-in-out;
+// }
+// header .banner-text h2:hover {
+//   color: $base-color;
+// }
+//
 /* scrolldown link */
-header .scrolldown a {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  margin-left: -29px;
-  color: $base-light;
-  display: block;
-  height: 42px;
-  width: auto;
-  color: $base-light;
-  border-radius: 100%;
+// header .scrolldown a {
+//   position: absolute;
+//   bottom: 30px;
+//   left: 50%;
+//   margin-left: -29px;
+//   color: $base-light;
+//   display: block;
+//   height: 42px;
+//   width: auto;
+//   border-radius: 100%;
+//
+//   -webkit-transition: all .3s ease-in-out;
+//   -moz-transition: all .3s ease-in-out;
+//   transition: all .3s ease-in-out;
+// }
+//
+// header .scrolldown a:hover { color: $base-color; }
 
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-}
-
-header .scrolldown a:hover { color: $base-color; }
-
-#work,
-#about,
-#skills,
-#contact,
-#education,
-#portfolio {
-  width: 100vw;
-  height: 90vh;
-  padding-top: 10vh;
-  display: inline-block;
-}
 
 #about {
   background-image: $section0-grad;
@@ -125,24 +113,28 @@ header .scrolldown a:hover { color: $base-color; }
   background-image: $section4-grad;
 }
 
+#projects {
+  background-image: $section4-grad;
+}
+
 // #contact {
 //   background: #191919;
 //   color: #636363;
 // }
 // #contact .section-head { margin-bottom: 42px; }
-
-footer {
-  padding-top: 48px;
-  margin-bottom: 48px;
-  color: #303030;
-  font-size: 14px;
-  text-align: center;
-}
-
-footer a, footer a:visited {
-  color: $base-dark;
-}
-
-footer a:hover, footer a:focus {
-  color: $base-color;
-}
+//
+// footer {
+//   padding-top: 48px;
+//   margin-bottom: 48px;
+//   color: #303030;
+//   font-size: 14px;
+//   text-align: center;
+// }
+//
+// footer a, footer a:visited {
+//   color: $base-dark;
+// }
+//
+// footer a:hover, footer a:focus {
+//   color: $base-color;
+// }

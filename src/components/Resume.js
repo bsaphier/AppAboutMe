@@ -8,13 +8,11 @@ import Loading from './Loading';
 import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 
-const navbar = {
+const navItems = {
   home: 'Home',
   about: 'About',
-  work: 'Experience',
-  education: 'Education',
   skills: 'Skills',
-  portfolio: 'Portfolio'
+  projects: 'Projects'
 };
 
 
@@ -22,18 +20,16 @@ const Resume = ({ app, resume: { name, resume } }) => {
   return app.isLoading
     ? <Loading />
     : (<div>
-        <Header id="resume-home">
-          <Navbar navLinks={navbar} />
+        <Header>
+          <Navbar navLinks={navItems} />
           <Banner name={name} />
           <ChangeSection link="about" text="ABOUT ME" />
         </Header>
 
         <ResumeComponents
-          basics={resume.about}
+          about={resume.about}
           skills={resume.skills}
-          work={resume.experience}
-          portfolio={resume.projects}
-          education={resume.education}
+          projects={resume.projects}
         />
       </div>
     );

@@ -25,9 +25,9 @@ const list = content =>
   });
 
 
-const Work = ({ content }) => {
+const Work = ({ content, styling }) => {
   return (
-    <section id="work">
+    <section id="work" style={styling}>
       <h1 className="shadow">EXPERIENCE</h1>
       { list(content) }
       <ChangeSection link="education" text="NEXT" />

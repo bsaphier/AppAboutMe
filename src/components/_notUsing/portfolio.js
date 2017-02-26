@@ -3,9 +3,9 @@ import React from 'react';
 import SectionItem from '../SectionItem';
 import ChangeSection from '../ChangeSection';
 
-const Portfolio = ({ content }) => {
+const Portfolio = ({ styling }) => {
   return (
-    <section id="portfolio">
+    <section id="portfolio" style={styling}>
       <h1 className="shadow">PORTFOLIO</h1>
       <SectionItem>
         <p>

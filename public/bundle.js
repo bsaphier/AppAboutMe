@@ -32725,14 +32725,14 @@
 	
 	var _Resume2 = _interopRequireDefault(_Resume);
 	
-	var _SectionWrapper = __webpack_require__(672);
+	var _SectionWrapper = __webpack_require__(670);
 	
 	var _SectionWrapper2 = _interopRequireDefault(_SectionWrapper);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// this tells webpack to include all the Sass styling
-	__webpack_require__(682);
+	__webpack_require__(671);
 	
 	var getResumeData = function getResumeData() {
 	  return _store2.default.dispatch((0, _actions.fetchData)());
@@ -35780,11 +35780,11 @@
 	 */
 	var useQueries = function useQueries(createHistory) {
 	  return function () {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	    var history = createHistory(options);
-	    var stringifyQuery = options.stringifyQuery;
-	    var parseQueryString = options.parseQueryString;
+	    var stringifyQuery = options.stringifyQuery,
+	        parseQueryString = options.parseQueryString;
 	
 	
 	    if (typeof stringifyQuery !== 'function') stringifyQuery = defaultStringifyQuery;
@@ -36131,7 +36131,7 @@
 	exports.__esModule = true;
 	exports.locationsAreEqual = exports.statesAreEqual = exports.createLocation = exports.createQuery = undefined;
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -36154,9 +36154,9 @@
 	};
 	
 	var createLocation = exports.createLocation = function createLocation() {
-	  var input = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
-	  var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
-	  var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	  var input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/';
+	  var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Actions.POP;
+	  var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 	
 	  var object = typeof input === 'string' ? (0, _PathUtils.parsePath)(input) : input;
 	
@@ -36236,12 +36236,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var addQueryStringValueToPath = exports.addQueryStringValueToPath = function addQueryStringValueToPath(path, key, value) {
-	  var _parsePath = parsePath(path);
-	
-	  var pathname = _parsePath.pathname;
-	  var search = _parsePath.search;
-	  var hash = _parsePath.hash;
-	
+	  var _parsePath = parsePath(path),
+	      pathname = _parsePath.pathname,
+	      search = _parsePath.search,
+	      hash = _parsePath.hash;
 	
 	  return createPath({
 	    pathname: pathname,
@@ -36251,12 +36249,10 @@
 	};
 	
 	var stripQueryStringValueFromPath = exports.stripQueryStringValueFromPath = function stripQueryStringValueFromPath(path, key) {
-	  var _parsePath2 = parsePath(path);
-	
-	  var pathname = _parsePath2.pathname;
-	  var search = _parsePath2.search;
-	  var hash = _parsePath2.hash;
-	
+	  var _parsePath2 = parsePath(path),
+	      pathname = _parsePath2.pathname,
+	      search = _parsePath2.search,
+	      hash = _parsePath2.hash;
 	
 	  return createPath({
 	    pathname: pathname,
@@ -36268,9 +36264,8 @@
 	};
 	
 	var getQueryStringValueFromPath = exports.getQueryStringValueFromPath = function getQueryStringValueFromPath(path, key) {
-	  var _parsePath3 = parsePath(path);
-	
-	  var search = _parsePath3.search;
+	  var _parsePath3 = parsePath(path),
+	      search = _parsePath3.search;
 	
 	  var match = search.match(new RegExp('[?&]' + key + '=([a-zA-Z0-9]+)'));
 	  return match && match[1];
@@ -36312,10 +36307,10 @@
 	var createPath = exports.createPath = function createPath(location) {
 	  if (location == null || typeof location === 'string') return location;
 	
-	  var basename = location.basename;
-	  var pathname = location.pathname;
-	  var search = location.search;
-	  var hash = location.hash;
+	  var basename = location.basename,
+	      pathname = location.pathname,
+	      search = location.search,
+	      hash = location.hash;
 	
 	  var path = (basename || '') + pathname;
 	
@@ -36347,7 +36342,7 @@
 	
 	var useBasename = function useBasename(createHistory) {
 	  return function () {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	    var history = createHistory(options);
 	    var basename = options.basename;
@@ -36357,7 +36352,7 @@
 	      if (!location) return location;
 	
 	      if (basename && location.basename == null) {
-	        if (location.pathname.indexOf(basename) === 0) {
+	        if (location.pathname.toLowerCase().indexOf(basename.toLowerCase()) === 0) {
 	          location.pathname = location.pathname.substring(basename.length);
 	          location.basename = basename;
 	
@@ -36481,7 +36476,7 @@
 	};
 	
 	var createMemoryHistory = function createMemoryHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  if (Array.isArray(options)) {
 	    options = { entries: options };
@@ -36548,9 +36543,9 @@
 	    go: go
 	  }));
 	
-	  var _options = options;
-	  var entries = _options.entries;
-	  var current = _options.current;
+	  var _options = options,
+	      entries = _options.entries,
+	      current = _options.current;
 	
 	
 	  if (typeof entries === 'string') {
@@ -36610,13 +36605,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var createHistory = function createHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var getCurrentLocation = options.getCurrentLocation;
-	  var getUserConfirmation = options.getUserConfirmation;
-	  var pushLocation = options.pushLocation;
-	  var replaceLocation = options.replaceLocation;
-	  var go = options.go;
-	  var keyLength = options.keyLength;
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var getCurrentLocation = options.getCurrentLocation,
+	      getUserConfirmation = options.getUserConfirmation,
+	      pushLocation = options.pushLocation,
+	      replaceLocation = options.replaceLocation,
+	      go = options.go,
+	      keyLength = options.keyLength;
 	
 	
 	  var currentLocation = void 0;
@@ -36745,7 +36740,7 @@
 	  };
 	
 	  var createLocation = function createLocation(location, action) {
-	    var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
+	    var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : createKey();
 	    return (0, _LocationUtils.createLocation)(location, action, key);
 	  };
 	
@@ -36985,18 +36980,18 @@
 	 * behavior using { forceRefresh: true } in options.
 	 */
 	var createBrowserHistory = function createBrowserHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Browser history needs a DOM') : (0, _invariant2.default)(false) : void 0;
 	
 	  var useRefresh = options.forceRefresh || !(0, _DOMUtils.supportsHistory)();
 	  var Protocol = useRefresh ? RefreshProtocol : BrowserProtocol;
 	
-	  var getUserConfirmation = Protocol.getUserConfirmation;
-	  var getCurrentLocation = Protocol.getCurrentLocation;
-	  var pushLocation = Protocol.pushLocation;
-	  var replaceLocation = Protocol.replaceLocation;
-	  var go = Protocol.go;
+	  var getUserConfirmation = Protocol.getUserConfirmation,
+	      getCurrentLocation = Protocol.getCurrentLocation,
+	      pushLocation = Protocol.pushLocation,
+	      replaceLocation = Protocol.replaceLocation,
+	      go = Protocol.go;
 	
 	
 	  var history = (0, _createHistory2.default)(_extends({
@@ -37102,8 +37097,9 @@
 	
 	var startListener = exports.startListener = function startListener(listener) {
 	  var handlePopState = function handlePopState(event) {
-	    if (event.state !== undefined) // Ignore extraneous popstate events in WebKit
-	      listener(_createLocation(event.state));
+	    if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) // Ignore extraneous popstate events in WebKit
+	      return;
+	    listener(_createLocation(event.state));
 	  };
 	
 	  (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
@@ -37126,8 +37122,8 @@
 	};
 	
 	var updateLocation = function updateLocation(location, updateState) {
-	  var state = location.state;
-	  var key = location.key;
+	  var state = location.state,
+	      key = location.key;
 	
 	
 	  if (state !== undefined) (0, _DOMStateStorage.saveState)(key, state);
@@ -37194,6 +37190,15 @@
 	 */
 	var supportsPopstateOnHashchange = exports.supportsPopstateOnHashchange = function supportsPopstateOnHashchange() {
 	  return window.navigator.userAgent.indexOf('Trident') === -1;
+	};
+	
+	/**
+	 * Returns true if a given popstate event is an extraneous WebKit event.
+	 * Accounts for the fact that Chrome on iOS fires real popstate events
+	 * containing undefined state when pressing the back button.
+	 */
+	var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
+	  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
 	};
 
 /***/ },
@@ -37436,12 +37441,12 @@
 	};
 	
 	var createHashHistory = function createHashHistory() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Hash history needs a DOM') : (0, _invariant2.default)(false) : void 0;
 	
-	  var queryKey = options.queryKey;
-	  var hashType = options.hashType;
+	  var queryKey = options.queryKey,
+	      hashType = options.hashType;
 	
 	
 	  process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(queryKey !== false, 'Using { queryKey: false } no longer works. Instead, just don\'t ' + 'use location state if you don\'t want a key in your URL query string') : void 0;
@@ -37636,8 +37641,8 @@
 	};
 	
 	var updateLocation = function updateLocation(location, pathCoder, queryKey, updateHash) {
-	  var state = location.state;
-	  var key = location.key;
+	  var state = location.state,
+	      key = location.key;
 	
 	
 	  var path = pathCoder.encodePath((0, _PathUtils.createPath)(location));
@@ -37786,13 +37791,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var navbar = {
+	var navItems = {
 	  home: 'Home',
 	  about: 'About',
-	  work: 'Experience',
-	  education: 'Education',
 	  skills: 'Skills',
-	  portfolio: 'Portfolio'
+	  projects: 'Projects'
 	};
 	
 	var Resume = function Resume(_ref) {
@@ -37806,17 +37809,15 @@
 	    null,
 	    _react2.default.createElement(
 	      _Header2.default,
-	      { id: 'resume-home' },
-	      _react2.default.createElement(_Navbar2.default, { navLinks: navbar }),
+	      null,
+	      _react2.default.createElement(_Navbar2.default, { navLinks: navItems }),
 	      _react2.default.createElement(_Banner2.default, { name: name }),
 	      _react2.default.createElement(_ChangeSection2.default, { link: 'about', text: 'ABOUT ME' })
 	    ),
 	    _react2.default.createElement(_resumeComponents2.default, {
-	      basics: resume.about,
+	      about: resume.about,
 	      skills: resume.skills,
-	      work: resume.experience,
-	      portfolio: resume.projects,
-	      education: resume.education
+	      projects: resume.projects
 	    })
 	  );
 	};
@@ -37858,6 +37859,22 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var styles = {
+	  before: {
+	    height: '50vh',
+	    margin: '0 auto',
+	    textAlign: 'center',
+	    display: 'inline-block'
+	  },
+	  header: {
+	    width: '100vw',
+	    overflow: 'hidden',
+	    minHeight: '500px',
+	    position: 'relative',
+	    textAlign: 'center'
+	  }
+	};
+	
 	var Header = function (_Component) {
 	  _inherits(Header, _Component);
 	
@@ -37894,19 +37911,22 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      // I need to complement this with a componentWillUnMount
+	      // to remove the listener
 	      return window.addEventListener('resize', this.updateDimensions);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var style = {
+	      var style = Object.assign(styles.header, {
 	        width: this.state.window.width,
 	        height: this.state.window.height
-	      };
+	      });
 	
 	      return _react2.default.createElement(
 	        'header',
 	        { id: this.props.id, style: style },
+	        _react2.default.createElement('div', { style: styles.before }),
 	        this.props.children
 	      );
 	    }
@@ -37921,7 +37941,7 @@
 /* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -37933,24 +37953,57 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var styles = {
+	  banner: {
+	    height: '50vh',
+	    margin: '0 auto',
+	    textAlign: 'center',
+	    display: 'inline-block'
+	  },
+	  title: {
+	    color: 'rgb(250, 255, 255)',
+	    margin: '0 20px 18px 20px',
+	    // textShadow: '0px 1px 3px rgba(0, 0, 0, .8)',
+	    WebkitTransition: 'all .3s ease-in-out',
+	    MozTransition: 'all .3s ease-in-out',
+	    transition: 'all .3s ease-in-out'
+	  }
+	};
+	
+	var hover = function hover(event) {
+	  event.target.style.color = 'rgb(68, 77, 255)';
+	};
+	
+	var leave = function leave(event) {
+	  event.target.style.color = 'rgb(250, 255, 255)';
+	};
+	
 	var Banner = function Banner(_ref) {
 	  var name = _ref.name;
 	
 	  return _react2.default.createElement(
-	    "div",
-	    { className: "banner" },
+	    'div',
+	    { style: styles.banner },
 	    _react2.default.createElement(
-	      "div",
-	      { className: "banner-text" },
+	      'div',
+	      { className: 'banner-text' },
 	      _react2.default.createElement(
-	        "h1",
-	        null,
+	        'h1',
+	        {
+	          style: styles.title,
+	          onMouseEnter: hover,
+	          onMouseLeave: leave
+	        },
 	        name
 	      ),
 	      _react2.default.createElement(
-	        "h2",
-	        null,
-	        "My site is currently under construction. Come back soon!"
+	        'h2',
+	        {
+	          style: styles.title,
+	          onMouseEnter: hover,
+	          onMouseLeave: leave
+	        },
+	        'My site is currently under construction. Come back soon!'
 	      )
 	    )
 	  );
@@ -37978,18 +38031,19 @@
 	var styles = {
 	  navWrap: {
 	    width: '100%',
+	    maxHeight: '48px',
 	    textTransform: 'uppercase',
 	    letterSpacing: '2.5px',
 	    margin: '0 auto',
 	    zIndex: 999,
 	    position: 'fixed',
-	    left: 0,
-	    top: 0,
+	    left: '0px',
+	    top: '0px',
 	    backgroundImage: 'linear-gradient(rgb(89, 89, 89), rgb(38, 38, 38))'
 	  },
 	  navList: {
-	    margin: 0,
-	    padding: 0,
+	    margin: '0px',
+	    padding: '0px',
 	    border: 'none',
 	    outline: 'none',
 	    minHeight: '48px',
@@ -38008,7 +38062,7 @@
 	    lineHeight: '32px',
 	    textDecoration: 'none',
 	    textAlign: 'left',
-	    color: 'rgb(68, 77, 255);',
+	    color: 'rgb(68, 77, 255)',
 	    WebkitTransition: 'color .2s ease-in-out',
 	    MozTransition: 'color .2s ease-in-out',
 	    msTransition: 'color .2s ease-in-out',
@@ -70267,7 +70321,29 @@
 	var styles = {
 	  button: {
 	    textAlign: 'center'
+	  },
+	  link: {
+	    // position: 'absolute',
+	    // bottom: 30,
+	    // left: '50%',
+	    // marginLeft: -29,
+	    // display: 'block',
+	    // height: '42px',
+	    // width: 'auto',
+	    borderRadius: '100%',
+	    color: 'rgb(68, 77, 255)',
+	    WebkitTransition: 'all .3s ease-in-out',
+	    MozTransition: 'all .3s ease-in-out',
+	    transition: 'all .3s ease-in-out'
 	  }
+	};
+	
+	var hover = function hover(event) {
+	  event.target.style.color = 'rgb(255, 43, 37)';
+	};
+	
+	var leave = function leave(event) {
+	  event.target.style.color = 'rgb(68, 77, 255)';
 	};
 	
 	var ChangeSection = function ChangeSection(_ref) {
@@ -70279,10 +70355,15 @@
 	    { style: styles.button },
 	    _react2.default.createElement(
 	      'p',
-	      { className: 'scrolldown' },
+	      {
+	        className: 'scrolldown',
+	        style: styles.link,
+	        onMouseEnter: hover,
+	        onMouseLeave: leave
+	      },
 	      _react2.default.createElement(
 	        'a',
-	        { className: 'smoothscroll', href: '#' + link },
+	        { href: '#' + link, className: 'smoothscroll' },
 	        text
 	      )
 	    )
@@ -70305,48 +70386,51 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _work = __webpack_require__(665);
-	
-	var _work2 = _interopRequireDefault(_work);
-	
-	var _about = __webpack_require__(667);
+	var _about = __webpack_require__(665);
 	
 	var _about2 = _interopRequireDefault(_about);
 	
-	var _skills = __webpack_require__(668);
+	var _skills = __webpack_require__(667);
 	
 	var _skills2 = _interopRequireDefault(_skills);
 	
-	var _footer = __webpack_require__(669);
+	var _footer = __webpack_require__(668);
 	
 	var _footer2 = _interopRequireDefault(_footer);
 	
-	var _education = __webpack_require__(670);
+	var _projects = __webpack_require__(669);
 	
-	var _education2 = _interopRequireDefault(_education);
-	
-	var _portfolio = __webpack_require__(671);
-	
-	var _portfolio2 = _interopRequireDefault(_portfolio);
+	var _projects2 = _interopRequireDefault(_projects);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var styles = {
+	  section: {
+	    width: '100vw',
+	    height: '90vh',
+	    paddingTop: '10vh',
+	    display: 'inline-block'
+	  },
+	  title: {
+	    margin: '0 20px 18px 20px',
+	    WebkitTransition: 'all .3s ease-in-out',
+	    MozTransition: 'all .3s ease-in-out',
+	    transition: 'all .3s ease-in-out'
+	  }
+	};
+	
 	var ResumeComponents = function ResumeComponents(_ref) {
-	  var work = _ref.work,
-	      basics = _ref.basics,
+	  var about = _ref.about,
 	      skills = _ref.skills,
-	      education = _ref.education,
-	      portfolio = _ref.portfolio;
+	      projects = _ref.projects;
 	
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_about2.default, { content: basics }),
-	    _react2.default.createElement(_work2.default, { content: work }),
-	    _react2.default.createElement(_education2.default, { content: education }),
-	    _react2.default.createElement(_skills2.default, { content: skills }),
-	    _react2.default.createElement(_portfolio2.default, { content: portfolio }),
-	    _react2.default.createElement(_footer2.default, { content: basics })
+	    _react2.default.createElement(_about2.default, { styling: styles, content: about }),
+	    _react2.default.createElement(_skills2.default, { styling: styles, content: skills }),
+	    _react2.default.createElement(_projects2.default, { styling: styles, content: projects }),
+	    _react2.default.createElement(_footer2.default, { styling: styles })
 	  );
 	};
 	
@@ -70376,67 +70460,32 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var description = function description(bulletPoints) {
-	  return bulletPoints.map(function (bullet) {
-	    return _react2.default.createElement(
-	      'li',
-	      { key: bullet.slice(0, 5) },
-	      bullet
-	    );
-	  });
-	};
-	
-	var list = function list(content) {
-	  return content.map(function (job) {
-	    return _react2.default.createElement(
-	      _SectionItem2.default,
-	      { key: job.business },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        job.business
-	      ),
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        job.title
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        job.location
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        job.duration
-	      ),
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        description(job.description)
-	      )
-	    );
-	  });
-	};
-	
-	var Work = function Work(_ref) {
-	  var content = _ref.content;
+	var About = function About(_ref) {
+	  var content = _ref.content,
+	      styling = _ref.styling;
 	
 	  return _react2.default.createElement(
 	    'section',
-	    { id: 'work' },
+	    { id: 'about', style: styling.section },
 	    _react2.default.createElement(
 	      'h1',
-	      { className: 'shadow' },
-	      'EXPERIENCE'
+	      { className: 'shadow', style: styling.title },
+	      'ABOUT'
 	    ),
-	    list(content),
-	    _react2.default.createElement(_ChangeSection2.default, { link: 'education', text: 'NEXT' })
+	    _react2.default.createElement(
+	      _SectionItem2.default,
+	      null,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        content
+	      )
+	    ),
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'skills', text: 'NEXT' })
 	  );
 	};
 	
-	exports.default = Work;
+	exports.default = About;
 
 /***/ },
 /* 666 */
@@ -70456,9 +70505,16 @@
 	
 	var style = {
 	  margin: 20,
-	  padding: 'auto',
+	  // float: 'left',
+	  overflow: 'hidden',
+	  // maxWidth: '20vmin',
+	  maxHeight: '38vh',
+	  padding: '5px 20px',
 	  textAlign: 'center',
-	  display: 'inline-block'
+	  display: 'inline-block',
+	  // fontSize: 14,
+	  lineHeight: '1.62em',
+	  border: '5px solid rgb(255, 43, 37)'
 	};
 	
 	var SectionItem = function SectionItem(_ref) {
@@ -70496,16 +70552,16 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var About = function About(_ref) {
-	  var content = _ref.content;
+	var Skills = function Skills(_ref) {
+	  var styling = _ref.styling;
 	
 	  return _react2.default.createElement(
 	    'section',
-	    { id: 'about' },
+	    { id: 'skills', style: styling.section },
 	    _react2.default.createElement(
 	      'h1',
-	      { className: 'shadow' },
-	      'ABOUT'
+	      { className: 'shadow', style: styling.title },
+	      'SKILLS'
 	    ),
 	    _react2.default.createElement(
 	      _SectionItem2.default,
@@ -70513,14 +70569,14 @@
 	      _react2.default.createElement(
 	        'p',
 	        null,
-	        content
+	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 	      )
 	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { link: 'work', text: 'NEXT' })
+	    _react2.default.createElement(_ChangeSection2.default, { link: 'projects', text: 'NEXT' })
 	  );
 	};
 	
-	exports.default = About;
+	exports.default = Skills;
 
 /***/ },
 /* 668 */
@@ -70536,6 +70592,49 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var styles = {
+	  footer: {
+	    paddingTop: '48px',
+	    marginBottom: '48px',
+	    fontSize: 14,
+	    textAlign: 'center'
+	  }
+	};
+	
+	var Footer = function Footer() {
+	  return _react2.default.createElement(
+	    'footer',
+	    { style: styles.footer },
+	    _react2.default.createElement(
+	      'a',
+	      { className: 'smoothscroll', title: 'Back to Top', href: '#' },
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'shadow' },
+	        'FOOTER'
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = Footer;
+
+/***/ },
+/* 669 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _SectionItem = __webpack_require__(666);
 	
 	var _SectionItem2 = _interopRequireDefault(_SectionItem);
@@ -70546,16 +70645,16 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Skills = function Skills(_ref) {
-	  var content = _ref.content;
+	var Projects = function Projects(_ref) {
+	  var styling = _ref.styling;
 	
 	  return _react2.default.createElement(
 	    'section',
-	    { id: 'skills' },
+	    { id: 'projects', style: styling.section },
 	    _react2.default.createElement(
 	      'h1',
-	      { className: 'shadow' },
-	      'SKILLS'
+	      { className: 'shadow', style: styling.title },
+	      'PROJECTS'
 	    ),
 	    _react2.default.createElement(
 	      _SectionItem2.default,
@@ -70566,47 +70665,11 @@
 	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 	      )
 	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { link: 'portfolio', text: 'NEXT' })
+	    _react2.default.createElement(_ChangeSection2.default, { link: '', text: 'TO THE TOP' })
 	  );
 	};
 	
-	exports.default = Skills;
-
-/***/ },
-/* 669 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Footer = function Footer(_ref) {
-	  var content = _ref.content;
-	
-	  return _react2.default.createElement(
-	    "footer",
-	    null,
-	    _react2.default.createElement(
-	      "a",
-	      { className: "smoothscroll", title: "Back to Top", href: "#" },
-	      _react2.default.createElement(
-	        "h2",
-	        { className: "shadow" },
-	        "Footer"
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = Footer;
+	exports.default = Projects;
 
 /***/ },
 /* 670 */
@@ -70622,141 +70685,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SectionItem = __webpack_require__(666);
-	
-	var _SectionItem2 = _interopRequireDefault(_SectionItem);
-	
-	var _ChangeSection = __webpack_require__(663);
-	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var description = function description(bulletPoints) {
-	  return bulletPoints.map(function (bullet) {
-	    return _react2.default.createElement(
-	      'li',
-	      { key: bullet.slice(0, 5) },
-	      bullet
-	    );
-	  });
-	};
-	
-	var list = function list(content) {
-	  return content.map(function (school) {
-	    return _react2.default.createElement(
-	      _SectionItem2.default,
-	      { key: school.school },
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        school.school
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        school.location
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        school.duration
-	      ),
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        description(school.description)
-	      )
-	    );
-	  });
-	};
-	
-	var Education = function Education(_ref) {
-	  var content = _ref.content;
-	
-	  return _react2.default.createElement(
-	    'section',
-	    { id: 'education' },
-	    _react2.default.createElement(
-	      'h1',
-	      { className: 'shadow' },
-	      'EDUCATION'
-	    ),
-	    list(content),
-	    _react2.default.createElement(_ChangeSection2.default, { link: 'skills', text: 'NEXT' })
-	  );
-	};
-	
-	exports.default = Education;
-
-/***/ },
-/* 671 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _SectionItem = __webpack_require__(666);
-	
-	var _SectionItem2 = _interopRequireDefault(_SectionItem);
-	
-	var _ChangeSection = __webpack_require__(663);
-	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Portfolio = function Portfolio(_ref) {
-	  var content = _ref.content;
-	
-	  return _react2.default.createElement(
-	    'section',
-	    { id: 'portfolio' },
-	    _react2.default.createElement(
-	      'h1',
-	      { className: 'shadow' },
-	      'PORTFOLIO'
-	    ),
-	    _react2.default.createElement(
-	      _SectionItem2.default,
-	      null,
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-	      )
-	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { link: '', text: 'TO THE TOP' })
-	  );
-	};
-	
-	exports.default = Portfolio;
-
-/***/ },
-/* 672 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-	
 	
 	var SectionWrapper = function SectionWrapper(_ref) {
 	  var children = _ref.children,
@@ -70771,25 +70700,16 @@
 	exports.default = SectionWrapper;
 
 /***/ },
-/* 673 */,
-/* 674 */,
-/* 675 */,
-/* 676 */,
-/* 677 */,
-/* 678 */,
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */
+/* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(683);
+	var content = __webpack_require__(672);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(685)(content, {});
+	var update = __webpack_require__(674)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -70806,21 +70726,21 @@
 	}
 
 /***/ },
-/* 683 */
+/* 672 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(684)();
+	exports = module.exports = __webpack_require__(673)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: #faffff; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\nheader {\n  width: 100vw;\n  overflow: hidden;\n  min-height: 500px;\n  position: relative;\n  text-align: center; }\n\n/* vertically center banner section */\nheader:before {\n  content: '';\n  height: 50vh;\n  margin: 0 auto;\n  text-align: center;\n  display: inline-block; }\n\nheader .banner {\n  margin: 0 auto;\n  width: 100vw;\n  padding-bottom: 30px;\n  text-align: center; }\n\nheader .banner-text h1 {\n  color: #faffff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h1:hover {\n  color: #444dff; }\n\nheader .banner-text h2 {\n  color: #faffff;\n  margin: 0 auto 18px auto;\n  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .banner-text h2:hover {\n  color: #444dff; }\n\n/* scrolldown link */\nheader .scrolldown a {\n  position: absolute;\n  bottom: 30px;\n  left: 50%;\n  margin-left: -29px;\n  color: #faffff;\n  display: block;\n  height: 42px;\n  width: auto;\n  color: #faffff;\n  border-radius: 100%;\n  -webkit-transition: all .3s ease-in-out;\n  -moz-transition: all .3s ease-in-out;\n  transition: all .3s ease-in-out; }\n\nheader .scrolldown a:hover {\n  color: #444dff; }\n\n#work,\n#about,\n#skills,\n#contact,\n#education,\n#portfolio {\n  width: 100vw;\n  height: 90vh;\n  padding-top: 10vh;\n  display: inline-block; }\n\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #595959); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), #faffff); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), #faffff); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\nfooter {\n  padding-top: 48px;\n  margin-bottom: 48px;\n  color: #303030;\n  font-size: 14px;\n  text-align: center; }\n\nfooter a, footer a:visited {\n  color: #595959; }\n\nfooter a:hover, footer a:focus {\n  color: #444dff; }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444dff;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
+	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\n/* scrolldown link */\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #595959); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), white); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), white); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n#projects {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #595959); }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  -webkit-animation: hueShift 26s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444dff;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  transition: all 0.05s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.8px;\n    left: -1.8px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 684 */
+/* 673 */
 /***/ function(module, exports) {
 
 	/*
@@ -70876,7 +70796,7 @@
 
 
 /***/ },
-/* 685 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

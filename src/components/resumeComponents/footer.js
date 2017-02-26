@@ -1,11 +1,20 @@
 import React from 'react';
 
-const Footer = ({ content }) => {
+const styles = {
+  footer: {
+    paddingTop: '48px',
+    marginBottom: '48px',
+    fontSize: 14,
+    textAlign: 'center'
+  }
+};
+
+const Footer = () => {
   return (
-    <footer>
+    <footer style={styles.footer}>
         <a className="smoothscroll" title="Back to Top" href="#">
           <h2 className="shadow">
-            Footer
+            FOOTER
           </h2>
         </a>
     </footer>
