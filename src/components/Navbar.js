@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 const styles = {
@@ -36,10 +37,10 @@ const styles = {
     textDecoration: 'none',
     textAlign: 'left',
     color: 'rgb(68, 77, 255)',
-    WebkitTransition: 'color .2s ease-in-out',
-    MozTransition: 'color .2s ease-in-out',
-    msTransition: 'color .2s ease-in-out',
-    transition: 'color .2s ease-in-out'
+    WebkitTransition: 'all .2s ease-in-out',
+    MozTransition: 'all .2s ease-in-out',
+    msTransition: 'all .2s ease-in-out',
+    transition: 'all .2s ease-in-out'
   }
 };
 
@@ -47,9 +48,23 @@ const styles = {
 export const NavItem = ({ link, name }) => {
   const linkLink = link === 'home'
     ? (
-      <a style={styles.navLink} className="smoothscroll shadow" href="">{name}</a>
+      <NavLink
+        to="/"
+        className="shadow"
+        style={styles.navLink}
+        activeClassName="active"
+      >
+        {name}
+      </NavLink>
     ) : (
-      <a style={styles.navLink} className="smoothscroll shadow" href={`#${link}`}>{name}</a>
+      <NavLink
+        to={`/${link}`}
+        className="shadow"
+        style={styles.navLink}
+        activeClassName="active"
+      >
+        {name}
+      </NavLink>
     );
   return (
     <li style={styles.listItem}>{ linkLink }</li>

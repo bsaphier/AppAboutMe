@@ -3,25 +3,14 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   button: {
-    // textAlign: 'center',
-    top: '50vh',
     display: 'block',
+    textAlign: 'center',
+    borderRadius: '100%',
     color: 'rgb(68, 77, 255)',
     margin: '0 20px 18px 20px',
     WebkitTransition: 'all .3s ease-in-out',
     MozTransition: 'all .3s ease-in-out',
     transition: 'all .3s ease-in-out'
-  },
-  link: {
-    // position: 'absolute',
-    // bottom: 30,
-    // left: '50%',
-    // marginLeft: -29,
-    // display: 'block',
-    // height: '42px',
-    // width: 'auto',
-    top: '50vh',
-    borderRadius: '100%',
   }
 };
 

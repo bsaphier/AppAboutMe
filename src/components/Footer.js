@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = {
   footer: {
+    bottom: 0,
     paddingTop: '48px',
     marginBottom: '48px',
     fontSize: 14,
@@ -12,11 +14,11 @@ const styles = {
 const Footer = () => {
   return (
     <footer style={styles.footer}>
-        <a className="smoothscroll" title="Back to Top" href="#">
+        <Link to="/">
           <h2 className="shadow">
             FOOTER
           </h2>
-        </a>
+        </Link>
     </footer>
   );
 };

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { fetchData } from '../actions';
 
-import Loading from './Loading';
 import Resume from './Resume';
+import Loading from './Loading';
 
 
 const Main = ({ app, getResumeData }) => {
@@ -15,11 +15,9 @@ const Main = ({ app, getResumeData }) => {
   if (app.isLoading) fakeDelay();
 
   return (
-    <div id="outer-container">
-      <main id="page-wrap">
-        { app.isLoading ? <Loading /> : <Resume /> }
-      </main>
-    </div>
+    <main>
+      { app.isLoading ? <Loading /> : <Resume /> }
+    </main>
   );
 };
 

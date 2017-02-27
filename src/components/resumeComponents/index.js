@@ -1,8 +1,8 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import About from './about';
 import Skills from './skills';
-import Footer from './footer';
 import Projects from './projects';
 
 
@@ -24,10 +24,18 @@ const styles = {
 const ResumeComponents = ({ about, skills, projects }) => {
   return (
     <div>
-      <About styling={styles} content={ about } />
-      <Skills styling={styles} content={ skills } />
-      <Projects styling={styles} content={ projects } />
-      <Footer styling={styles} />
+      <Route
+        path="/my-site/about"
+        children={ () => <About styling={styles} content={ about } />}
+      />
+      <Route
+        path="/my-site/skills"
+        children={ () => <Skills styling={styles} content={ skills } />}
+      />
+      <Route
+        path="/my-site/projects"
+        children={ () => <Projects styling={styles} content={ projects } />}
+      />
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 import Header from './Header';
-import Welcome from './Welcome';
 import Navbar from './Navbar';
+import Footer from './Footer';
+import Welcome from './Welcome';
 import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 
@@ -29,6 +31,7 @@ const Resume = ({ resume: { resume } }) => {
         skills={resume.skills}
         projects={resume.projects}
       />
+      <Footer />
     </div>
   );
 };

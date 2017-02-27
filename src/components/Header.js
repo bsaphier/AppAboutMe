@@ -2,40 +2,14 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 
-const styles = {
-  before: {
-    height: '50vh',
-    margin: '0',
-    textAlign: 'center',
-    display: 'inline-block'
-  },
-  header: {
-    overflow: 'hidden',
-    minHeight: '500px',
-    textAlign: 'center',
-    position: 'relative'
-  }
-};
-
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      window: {
-        height: 0,
-        width: 0
-      }
+      width: 0,
+      height: 0
     };
     this.updateDimensions = this.updateDimensions.bind(this);
-  }
-
-  updateDimensions() {
-    return this.setState({
-      window: {
-        height: window.innerHeight,
-        width: window.innerWidth
-      }
-    });
   }
 
   componentWillMount() {
@@ -50,18 +24,33 @@ class Header extends Component {
     return window.removeEventListener('resize', this.updateDimensions);
   }
 
+  updateDimensions() {
+    return this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }
+
   render() {
-    const style = {
-      overflow: 'hidden',
-      minHeight: '500px',
-      textAlign: 'center',
-      position: 'relative',
-      width: this.state.window.width,
-      height: this.state.window.height
+    const styles = {
+      before: {
+        margin: '0',
+        height: '50vh',
+        textAlign: 'center',
+        display: 'inline-block'
+      },
+      window: {
+        overflow: 'hidden',
+        minHeight: '500px',
+        textAlign: 'center',
+        position: 'relative',
+        width: this.state.width,
+        height: this.state.height
+      }
     };
 
     return (
-      <header id={this.props.id} style={style}>
+      <header id={this.props.id} style={styles.window}>
         <div style={styles.before} />
         { this.props.children }
       </header>
