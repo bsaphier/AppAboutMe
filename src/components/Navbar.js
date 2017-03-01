@@ -49,7 +49,7 @@ export const NavItem = ({ link, name }) => {
   const linkLink = link === 'home'
     ? (
       <NavLink
-        to="/"
+        to="/resume"
         className="shadow"
         style={styles.navLink}
         activeClassName="active"
@@ -58,7 +58,7 @@ export const NavItem = ({ link, name }) => {
       </NavLink>
     ) : (
       <NavLink
-        to={`/${link}`}
+        to={`/resume/${link}`}
         className="shadow"
         style={styles.navLink}
         activeClassName="active"

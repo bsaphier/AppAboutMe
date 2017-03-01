@@ -14,11 +14,11 @@ const styles = {
 const Footer = () => {
   return (
     <footer style={styles.footer}>
-        <Link to="/">
-          <h2 className="shadow">
-            FOOTER
-          </h2>
+      <h2 className="shadow">
+        <Link to="/resume">
+          FOOTER
         </Link>
+      </h2>
     </footer>
   );
 };

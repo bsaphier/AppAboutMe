@@ -29,7 +29,7 @@ const ChangeSection = ({ link, text }) => {
       onMouseEnter={hover}
       onMouseLeave={leave}
     >
-      <Link to={`/${link}`} style={styles.button}>{ text }</Link>
+      <Link to={`/resume/${link}`} style={styles.button}>{ text }</Link>
     </div>
   );
 };

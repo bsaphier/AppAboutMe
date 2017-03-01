@@ -1,13 +1,29 @@
 import React from 'react';
-import { CircularProgress } from 'material-ui';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import Header from './Header';
+import { fetchData } from '../actions';
+
+import Spinner from './Spinner';
 
 
-const Loading = () => (
-  <Header>
-    <CircularProgress size={80} thickness={5} />
-  </Header>
-);
+const Main = ({ app, getResumeData }) => {
 
-export default Loading;
+  // fake delay to test loading animation
+  const fakeDelay = () => setTimeout(getResumeData, 1000);
+
+  if (app.isLoading) fakeDelay();
+
+  return app.isLoading
+    ? <Spinner />
+    : <Redirect to="/resume" />;
+};
+
+
+const mapStateToProps = ({ app }) => ({ app });
+
+const mapDispatchToProps = dispatch => ({
+  getResumeData: () => dispatch(fetchData())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

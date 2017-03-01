@@ -74,9 +74,9 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _Router = __webpack_require__(383);
+	var _App = __webpack_require__(383);
 	
-	var _Router2 = _interopRequireDefault(_Router);
+	var _App2 = _interopRequireDefault(_App);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88,7 +88,7 @@
 	  _react2.default.createElement(
 	    _reactRedux.Provider,
 	    { store: _store2.default },
-	    _react2.default.createElement(_Router2.default, null)
+	    _react2.default.createElement(_App2.default, null)
 	  )
 	), document.getElementById('app'));
 
@@ -32653,7 +32653,6 @@
 	  value: true
 	});
 	var DATA_LOADED = exports.DATA_LOADED = 'DATA_LOADED';
-	var LOAD_RESUME = exports.LOAD_RESUME = 'LOAD_RESUME';
 
 /***/ },
 /* 382 */
@@ -32707,100 +32706,33 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Main = __webpack_require__(420);
+	var _Resume = __webpack_require__(420);
 	
-	var _Main2 = _interopRequireDefault(_Main);
+	var _Resume2 = _interopRequireDefault(_Resume);
+	
+	var _Loading = __webpack_require__(431);
+	
+	var _Loading2 = _interopRequireDefault(_Loading);
+	
+	__webpack_require__(653);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// this tells webpack to include all the Sass styling
-	__webpack_require__(653);
-	
-	// const styles = {
-	//   fill: {
-	//     position: 'absolute',
-	//     left: 0,
-	//     right: 0,
-	//     top: 0,
-	//     bottom: 0
-	//   }
-	// };
-	
-	var Router = function Router() {
+	var App = function App() {
 	  return _react2.default.createElement(
 	    _reactRouterDom.BrowserRouter,
 	    { basename: '/my-site' },
-	    _react2.default.createElement(_reactRouterDom.Route, { component: _Main2.default })
+	    _react2.default.createElement(
+	      'main',
+	      null,
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Loading2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/resume', component: _Resume2.default })
+	    )
 	  );
 	};
 	
-	exports.default = Router;
-	
-	/*
-	const AnimationExample = () => (
-	  <BrowserRouter>
-	    <div style={styles.fill}>
-	      <ul style={styles.nav}>
-	        <NavLink to="/10/90/50">Red</NavLink>
-	        <NavLink to="/120/100/40">Green</NavLink>
-	        <NavLink to="/200/100/40">Blue</NavLink>
-	        <NavLink to="/310/100/50">Pink</NavLink>
-	      </ul>
-
-	      <div style={styles.content}>
-	        <FadeRoute path="/:h/:s/:l" component={HSL} />
-	      </div>
-
-	      <Route exact path="/" render={() => (
-	        <Redirect to="/10/90/50" />
-	      )} />
-	    </div>
-	  </BrowserRouter>
-	);
-
-	const FadeRoute = ({ component: Component, ...rest }) => {
-	  const willLeave = () => ({ zIndex: 1, opacity: spring(0) })
-
-	  return (
-	    <Route {...rest} children={({ location, match }) => (
-	      <TransitionMotion
-	        willLeave={willLeave}
-	        styles={match ? [ {
-	          key: location.pathname,
-	          style: { opacity: 1 },
-	          data: match
-	        } ] : []}
-	      >
-	        {interpolatedStyles => (
-	          <div>
-	            {interpolatedStyles.map(config => (
-	              <div
-	                key={config.key}
-	                style={{ ...styles.fill, ...config.style }}
-	              >
-	                <Component {...config.data} />
-	              </div>
-	            ))}
-	          </div>
-	        )}
-	      </TransitionMotion>
-	    )} />
-	  );
-	};
-
-	const NavLink = (props) => (
-	  <li style={styles.navItem}>
-	    <Link {...props} style={{ color: 'inherit' }} />
-	  </li>
-	);
-
-	const HSL = ({ params }) => (
-	  <div style={{
-	    ...styles.hsl,
-	    background: `hsl(${params.h}, ${params.s}%, ${params.l}%)`
-	  }}>hsl({params.h}, {params.s}%, {params.l}%)</div>
-	);
-	*/
+	// this tells webpack to include all the Sass styling
+	exports.default = App;
 
 /***/ },
 /* 384 */
@@ -35885,141 +35817,33 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _actions = __webpack_require__(421);
-	
-	var _Resume = __webpack_require__(422);
-	
-	var _Resume2 = _interopRequireDefault(_Resume);
-	
-	var _Loading = __webpack_require__(433);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Main = function Main(_ref) {
-	  var app = _ref.app,
-	      getResumeData = _ref.getResumeData;
-	
-	
-	  // fake delay to test loading animation
-	  var fakeDelay = function fakeDelay() {
-	    return setTimeout(getResumeData, 1000);
-	  };
-	
-	  if (app.isLoading) fakeDelay();
-	
-	  return _react2.default.createElement(
-	    'main',
-	    null,
-	    app.isLoading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(_Resume2.default, null)
-	  );
-	};
-	
-	var mapStateToProps = function mapStateToProps(_ref2) {
-	  var app = _ref2.app;
-	  return { app: app };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    getResumeData: function getResumeData() {
-	      return dispatch((0, _actions.fetchData)());
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
-
-/***/ },
-/* 421 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.fetchData = exports.didLoad = undefined;
-	
-	var _constants = __webpack_require__(381);
-	
-	var didLoad = exports.didLoad = function didLoad(_ref) {
-	  var name = _ref.name,
-	      contact = _ref.contact,
-	      resume = _ref.resume;
-	  return {
-	    type: _constants.DATA_LOADED,
-	    name: name,
-	    resume: resume,
-	    contact: contact
-	  };
-	};
-	
-	// export const loadResume = () => ({
-	//   type: LOAD_RESUME,
-	//   name,
-	//   resume,
-	//   contact
-	// });
-	
-	
-	var fetchData = exports.fetchData = function fetchData() {
-	  // make a backend route to retrieve this instead of accessing the filepath
-	  return function (dispatch) {
-	    fetch('/public/resume.json').then(function (response) {
-	      return response.json();
-	    }).then(function (json) {
-	      return dispatch(didLoad(json));
-	    }).catch(function (err) {
-	      return console.log('There was an error fetching the data. ERROR: ' + err);
-	    });
-	  };
-	};
-
-/***/ },
-/* 422 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _reactRouterDom = __webpack_require__(384);
-	
-	var _Header = __webpack_require__(423);
+	var _Header = __webpack_require__(421);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Navbar = __webpack_require__(424);
+	var _Navbar = __webpack_require__(422);
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Footer = __webpack_require__(425);
+	var _Footer = __webpack_require__(423);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Welcome = __webpack_require__(426);
+	var _Welcome = __webpack_require__(424);
 	
 	var _Welcome2 = _interopRequireDefault(_Welcome);
 	
-	var _ChangeSection = __webpack_require__(427);
+	var _ChangeSection = __webpack_require__(425);
 	
 	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
-	var _resumeComponents = __webpack_require__(428);
+	var _resumeComponents = __webpack_require__(426);
 	
 	var _resumeComponents2 = _interopRequireDefault(_resumeComponents);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import { Route } from 'react-router-dom';
 	
 	var navItems = {
 	  home: 'Home',
@@ -36058,7 +35882,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Resume);
 
 /***/ },
-/* 423 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36157,7 +35981,7 @@
 	exports.default = (0, _reactRedux.connect)()(Header);
 
 /***/ },
-/* 424 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36224,7 +36048,7 @@
 	  var linkLink = link === 'home' ? _react2.default.createElement(
 	    _reactRouterDom.NavLink,
 	    {
-	      to: '/',
+	      to: '/resume',
 	      className: 'shadow',
 	      style: styles.navLink,
 	      activeClassName: 'active'
@@ -36233,7 +36057,7 @@
 	  ) : _react2.default.createElement(
 	    _reactRouterDom.NavLink,
 	    {
-	      to: '/' + link,
+	      to: '/resume/' + link,
 	      className: 'shadow',
 	      style: styles.navLink,
 	      activeClassName: 'active'
@@ -36270,7 +36094,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 425 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36302,11 +36126,11 @@
 	    'footer',
 	    { style: styles.footer },
 	    _react2.default.createElement(
-	      _reactRouterDom.Link,
-	      { to: '/' },
+	      'h2',
+	      { className: 'shadow' },
 	      _react2.default.createElement(
-	        'h2',
-	        { className: 'shadow' },
+	        _reactRouterDom.Link,
+	        { to: '/resume' },
 	        'FOOTER'
 	      )
 	    )
@@ -36316,7 +36140,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 426 */
+/* 424 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36385,7 +36209,7 @@
 	exports.default = Welcome;
 
 /***/ },
-/* 427 */
+/* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36436,7 +36260,7 @@
 	    },
 	    _react2.default.createElement(
 	      _reactRouterDom.Link,
-	      { to: '/' + link, style: styles.button },
+	      { to: '/resume/' + link, style: styles.button },
 	      text
 	    )
 	  );
@@ -36445,7 +36269,7 @@
 	exports.default = ChangeSection;
 
 /***/ },
-/* 428 */
+/* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36460,15 +36284,15 @@
 	
 	var _reactRouterDom = __webpack_require__(384);
 	
-	var _about = __webpack_require__(429);
+	var _about = __webpack_require__(427);
 	
 	var _about2 = _interopRequireDefault(_about);
 	
-	var _skills = __webpack_require__(431);
+	var _skills = __webpack_require__(429);
 	
 	var _skills2 = _interopRequireDefault(_skills);
 	
-	var _projects = __webpack_require__(432);
+	var _projects = __webpack_require__(430);
 	
 	var _projects2 = _interopRequireDefault(_projects);
 	
@@ -36521,7 +36345,7 @@
 	exports.default = ResumeComponents;
 
 /***/ },
-/* 429 */
+/* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36534,11 +36358,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SectionItem = __webpack_require__(430);
+	var _SectionItem = __webpack_require__(428);
 	
 	var _SectionItem2 = _interopRequireDefault(_SectionItem);
 	
-	var _ChangeSection = __webpack_require__(427);
+	var _ChangeSection = __webpack_require__(425);
 	
 	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
@@ -36572,7 +36396,7 @@
 	exports.default = About;
 
 /***/ },
-/* 430 */
+/* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36613,7 +36437,7 @@
 	exports.default = SectionItem;
 
 /***/ },
-/* 431 */
+/* 429 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36626,11 +36450,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SectionItem = __webpack_require__(430);
+	var _SectionItem = __webpack_require__(428);
 	
 	var _SectionItem2 = _interopRequireDefault(_SectionItem);
 	
-	var _ChangeSection = __webpack_require__(427);
+	var _ChangeSection = __webpack_require__(425);
 	
 	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
@@ -36663,7 +36487,7 @@
 	exports.default = Skills;
 
 /***/ },
-/* 432 */
+/* 430 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36676,11 +36500,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SectionItem = __webpack_require__(430);
+	var _SectionItem = __webpack_require__(428);
 	
 	var _SectionItem2 = _interopRequireDefault(_SectionItem);
 	
-	var _ChangeSection = __webpack_require__(427);
+	var _ChangeSection = __webpack_require__(425);
 	
 	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
 	
@@ -36713,6 +36537,100 @@
 	exports.default = Projects;
 
 /***/ },
+/* 431 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _reactRouterDom = __webpack_require__(384);
+	
+	var _actions = __webpack_require__(432);
+	
+	var _Spinner = __webpack_require__(433);
+	
+	var _Spinner2 = _interopRequireDefault(_Spinner);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Main = function Main(_ref) {
+	  var app = _ref.app,
+	      getResumeData = _ref.getResumeData;
+	
+	
+	  // fake delay to test loading animation
+	  var fakeDelay = function fakeDelay() {
+	    return setTimeout(getResumeData, 1000);
+	  };
+	
+	  if (app.isLoading) fakeDelay();
+	
+	  return app.isLoading ? _react2.default.createElement(_Spinner2.default, null) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/resume' });
+	};
+	
+	var mapStateToProps = function mapStateToProps(_ref2) {
+	  var app = _ref2.app;
+	  return { app: app };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    getResumeData: function getResumeData() {
+	      return dispatch((0, _actions.fetchData)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
+
+/***/ },
+/* 432 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.fetchData = exports.didLoad = undefined;
+	
+	var _constants = __webpack_require__(381);
+	
+	var didLoad = exports.didLoad = function didLoad(_ref) {
+	  var name = _ref.name,
+	      contact = _ref.contact,
+	      resume = _ref.resume;
+	  return {
+	    type: _constants.DATA_LOADED,
+	    name: name,
+	    resume: resume,
+	    contact: contact
+	  };
+	};
+	
+	// make a backend route to retrieve this instead of accessing the filepath
+	var fetchData = exports.fetchData = function fetchData() {
+	  return function (dispatch) {
+	    return fetch('/public/resume.json').then(function (response) {
+	      return response.json();
+	    }).then(function (json) {
+	      return dispatch(didLoad(json));
+	    }).catch(function (err) {
+	      return console.log('There was an error fetching the data. ERROR: ' + err);
+	    });
+	  };
+	};
+
+/***/ },
 /* 433 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36728,13 +36646,13 @@
 	
 	var _materialUi = __webpack_require__(434);
 	
-	var _Header = __webpack_require__(423);
+	var _Header = __webpack_require__(421);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Loading = function Loading() {
+	var Spinner = function Spinner() {
 	  return _react2.default.createElement(
 	    _Header2.default,
 	    null,
@@ -36742,7 +36660,7 @@
 	  );
 	};
 	
-	exports.default = Loading;
+	exports.default = Spinner;
 
 /***/ },
 /* 434 */
