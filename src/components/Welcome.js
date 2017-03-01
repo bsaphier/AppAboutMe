@@ -6,12 +6,14 @@ const styles = {
     margin: '0 auto',
     textAlign: 'center',
     display: 'inline-block',
-    border: '5px solid rgb(255, 43, 37)'
+    border: '5px solid',
+    borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
+    borderImageSlice: 1
   },
   title: {
     color: 'rgb(255, 255, 255)',
     margin: '0 20px 18px 20px',
-    textShadow: '2px 2px 0px rgba(255, 43, 37, 1)',
+    textShadow: '2px 2px 0px rgba(255, 68, 62, 1)',
     WebkitTransition: 'all .3s ease-in-out',
     MozTransition: 'all .3s ease-in-out',
     transition: 'all .3s ease-in-out'

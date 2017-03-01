@@ -1,5 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Scroll from 'react-scroll';
+
+import { scrollToTop } from '../bin/scrollHelpers';
+
+const { Link } = Scroll;
 
 const styles = {
   button: {
@@ -15,23 +19,28 @@ const styles = {
 };
 
 const hover = event => {
-  event.target.style.color = 'rgb(255, 43, 37)';
+  event.target.style.color = 'rgb(255, 68, 62)';
 };
 
 const leave = event => {
   event.target.style.color = 'rgb(68, 77, 255)';
 };
 
-const ChangeSection = ({ link, text }) => {
-  return (
-    <div
-      style={styles.button}
-      onMouseEnter={hover}
-      onMouseLeave={leave}
-    >
-      <Link to={`/resume/${link}`} style={styles.button}>{ text }</Link>
-    </div>
-  );
+const ChangeSection = ({ to, text }) => {
+  return to.length === 0
+    ? (
+      <div onMouseEnter={hover} onMouseLeave={leave}>
+        <a onClick={scrollToTop} style={styles.button}>
+          { text }
+        </a>
+      </div>
+    ) : (
+      <div onMouseEnter={hover} onMouseLeave={leave}>
+        <Link to={to} smooth={true} duration={500} style={styles.button}>
+          { text }
+        </Link>
+      </div>
+    );
 };
 
 export default ChangeSection;

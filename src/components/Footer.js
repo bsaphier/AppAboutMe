@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { scrollToTop } from '../bin/scrollHelpers';
 
 const styles = {
   footer: {
@@ -15,9 +16,9 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <h2 className="shadow">
-        <Link to="/resume">
+        <a onClick={scrollToTop}>
           FOOTER
-        </Link>
+        </a>
       </h2>
     </footer>
   );

@@ -24,18 +24,9 @@ const styles = {
 const ResumeComponents = ({ about, skills, projects }) => {
   return (
     <div>
-      <Route
-        path="/my-site/about"
-        children={ () => <About styling={styles} content={ about } />}
-      />
-      <Route
-        path="/my-site/skills"
-        children={ () => <Skills styling={styles} content={ skills } />}
-      />
-      <Route
-        path="/my-site/projects"
-        children={ () => <Projects styling={styles} content={ projects } />}
-      />
+      <About styling={styles} content={ about } />
+      <Skills styling={styles} content={ skills } />
+      <Projects styling={styles} content={ projects } />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const About = ({ content, styling }) => {
       <SectionItem>
         <p>{content}</p>
       </SectionItem>
-      <ChangeSection link="skills" text="NEXT" />
+      <ChangeSection to="skills" text="NEXT" />
     </section>
   );
 };

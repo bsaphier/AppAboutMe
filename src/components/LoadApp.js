@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
+import Main from './Main';
+import Spinner from './Spinner';
 import { fetchData } from '../actions';
 
-import Spinner from './Spinner';
-
-
-const Main = ({ app, getResumeData }) => {
+const LoadApp = ({ app, resume, getResumeData }) => {
 
   // fake delay to test loading animation
   const fakeDelay = () => setTimeout(getResumeData, 1000);
@@ -16,14 +14,14 @@ const Main = ({ app, getResumeData }) => {
 
   return app.isLoading
     ? <Spinner />
-    : <Redirect to="/resume" />;
+    : <Main resume={resume} />;
 };
 
 
-const mapStateToProps = ({ app }) => ({ app });
+const mapStateToProps = ({ app, resume: { resume } }) => ({ app, resume });
 
 const mapDispatchToProps = dispatch => ({
   getResumeData: () => dispatch(fetchData())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(LoadApp);

@@ -1,6 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Scroll from 'react-scroll';
 
+import { scrollToTop } from '../bin/scrollHelpers';
+
+const { Link } = Scroll;
 
 const styles = {
   navWrap: {
@@ -13,7 +16,7 @@ const styles = {
     position: 'fixed',
     left: '0px',
     top: '0px',
-    backgroundImage: 'linear-gradient(rgb(89, 89, 89), rgb(38, 38, 38))'
+    backgroundColor: 'rgb(45, 45, 45)'
   },
   navList: {
     margin: '0px',
@@ -48,23 +51,20 @@ const styles = {
 export const NavItem = ({ link, name }) => {
   const linkLink = link === 'home'
     ? (
-      <NavLink
-        to="/resume"
-        className="shadow"
-        style={styles.navLink}
-        activeClassName="active"
-      >
-        {name}
-      </NavLink>
+      <a onClick={scrollToTop} style={styles.navLink}>
+        <p className="shadow">{ name }</p>
+      </a>
     ) : (
-      <NavLink
-        to={`/resume/${link}`}
-        className="shadow"
+      <Link
+        to={link}
+        spy={true}
+        smooth={true}
+        duration={500}
+        activeClass="active"
         style={styles.navLink}
-        activeClassName="active"
       >
-        {name}
-      </NavLink>
+        <p className="shadow">{ name }</p>
+      </Link>
     );
   return (
     <li style={styles.listItem}>{ linkLink }</li>
@@ -76,13 +76,13 @@ const Navbar = ({ navLinks }) => {
   return (
     <nav style={styles.navWrap}>
       <ul style={styles.navList}>
-        {Object.keys(navLinks).map((navLink, idx) =>
-          (<NavItem
+        {Object.keys(navLinks).map((navLink, idx) => (
+          <NavItem
             link={navLink}
             key={`nav${+idx}`}
             name={navLinks[navLink]}
-          />)
-        )}
+          />
+        ))}
       </ul>
     </nav>
   );
