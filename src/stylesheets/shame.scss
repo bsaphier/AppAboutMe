@@ -49,3 +49,9 @@
 .active {
   background-image: linear-gradient(rgb(81, 81, 81), rgb(45, 45, 45));
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -6,12 +6,26 @@ import { scrollToTop } from '../bin/scrollHelpers';
 const { Link } = Scroll;
 
 const styles = {
-  button: {
-    display: 'block',
+  foot: {
+    position: 'absolute',
+    bottom: '0%',
+    width: '100%',
+    left: 0,
+    height: '50px',
+    background: 'rgba(45, 45, 45, 0.1)',
     textAlign: 'center',
-    borderRadius: '100%',
-    color: 'rgb(68, 77, 255)',
-    margin: '0 20px 18px 20px',
+  },
+  button: {
+    verticalAlign: 'middle',
+    color: 'rgba(255, 255, 255, 1)',
+    background: 'rgb(68, 77, 255)',
+    display: 'inline-block',
+    textDecoration: 'none',
+    appearance: 'none',
+    WebkitAppearance: 'none',
+    height: '100%',
+    padding: '5pt 20px',
+    cursor: 'pointer',
     WebkitTransition: 'all .3s ease-in-out',
     MozTransition: 'all .3s ease-in-out',
     transition: 'all .3s ease-in-out'
@@ -19,28 +33,37 @@ const styles = {
 };
 
 const hover = event => {
-  event.target.style.color = 'rgb(255, 68, 62)';
+  event.target.style.background = 'rgb(255, 68, 62)';
 };
 
 const leave = event => {
-  event.target.style.color = 'rgb(68, 77, 255)';
+  event.target.style.background = 'rgb(68, 77, 255)';
 };
 
-const ChangeSection = ({ to, text }) => {
-  return to.length === 0
-    ? (
-      <div onMouseEnter={hover} onMouseLeave={leave}>
-        <a onClick={scrollToTop} style={styles.button}>
-          { text }
-        </a>
-      </div>
+const ChangeSection = ({ to, text }) => (
+  <div style={styles.foot}>
+    { to.length === 0 ? (
+      <a
+        onMouseEnter={hover}
+        onMouseLeave={leave}
+        style={styles.button}
+        onClick={scrollToTop}
+      >
+        { text }
+      </a>
     ) : (
-      <div onMouseEnter={hover} onMouseLeave={leave}>
-        <Link to={to} smooth={true} duration={500} style={styles.button}>
-          { text }
-        </Link>
-      </div>
-    );
-};
+      <Link
+        to={to}
+        smooth={true}
+        duration={500}
+        onMouseEnter={hover}
+        onMouseLeave={leave}
+        style={styles.button}
+      >
+        { text }
+      </Link>
+    )}
+  </div>
+);
 
 export default ChangeSection;

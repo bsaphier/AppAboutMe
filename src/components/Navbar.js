@@ -8,14 +8,15 @@ const { Link } = Scroll;
 const styles = {
   navWrap: {
     width: '100%',
-    maxHeight: '48px',
+    maxHeight: '50px',
     textTransform: 'uppercase',
-    letterSpacing: '2.5px',
+    // letterSpacing: '2.5px',
     margin: '0 auto',
-    zIndex: 999,
+    zIndex: 100,
     position: 'fixed',
-    left: '0px',
-    top: '0px',
+    left: 0,
+    right: 0,
+    top: 0,
     backgroundColor: 'rgb(45, 45, 45)'
   },
   navList: {

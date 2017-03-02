@@ -1,11 +1,12 @@
 import React from 'react';
 
+import Section from '../Section';
 import SectionItem from '../SectionItem';
 import ChangeSection from '../ChangeSection';
 
 const Skills = ({ styling }) => {
   return (
-    <section id="skills" style={styling.section}>
+    <Section id="skills">
       <h1 className="shadow" style={styling.title}>SKILLS</h1>
       <SectionItem>
         <p>
@@ -13,7 +14,7 @@ const Skills = ({ styling }) => {
         </p>
       </SectionItem>
       <ChangeSection to="projects" text="NEXT" />
-    </section>
+    </Section>
   );
 };
 

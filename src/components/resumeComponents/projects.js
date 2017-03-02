@@ -1,11 +1,12 @@
 import React from 'react';
 
+import Section from '../Section';
 import SectionItem from '../SectionItem';
 import ChangeSection from '../ChangeSection';
 
 const Projects = ({ styling }) => {
   return (
-    <section id="projects" style={styling.section}>
+    <Section id="projects">
       <h1 className="shadow" style={styling.title}>PROJECTS</h1>
       <SectionItem>
         <p>
@@ -13,7 +14,7 @@ const Projects = ({ styling }) => {
         </p>
       </SectionItem>
       <ChangeSection to="" text="TO THE TOP" />
-    </section>
+    </Section>
   );
 };
 
