@@ -35870,15 +35870,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Navbar = __webpack_require__(423);
+	var _Navbar = __webpack_require__(422);
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Footer = __webpack_require__(437);
+	var _Footer = __webpack_require__(436);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Section = __webpack_require__(670);
+	var _Section = __webpack_require__(437);
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
@@ -35910,10 +35910,10 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_Navbar2.default, { navLinks: navItems }),
 	    _react2.default.createElement(
 	      _Section2.default,
 	      null,
+	      _react2.default.createElement(_Navbar2.default, { navLinks: navItems }),
 	      _react2.default.createElement(_Welcome2.default, null),
 	      _react2.default.createElement(_ChangeSection2.default, { to: 'about', text: 'ABOUT ME' })
 	    ),
@@ -35929,8 +35929,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 422 */,
-/* 423 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35944,11 +35943,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactScroll = __webpack_require__(424);
+	var _reactScroll = __webpack_require__(423);
 	
 	var _reactScroll2 = _interopRequireDefault(_reactScroll);
 	
-	var _scrollHelpers = __webpack_require__(436);
+	var _scrollHelpers = __webpack_require__(435);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -35963,7 +35962,7 @@
 	    // letterSpacing: '2.5px',
 	    margin: '0 auto',
 	    zIndex: 100,
-	    position: 'fixed',
+	    // position: 'fixed',
 	    left: 0,
 	    right: 0,
 	    top: 0,
@@ -36056,27 +36055,27 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 424 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports.Link = __webpack_require__(425);
-	exports.Button = __webpack_require__(434);
-	exports.Element = __webpack_require__(435);
-	exports.Helpers = __webpack_require__(426);
-	exports.scroller = __webpack_require__(433);
-	exports.Events = __webpack_require__(431);
-	exports.scrollSpy = __webpack_require__(432);
-	exports.animateScroll = __webpack_require__(427);
+	exports.Link = __webpack_require__(424);
+	exports.Button = __webpack_require__(433);
+	exports.Element = __webpack_require__(434);
+	exports.Helpers = __webpack_require__(425);
+	exports.scroller = __webpack_require__(432);
+	exports.Events = __webpack_require__(430);
+	exports.scrollSpy = __webpack_require__(431);
+	exports.animateScroll = __webpack_require__(426);
 
 
 /***/ },
-/* 425 */
+/* 424 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var React = __webpack_require__(1);
-	var Helpers = __webpack_require__(426);
+	var Helpers = __webpack_require__(425);
 	
 	var Link = React.createClass({
 	  render: function () {
@@ -36088,7 +36087,7 @@
 
 
 /***/ },
-/* 426 */
+/* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36096,9 +36095,9 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
 	
-	var animateScroll = __webpack_require__(427);
-	var scrollSpy = __webpack_require__(432);
-	var defaultScroller = __webpack_require__(433);
+	var animateScroll = __webpack_require__(426);
+	var scrollSpy = __webpack_require__(431);
+	var defaultScroller = __webpack_require__(432);
 	var assign = __webpack_require__(4);
 	
 	
@@ -36332,18 +36331,18 @@
 
 
 /***/ },
-/* 427 */
+/* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var assign = __webpack_require__(4);
 	
-	var smooth = __webpack_require__(428);
+	var smooth = __webpack_require__(427);
 	
 	var easing = smooth.defaultEasing;
 	
-	var cancelEvents = __webpack_require__(429);
+	var cancelEvents = __webpack_require__(428);
 	
-	var events = __webpack_require__(431);
+	var events = __webpack_require__(430);
 	
 	/*
 	 * Function helper
@@ -36536,7 +36535,7 @@
 
 
 /***/ },
-/* 428 */
+/* 427 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -36554,10 +36553,10 @@
 	}
 
 /***/ },
-/* 429 */
+/* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addPassiveEventListener = __webpack_require__(430);
+	var addPassiveEventListener = __webpack_require__(429);
 	
 	var events = ['mousedown', 'mousewheel', 'touchmove', 'keydown']
 	
@@ -36575,7 +36574,7 @@
 
 
 /***/ },
-/* 430 */
+/* 429 */
 /***/ function(module, exports) {
 
 	/*
@@ -36604,7 +36603,7 @@
 
 
 /***/ },
-/* 431 */
+/* 430 */
 /***/ function(module, exports) {
 
 	
@@ -36623,10 +36622,10 @@
 	module.exports = Events;
 
 /***/ },
-/* 432 */
+/* 431 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addPassiveEventListener = __webpack_require__(430);
+	var addPassiveEventListener = __webpack_require__(429);
 	
 	var eventThrottler = function(eventHandler) {
 	  var eventHandlerTimeout;
@@ -36730,13 +36729,13 @@
 
 
 /***/ },
-/* 433 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var assign = __webpack_require__(4);
 	
-	var animateScroll = __webpack_require__(427);
-	var events = __webpack_require__(431);
+	var animateScroll = __webpack_require__(426);
+	var events = __webpack_require__(430);
 	
 	var __mapped = {};
 	var __activeLink;
@@ -36840,13 +36839,13 @@
 
 
 /***/ },
-/* 434 */
+/* 433 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var React = __webpack_require__(1);
-	var Helpers = __webpack_require__(426);
+	var Helpers = __webpack_require__(425);
 	
 	var Button = React.createClass({
 	  render: function () {
@@ -36858,13 +36857,13 @@
 
 
 /***/ },
-/* 435 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var React = __webpack_require__(1);
-	var Helpers = __webpack_require__(426);
+	var Helpers = __webpack_require__(425);
 	
 	var Element = React.createClass({
 	  render: function () {
@@ -36876,7 +36875,7 @@
 
 
 /***/ },
-/* 436 */
+/* 435 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36886,7 +36885,7 @@
 	});
 	exports.scrollToTop = undefined;
 	
-	var _reactScroll = __webpack_require__(424);
+	var _reactScroll = __webpack_require__(423);
 	
 	var _reactScroll2 = _interopRequireDefault(_reactScroll);
 	
@@ -36898,7 +36897,7 @@
 	};
 
 /***/ },
-/* 437 */
+/* 436 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36911,7 +36910,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _scrollHelpers = __webpack_require__(436);
+	var _scrollHelpers = __webpack_require__(435);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -36944,6 +36943,43 @@
 	exports.default = Footer;
 
 /***/ },
+/* 437 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Header = function Header(props) {
+	  var styles = {
+	    window: {
+	      width: '100%',
+	      height: '100vh',
+	      // paddingTop: '50px',
+	      position: 'relative'
+	    }
+	  };
+	
+	  return _react2.default.createElement(
+	    'section',
+	    { id: props.id, style: styles.window },
+	    props.children
+	  );
+	};
+	
+	exports.default = (0, _reactRedux.connect)()(Header);
+
+/***/ },
 /* 438 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36970,34 +37006,61 @@
 	    padding: '40pt',
 	    width: '100%',
 	    height: '100%',
-	    paddingTop: 0,
-	    display: 'table'
+	    paddingTop: 0
 	  },
 	  cell: {
-	    display: 'table-cell',
+	    position: 'absolute',
+	    top: '50%',
+	    left: '50%',
+	    transform: 'translate(-50%, -50%)',
+	    // width: '62%',
+	    // display: 'table-cell',
 	    verticalAlign: 'middle'
 	  },
 	  title: {
-	    width: '38%',
-	    margin: '0px auto',
-	    display: 'block',
-	    wordSpacing: '0px',
+	    display: 'flex',
+	    // wordSpacing: '0px',
 	    textAlign: 'justify',
 	    textTransform: 'uppercase'
 	  },
 	  text: {
+	    margin: '0 auto',
 	    display: 'inline-block',
-	    whiteSpace: 'pre-line'
+	    whiteSpace: 'pre-line',
+	    letterSpacing: '0.001vw',
+	    WebkitBackgroundClip: 'text',
+	    WebkitTextFillColor: 'transparent',
+	    backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
 	  }
 	};
-	//
-	// const hover = event => {
-	//   event.target.style.color = 'rgb(68, 77, 255)';
-	// };
-	//
-	// const leave = event => {
-	//   event.target.style.color = 'rgb(255, 255, 255)';
-	// };
+	
+	var hover = function hover(event) {
+	  var color = event.target.style.color;
+	  // color = 'rgb(68, 77, 255)';
+	};
+	
+	var leave = function leave(event) {
+	  var color = event.target.style.color;
+	  // color = 'rgb(255, 255, 255)';
+	};
+	
+	var Title = function Title(_ref) {
+	  var style = _ref.style,
+	      title = _ref.title;
+	  return _react2.default.createElement(
+	    'div',
+	    { style: styles.title },
+	    _react2.default.createElement(
+	      'span',
+	      {
+	        onMouseOver: hover,
+	        onMouseLeave: leave,
+	        style: _extends({}, styles.text, style)
+	      },
+	      title
+	    )
+	  );
+	};
 	
 	var Welcome = function Welcome() {
 	  return _react2.default.createElement(
@@ -37006,33 +37069,43 @@
 	    _react2.default.createElement(
 	      'div',
 	      { style: styles.cell },
-	      _react2.default.createElement(
-	        'h1',
-	        { style: styles.title },
-	        _react2.default.createElement(
-	          'span',
-	          { style: _extends({ fontSize: '8vh' }, styles.text) },
-	          'Hello'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'h1',
-	        { style: styles.title },
-	        _react2.default.createElement(
-	          'span',
-	          { style: _extends({ fontSize: '8vh' }, styles.text) },
-	          'my name is Ben Saphier'
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        { style: styles.title },
-	        _react2.default.createElement(
-	          'span',
-	          { style: _extends({ fontSize: '10vh' }, styles.text) },
-	          'Come back soon!'
-	        )
-	      )
+	      _react2.default.createElement(Title, {
+	        title: 'I\'m Ben',
+	        style: {
+	          fontWeight: 900,
+	          fontSize: '13vh',
+	          lineHeight: '12vh',
+	          letterSpacing: '-0.009em'
+	        }
+	      }),
+	      _react2.default.createElement(Title, {
+	        title: 'Saphier',
+	        style: {
+	          fontWeight: 100,
+	          fontSize: '13vh',
+	          fontStyle: 'italic',
+	          lineHeight: '12vh',
+	          padding: '0 0.03em',
+	          letterSpacing: '-0.08em'
+	        }
+	      }),
+	      _react2.default.createElement(Title, {
+	        title: 'I\'m a software engineer',
+	        style: {
+	          fontWeight: 900,
+	          fontSize: '3.8vh',
+	          padding: '0 0.038em',
+	          letterSpacing: '-0.038em'
+	        }
+	      }),
+	      _react2.default.createElement(Title, {
+	        title: 'Stuff & Things',
+	        style: {
+	          fontWeight: 100,
+	          fontSize: '5vh',
+	          letterSpacing: '-0.08em'
+	        }
+	      })
 	    )
 	  );
 	};
@@ -37053,11 +37126,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactScroll = __webpack_require__(424);
+	var _reactScroll = __webpack_require__(423);
 	
 	var _reactScroll2 = _interopRequireDefault(_reactScroll);
 	
-	var _scrollHelpers = __webpack_require__(436);
+	var _scrollHelpers = __webpack_require__(435);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -37198,7 +37271,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Section = __webpack_require__(670);
+	var _Section = __webpack_require__(437);
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
@@ -37294,7 +37367,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Section = __webpack_require__(670);
+	var _Section = __webpack_require__(437);
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
@@ -37348,7 +37421,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Section = __webpack_require__(670);
+	var _Section = __webpack_require__(437);
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
@@ -37404,7 +37477,7 @@
 	
 	var _materialUi = __webpack_require__(446);
 	
-	var _Section = __webpack_require__(670);
+	var _Section = __webpack_require__(437);
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
@@ -69639,7 +69712,7 @@
 	var content = __webpack_require__(667);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(668)(content, {});
+	var update = __webpack_require__(669)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -69659,18 +69732,74 @@
 /* 667 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(669)();
+	exports = module.exports = __webpack_require__(668)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nh1, h2, h3, h4, h5, h6, .menu-item {\n  font-family: 'Roboto', sans-serif; }\n\na, p {\n  font-family: 'Roboto Condensed', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\n/* scrolldown link */\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #515151); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), white); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), white); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#projects {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n.wavy--shit {\n  color: transparent;\n  background: linear-gradient(162deg, #9a5fba, #68099D, #ffff59);\n  background-size: 666% 666%;\n  -webkit-background-clip: text;\n  -webkit-animation: gradwave 13s ease infinite; }\n\n.wavy--border {\n  color: transparent;\n  border: 2.5px solid #ffff59;\n  border-radius: 4px;\n  line-height: 1.375;\n  padding: .75rem 1.5rem;\n  margin: .375rem;\n  font-weight: 400;\n  -webkit-animation: hueShift 13s infinite linear; }\n  .wavy--border:hover {\n    color: #ffff59; }\n\n.shadow {\n  color: #444dff;\n  margin: auto;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  -webkit-transition: all .2s ease-in-out;\n  -moz-transition: all .2s ease-in-out;\n  -ms-transition: all .2s ease-in-out;\n  transition: all 0.2s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.5px;\n    left: -1.5px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n\n.active {\n  background-image: linear-gradient(#515151, #2d2d2d); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n", ""]);
+	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nmain {\n  font-family: 'Roboto', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\n/* scrolldown link */\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #515151); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), white); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), white); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#projects {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n.shadow {\n  color: #444dff;\n  margin: auto;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  -webkit-animation: hueShift 13s infinite linear;\n  -webkit-transition: all .2s ease-in-out;\n  -moz-transition: all .2s ease-in-out;\n  -ms-transition: all .2s ease-in-out;\n  transition: all 0.2s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.5px;\n    left: -1.5px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n\n.active {\n  background-image: linear-gradient(#515151, #2d2d2d); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
 /* 668 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -69920,99 +70049,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 669 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 670 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Header = function Header(props) {
-	  var styles = {
-	    window: {
-	      width: '100%',
-	      height: '100vh',
-	      paddingTop: '50px',
-	      position: 'relative'
-	    }
-	  };
-	
-	  return _react2.default.createElement(
-	    'section',
-	    { id: props.id, style: styles.window },
-	    props.children
-	  );
-	};
-	
-	exports.default = (0, _reactRedux.connect)()(Header);
 
 /***/ }
 /******/ ]);

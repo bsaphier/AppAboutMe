@@ -10,63 +10,106 @@ const styles = {
     width: '100%',
     height: '100%',
     paddingTop: 0,
-    display: 'table',
-    // display: 'inline-block',
-    // border: '5px solid',
-    // borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
-    // borderImageSlice: 1
+    // display: 'table',
   },
   cell: {
-    display: 'table-cell',
-    verticalAlign: 'middle'
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    // width: '62%',
+    // display: 'table-cell',
+    verticalAlign: 'middle',
+    // border: '5px solid',
+    // borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
+    // borderImageSlice: 1,
   },
   title: {
-    width: '38%',
-    margin: '0px auto',
-    display: 'block',
-    wordSpacing: '0px',
+    display: 'flex',
+    // wordSpacing: '0px',
     textAlign: 'justify',
     textTransform: 'uppercase',
-    // color: 'rgb(255, 255, 255)',
-    // margin: '0 20px 18px 20px',
-    // textShadow: '2px 2px 0px rgba(255, 68, 62, 1)',
     // WebkitTransition: 'all .3s ease-in-out',
     // MozTransition: 'all .3s ease-in-out',
     // transition: 'all .3s ease-in-out'
   },
   text: {
+    margin: '0 auto',
     display: 'inline-block',
-    whiteSpace: 'pre-line'
+    whiteSpace: 'pre-line',
+    letterSpacing: '0.001vw',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
   }
 };
-//
-// const hover = event => {
-//   event.target.style.color = 'rgb(68, 77, 255)';
-// };
-//
-// const leave = event => {
-//   event.target.style.color = 'rgb(255, 255, 255)';
-// };
 
+const hover = event => {
+  let { color } = event.target.style;
+  // color = 'rgb(68, 77, 255)';
+};
+
+const leave = event => {
+  let { color } = event.target.style;
+  // color = 'rgb(255, 255, 255)';
+};
+
+const Title = ({ style, title }) => (
+  <div style={styles.title}>
+    <span
+      onMouseOver={hover}
+      onMouseLeave={leave}
+      style={{
+        ...styles.text,
+        ...style
+      }}
+    >
+      { title }
+    </span>
+  </div>
+);
+// I like to explore the crossover between music & technology
 const Welcome = () => {
   return (
     <div style={styles.banner}>
       <div style={styles.cell}>
-        <h1 style={styles.title}>
-          <span style={{fontSize: '8vh', ...styles.text}}>
-            Hello
-          </span>
-        </h1>
-        <h1 style={styles.title}>
-          <span style={{fontSize: '8vh', ...styles.text}}>
-            my name is Ben Saphier
-          </span>
-        </h1>
-        <p style={styles.title}>
-          <span style={{fontSize: '10vh', ...styles.text}}>
-            Come back soon!
-          </span>
-        </p>
+        <Title
+          title="I'm Ben"
+          style={{
+            fontWeight: 900,
+            fontSize: '13vh',
+            lineHeight: '12vh',
+            letterSpacing: '-0.009em'
+          }}
+        />
+        <Title
+          title="Saphier"
+          style={{
+            fontWeight: 100,
+            fontSize: '13vh',
+            fontStyle: 'italic',
+            lineHeight: '12vh',
+            padding: '0 0.03em',
+            letterSpacing: '-0.08em'
+          }}
+        />
+        <Title
+          title="I'm a software engineer"
+          style={{
+            fontWeight: 900,
+            fontSize: '3.8vh',
+            padding: '0 0.038em',
+            letterSpacing: '-0.038em'
+          }}
+        />
+        <Title
+          title="music & technology"
+          style={{
+            fontWeight: 100,
+            fontSize: '5vh',
+            letterSpacing: '-0.08em'
+          }}
+        />
       </div>
     </div>
   );

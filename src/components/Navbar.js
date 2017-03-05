@@ -13,7 +13,7 @@ const styles = {
     // letterSpacing: '2.5px',
     margin: '0 auto',
     zIndex: 100,
-    position: 'fixed',
+    // position: 'fixed',
     left: 0,
     right: 0,
     top: 0,

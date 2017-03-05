@@ -19,8 +19,8 @@ const Main = ({ resume }) => {
 
   return (
     <div>
-      <Navbar navLinks={navItems} />
       <Section>
+        <Navbar navLinks={navItems} />
         <Welcome />
         <ChangeSection to="about" text="ABOUT ME" />
       </Section>
