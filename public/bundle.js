@@ -32706,9 +32706,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LoadApp = __webpack_require__(420);
+	var _App = __webpack_require__(670);
 	
-	var _LoadApp2 = _interopRequireDefault(_LoadApp);
+	var _App2 = _interopRequireDefault(_App);
 	
 	__webpack_require__(666);
 	
@@ -32718,15 +32718,12 @@
 	  return _react2.default.createElement(
 	    _reactRouterDom.BrowserRouter,
 	    { basename: '/my-site' },
-	    _react2.default.createElement(
-	      'main',
-	      null,
-	      _react2.default.createElement(_reactRouterDom.Route, { component: _LoadApp2.default })
-	    )
+	    _react2.default.createElement(_App2.default, null)
 	  );
 	};
 	
 	// this tells webpack to include all the Sass styling
+	//* TODO - convert styling to JS
 	exports.default = Router;
 
 /***/ },
@@ -35797,66 +35794,7 @@
 	});
 
 /***/ },
-/* 420 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _Main = __webpack_require__(421);
-	
-	var _Main2 = _interopRequireDefault(_Main);
-	
-	var _Spinner = __webpack_require__(445);
-	
-	var _Spinner2 = _interopRequireDefault(_Spinner);
-	
-	var _actions = __webpack_require__(665);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LoadApp = function LoadApp(_ref) {
-	  var app = _ref.app,
-	      resume = _ref.resume,
-	      getResumeData = _ref.getResumeData;
-	
-	
-	  // fake delay to test loading animation
-	  var fakeDelay = function fakeDelay() {
-	    return setTimeout(getResumeData, 1000);
-	  };
-	
-	  if (app.isLoading) fakeDelay();
-	
-	  return app.isLoading ? _react2.default.createElement(_Spinner2.default, null) : _react2.default.createElement(_Main2.default, { resume: resume });
-	};
-	
-	var mapStateToProps = function mapStateToProps(_ref2) {
-	  var app = _ref2.app,
-	      resume = _ref2.resume.resume;
-	  return { app: app, resume: resume };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    getResumeData: function getResumeData() {
-	      return dispatch((0, _actions.fetchData)());
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoadApp);
-
-/***/ },
+/* 420 */,
 /* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -37061,7 +36999,7 @@
 	    )
 	  );
 	};
-	
+	// I like to explore the crossover between music & technology
 	var Welcome = function Welcome() {
 	  return _react2.default.createElement(
 	    'div',
@@ -37099,7 +37037,7 @@
 	        }
 	      }),
 	      _react2.default.createElement(Title, {
-	        title: 'Stuff & Things',
+	        title: 'music & technology',
 	        style: {
 	          fontWeight: 100,
 	          fontSize: '5vh',
@@ -70049,6 +69987,78 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 670 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _reactRouterDom = __webpack_require__(384);
+	
+	var _Main = __webpack_require__(421);
+	
+	var _Main2 = _interopRequireDefault(_Main);
+	
+	var _Spinner = __webpack_require__(445);
+	
+	var _Spinner2 = _interopRequireDefault(_Spinner);
+	
+	var _actions = __webpack_require__(665);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LoadMainApp = function LoadMainApp(_ref) {
+	  var app = _ref.app,
+	      resume = _ref.resume,
+	      getResumeData = _ref.getResumeData;
+	
+	
+	  // fake delay to test loading animation
+	  if (app.isLoading) {
+	    (function () {
+	      return setTimeout(getResumeData, 1000);
+	    })();
+	  }
+	
+	  return app.isLoading ? _react2.default.createElement(_Spinner2.default, null) : _react2.default.createElement(_Main2.default, { resume: resume });
+	};
+	
+	var mapStateToProps = function mapStateToProps(_ref2) {
+	  var app = _ref2.app,
+	      resume = _ref2.resume.resume;
+	  return { app: app, resume: resume };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    getResumeData: function getResumeData() {
+	      return dispatch((0, _actions.fetchData)());
+	    }
+	  };
+	};
+	
+	var ResumeApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoadMainApp);
+	
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'main',
+	    null,
+	    _react2.default.createElement(_reactRouterDom.Route, { component: ResumeApp })
+	  );
+	};
+	
+	exports.default = App;
 
 /***/ }
 /******/ ]);

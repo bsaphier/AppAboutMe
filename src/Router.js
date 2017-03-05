@@ -1,20 +1,16 @@
-import {
-  Route,
-  BrowserRouter,
-} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 
-import LoadApp from './components/LoadApp';
+import App from './components/App';
 
 // this tells webpack to include all the Sass styling
+//* TODO - convert styling to JS
 import './stylesheets/main.scss';
 
 
 const Router = () => (
   <BrowserRouter basename="/my-site">
-    <main>
-      <Route component={LoadApp} />
-    </main>
+    <App />
   </BrowserRouter>
 );
 
