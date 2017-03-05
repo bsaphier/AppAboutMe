@@ -1,22 +1,25 @@
 import React from 'react';
 
-import Work from './work';
 import About from './about';
 import Skills from './skills';
-import Footer from './footer';
-import Education from './education';
-import Portfolio from './portfolio';
+import Projects from './projects';
 
 
-const ResumeComponents = ({ work, basics, skills, education, portfolio }) => {
+const styles = {
+  title: {
+    margin: '0 20px 18px 20px',
+    WebkitTransition: 'all .3s ease-in-out',
+    MozTransition: 'all .3s ease-in-out',
+    transition: 'all .3s ease-in-out'
+  }
+};
+
+const ResumeComponents = ({ about, skills, projects }) => {
   return (
-    <div id="resume-home">
-      <About content={ basics } />
-      <Work content={ work } />
-      <Education content={ education } />
-      <Skills content={ skills } />
-      <Portfolio content={ portfolio } />
-      <Footer content={ basics } />
+    <div>
+      <About styling={styles} content={ about } />
+      <Skills styling={styles} content={ skills } />
+      <Projects styling={styles} content={ projects } />
     </div>
   );
 };

@@ -1,14 +1,18 @@
 import React from 'react';
 
-const About = ({ content }) => {
+import Section from '../Section';
+import SectionItem from '../SectionItem';
+import ChangeSection from '../ChangeSection';
+
+const About = ({ content, styling }) => {
   return (
-    <section id="about">
-      <a className="smoothscroll" href="#work">
-        <h1 className="center shadow">
-          {content.text}
-        </h1>
-      </a>
-    </section>
+    <Section id="about" style={styling.section}>
+      <h1 className="shadow" style={styling.title}>ABOUT</h1>
+      <SectionItem>
+        <p>{content}</p>
+      </SectionItem>
+      <ChangeSection to="skills" text="NEXT" />
+    </Section>
   );
 };
 

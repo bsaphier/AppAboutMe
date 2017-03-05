@@ -4,18 +4,18 @@ import Section from '../Section';
 import SectionItem from '../SectionItem';
 import ChangeSection from '../ChangeSection';
 
-const Skills = ({ styling }) => {
+const Projects = ({ styling }) => {
   return (
-    <Section id="skills">
-      <h1 className="shadow" style={styling.title}>SKILLS</h1>
+    <Section id="projects">
+      <h1 className="shadow" style={styling.title}>PROJECTS</h1>
       <SectionItem>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </SectionItem>
-      <ChangeSection to="projects" text="NEXT" />
+      <ChangeSection to="" text="TO THE TOP" />
     </Section>
   );
 };
 
-export default Skills;
+export default Projects;

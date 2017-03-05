@@ -1,10 +1,9 @@
-import { DATA_LOADED } from '../constants';
+import {
+  DATA_LOADED
+} from '../constants';
 
 const initialState = {
-  name: '',
-  contact: {},
-  reume: {},
-  portfolio: {}
+  isLoading: true
 };
 
 export default (state = initialState, action) => {
@@ -12,9 +11,7 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case DATA_LOADED:
-      nextState.name = action.name;
-      nextState.resume = action.resume;
-      nextState.contact = action.contact;
+      nextState.isLoading = false;
       return nextState;
     default:
       return state;
