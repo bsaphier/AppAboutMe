@@ -21539,7 +21539,7 @@
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connectAdvanced = __webpack_require__(183);
+	var _connectAdvanced = __webpack_require__(182);
 	
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 	
@@ -21564,15 +21564,9 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _Subscription = __webpack_require__(180);
+	var _PropTypes = __webpack_require__(180);
 	
-	var _Subscription2 = _interopRequireDefault(_Subscription);
-	
-	var _storeShape = __webpack_require__(181);
-	
-	var _storeShape2 = _interopRequireDefault(_storeShape);
-	
-	var _warning = __webpack_require__(182);
+	var _warning = __webpack_require__(181);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -21633,132 +21627,42 @@
 	}
 	
 	Provider.propTypes = {
-	  store: _storeShape2.default.isRequired,
+	  store: _PropTypes.storeShape.isRequired,
 	  children: _react.PropTypes.element.isRequired
 	};
 	Provider.childContextTypes = {
-	  store: _storeShape2.default.isRequired,
-	  storeSubscription: _react.PropTypes.instanceOf(_Subscription2.default)
+	  store: _PropTypes.storeShape.isRequired,
+	  storeSubscription: _PropTypes.subscriptionShape
 	};
 	Provider.displayName = 'Provider';
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 180 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports.__esModule = true;
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	// encapsulates the subscription logic for connecting a component to the redux store, as
-	// well as nesting subscriptions of descendant components, so that we can ensure the
-	// ancestor components re-render before descendants
-	
-	var CLEARED = null;
-	var nullListeners = {
-	  notify: function notify() {}
-	};
-	
-	function createListenerCollection() {
-	  // the current/next pattern is copied from redux's createStore code.
-	  // TODO: refactor+expose that code to be reusable here?
-	  var current = [];
-	  var next = [];
-	
-	  return {
-	    clear: function clear() {
-	      next = CLEARED;
-	      current = CLEARED;
-	    },
-	    notify: function notify() {
-	      var listeners = current = next;
-	      for (var i = 0; i < listeners.length; i++) {
-	        listeners[i]();
-	      }
-	    },
-	    subscribe: function subscribe(listener) {
-	      var isSubscribed = true;
-	      if (next === current) next = current.slice();
-	      next.push(listener);
-	
-	      return function unsubscribe() {
-	        if (!isSubscribed || current === CLEARED) return;
-	        isSubscribed = false;
-	
-	        if (next === current) next = current.slice();
-	        next.splice(next.indexOf(listener), 1);
-	      };
-	    }
-	  };
-	}
-	
-	var Subscription = function () {
-	  function Subscription(store, parentSub) {
-	    _classCallCheck(this, Subscription);
-	
-	    this.store = store;
-	    this.parentSub = parentSub;
-	    this.unsubscribe = null;
-	    this.listeners = nullListeners;
-	  }
-	
-	  Subscription.prototype.addNestedSub = function addNestedSub(listener) {
-	    this.trySubscribe();
-	    return this.listeners.subscribe(listener);
-	  };
-	
-	  Subscription.prototype.notifyNestedSubs = function notifyNestedSubs() {
-	    this.listeners.notify();
-	  };
-	
-	  Subscription.prototype.isSubscribed = function isSubscribed() {
-	    return Boolean(this.unsubscribe);
-	  };
-	
-	  Subscription.prototype.trySubscribe = function trySubscribe() {
-	    if (!this.unsubscribe) {
-	      // this.onStateChange is set by connectAdvanced.initSubscription()
-	      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.onStateChange) : this.store.subscribe(this.onStateChange);
-	
-	      this.listeners = createListenerCollection();
-	    }
-	  };
-	
-	  Subscription.prototype.tryUnsubscribe = function tryUnsubscribe() {
-	    if (this.unsubscribe) {
-	      this.unsubscribe();
-	      this.unsubscribe = null;
-	      this.listeners.clear();
-	      this.listeners = nullListeners;
-	    }
-	  };
-	
-	  return Subscription;
-	}();
-	
-	exports.default = Subscription;
-
-/***/ },
-/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
+	exports.storeShape = exports.subscriptionShape = undefined;
 	
 	var _react = __webpack_require__(1);
 	
-	exports.default = _react.PropTypes.shape({
+	var subscriptionShape = exports.subscriptionShape = _react.PropTypes.shape({
+	  trySubscribe: _react.PropTypes.func.isRequired,
+	  tryUnsubscribe: _react.PropTypes.func.isRequired,
+	  notifyNestedSubs: _react.PropTypes.func.isRequired,
+	  isSubscribed: _react.PropTypes.func.isRequired
+	});
+	
+	var storeShape = exports.storeShape = _react.PropTypes.shape({
 	  subscribe: _react.PropTypes.func.isRequired,
 	  dispatch: _react.PropTypes.func.isRequired,
 	  getState: _react.PropTypes.func.isRequired
 	});
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21788,7 +21692,7 @@
 	}
 
 /***/ },
-/* 183 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -21799,23 +21703,21 @@
 	
 	exports.default = connectAdvanced;
 	
-	var _hoistNonReactStatics = __webpack_require__(184);
+	var _hoistNonReactStatics = __webpack_require__(183);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(185);
+	var _invariant = __webpack_require__(184);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
 	var _react = __webpack_require__(1);
 	
-	var _Subscription = __webpack_require__(180);
+	var _Subscription = __webpack_require__(185);
 	
 	var _Subscription2 = _interopRequireDefault(_Subscription);
 	
-	var _storeShape = __webpack_require__(181);
-	
-	var _storeShape2 = _interopRequireDefault(_storeShape);
+	var _PropTypes = __webpack_require__(180);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21828,6 +21730,29 @@
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	var hotReloadingVersion = 0;
+	var dummyState = {};
+	function noop() {}
+	function makeSelectorStateful(sourceSelector, store) {
+	  // wrap the selector in an object that tracks its results between runs.
+	  var selector = {
+	    run: function runComponentSelector(props) {
+	      try {
+	        var nextProps = sourceSelector(store.getState(), props);
+	        if (nextProps !== selector.props || selector.error) {
+	          selector.shouldComponentUpdate = true;
+	          selector.props = nextProps;
+	          selector.error = null;
+	        }
+	      } catch (error) {
+	        selector.shouldComponentUpdate = true;
+	        selector.error = error;
+	      }
+	    }
+	  };
+	
+	  return selector;
+	}
+	
 	function connectAdvanced(
 	/*
 	  selectorFactory is a func that is responsible for returning the selector function used to
@@ -21866,11 +21791,11 @@
 	  var subscriptionKey = storeKey + 'Subscription';
 	  var version = hotReloadingVersion++;
 	
-	  var contextTypes = (_contextTypes = {}, _contextTypes[storeKey] = _storeShape2.default, _contextTypes[subscriptionKey] = _react.PropTypes.instanceOf(_Subscription2.default), _contextTypes);
-	  var childContextTypes = (_childContextTypes = {}, _childContextTypes[subscriptionKey] = _react.PropTypes.instanceOf(_Subscription2.default), _childContextTypes);
+	  var contextTypes = (_contextTypes = {}, _contextTypes[storeKey] = _PropTypes.storeShape, _contextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _contextTypes);
+	  var childContextTypes = (_childContextTypes = {}, _childContextTypes[subscriptionKey] = _PropTypes.subscriptionShape, _childContextTypes);
 	
 	  return function wrapWithConnect(WrappedComponent) {
-	    (0, _invariant2.default)(typeof WrappedComponent == 'function', 'You must pass a component to the function returned by ' + ('connect. Instead received ' + WrappedComponent));
+	    (0, _invariant2.default)(typeof WrappedComponent == 'function', 'You must pass a component to the function returned by ' + ('connect. Instead received ' + JSON.stringify(WrappedComponent)));
 	
 	    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 	
@@ -21899,16 +21824,11 @@
 	        _this.version = version;
 	        _this.state = {};
 	        _this.renderCount = 0;
-	        _this.store = _this.props[storeKey] || _this.context[storeKey];
-	        _this.parentSub = props[subscriptionKey] || context[subscriptionKey];
-	
+	        _this.store = props[storeKey] || context[storeKey];
+	        _this.propsMode = Boolean(props[storeKey]);
 	        _this.setWrappedInstance = _this.setWrappedInstance.bind(_this);
 	
-	        (0, _invariant2.default)(_this.store, 'Could not find "' + storeKey + '" in either the context or ' + ('props of "' + displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "' + storeKey + '" as a prop to "' + displayName + '".'));
-	
-	        // make sure `getState` is properly bound in order to avoid breaking
-	        // custom store implementations that rely on the store's context
-	        _this.getState = _this.store.getState.bind(_this.store);
+	        (0, _invariant2.default)(_this.store, 'Could not find "' + storeKey + '" in either the context or props of ' + ('"' + displayName + '". Either wrap the root component in a <Provider>, ') + ('or explicitly pass "' + storeKey + '" as a prop to "' + displayName + '".'));
 	
 	        _this.initSelector();
 	        _this.initSubscription();
@@ -21918,7 +21838,12 @@
 	      Connect.prototype.getChildContext = function getChildContext() {
 	        var _ref2;
 	
-	        return _ref2 = {}, _ref2[subscriptionKey] = this.subscription || this.parentSub, _ref2;
+	        // If this component received store from props, its subscription should be transparent
+	        // to any descendants receiving store+subscription from context; it passes along
+	        // subscription passed to it. Otherwise, it shadows the parent subscription, which allows
+	        // Connect to control ordering of notifications to flow top-down.
+	        var subscription = this.propsMode ? null : this.subscription;
+	        return _ref2 = {}, _ref2[subscriptionKey] = subscription || this.context[subscriptionKey], _ref2;
 	      };
 	
 	      Connect.prototype.componentDidMount = function componentDidMount() {
@@ -21945,12 +21870,11 @@
 	
 	      Connect.prototype.componentWillUnmount = function componentWillUnmount() {
 	        if (this.subscription) this.subscription.tryUnsubscribe();
-	        // these are just to guard against extra memory leakage if a parent element doesn't
-	        // dereference this instance properly, such as an async callback that never finishes
 	        this.subscription = null;
+	        this.notifyNestedSubs = noop;
 	        this.store = null;
-	        this.parentSub = null;
-	        this.selector.run = function () {};
+	        this.selector.run = noop;
+	        this.selector.shouldComponentUpdate = false;
 	      };
 	
 	      Connect.prototype.getWrappedInstance = function getWrappedInstance() {
@@ -21963,55 +21887,47 @@
 	      };
 	
 	      Connect.prototype.initSelector = function initSelector() {
-	        var dispatch = this.store.dispatch;
-	        var getState = this.getState;
-	
-	        var sourceSelector = selectorFactory(dispatch, selectorFactoryOptions);
-	
-	        // wrap the selector in an object that tracks its results between runs
-	        var selector = this.selector = {
-	          shouldComponentUpdate: true,
-	          props: sourceSelector(getState(), this.props),
-	          run: function runComponentSelector(props) {
-	            try {
-	              var nextProps = sourceSelector(getState(), props);
-	              if (selector.error || nextProps !== selector.props) {
-	                selector.shouldComponentUpdate = true;
-	                selector.props = nextProps;
-	                selector.error = null;
-	              }
-	            } catch (error) {
-	              selector.shouldComponentUpdate = true;
-	              selector.error = error;
-	            }
-	          }
-	        };
+	        var sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions);
+	        this.selector = makeSelectorStateful(sourceSelector, this.store);
+	        this.selector.run(this.props);
 	      };
 	
 	      Connect.prototype.initSubscription = function initSubscription() {
-	        var _this2 = this;
+	        if (!shouldHandleStateChanges) return;
 	
-	        if (shouldHandleStateChanges) {
-	          (function () {
-	            var subscription = _this2.subscription = new _Subscription2.default(_this2.store, _this2.parentSub);
-	            var dummyState = {};
+	        // parentSub's source should match where store came from: props vs. context. A component
+	        // connected to the store via props shouldn't use subscription from context, or vice versa.
+	        var parentSub = (this.propsMode ? this.props : this.context)[subscriptionKey];
+	        this.subscription = new _Subscription2.default(this.store, parentSub, this.onStateChange.bind(this));
 	
-	            subscription.onStateChange = function onStateChange() {
-	              this.selector.run(this.props);
+	        // `notifyNestedSubs` is duplicated to handle the case where the component is  unmounted in
+	        // the middle of the notification loop, where `this.subscription` will then be null. An
+	        // extra null check every change can be avoided by copying the method onto `this` and then
+	        // replacing it with a no-op on unmount. This can probably be avoided if Subscription's
+	        // listeners logic is changed to not call listeners that have been unsubscribed in the
+	        // middle of the notification loop.
+	        this.notifyNestedSubs = this.subscription.notifyNestedSubs.bind(this.subscription);
+	      };
 	
-	              if (!this.selector.shouldComponentUpdate) {
-	                subscription.notifyNestedSubs();
-	              } else {
-	                this.componentDidUpdate = function componentDidUpdate() {
-	                  this.componentDidUpdate = undefined;
-	                  subscription.notifyNestedSubs();
-	                };
+	      Connect.prototype.onStateChange = function onStateChange() {
+	        this.selector.run(this.props);
 	
-	                this.setState(dummyState);
-	              }
-	            }.bind(_this2);
-	          })();
+	        if (!this.selector.shouldComponentUpdate) {
+	          this.notifyNestedSubs();
+	        } else {
+	          this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate;
+	          this.setState(dummyState);
 	        }
+	      };
+	
+	      Connect.prototype.notifyNestedSubsOnComponentDidUpdate = function notifyNestedSubsOnComponentDidUpdate() {
+	        // `componentDidUpdate` is conditionally implemented when `onStateChange` determines it
+	        // needs to notify nested subs. Once called, it unimplements itself until further state
+	        // changes occur. Doing it this way vs having a permanent `componentDidMount` that does
+	        // a boolean check every time avoids an extra method call most of the time, resulting
+	        // in some perf boost.
+	        this.componentDidUpdate = undefined;
+	        this.notifyNestedSubs();
 	      };
 	
 	      Connect.prototype.isSubscribed = function isSubscribed() {
@@ -22019,7 +21935,7 @@
 	      };
 	
 	      Connect.prototype.addExtraProps = function addExtraProps(props) {
-	        if (!withRef && !renderCountProp) return props;
+	        if (!withRef && !renderCountProp && !(this.propsMode && this.subscription)) return props;
 	        // make a shallow copy so that fields added don't leak to the original selector.
 	        // this is especially important for 'ref' since that's a reference back to the component
 	        // instance. a singleton memoized selector would then be holding a reference to the
@@ -22027,6 +21943,7 @@
 	        var withExtras = _extends({}, props);
 	        if (withRef) withExtras.ref = this.setWrappedInstance;
 	        if (renderCountProp) withExtras[renderCountProp] = this.renderCount++;
+	        if (this.propsMode && this.subscription) withExtras[subscriptionKey] = this.subscription;
 	        return withExtras;
 	      };
 	
@@ -22070,7 +21987,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 184 */
+/* 183 */
 /***/ function(module, exports) {
 
 	/**
@@ -22126,7 +22043,7 @@
 
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -22184,6 +22101,104 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
+/* 185 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	// encapsulates the subscription logic for connecting a component to the redux store, as
+	// well as nesting subscriptions of descendant components, so that we can ensure the
+	// ancestor components re-render before descendants
+	
+	var CLEARED = null;
+	var nullListeners = {
+	  notify: function notify() {}
+	};
+	
+	function createListenerCollection() {
+	  // the current/next pattern is copied from redux's createStore code.
+	  // TODO: refactor+expose that code to be reusable here?
+	  var current = [];
+	  var next = [];
+	
+	  return {
+	    clear: function clear() {
+	      next = CLEARED;
+	      current = CLEARED;
+	    },
+	    notify: function notify() {
+	      var listeners = current = next;
+	      for (var i = 0; i < listeners.length; i++) {
+	        listeners[i]();
+	      }
+	    },
+	    subscribe: function subscribe(listener) {
+	      var isSubscribed = true;
+	      if (next === current) next = current.slice();
+	      next.push(listener);
+	
+	      return function unsubscribe() {
+	        if (!isSubscribed || current === CLEARED) return;
+	        isSubscribed = false;
+	
+	        if (next === current) next = current.slice();
+	        next.splice(next.indexOf(listener), 1);
+	      };
+	    }
+	  };
+	}
+	
+	var Subscription = function () {
+	  function Subscription(store, parentSub, onStateChange) {
+	    _classCallCheck(this, Subscription);
+	
+	    this.store = store;
+	    this.parentSub = parentSub;
+	    this.onStateChange = onStateChange;
+	    this.unsubscribe = null;
+	    this.listeners = nullListeners;
+	  }
+	
+	  Subscription.prototype.addNestedSub = function addNestedSub(listener) {
+	    this.trySubscribe();
+	    return this.listeners.subscribe(listener);
+	  };
+	
+	  Subscription.prototype.notifyNestedSubs = function notifyNestedSubs() {
+	    this.listeners.notify();
+	  };
+	
+	  Subscription.prototype.isSubscribed = function isSubscribed() {
+	    return Boolean(this.unsubscribe);
+	  };
+	
+	  Subscription.prototype.trySubscribe = function trySubscribe() {
+	    if (!this.unsubscribe) {
+	      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.onStateChange) : this.store.subscribe(this.onStateChange);
+	
+	      this.listeners = createListenerCollection();
+	    }
+	  };
+	
+	  Subscription.prototype.tryUnsubscribe = function tryUnsubscribe() {
+	    if (this.unsubscribe) {
+	      this.unsubscribe();
+	      this.unsubscribe = null;
+	      this.listeners.clear();
+	      this.listeners = nullListeners;
+	    }
+	  };
+	
+	  return Subscription;
+	}();
+	
+	exports.default = Subscription;
+
+/***/ },
 /* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22195,7 +22210,7 @@
 	
 	exports.createConnect = createConnect;
 	
-	var _connectAdvanced = __webpack_require__(183);
+	var _connectAdvanced = __webpack_require__(182);
 	
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 	
@@ -22320,28 +22335,39 @@
 /* 187 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	exports.__esModule = true;
 	exports.default = shallowEqual;
 	var hasOwn = Object.prototype.hasOwnProperty;
 	
-	function shallowEqual(a, b) {
-	  if (a === b) return true;
+	function is(x, y) {
+	  if (x === y) {
+	    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+	  } else {
+	    return x !== x && y !== y;
+	  }
+	}
 	
-	  var countA = 0;
-	  var countB = 0;
+	function shallowEqual(objA, objB) {
+	  if (is(objA, objB)) return true;
 	
-	  for (var key in a) {
-	    if (hasOwn.call(a, key) && a[key] !== b[key]) return false;
-	    countA++;
+	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+	    return false;
 	  }
 	
-	  for (var _key in b) {
-	    if (hasOwn.call(b, _key)) countB++;
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+	
+	  if (keysA.length !== keysB.length) return false;
+	
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwn.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+	      return false;
+	    }
 	  }
 	
-	  return countA === countB;
+	  return true;
 	}
 
 /***/ },
@@ -23469,10 +23495,12 @@
 	      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
 	    };
 	
-	    proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+	    // allow detectFactoryAndVerify to get ownProps
+	    proxy.dependsOnOwnProps = true;
 	
 	    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
 	      proxy.mapToProps = mapToProps;
+	      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
 	      var props = proxy(stateOrDispatch, ownProps);
 	
 	      if (typeof props === 'function') {
@@ -23504,7 +23532,7 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _warning = __webpack_require__(182);
+	var _warning = __webpack_require__(181);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -23732,7 +23760,7 @@
 	exports.__esModule = true;
 	exports.default = verifySubselectors;
 	
-	var _warning = __webpack_require__(182);
+	var _warning = __webpack_require__(181);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -31764,6 +31792,20 @@
 	    console.error('Option \'transformer\' is deprecated, use \'stateTransformer\' instead!'); // eslint-disable-line no-console
 	  }
 	
+	  // Detect if 'createLogger' was passed directly to 'applyMiddleware'.
+	  if (options.getState && options.dispatch) {
+	    // eslint-disable-next-line no-console
+	    console.error('redux-logger not installed. Make sure to pass logger instance as middleware:\n\nimport createLogger from \'redux-logger\';\n\nconst logger = createLogger();\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n);');
+	
+	    return function () {
+	      return function (next) {
+	        return function (action) {
+	          return next(action);
+	        };
+	      };
+	    };
+	  }
+	
 	  var logBuffer = [];
 	
 	  return function (_ref) {
@@ -32706,7 +32748,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _App = __webpack_require__(670);
+	var _App = __webpack_require__(420);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -32879,7 +32921,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _invariant = __webpack_require__(185);
+	var _invariant = __webpack_require__(184);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -33893,7 +33935,11 @@
 	
 	exports.__esModule = true;
 	
-	var _invariant = __webpack_require__(185);
+	var _warning = __webpack_require__(337);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	var _invariant = __webpack_require__(184);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -33910,28 +33956,70 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	/**
-	 * The public API for putting history on context.router.
+	 * The public API for putting history on context.
 	 */
 	var Router = function (_React$Component) {
 	  _inherits(Router, _React$Component);
 	
 	  function Router() {
+	    var _temp, _this, _ret;
+	
 	    _classCallCheck(this, Router);
 	
-	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
+	      match: _this.computeMatch(_this.props.history.location.pathname)
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
 	  Router.prototype.getChildContext = function getChildContext() {
 	    return {
-	      router: this.props.history
+	      history: this.props.history,
+	      route: {
+	        location: this.props.history.location,
+	        match: this.state.match
+	      }
+	    };
+	  };
+	
+	  Router.prototype.computeMatch = function computeMatch(pathname) {
+	    return {
+	      path: '/',
+	      url: '/',
+	      params: {},
+	      isExact: pathname === '/'
 	    };
 	  };
 	
 	  Router.prototype.componentWillMount = function componentWillMount() {
-	    var children = this.props.children;
+	    var _this2 = this;
+	
+	    var _props = this.props,
+	        children = _props.children,
+	        history = _props.history;
 	
 	
 	    (0, _invariant2.default)(children == null || _react2.default.Children.count(children) === 1, 'A <Router> may have only one child element');
+	
+	    // Do this here so we can setState when a <Redirect> changes the
+	    // location in componentWillMount. This happens e.g. when doing
+	    // server rendering using a <StaticRouter>.
+	    this.unlisten = history.listen(function () {
+	      _this2.setState({
+	        match: _this2.computeMatch(history.location.pathname)
+	      });
+	    });
+	  };
+	
+	  Router.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    (0, _warning2.default)(this.props.history === nextProps.history, 'You cannot change <Router history>');
+	  };
+	
+	  Router.prototype.componentWillUnmount = function componentWillUnmount() {
+	    this.unlisten();
 	  };
 	
 	  Router.prototype.render = function render() {
@@ -33948,7 +34036,8 @@
 	  children: _react.PropTypes.node
 	};
 	Router.childContextTypes = {
-	  router: _react.PropTypes.object.isRequired
+	  history: _react.PropTypes.object.isRequired,
+	  route: _react.PropTypes.object.isRequired
 	};
 	exports.default = Router;
 
@@ -33988,7 +34077,7 @@
 	  Prompt.prototype.enable = function enable(message) {
 	    if (this.unblock) this.unblock();
 	
-	    this.unblock = this.context.router.block(message);
+	    this.unblock = this.context.history.block(message);
 	  };
 	
 	  Prompt.prototype.disable = function disable() {
@@ -34022,7 +34111,7 @@
 	}(_react2.default.Component);
 	
 	Prompt.contextTypes = {
-	  router: _react.PropTypes.shape({
+	  history: _react.PropTypes.shape({
 	    block: _react.PropTypes.func.isRequired
 	  }).isRequired
 	};
@@ -34069,24 +34158,24 @@
 	  }
 	
 	  Redirect.prototype.componentWillMount = function componentWillMount() {
-	    if (this.context.router.staticContext) this.perform();
+	    if (this.context.history.staticContext) this.perform();
 	  };
 	
 	  Redirect.prototype.componentDidMount = function componentDidMount() {
-	    if (!this.context.router.staticContext) this.perform();
+	    if (!this.context.history.staticContext) this.perform();
 	  };
 	
 	  Redirect.prototype.perform = function perform() {
-	    var router = this.context.router;
+	    var history = this.context.history;
 	    var _props = this.props,
 	        push = _props.push,
 	        to = _props.to;
 	
 	
 	    if (push) {
-	      router.push(to);
+	      history.push(to);
 	    } else {
-	      router.replace(to);
+	      history.replace(to);
 	    }
 	  };
 	
@@ -34098,7 +34187,7 @@
 	}(_react2.default.Component);
 	
 	Redirect.contextTypes = {
-	  router: _react.PropTypes.shape({
+	  history: _react.PropTypes.shape({
 	    push: _react.PropTypes.func.isRequired,
 	    replace: _react.PropTypes.func.isRequired,
 	    staticContext: _react.PropTypes.object
@@ -34121,7 +34210,9 @@
 	
 	exports.__esModule = true;
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _warning = __webpack_require__(337);
+	
+	var _warning2 = _interopRequireDefault(_warning);
 	
 	var _react = __webpack_require__(1);
 	
@@ -34139,73 +34230,76 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var computeMatch = function computeMatch(router, _ref) {
-	  var computedMatch = _ref.computedMatch,
-	      path = _ref.path,
-	      exact = _ref.exact,
-	      strict = _ref.strict;
-	  return computedMatch || (0, _matchPath2.default)(router.location.pathname, path, { exact: exact, strict: strict });
-	};
-	
 	/**
 	 * The public API for matching a single path and rendering.
 	 */
-	
 	var Route = function (_React$Component) {
 	  _inherits(Route, _React$Component);
 	
 	  function Route() {
+	    var _temp, _this, _ret;
+	
 	    _classCallCheck(this, Route);
 	
-	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
+	      match: _this.computeMatch(_this.props, _this.context)
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
 	  Route.prototype.getChildContext = function getChildContext() {
 	    return {
-	      router: this.router
+	      route: {
+	        location: this.props.location || this.context.route.location,
+	        match: this.state.match
+	      }
 	    };
 	  };
 	
-	  Route.prototype.componentWillMount = function componentWillMount() {
-	    var _this2 = this;
+	  Route.prototype.computeMatch = function computeMatch(_ref, _ref2) {
+	    var computedMatch = _ref.computedMatch,
+	        location = _ref.location,
+	        path = _ref.path,
+	        strict = _ref.strict,
+	        exact = _ref.exact;
+	    var route = _ref2.route;
 	
-	    var parentRouter = this.context.router;
+	    if (computedMatch) return computedMatch; // <Switch> already computed the match for us
 	
-	    this.router = _extends({}, parentRouter, {
-	      match: computeMatch(parentRouter, this.props)
-	    });
+	    var pathname = (location || route.location).pathname;
 	
-	    // Start listening here so we can <Redirect> on the initial render.
-	    this.unlisten = parentRouter.listen(function () {
-	      _extends(_this2.router, parentRouter, {
-	        match: computeMatch(parentRouter, _this2.props)
-	      });
-	
-	      _this2.forceUpdate();
-	    });
+	    return (0, _matchPath2.default)(pathname, { path: path, strict: strict, exact: exact });
 	  };
 	
-	  Route.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	    _extends(this.router, {
-	      match: computeMatch(this.router, nextProps)
-	    });
-	  };
+	  Route.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextContext) {
+	    (0, _warning2.default)(!(nextProps.location && !this.props.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.');
 	
-	  Route.prototype.componentWillUnmount = function componentWillUnmount() {
-	    this.unlisten();
+	    (0, _warning2.default)(!(!nextProps.location && this.props.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.');
+	
+	    this.setState({
+	      match: this.computeMatch(nextProps, nextContext)
+	    });
 	  };
 	
 	  Route.prototype.render = function render() {
+	    var match = this.state.match;
 	    var _props = this.props,
 	        children = _props.children,
 	        component = _props.component,
 	        render = _props.render;
+	    var _context = this.context,
+	        history = _context.history,
+	        route = _context.route;
 	
-	    var props = _extends({}, this.router);
+	    var location = this.props.location || route.location;
+	    var props = { match: match, location: location, history: history };
 	
 	    return component ? // component prop gets first priority, only called if there's a match
-	    props.match ? _react2.default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
-	    props.match ? render(props) : null : children ? // children come last, always called
+	    match ? _react2.default.createElement(component, props) : null : render ? // render prop is next, only called if there's a match
+	    match ? render(props) : null : children ? // children come last, always called
 	    typeof children === 'function' ? children(props) : !Array.isArray(children) || children.length ? // Preact defaults to empty children array
 	    _react2.default.Children.only(children) : null : null;
 	  };
@@ -34214,9 +34308,8 @@
 	}(_react2.default.Component);
 	
 	Route.contextTypes = {
-	  router: _react.PropTypes.shape({
-	    listen: _react.PropTypes.func.isRequired
-	  }).isRequired
+	  history: _react.PropTypes.object.isRequired,
+	  route: _react.PropTypes.object.isRequired
 	};
 	Route.propTypes = {
 	  computedMatch: _react.PropTypes.object, // private, from <Switch>
@@ -34225,10 +34318,11 @@
 	  strict: _react.PropTypes.bool,
 	  component: _react.PropTypes.func,
 	  render: _react.PropTypes.func,
-	  children: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.node])
+	  children: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.node]),
+	  location: _react.PropTypes.object
 	};
 	Route.childContextTypes = {
-	  router: _react.PropTypes.object.isRequired
+	  route: _react.PropTypes.object.isRequired
 	};
 	exports.default = Route;
 
@@ -34271,13 +34365,18 @@
 	/**
 	 * Public API for matching a URL pathname to a path pattern.
 	 */
-	var matchPath = function matchPath(pathname, path) {
-	  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-	  var _options$exact = options.exact,
+	var matchPath = function matchPath(pathname) {
+	  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	  if (typeof options === 'string') options = { path: options };
+	
+	  var _options = options,
+	      _options$exact = _options.exact,
 	      exact = _options$exact === undefined ? false : _options$exact,
-	      _options$strict = options.strict,
+	      _options$strict = _options.strict,
 	      strict = _options$strict === undefined ? false : _options$strict;
 	
+	  var path = options.path || options.from;
 	
 	  if (!path) return { url: pathname, isExact: true, params: {} };
 	
@@ -34760,7 +34859,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _invariant = __webpack_require__(185);
+	var _invariant = __webpack_require__(184);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -34812,8 +34911,6 @@
 	  if (!basename) return location;
 	
 	  var base = (0, _PathUtils.addLeadingSlash)(basename);
-	  var pathname = location.pathname;
-	
 	
 	  if (location.pathname.indexOf(base) !== 0) return location;
 	
@@ -34877,6 +34974,8 @@
 	      context.url = createURL(context.location);
 	    }, _this.handleListen = function () {
 	      return noop;
+	    }, _this.handleBlock = function () {
+	      return noop;
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
@@ -34897,7 +34996,8 @@
 	      go: staticHandler('go'),
 	      goBack: staticHandler('goBack'),
 	      goForward: staticHandler('goForward'),
-	      listen: this.handleListen
+	      listen: this.handleListen,
+	      block: this.handleBlock
 	    };
 	
 	    return _react2.default.createElement(_Router2.default, _extends({}, props, { history: history }));
@@ -34929,6 +35029,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _warning = __webpack_require__(337);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
 	var _matchPath = __webpack_require__(401);
 	
 	var _matchPath2 = _interopRequireDefault(_matchPath);
@@ -34948,67 +35052,43 @@
 	  _inherits(Switch, _React$Component);
 	
 	  function Switch() {
-	    var _temp, _this, _ret;
-	
 	    _classCallCheck(this, Switch);
 	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
-	      location: null
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
-	  Switch.prototype.componentWillMount = function componentWillMount() {
-	    var _this2 = this;
+	  Switch.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    (0, _warning2.default)(!(nextProps.location && !this.props.location), '<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.');
 	
-	    var router = this.context.router;
-	
-	
-	    this.setState({
-	      location: router.location
-	    });
-	
-	    // Start listening here so we can <Redirect> on the initial render.
-	    this.unlisten = router.listen(function () {
-	      _this2.setState({
-	        location: router.location
-	      });
-	    });
-	  };
-	
-	  Switch.prototype.componentWillUnmount = function componentWillUnmount() {
-	    this.unlisten();
+	    (0, _warning2.default)(!(!nextProps.location && this.props.location), '<Switch> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.');
 	  };
 	
 	  Switch.prototype.render = function render() {
 	    var children = this.props.children;
-	    var location = this.state.location;
 	
-	    var routes = _react2.default.Children.toArray(children);
+	    var location = this.props.location || this.context.route.location;
 	
-	    var route = void 0,
-	        match = void 0;
-	    for (var i = 0, length = routes.length; match == null && i < length; ++i) {
-	      route = routes[i];
-	      match = (0, _matchPath2.default)(location.pathname, route.props.path, route.props);
-	    }
+	    var match = void 0,
+	        child = void 0;
+	    _react2.default.Children.forEach(children, function (element) {
+	      if (match == null) {
+	        child = element;
+	        match = (0, _matchPath2.default)(location.pathname, element.props);
+	      }
+	    });
 	
-	    return match ? _react2.default.cloneElement(route, { computedMatch: match }) : null;
+	    return match ? _react2.default.cloneElement(child, { location: location, computedMatch: match }) : null;
 	  };
 	
 	  return Switch;
 	}(_react2.default.Component);
 	
 	Switch.contextTypes = {
-	  router: _react.PropTypes.shape({
-	    listen: _react.PropTypes.func.isRequired
-	  }).isRequired
+	  route: _react.PropTypes.object.isRequired
 	};
 	Switch.propTypes = {
-	  children: _react.PropTypes.node
+	  children: _react.PropTypes.node,
+	  location: _react.PropTypes.object
 	};
 	exports.default = Switch;
 
@@ -35026,53 +35106,25 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Route = __webpack_require__(400);
+	
+	var _Route2 = _interopRequireDefault(_Route);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
 	/**
-	 * A public higher-order component for re-rendering as the
-	 * location changes. Also, passes ...context.router as props.
+	 * A public higher-order component to access the imperative API
 	 */
-	var withRouter = function withRouter(component) {
-	  var _class, _temp;
+	var withRouter = function withRouter(Component) {
+	  var C = function C(props) {
+	    return _react2.default.createElement(_Route2.default, { render: function render(routeComponentProps) {
+	        return _react2.default.createElement(Component, _extends({}, props, routeComponentProps));
+	      } });
+	  };
 	
-	  return _temp = _class = function (_React$Component) {
-	    _inherits(_class, _React$Component);
+	  C.displayName = 'withRouter(' + (Component.displayName || Component.name) + ')';
 	
-	    function _class() {
-	      _classCallCheck(this, _class);
-	
-	      return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-	    }
-	
-	    _class.prototype.componentWillMount = function componentWillMount() {
-	      var _this2 = this;
-	
-	      // Start listening here so we can <Redirect> on the initial render.
-	      this.unlisten = this.context.router.listen(function () {
-	        return _this2.forceUpdate();
-	      });
-	    };
-	
-	    _class.prototype.componentWillUnmount = function componentWillUnmount() {
-	      this.unlisten();
-	    };
-	
-	    _class.prototype.render = function render() {
-	      return _react2.default.createElement(component, _extends({}, this.props, this.context.router));
-	    };
-	
-	    return _class;
-	  }(_react2.default.Component), _class.displayName = 'withRouter(' + (component.displayName || component.name) + ')', _class.contextTypes = {
-	    router: _react.PropTypes.shape({
-	      listen: _react.PropTypes.func.isRequired
-	    }).isRequired
-	  }, _temp;
+	  return C;
 	};
 	
 	exports.default = withRouter;
@@ -35150,7 +35202,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _invariant = __webpack_require__(185);
+	var _invariant = __webpack_require__(184);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -35794,7 +35846,78 @@
 	});
 
 /***/ },
-/* 420 */,
+/* 420 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _reactRouterDom = __webpack_require__(384);
+	
+	var _Main = __webpack_require__(421);
+	
+	var _Main2 = _interopRequireDefault(_Main);
+	
+	var _Spinner = __webpack_require__(445);
+	
+	var _Spinner2 = _interopRequireDefault(_Spinner);
+	
+	var _actions = __webpack_require__(665);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var LoadMainApp = function LoadMainApp(_ref) {
+	  var app = _ref.app,
+	      resume = _ref.resume,
+	      getResumeData = _ref.getResumeData;
+	
+	
+	  // fake delay to test loading animation
+	  if (app.isLoading) {
+	    (function () {
+	      return setTimeout(getResumeData, 1000);
+	    })();
+	  }
+	
+	  return app.isLoading ? _react2.default.createElement(_Spinner2.default, null) : _react2.default.createElement(_Main2.default, { resume: resume });
+	};
+	
+	var mapStateToProps = function mapStateToProps(_ref2) {
+	  var app = _ref2.app,
+	      resume = _ref2.resume.resume;
+	  return { app: app, resume: resume };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    getResumeData: function getResumeData() {
+	      return dispatch((0, _actions.fetchData)());
+	    }
+	  };
+	};
+	
+	var ResumeApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoadMainApp);
+	
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'main',
+	    { style: { fontFamily: '"Roboto", sans-serif' } },
+	    _react2.default.createElement(_reactRouterDom.Route, { component: ResumeApp })
+	  );
+	};
+	
+	exports.default = App;
+
+/***/ },
 /* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36965,7 +37088,6 @@
 	    margin: '0 auto',
 	    display: 'inline-block',
 	    whiteSpace: 'pre-line',
-	    letterSpacing: '0.001vw',
 	    WebkitBackgroundClip: 'text',
 	    WebkitTextFillColor: 'transparent',
 	    backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
@@ -36999,6 +37121,7 @@
 	    )
 	  );
 	};
+	
 	// I like to explore the crossover between music & technology
 	var Welcome = function Welcome() {
 	  return _react2.default.createElement(
@@ -43864,7 +43987,7 @@
 	  /**
 	   * The DOM target to listen to.
 	   */
-	  target: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string])
+	  target: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string]).isRequired
 	} : void 0;
 	exports.default = EventListener;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -69656,8 +69779,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./main.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -69675,7 +69798,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nmain {\n  font-family: 'Roboto', sans-serif; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\n/* scrolldown link */\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #515151); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), white); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), white); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#projects {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n.shadow {\n  color: #444dff;\n  margin: auto;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  -webkit-animation: hueShift 13s infinite linear;\n  -webkit-transition: all .2s ease-in-out;\n  -moz-transition: all .2s ease-in-out;\n  -ms-transition: all .2s ease-in-out;\n  transition: all 0.2s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.5px;\n    left: -1.5px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n\n.active {\n  background-image: linear-gradient(#515151, #2d2d2d); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n", ""]);
+	exports.push([module.id, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.top {\n  z-index: 99; }\n\n.center {\n  margin-top: 34vh; }\n\n/*~~~~~~~~~~~~ ReactCSSTransitionGroup~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~~~ Resume-Content ~~~~~~~~~~~~~~~~*/\n/* scrolldown link */\n#about {\n  background-image: linear-gradient(to left bottom, rgba(255, 255, 255, 0), #515151); }\n\n#work {\n  background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0), white); }\n\n#education {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#skills {\n  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0), white); }\n\n#portfolio {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n#projects {\n  background-image: linear-gradient(to left top, rgba(255, 255, 255, 0), #515151); }\n\n.shadow {\n  color: #444dff;\n  margin: auto;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  -webkit-animation: hueShift 13s infinite linear;\n  -webkit-transition: all .2s ease-in-out;\n  -moz-transition: all .2s ease-in-out;\n  -ms-transition: all .2s ease-in-out;\n  transition: all 0.2s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.5px;\n    left: -1.5px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n\n.active {\n  background-image: linear-gradient(#515151, #2d2d2d); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n", ""]);
 	
 	// exports
 
@@ -69753,7 +69876,7 @@
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -69987,78 +70110,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 670 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _reactRouterDom = __webpack_require__(384);
-	
-	var _Main = __webpack_require__(421);
-	
-	var _Main2 = _interopRequireDefault(_Main);
-	
-	var _Spinner = __webpack_require__(445);
-	
-	var _Spinner2 = _interopRequireDefault(_Spinner);
-	
-	var _actions = __webpack_require__(665);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var LoadMainApp = function LoadMainApp(_ref) {
-	  var app = _ref.app,
-	      resume = _ref.resume,
-	      getResumeData = _ref.getResumeData;
-	
-	
-	  // fake delay to test loading animation
-	  if (app.isLoading) {
-	    (function () {
-	      return setTimeout(getResumeData, 1000);
-	    })();
-	  }
-	
-	  return app.isLoading ? _react2.default.createElement(_Spinner2.default, null) : _react2.default.createElement(_Main2.default, { resume: resume });
-	};
-	
-	var mapStateToProps = function mapStateToProps(_ref2) {
-	  var app = _ref2.app,
-	      resume = _ref2.resume.resume;
-	  return { app: app, resume: resume };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    getResumeData: function getResumeData() {
-	      return dispatch((0, _actions.fetchData)());
-	    }
-	  };
-	};
-	
-	var ResumeApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoadMainApp);
-	
-	var App = function App() {
-	  return _react2.default.createElement(
-	    'main',
-	    null,
-	    _react2.default.createElement(_reactRouterDom.Route, { component: ResumeApp })
-	  );
-	};
-	
-	exports.default = App;
 
 /***/ }
 /******/ ]);

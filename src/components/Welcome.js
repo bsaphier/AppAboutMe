@@ -37,7 +37,6 @@ const styles = {
     margin: '0 auto',
     display: 'inline-block',
     whiteSpace: 'pre-line',
-    letterSpacing: '0.001vw',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
@@ -68,6 +67,7 @@ const Title = ({ style, title }) => (
     </span>
   </div>
 );
+
 // I like to explore the crossover between music & technology
 const Welcome = () => {
   return (

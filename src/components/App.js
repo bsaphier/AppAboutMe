@@ -6,6 +6,7 @@ import Main from './Main';
 import Spinner from './Spinner';
 import { fetchData } from '../actions';
 
+
 const LoadMainApp = ({ app, resume, getResumeData }) => {
 
   // fake delay to test loading animation
@@ -18,7 +19,6 @@ const LoadMainApp = ({ app, resume, getResumeData }) => {
     : <Main resume={resume} />;
 };
 
-
 const mapStateToProps = ({ app, resume: { resume } }) => ({ app, resume });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,10 +27,11 @@ const mapDispatchToProps = dispatch => ({
 
 const ResumeApp = connect(mapStateToProps, mapDispatchToProps)(LoadMainApp);
 
+
 const App = () => (
-  <main>
+  <main style={{ fontFamily: '"Roboto", sans-serif' }}>
     <Route component={ResumeApp} />
   </main>
 );
 
-export default App;
+export default App
