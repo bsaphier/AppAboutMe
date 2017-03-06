@@ -10,23 +10,16 @@ const styles = {
     width: '100%',
     height: '100%',
     paddingTop: 0,
-    // display: 'table',
   },
   cell: {
     position: 'absolute',
-    top: '50%',
+    top: '38%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    // width: '62%',
-    // display: 'table-cell',
     verticalAlign: 'middle',
-    // border: '5px solid',
-    // borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
-    // borderImageSlice: 1,
   },
   title: {
     display: 'flex',
-    // wordSpacing: '0px',
     textAlign: 'justify',
     textTransform: 'uppercase',
     // WebkitTransition: 'all .3s ease-in-out',
@@ -53,7 +46,7 @@ const leave = event => {
   // color = 'rgb(255, 255, 255)';
 };
 
-const Title = ({ style, title }) => (
+const Title = ({ style, children }) => (
   <div style={styles.title}>
     <span
       onMouseOver={hover}
@@ -63,53 +56,72 @@ const Title = ({ style, title }) => (
         ...style
       }}
     >
-      { title }
+      { children }
     </span>
   </div>
 );
 
-// I like to explore the crossover between music & technology
 const Welcome = () => {
   return (
     <div style={styles.banner}>
       <div style={styles.cell}>
-        <Title
-          title="I'm Ben"
-          style={{
-            fontWeight: 900,
-            fontSize: '13vh',
-            lineHeight: '12vh',
-            letterSpacing: '-0.009em'
-          }}
-        />
-        <Title
-          title="Saphier"
-          style={{
-            fontWeight: 100,
-            fontSize: '13vh',
-            fontStyle: 'italic',
-            lineHeight: '12vh',
-            padding: '0 0.03em',
-            letterSpacing: '-0.08em'
-          }}
-        />
-        <Title
-          title="I'm a software engineer"
-          style={{
-            fontWeight: 900,
-            fontSize: '3.8vh',
-            padding: '0 0.038em',
-            letterSpacing: '-0.038em'
-          }}
-        />
-        <Title
-          title="music & technology"
-          style={{
-            fontWeight: 100,
-            fontSize: '5vh',
-            letterSpacing: '-0.08em'
-          }}
-        />
+        <Title style={{
+          fontWeight: 500,
+          fontSize: '14vh',
+          lineHeight: '11vh',
+          paddingRight: '0.07em',
+          letterSpacing: '-0.03em'
+        }}>
+          Hello
+        </Title>
+        <Title style={{
+          fontWeight: 100,
+          fontSize: '5vh',
+          lineHeight: '4vh',
+          letterSpacing: '0.25em'
+        }}>
+          My name is
+        </Title>
+        <Title style={{
+          fontWeight: 900,
+          fontSize: '23vh',
+          lineHeight: '16.2vh',
+          paddingTop: '0.03em',
+          paddingRight: '0.1em',
+          letterSpacing: '-0.06em'
+        }}>
+          <b style={{letterSpacing: '-0.08em'}}>B</b>en
+        </Title>
+        <Title style={{
+          fontWeight: 100,
+          fontSize: '12vh',
+          fontStyle: 'italic',
+          lineHeight: '9.6vh',
+          paddingRight: '0.15em',
+          letterSpacing: '-0.08em'
+        }}>
+          Saphier
+        </Title>
+        <Title style={{
+          fontWeight: 900,
+          fontSize: '7vh',
+          lineHeight: '5.1vh',
+          wordSpacing: '-0.05em',
+          paddingTop: '0.07em',
+          paddingRight: '0.15em',
+          letterSpacing: '-0.05em'
+        }}>
+          I like to mix
+        </Title>
+        <Title style={{
+          fontWeight: 100,
+          fontSize: '6.66vh',
+          lineHeight: '7vh',
+          paddingRight: '0.2em', 
+          letterSpacing: '-0.1em'
+        }}>
+          sound & code
+        </Title>
       </div>
     </div>
   );

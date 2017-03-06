@@ -37071,16 +37071,13 @@
 	  },
 	  cell: {
 	    position: 'absolute',
-	    top: '50%',
+	    top: '38%',
 	    left: '50%',
 	    transform: 'translate(-50%, -50%)',
-	    // width: '62%',
-	    // display: 'table-cell',
 	    verticalAlign: 'middle'
 	  },
 	  title: {
 	    display: 'flex',
-	    // wordSpacing: '0px',
 	    textAlign: 'justify',
 	    textTransform: 'uppercase'
 	  },
@@ -37106,7 +37103,7 @@
 	
 	var Title = function Title(_ref) {
 	  var style = _ref.style,
-	      title = _ref.title;
+	      children = _ref.children;
 	  return _react2.default.createElement(
 	    'div',
 	    { style: styles.title },
@@ -37117,12 +37114,11 @@
 	        onMouseLeave: leave,
 	        style: _extends({}, styles.text, style)
 	      },
-	      title
+	      children
 	    )
 	  );
 	};
 	
-	// I like to explore the crossover between music & technology
 	var Welcome = function Welcome() {
 	  return _react2.default.createElement(
 	    'div',
@@ -37130,43 +37126,80 @@
 	    _react2.default.createElement(
 	      'div',
 	      { style: styles.cell },
-	      _react2.default.createElement(Title, {
-	        title: 'I\'m Ben',
-	        style: {
-	          fontWeight: 900,
-	          fontSize: '13vh',
-	          lineHeight: '12vh',
-	          letterSpacing: '-0.009em'
-	        }
-	      }),
-	      _react2.default.createElement(Title, {
-	        title: 'Saphier',
-	        style: {
-	          fontWeight: 100,
-	          fontSize: '13vh',
-	          fontStyle: 'italic',
-	          lineHeight: '12vh',
-	          padding: '0 0.03em',
-	          letterSpacing: '-0.08em'
-	        }
-	      }),
-	      _react2.default.createElement(Title, {
-	        title: 'I\'m a software engineer',
-	        style: {
-	          fontWeight: 900,
-	          fontSize: '3.8vh',
-	          padding: '0 0.038em',
-	          letterSpacing: '-0.038em'
-	        }
-	      }),
-	      _react2.default.createElement(Title, {
-	        title: 'music & technology',
-	        style: {
-	          fontWeight: 100,
-	          fontSize: '5vh',
-	          letterSpacing: '-0.08em'
-	        }
-	      })
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 500,
+	            fontSize: '14vh',
+	            lineHeight: '11vh',
+	            paddingRight: '0.07em',
+	            letterSpacing: '-0.03em'
+	          } },
+	        'Hello'
+	      ),
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 100,
+	            fontSize: '5vh',
+	            lineHeight: '4vh',
+	            letterSpacing: '0.25em'
+	          } },
+	        'My name is'
+	      ),
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 900,
+	            fontSize: '23vh',
+	            lineHeight: '16.2vh',
+	            paddingTop: '0.03em',
+	            paddingRight: '0.1em',
+	            letterSpacing: '-0.06em'
+	          } },
+	        _react2.default.createElement(
+	          'b',
+	          { style: { letterSpacing: '-0.08em' } },
+	          'B'
+	        ),
+	        'en'
+	      ),
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 100,
+	            fontSize: '12vh',
+	            fontStyle: 'italic',
+	            lineHeight: '9.6vh',
+	            paddingRight: '0.15em',
+	            letterSpacing: '-0.08em'
+	          } },
+	        'Saphier'
+	      ),
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 900,
+	            fontSize: '7vh',
+	            lineHeight: '5.1vh',
+	            wordSpacing: '-0.05em',
+	            paddingTop: '0.07em',
+	            paddingRight: '0.15em',
+	            letterSpacing: '-0.05em'
+	          } },
+	        'I like to mix'
+	      ),
+	      _react2.default.createElement(
+	        Title,
+	        { style: {
+	            fontWeight: 100,
+	            fontSize: '6.66vh',
+	            lineHeight: '7vh',
+	            paddingRight: '0.2em',
+	            letterSpacing: '-0.1em'
+	          } },
+	        'sound & code'
+	      )
 	    )
 	  );
 	};
