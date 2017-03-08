@@ -21,9 +21,10 @@ export const didLoad = ({ name, contact, resume }) => ({
   contact
 });
 
-// make a backend route to retrieve this instead of accessing the filepath
+// _RESUME needs to change if running locally vs gh-pages
+const _RESUME = '/app-about-me/public/resume.json';
 export const fetchData = () => dispatch =>
-  fetch('/app-about-me/public/resume.json')
+  fetch(_RESUME)
     .then( response => response.json() )
     .then( json => dispatch(didLoad(json)) )
     .catch( err =>

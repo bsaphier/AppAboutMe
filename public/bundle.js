@@ -38782,10 +38782,11 @@
 	  };
 	};
 	
-	// make a backend route to retrieve this instead of accessing the filepath
+	// _RESUME needs to change if running locally vs gh-pages
+	var _RESUME = '/app-about-me/public/resume.json';
 	var fetchData = exports.fetchData = function fetchData() {
 	  return function (dispatch) {
-	    return fetch('/app-about-me/public/resume.json').then(function (response) {
+	    return fetch(_RESUME).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
 	      return dispatch(didLoad(json));
