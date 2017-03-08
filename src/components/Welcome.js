@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Motion, spring } from 'react-motion';
 
-import { toggleWelcome } from '../actions';
-
 const styles = {
   banner: {
     position: 'relative',
@@ -21,9 +19,6 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     verticalAlign: 'middle',
-    // WebkitTransition: 'all .3s ease-in-out',
-    // MozTransition: 'all .3s ease-in-out',
-    // transition: 'all .3s ease-in-out'
   },
   title: {
     display: 'flex',
@@ -50,16 +45,6 @@ const leave = event => {
   // color = 'rgb(255, 255, 255)';
 };
 
-// const enter = event => {
-//   // if (event.target.parentNode.parentNode.id === 'cell') {
-//     document.getElementById('cell').style.top = '-38%';
-//   // }
-// };
-//
-// const exit = event => {
-//   document.getElementById('cell').style.top = '38%';
-// };
-
 const Title = ({ style, children }) => (
   <div style={styles.title}>
     <span
@@ -76,13 +61,15 @@ const Title = ({ style, children }) => (
 );
 
 
-const Welcome = ({ welcomeIn, toggleWelcomeText }) => {
+const Welcome = ({ welcomeIn, currSection }) => {
 
-  let titleIn = welcomeIn ? {top: spring(38)} : {top: spring(-38)};
+  let titleIn = (welcomeIn && currSection === 'home')
+    ? {top: spring(38)}
+    : {top: spring(-38)};
 
   //*TODO create title components by iterating instead of inline
   return (
-    <div style={styles.banner} onClick={toggleWelcomeText}>
+    <div style={styles.banner}>
       {/* <a onClick={exit}>button</a> */}
       <Motion style={titleIn}>
         {(interpStyle) => (
@@ -153,11 +140,8 @@ const Welcome = ({ welcomeIn, toggleWelcomeText }) => {
 
 
 const mapStateToProps = ({ app }) => ({
-  welcomeIn: app.welcomeIn
+  welcomeIn: app.welcomeIn,
+  currSection: app.currSection
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleWelcomeText: () => dispatch(toggleWelcome())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default connect(mapStateToProps)(Welcome);

@@ -6,12 +6,14 @@ import rootReducer from './reducers/root-reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const reduxLogger = createLogger({collapsed: true});
+
 export default createStore(
   rootReducer,
   composeEnhancers(
     applyMiddleware(
-      thunkMiddleware,
-      createLogger({collapsed: true})
+      reduxLogger,
+      thunkMiddleware
     )
   )
 );

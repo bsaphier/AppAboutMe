@@ -1,7 +1,14 @@
 import {
   DATA_LOADED,
+  SECTION_ENTER,
   TOGGLE_WELCOME
 } from './constants';
+
+//*TODO call this using waypoint events
+export const sectionChange = (section) => ({
+  type: SECTION_ENTER,
+  section
+});
 
 export const toggleWelcome = () => ({
   type: TOGGLE_WELCOME
