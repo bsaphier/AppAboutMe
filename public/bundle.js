@@ -38787,7 +38787,7 @@
 	var fetchData = exports.fetchData = function fetchData() {
 	  return function (dispatch) {
 	    return fetch('/public/resume.json').then(function (response) {
-	      return response.json();
+	      return response;
 	    }).then(function (json) {
 	      return dispatch(didLoad(json));
 	    }).catch(function (err) {
