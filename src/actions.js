@@ -1,5 +1,11 @@
-import { DATA_LOADED } from './constants';
+import {
+  DATA_LOADED,
+  TOGGLE_WELCOME
+} from './constants';
 
+export const toggleWelcome = () => ({
+  type: TOGGLE_WELCOME
+});
 
 export const didLoad = ({ name, contact, resume }) => ({
   type: DATA_LOADED,

@@ -19,13 +19,11 @@ const LoadMainApp = ({ app, resume, getResumeData }) => {
     : <Main resume={resume} />;
 };
 
-const mapStateToProps = ({ app, resume: { resume } }) => ({ app, resume });
 
-const mapDispatchToProps = dispatch => ({
-  getResumeData: () => dispatch(fetchData())
-});
-
-const ResumeApp = connect(mapStateToProps, mapDispatchToProps)(LoadMainApp);
+const ResumeApp = connect(
+  ({ app, resume: { resume } }) => ({ app, resume }),
+  (dispatch) => ({getResumeData: () => dispatch(fetchData())})
+)(LoadMainApp);
 
 
 const App = () => (
@@ -34,4 +32,5 @@ const App = () => (
   </main>
 );
 
-export default App
+
+export default App;
