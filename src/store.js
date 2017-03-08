@@ -4,12 +4,12 @@ import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from './reducers/root-reducer';
 
-const reduxLogger = process.env.PORT ? null : createLogger({collapsed: true});
+const reduxLogger = createLogger({collapsed: true});
 
 export default createStore(
   rootReducer,
   applyMiddleware(
-    reduxLogger,
-    thunkMiddleware
+    thunkMiddleware,
+    reduxLogger
   )
 );

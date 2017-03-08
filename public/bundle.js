@@ -31696,7 +31696,7 @@
 /* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -31718,10 +31718,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var reduxLogger = process.env.PORT ? null : (0, _reduxLogger2.default)({ collapsed: true });
+	var reduxLogger = (0, _reduxLogger2.default)({ collapsed: true });
 	
-	exports.default = (0, _redux.createStore)(_rootReducer2.default, (0, _redux.applyMiddleware)(reduxLogger, _reduxThunk2.default));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	exports.default = (0, _redux.createStore)(_rootReducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, reduxLogger));
 
 /***/ },
 /* 372 */
@@ -38787,7 +38786,7 @@
 	var fetchData = exports.fetchData = function fetchData() {
 	  return function (dispatch) {
 	    return fetch('/public/resume.json').then(function (response) {
-	      return response;
+	      return response.json();
 	    }).then(function (json) {
 	      return dispatch(didLoad(json));
 	    }).catch(function (err) {
