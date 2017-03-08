@@ -38785,7 +38785,7 @@
 	// make a backend route to retrieve this instead of accessing the filepath
 	var fetchData = exports.fetchData = function fetchData() {
 	  return function (dispatch) {
-	    return fetch('/public/resume.json').then(function (response) {
+	    return fetch('/app-about-me/public/resume.json').then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
 	      return dispatch(didLoad(json));
