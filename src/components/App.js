@@ -3,27 +3,18 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import Main from './Main';
-import Spinner from './Spinner';
+import store from '../store';
 import { fetchData } from '../actions';
+import loadAppWithSpinner from './HOC/loadAppWithSpinner';
 
 
-const LoadMainApp = ({ app, resume, getResumeData }) => {
-
-  // fake delay to test loading animation
-  if (app.isLoading) {
-    (() => setTimeout(getResumeData, 1000))();
-  }
-
-  return app.isLoading
-    ? <Spinner />
-    : <Main resume={resume} />;
-};
-
+const loadAppHOC = loadAppWithSpinner(
+  () => store.dispatch(fetchData())
+)(Main);
 
 const ResumeApp = connect(
-  ({ app, resume: { resume } }) => ({ app, resume }),
-  (dispatch) => ({getResumeData: () => dispatch(fetchData())})
-)(LoadMainApp);
+  ({ app: { isLoading }, resume: { resume } }) => ({ resume, isLoading })
+)(loadAppHOC);
 
 
 const App = () => (
