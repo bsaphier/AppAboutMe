@@ -8,7 +8,7 @@ const { Link } = Scroll;
 const styles = {
   navWrap: {
     width: '100%',
-    maxHeight: '50px',
+    maxHeight: '5em',
     textTransform: 'uppercase',
     // letterSpacing: '2.5px',
     margin: '0 auto',
@@ -24,20 +24,20 @@ const styles = {
     padding: '0px',
     border: 'none',
     outline: 'none',
-    minHeight: '48px',
+    minHeight: '3em',
     width: 'auto',
     textAlign: 'center'
   },
   listItem: {
     position: 'relative',
     listStyle: 'none',
-    height: '48px',
+    height: '3em',
     display: 'inline-block'
   },
   navLink: {
     display: 'inline-block',
     padding: '8px 13px',
-    lineHeight: '32px',
+    lineHeight: '2em',
     textDecoration: 'none',
     textAlign: 'left',
     color: 'rgb(68, 77, 255)',

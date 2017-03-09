@@ -3,7 +3,7 @@ import React from 'react';
 const style = {
   margin: 20,
   overflow: 'hidden',
-  // maxWidth: '20vmin',
+  maxWidth: '62%',
   maxHeight: '38vh',
   padding: '5px 20px',
   textAlign: 'center',

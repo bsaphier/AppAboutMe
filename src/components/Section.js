@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-
-const Header = (props) => {
+const Section = (props) => {
   const styles = {
     window: {
       width: '100%',
@@ -19,4 +18,4 @@ const Header = (props) => {
   );
 };
 
-export default connect()(Header);
+export default connect()(Section);

@@ -22,7 +22,8 @@ export const didLoad = ({ name, contact, resume }) => ({
 });
 
 // _RESUME needs to change if running locally vs gh-pages
-const _RESUME = '/app-about-me/public/resume.json';
+// '/app-about-me/public/resume.json'
+const _RESUME = '/public/resume.json';
 export const fetchData = () => dispatch =>
   fetch(_RESUME)
     .then( response => response.json() )

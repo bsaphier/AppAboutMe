@@ -6,8 +6,19 @@ import Projects from './projects';
 
 
 const styles = {
+  cell: {
+    position: 'absolute',
+    top: '38%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    verticalAlign: 'middle',
+  },
   title: {
-    margin: '0 20px 18px 20px',
+    fontWeight: 900,
+    fontSize: '3vh',
+    lineHeight: '16.2vh',
+    letterSpacing: '0.1em',
+    marginLeft: '8vh',
     WebkitTransition: 'all .3s ease-in-out',
     MozTransition: 'all .3s ease-in-out',
     transition: 'all .3s ease-in-out'
@@ -18,8 +29,8 @@ const ResumeComponents = ({ about, skills, projects }) => {
   return (
     <div>
       <About styling={styles} content={ about } />
-      <Skills styling={styles} content={ skills } />
       <Projects styling={styles} content={ projects } />
+      <Skills styling={styles} content={ skills } />
     </div>
   );
 };

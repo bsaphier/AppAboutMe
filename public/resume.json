@@ -37,17 +37,16 @@
       "skills":
         {
           "proficient": [
-            "Javascript/ES6",
+            "Javascript / ES6",
             "The NERP stack (Node.js, ExpressJs, React, PostgreSQL)",
             "Redux",
-            "HTML5/CSS3 & Sass",
-            "WebAudio API, OSC & MIDI",
-            "Max/MSP"
+            "HTML5 / CSS3 / Sass / Bootstrap",
+            "Webpack",
+            "Git"
           ],
           "knowledgeable": [
-            "Webpack",
             "Mocha & Chai",
-            "Axios/AJAX",
+            "Axios / AJAX",
             "OAuth",
             "SQL",
             "RESTful architecture",

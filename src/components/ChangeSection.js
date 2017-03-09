@@ -8,10 +8,10 @@ const { Link } = Scroll;
 const styles = {
   foot: {
     position: 'absolute',
+    left: 0,
     bottom: '0%',
     width: '100%',
-    left: 0,
-    height: '50px',
+    height: '3em',
     background: 'rgba(45, 45, 45, 0.1)',
     textAlign: 'center',
   },
@@ -40,8 +40,11 @@ const leave = event => {
   event.target.style.background = 'rgb(68, 77, 255)';
 };
 
-const ChangeSection = ({ to, text }) => (
-  <div style={styles.foot}>
+const ChangeSection = ({ to, text, sidebar }) => (
+  <div style={sidebar
+    ? {...styles.foot, width: '75%'}
+    : styles.foot}
+    >
     { to.length === 0 ? (
       <a
         onMouseEnter={hover}

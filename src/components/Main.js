@@ -33,7 +33,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Section>
+        <Section id="home">
           <Navbar navLinks={this.state.navItems} />
           <Welcome />
           <ChangeSection to="about" text="ABOUT ME" />
