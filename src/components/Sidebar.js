@@ -4,8 +4,8 @@ import Title from './Title';
 
 const styles = {
   sidebarContainer: {
-    position: 'absolute',
-    right: '0%',
+    // position: 'relative',
+    float: 'right',
     width: '25%',
     height: '100%',
     minWidth: '300px',

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Cell from '../Cell';
 import Title from '../Title';
 import Section from '../Section';
 import ChangeSection from '../ChangeSection';
@@ -7,13 +8,15 @@ import ChangeSection from '../ChangeSection';
 const Skills = ({ styling, content }) => {
   return (
     <Section id="skills">
-      <Title className="shadow" style={styling.title}>MY SKILLS</Title>
-      <div style={styling.cell}>
+      <Title className="shadow" style={styling.title}>
+        MY SKILLS
+      </Title>
+      <Cell>
         {content.proficient.map((skill) => (
           <div key={skill}>{skill}</div>
         ))}
-      </div>
-        <ChangeSection to="" text="TO THE TOP" />
+      </Cell>
+      <ChangeSection to="" text="TO THE TOP" />
     </Section>
   );
 };

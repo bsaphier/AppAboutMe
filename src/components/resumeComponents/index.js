@@ -6,12 +6,16 @@ import Projects from './projects';
 
 
 const styles = {
-  cell: {
-    position: 'absolute',
-    top: '38%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    verticalAlign: 'middle',
+  banner: {
+    // position: 'absolute',
+    background: 'none',
+    textAlign: 'center',
+    color: 'rgba(255, 68, 62, 1)',
+    // padding: '40pt',
+    // width: 'auto',
+    margin: '0 auto',
+    height: '100%',
+    paddingTop: 0,
   },
   title: {
     fontWeight: 900,

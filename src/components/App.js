@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import Main from './Main';
 import store from '../store';
 import { fetchData } from '../actions';
-import loadAppWithSpinner from './HOC/loadAppWithSpinner';
+import { loadAppWithSpinner } from './HOC';
 
 
 const loadAppHOC = loadAppWithSpinner(

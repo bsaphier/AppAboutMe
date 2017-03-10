@@ -1,5 +1,3 @@
-import loadAppWithSpinner from './loadAppWithSpinner';
+import _loadAppWithSpinner from './loadAppWithSpinner';
 
-export default {
-  loadAppWithSpinner
-};
+export const loadAppWithSpinner = _loadAppWithSpinner;

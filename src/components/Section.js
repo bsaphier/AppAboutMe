@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const Section = (props) => {
   const styles = {
     window: {
-      width: '100%',
+      width: '100vw',
       height: '100vh',
       // paddingTop: '50px',
       position: 'relative'
