@@ -8,9 +8,7 @@ import { fetchData } from '../actions';
 import { loadAppWithSpinner } from './HOC';
 
 
-const loadAppHOC = loadAppWithSpinner(
-  () => store.dispatch(fetchData())
-)(Main);
+const loadAppHOC = loadAppWithSpinner( () => store.dispatch(fetchData()) )(Main);
 
 const ResumeApp = connect(
   ({ app: { isLoading }, resume: { resume } }) => ({ resume, isLoading })

@@ -9,9 +9,8 @@ const styles = {
   foot: {
     position: 'absolute',
     left: 0,
-    bottom: '0%',
+    bottom: 0,
     width: '100%',
-    height: '3em',
     background: 'rgba(45, 45, 45, 0.1)',
     textAlign: 'center',
   },
@@ -24,7 +23,7 @@ const styles = {
     appearance: 'none',
     WebkitAppearance: 'none',
     height: '100%',
-    padding: '1em',
+    padding: '0.8em',
     minWidth: '10em',
     cursor: 'pointer',
     WebkitTransition: 'all .3s ease-in-out',
@@ -41,11 +40,8 @@ const leave = event => {
   event.target.style.background = 'rgb(68, 77, 255)';
 };
 
-const SectionFoot = ({ to, text, sidebar }) => (
-  <div style={sidebar
-    ? {...styles.foot, width: 'calc(77%)'}
-    : styles.foot}
-    >
+const SectionFoot = ({ to, text }) => (
+  <div style={styles.foot}>
     { to.length === 0
     ? <a
         onMouseEnter={hover}

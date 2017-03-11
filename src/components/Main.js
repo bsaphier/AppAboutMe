@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Section from './Section';
 import Welcome from './Welcome';
+import FillView from './FillView';
 import SectionFoot from './SectionFoot';
 import { toggleWelcome } from '../actions';
 import ResumeComponents from './resumeComponents';
@@ -35,8 +36,10 @@ class Main extends React.Component {
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
         <Section id="home">
           {/* <Navbar navLinks={this.state.navItems} /> */}
-          <Welcome />
-          <SectionFoot to="about" text="ABOUT ME" />
+          <FillView>
+            <Welcome />
+            <SectionFoot to="about" text="ABOUT ME" />
+          </FillView>
         </Section>
 
         <ResumeComponents

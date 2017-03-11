@@ -33,11 +33,8 @@ const Title = ({ style, children }) => (
     <span
       onMouseOver={hover}
       onMouseLeave={leave}
-      style={{
-        ...styles.text,
-        ...style
-      }}
-    >
+      style={{ ...styles.text, ...style }}
+      >
       { children }
     </span>
   </div>

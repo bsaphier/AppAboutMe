@@ -2,27 +2,29 @@ import React from 'react';
 
 import Cell from '../Cell';
 import Title from '../Title';
-import Sidebar from '../Sidebar';
+import SideSection from '../SideSection';
 import Section from '../Section';
 import FillView from '../FillView';
-import SectionItem from '../SectionItem';
+import BorderGrad from '../BorderGrad';
 import SectionFoot from '../SectionFoot';
 
 const About = ({ content, style }) => {
   return (
     <Section id="about">
-      <Sidebar title="Contact">
+
+      <SideSection title="Contact">
         <Title style={{
           ...style.title,
           fontSize: '6vh',
           letterSpacing: '-0.05em'
         }}>
-          Contact
+          <span>Contact</span>
         </Title>
-      </Sidebar>
+      </SideSection>
+
       <FillView style={{background: 'rgb(81, 81, 81)'}}>
         <Cell>
-          <SectionItem style={{
+          <BorderGrad style={{
             top: '47%',
             left: '49%',
             width: '74%',
@@ -33,10 +35,11 @@ const About = ({ content, style }) => {
               ABOUT ME
             </Title>
             <p style={style.text}>{content}</p>
-          </SectionItem>
+          </BorderGrad>
         </Cell>
+        <SectionFoot to="projects" text="NEXT" />
       </FillView>
-      <SectionFoot to="projects" text="NEXT" sidebar />
+
     </Section>
   );
 };

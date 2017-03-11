@@ -5,7 +5,8 @@ const styles = {
     height: '100%',
     padding: '3vmin',
     overflow: 'hidden',
-    background: 'none'
+    background: 'none',
+    position: 'relative'
   }
 };
 

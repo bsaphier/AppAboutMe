@@ -12,10 +12,10 @@ const styles = {
   }
 };
 
-const SectionItem = ({ children, style }) => (
+const BorderGrad = ({ children, style }) => (
   <div style={{...styles.sectionItem, ...style}}>
     { children }
   </div>
 );
 
-export default SectionItem;
+export default BorderGrad;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const styles = {
-  sidebarContainer: {
+  rightSideContainer: {
     float: 'right',
     width: '23%',
     height: '100%',
@@ -11,12 +11,12 @@ const styles = {
   }
 };
 
-const Sidebar = ({ children }) => {
+const SideSection = ({ children }) => {
   return (
-    <div style={styles.sidebarContainer}>
-      {children && <div>{ children }</div>}
+    <div style={styles.rightSideContainer}>
+      { children }
     </div>
   );
 };
 
-export default Sidebar;
+export default SideSection;

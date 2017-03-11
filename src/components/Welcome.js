@@ -4,7 +4,6 @@ import { Motion, presets, spring } from 'react-motion';
 
 import Cell from './Cell';
 import Title from './Title';
-import FillView from './FillView';
 
 
 const Welcome = ({ welcomeIn, currSection }) => {
@@ -20,7 +19,7 @@ const Welcome = ({ welcomeIn, currSection }) => {
         letterSpacing5: spring(-0.1, presets.gentle)
       }
     : {
-        top: -13,
+        top: -50,
         letterSpacing0: 3,
         letterSpacing1: 2,
         letterSpacing2: 6,
@@ -31,71 +30,69 @@ const Welcome = ({ welcomeIn, currSection }) => {
 
   //*TODO create title components by iterating instead of inline
   return (
-    <FillView>
-      <Motion style={titleIn}>
-        {(interpStyle) => (
-          <Cell style={{paddingTop: `${interpStyle.top}%`}}>
-            <Title style={{
-              fontWeight: 500,
-              fontSize: '14vh',
-              lineHeight: '11vh',
-              paddingRight: '0.07em',
-              letterSpacing: `${interpStyle.letterSpacing0}em`
-            }}>
-              Hello
-            </Title>
-            <Title style={{
-              fontWeight: 100,
-              fontSize: '5vh',
-              lineHeight: '4vh',
-              letterSpacing: `${interpStyle.letterSpacing1}em`
-            }}>
-              My name is
-            </Title>
-            <Title style={{
-              fontWeight: 900,
-              fontSize: '23vh',
-              lineHeight: '16.2vh',
-              paddingTop: '0.03em',
-              paddingRight: '0.1em',
-              letterSpacing: `${interpStyle.letterSpacing2}em`
-            }}>
-              <b style={{letterSpacing: `${interpStyle.letterSpacing2 - 0.02}em`}}>B</b>en
-            </Title>
-            <Title style={{
-              fontWeight: 100,
-              fontSize: '12vh',
-              fontStyle: 'italic',
-              lineHeight: '9.6vh',
-              paddingRight: '0.15em',
-              letterSpacing: `${interpStyle.letterSpacing3}em`
-            }}>
-              Saphier
-            </Title>
-            <Title style={{
-              fontWeight: 900,
-              fontSize: '7vh',
-              lineHeight: '5.1vh',
-              wordSpacing: '-0.05em',
-              paddingTop: '0.07em',
-              paddingRight: '0.15em',
-              letterSpacing: `${interpStyle.letterSpacing4}em`
-            }}>
-              I like to mix
-            </Title>
-            <Title style={{
-              fontWeight: 100,
-              fontSize: '6.66vh',
-              lineHeight: '7vh',
-              paddingRight: '0.2em',
-              letterSpacing: `${interpStyle.letterSpacing5}em`
-            }}>
-              sound & code
-            </Title>
-          </Cell>
-        )}
-      </Motion>
-    </FillView>
+    <Motion style={titleIn}>
+      {(interpStyle) => (
+        <Cell style={{paddingTop: `${interpStyle.top}%`}}>
+          <Title style={{
+            fontWeight: 500,
+            fontSize: '14vh',
+            lineHeight: '11vh',
+            paddingRight: '0.07em',
+            letterSpacing: `${interpStyle.letterSpacing0}em`
+          }}>
+            Hello
+          </Title>
+          <Title style={{
+            fontWeight: 100,
+            fontSize: '5vh',
+            lineHeight: '4vh',
+            letterSpacing: `${interpStyle.letterSpacing1}em`
+          }}>
+            My name is
+          </Title>
+          <Title style={{
+            fontWeight: 900,
+            fontSize: '23vh',
+            lineHeight: '16.2vh',
+            paddingTop: '0.03em',
+            paddingRight: '0.1em',
+            letterSpacing: `${interpStyle.letterSpacing2}em`
+          }}>
+            <b style={{letterSpacing: `${interpStyle.letterSpacing2 - 0.02}em`}}>B</b>en
+          </Title>
+          <Title style={{
+            fontWeight: 100,
+            fontSize: '12vh',
+            fontStyle: 'italic',
+            lineHeight: '9.6vh',
+            paddingRight: '0.15em',
+            letterSpacing: `${interpStyle.letterSpacing3}em`
+          }}>
+            Saphier
+          </Title>
+          <Title style={{
+            fontWeight: 900,
+            fontSize: '7vh',
+            lineHeight: '5.1vh',
+            wordSpacing: '-0.05em',
+            paddingTop: '0.07em',
+            paddingRight: '0.15em',
+            letterSpacing: `${interpStyle.letterSpacing4}em`
+          }}>
+            I like to mix
+          </Title>
+          <Title style={{
+            fontWeight: 100,
+            fontSize: '6.66vh',
+            lineHeight: '7vh',
+            paddingRight: '0.2em',
+            letterSpacing: `${interpStyle.letterSpacing5}em`
+          }}>
+            sound & code
+          </Title>
+        </Cell>
+      )}
+    </Motion>
   );
 };
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "npm run start-dev-server && npm run build-watch",
+    "start": "npm run start-dev-server",
     "test": "echo \"Maybe write some tests, FOOL!\" && exit 1",
     "start-dev-server": "node server/start.js",
     "build-watch": "webpack -w"
