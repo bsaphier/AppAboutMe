@@ -23060,11 +23060,23 @@
 			module.deprecate = function() {};
 			module.paths = [];
 			// module.parent = undefined by default
-			module.children = [];
+			if(!module.children) module.children = [];
+			Object.defineProperty(module, "loaded", {
+				enumerable: true,
+				get: function() {
+					return module.l;
+				}
+			});
+			Object.defineProperty(module, "id", {
+				enumerable: true,
+				get: function() {
+					return module.i;
+				}
+			});
 			module.webpackPolyfill = 1;
 		}
 		return module;
-	}
+	};
 
 
 /***/ },
@@ -30097,7 +30109,9 @@
 /* 322 */
 /***/ function(module, exports) {
 
-	module.exports = function() { throw new Error("define cannot be used indirect"); };
+	module.exports = function() {
+		throw new Error("define cannot be used indirect");
+	};
 
 
 /***/ },
@@ -35881,7 +35895,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(454);
+	var _actions = __webpack_require__(455);
 	
 	var _HOC = __webpack_require__(463);
 	
@@ -35898,11 +35912,7 @@
 	})(loadAppHOC);
 	
 	var App = function App() {
-	  return _react2.default.createElement(
-	    'main',
-	    { style: { fontFamily: '"Roboto", sans-serif' } },
-	    _react2.default.createElement(_reactRouterDom.Route, { component: ResumeApp })
-	  );
+	  return _react2.default.createElement(_reactRouterDom.Route, { component: ResumeApp });
 	};
 	
 	exports.default = App;
@@ -35943,13 +35953,13 @@
 	
 	var _Welcome2 = _interopRequireDefault(_Welcome);
 	
-	var _actions = __webpack_require__(454);
+	var _SectionFoot = __webpack_require__(690);
 	
-	var _ChangeSection = __webpack_require__(455);
+	var _SectionFoot2 = _interopRequireDefault(_SectionFoot);
 	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	var _actions = __webpack_require__(455);
 	
-	var _resumeComponents = __webpack_require__(456);
+	var _resumeComponents = __webpack_require__(457);
 	
 	var _resumeComponents2 = _interopRequireDefault(_resumeComponents);
 	
@@ -35992,14 +36002,13 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        'main',
+	        { style: { fontFamily: '"Roboto", sans-serif' } },
 	        _react2.default.createElement(
 	          _Section2.default,
 	          { id: 'home' },
-	          _react2.default.createElement(_Navbar2.default, { navLinks: this.state.navItems }),
 	          _react2.default.createElement(_Welcome2.default, null),
-	          _react2.default.createElement(_ChangeSection2.default, { to: 'about', text: 'ABOUT ME' })
+	          _react2.default.createElement(_SectionFoot2.default, { to: 'about', text: 'ABOUT ME' })
 	        ),
 	        _react2.default.createElement(_resumeComponents2.default, {
 	          about: this.state.about,
@@ -36044,29 +36053,30 @@
 	
 	var styles = {
 	  navWrap: {
+	    // float: 'right',
 	    width: '100%',
 	    maxHeight: '5em',
 	    textTransform: 'uppercase',
 	    // letterSpacing: '2.5px',
-	    margin: '0 auto',
-	    zIndex: 100,
+	    // margin: '0 auto',
+	    // zIndex: 100,
 	    // position: 'fixed',
-	    left: 0,
-	    right: 0,
-	    top: 0,
+	    // left: 0,
+	    // right: 0,
+	    // top: 0,
 	    backgroundColor: 'rgb(45, 45, 45)'
 	  },
 	  navList: {
-	    margin: '0px',
-	    padding: '0px',
-	    border: 'none',
-	    outline: 'none',
+	    // margin: '0px',
+	    // padding: '0px',
+	    // border: 'none',
+	    // outline: 'none',
 	    minHeight: '3em',
-	    width: 'auto',
+	    // width: 'auto',
 	    textAlign: 'center'
 	  },
 	  listItem: {
-	    position: 'relative',
+	    // position: 'relative',
 	    listStyle: 'none',
 	    height: '3em',
 	    display: 'inline-block'
@@ -37044,28 +37054,25 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRedux = __webpack_require__(178);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Section = function Section(props) {
-	  var styles = {
-	    window: {
-	      width: '100vw',
-	      height: '100vh',
-	      // paddingTop: '50px',
-	      position: 'relative'
-	    }
-	  };
+	var styles = {
+	  section: {
+	    width: '100vw',
+	    height: '100vh',
+	    position: 'relative'
+	  }
+	};
 	
+	var Section = function Section(props) {
 	  return _react2.default.createElement(
 	    'section',
-	    { id: props.id, style: styles.window },
+	    { className: 'section', id: props.id, style: styles.section },
 	    props.children
 	  );
 	};
 	
-	exports.default = (0, _reactRedux.connect)()(Section);
+	exports.default = Section;
 
 /***/ },
 /* 438 */
@@ -37077,8 +37084,6 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -37087,31 +37092,19 @@
 	
 	var _reactMotion = __webpack_require__(439);
 	
-	var _Title = __webpack_require__(453);
+	var _Cell = __webpack_require__(453);
+	
+	var _Cell2 = _interopRequireDefault(_Cell);
+	
+	var _Title = __webpack_require__(454);
 	
 	var _Title2 = _interopRequireDefault(_Title);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _FillView = __webpack_require__(691);
 	
-	var styles = {
-	  banner: {
-	    position: 'relative',
-	    background: 'none',
-	    textAlign: 'center',
-	    color: 'rgba(255, 68, 62, 1)',
-	    padding: '40pt',
-	    width: '100%',
-	    height: '100%',
-	    paddingTop: 0
-	  },
-	  cell: {
-	    position: 'absolute',
-	    top: '38%',
-	    left: '50%',
-	    transform: 'translate(-50%, -50%)',
-	    verticalAlign: 'middle'
-	  }
-	};
+	var _FillView2 = _interopRequireDefault(_FillView);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Welcome = function Welcome(_ref) {
 	  var welcomeIn = _ref.welcomeIn,
@@ -37119,7 +37112,7 @@
 	
 	
 	  var titleIn = welcomeIn && currSection === 'home' ? {
-	    top: (0, _reactMotion.spring)(38, _reactMotion.presets.stiff),
+	    top: (0, _reactMotion.spring)(8, _reactMotion.presets.stiff),
 	    letterSpacing0: (0, _reactMotion.spring)(-0.03, _reactMotion.presets.gentle),
 	    letterSpacing1: (0, _reactMotion.spring)(0.25, _reactMotion.presets.gentle),
 	    letterSpacing2: (0, _reactMotion.spring)(-0.06, _reactMotion.presets.wobbly),
@@ -37127,7 +37120,7 @@
 	    letterSpacing4: (0, _reactMotion.spring)(-0.05, _reactMotion.presets.gentle),
 	    letterSpacing5: (0, _reactMotion.spring)(-0.1, _reactMotion.presets.gentle)
 	  } : {
-	    top: -38,
+	    top: -13,
 	    letterSpacing0: 3,
 	    letterSpacing1: 2,
 	    letterSpacing2: 6,
@@ -37138,15 +37131,15 @@
 	
 	  //*TODO create title components by iterating instead of inline
 	  return _react2.default.createElement(
-	    'div',
-	    { style: styles.banner },
+	    _FillView2.default,
+	    null,
 	    _react2.default.createElement(
 	      _reactMotion.Motion,
 	      { style: titleIn },
 	      function (interpStyle) {
 	        return _react2.default.createElement(
-	          'div',
-	          { id: 'cell', style: _extends({}, styles.cell, { top: interpStyle.top + '%' }) },
+	          _Cell2.default,
+	          { style: { paddingTop: interpStyle.top + '%' } },
 	          _react2.default.createElement(
 	            _Title2.default,
 	            { style: {
@@ -38727,6 +38720,44 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var styles = {
+	  cell: {
+	    height: '100%',
+	    overflow: 'hidden',
+	    position: 'relative'
+	  }
+	};
+	
+	var Cell = function Cell(_ref) {
+	  var children = _ref.children,
+	      style = _ref.style;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'cell', style: _extends({}, styles.cell, style) },
+	    children
+	  );
+	};
+	
+	exports.default = Cell;
+
+/***/ },
+/* 454 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var styles = {
 	  title: {
 	    display: 'flex',
 	    textAlign: 'justify',
@@ -38773,7 +38804,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 454 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38827,103 +38858,8 @@
 	};
 
 /***/ },
-/* 455 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactScroll = __webpack_require__(423);
-	
-	var _reactScroll2 = _interopRequireDefault(_reactScroll);
-	
-	var _scrollHelpers = __webpack_require__(435);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Link = _reactScroll2.default.Link;
-	
-	
-	var styles = {
-	  foot: {
-	    position: 'absolute',
-	    left: 0,
-	    bottom: '0%',
-	    width: '100%',
-	    height: '3em',
-	    background: 'rgba(45, 45, 45, 0.1)',
-	    textAlign: 'center'
-	  },
-	  button: {
-	    verticalAlign: 'middle',
-	    color: 'rgba(255, 255, 255, 1)',
-	    background: 'rgb(68, 77, 255)',
-	    display: 'inline-block',
-	    textDecoration: 'none',
-	    appearance: 'none',
-	    WebkitAppearance: 'none',
-	    height: '100%',
-	    padding: '5pt 20px',
-	    cursor: 'pointer',
-	    WebkitTransition: 'all .3s ease-in-out',
-	    MozTransition: 'all .3s ease-in-out',
-	    transition: 'all .3s ease-in-out'
-	  }
-	};
-	
-	var hover = function hover(event) {
-	  event.target.style.background = 'rgb(255, 68, 62)';
-	};
-	
-	var leave = function leave(event) {
-	  event.target.style.background = 'rgb(68, 77, 255)';
-	};
-	
-	var ChangeSection = function ChangeSection(_ref) {
-	  var to = _ref.to,
-	      text = _ref.text,
-	      sidebar = _ref.sidebar;
-	  return _react2.default.createElement(
-	    'div',
-	    { style: sidebar ? _extends({}, styles.foot, { width: '75%' }) : styles.foot
-	    },
-	    to.length === 0 ? _react2.default.createElement(
-	      'a',
-	      {
-	        onMouseEnter: hover,
-	        onMouseLeave: leave,
-	        style: styles.button,
-	        onClick: _scrollHelpers.scrollToTop
-	      },
-	      text
-	    ) : _react2.default.createElement(
-	      Link,
-	      {
-	        to: to,
-	        smooth: true,
-	        duration: 500,
-	        onMouseEnter: hover,
-	        onMouseLeave: leave,
-	        style: styles.button
-	      },
-	      text
-	    )
-	  );
-	};
-	
-	exports.default = ChangeSection;
-
-/***/ },
-/* 456 */
+/* 456 */,
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38936,7 +38872,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _about = __webpack_require__(457);
+	var _about = __webpack_require__(458);
 	
 	var _about2 = _interopRequireDefault(_about);
 	
@@ -38951,26 +38887,20 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var styles = {
-	  banner: {
-	    // position: 'absolute',
-	    background: 'none',
-	    textAlign: 'center',
-	    color: 'rgba(255, 68, 62, 1)',
-	    // padding: '40pt',
-	    // width: 'auto',
-	    margin: '0 auto',
-	    height: '100%',
-	    paddingTop: 0
-	  },
 	  title: {
-	    fontWeight: 900,
-	    fontSize: '3vh',
-	    lineHeight: '16.2vh',
+	    fontWeight: 100,
+	    fontSize: '8vh',
+	    // lineHeight: '16.2vh',
 	    letterSpacing: '0.1em',
-	    marginLeft: '8vh',
+	    marginLeft: 0,
 	    WebkitTransition: 'all .3s ease-in-out',
 	    MozTransition: 'all .3s ease-in-out',
 	    transition: 'all .3s ease-in-out'
+	  },
+	  text: {
+	    fontWeight: 900,
+	    paddingTop: '2em',
+	    letterSpacing: '-0.02em'
 	  }
 	};
 	
@@ -38982,89 +38912,13 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_about2.default, { styling: styles, content: about }),
-	    _react2.default.createElement(_projects2.default, { styling: styles, content: projects }),
-	    _react2.default.createElement(_skills2.default, { styling: styles, content: skills })
+	    _react2.default.createElement(_about2.default, { style: styles, content: about }),
+	    _react2.default.createElement(_projects2.default, { style: styles, content: projects }),
+	    _react2.default.createElement(_skills2.default, { style: styles, content: skills })
 	  );
 	};
 	
 	exports.default = ResumeComponents;
-
-/***/ },
-/* 457 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Cell = __webpack_require__(458);
-	
-	var _Cell2 = _interopRequireDefault(_Cell);
-	
-	var _Title = __webpack_require__(453);
-	
-	var _Title2 = _interopRequireDefault(_Title);
-	
-	var _Sidebar = __webpack_require__(459);
-	
-	var _Sidebar2 = _interopRequireDefault(_Sidebar);
-	
-	var _Section = __webpack_require__(437);
-	
-	var _Section2 = _interopRequireDefault(_Section);
-	
-	var _SectionItem = __webpack_require__(460);
-	
-	var _SectionItem2 = _interopRequireDefault(_SectionItem);
-	
-	var _ChangeSection = __webpack_require__(455);
-	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var About = function About(_ref) {
-	  var content = _ref.content,
-	      styling = _ref.styling;
-	
-	  return _react2.default.createElement(
-	    _Section2.default,
-	    { id: 'about' },
-	    _react2.default.createElement(_Sidebar2.default, { title: 'Contact' }),
-	    _react2.default.createElement(
-	      'div',
-	      { style: styling.banner },
-	      _react2.default.createElement(
-	        _Cell2.default,
-	        { style: { position: 'absolute' } },
-	        _react2.default.createElement(
-	          _Title2.default,
-	          { className: 'shadow', style: styling.title },
-	          'ABOUT'
-	        ),
-	        _react2.default.createElement(
-	          _SectionItem2.default,
-	          null,
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            content
-	          )
-	        )
-	      )
-	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { to: 'projects', text: 'NEXT', sidebar: true })
-	  );
-	};
-	
-	exports.default = About;
 
 /***/ },
 /* 458 */
@@ -39076,35 +38930,81 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Cell = __webpack_require__(453);
+	
+	var _Cell2 = _interopRequireDefault(_Cell);
+	
+	var _Title = __webpack_require__(454);
+	
+	var _Title2 = _interopRequireDefault(_Title);
+	
+	var _Sidebar = __webpack_require__(459);
+	
+	var _Sidebar2 = _interopRequireDefault(_Sidebar);
+	
+	var _Section = __webpack_require__(437);
+	
+	var _Section2 = _interopRequireDefault(_Section);
+	
+	var _FillView = __webpack_require__(691);
+	
+	var _FillView2 = _interopRequireDefault(_FillView);
+	
+	var _SectionItem = __webpack_require__(460);
+	
+	var _SectionItem2 = _interopRequireDefault(_SectionItem);
+	
+	var _SectionFoot = __webpack_require__(690);
+	
+	var _SectionFoot2 = _interopRequireDefault(_SectionFoot);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var styles = {
-	  cell: {
-	    position: 'absolute',
-	    top: '50%',
-	    left: '50%',
-	    transform: 'translate(-50%, -50%)',
-	    verticalAlign: 'middle'
-	  }
-	};
-	
-	var Cell = function Cell(_ref) {
-	  var children = _ref.children,
+	var About = function About(_ref) {
+	  var content = _ref.content,
 	      style = _ref.style;
+	
 	  return _react2.default.createElement(
-	    'div',
-	    { style: _extends({}, styles.cell, style) },
-	    children
+	    _Section2.default,
+	    { id: 'about' },
+	    _react2.default.createElement(_Sidebar2.default, { title: 'Contact' }),
+	    _react2.default.createElement(
+	      _FillView2.default,
+	      { style: { background: 'rgb(81, 81, 81)' } },
+	      _react2.default.createElement(
+	        _Cell2.default,
+	        null,
+	        _react2.default.createElement(
+	          _SectionItem2.default,
+	          { style: {
+	              top: '47%',
+	              left: '49%',
+	              width: '74%',
+	              height: '65%',
+	              transform: 'translate(-50%, -50%)'
+	            } },
+	          _react2.default.createElement(
+	            _Title2.default,
+	            { className: 'shadow', style: style.title },
+	            'ABOUT ME'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { style: style.text },
+	            content
+	          )
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(_SectionFoot2.default, { to: 'projects', text: 'NEXT', sidebar: true })
 	  );
 	};
 	
-	exports.default = Cell;
+	exports.default = About;
 
 /***/ },
 /* 459 */
@@ -39120,7 +39020,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Title = __webpack_require__(453);
+	var _Title = __webpack_require__(454);
 	
 	var _Title2 = _interopRequireDefault(_Title);
 	
@@ -39128,18 +39028,16 @@
 	
 	var styles = {
 	  sidebarContainer: {
-	    // position: 'relative',
 	    float: 'right',
-	    width: '25%',
+	    width: '23%',
 	    height: '100%',
-	    minWidth: '300px',
-	    backgroundColor: 'rgb(45, 45, 45)'
+	    minWidth: 'calc(340px)',
+	    background: 'rgb(45, 45, 45)'
 	  },
 	  title: {
 	    fontWeight: 400,
 	    fontSize: '5vh',
 	    textAlign: 'left',
-	    // lineHeight: 'vh',
 	    marginLeft: 0,
 	    padding: '0.8em',
 	    letterSpacing: '-0.1em'
@@ -39178,31 +39076,32 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var style = {
-	  margin: 20,
-	  // overflow: 'hidden',
-	  // maxWidth: '62%',
-	  // maxHeight: '38vh',
-	  padding: '5px 20px',
-	  textAlign: 'center',
-	  // display: 'inline-block',
-	  // lineHeight: '1.62em',
-	  border: '5px solid',
-	  borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
-	  borderImageSlice: 1
+	var styles = {
+	  sectionItem: {
+	    overflow: 'hidden',
+	    padding: '2em 2em',
+	    border: '0.162em solid',
+	    position: 'absolute',
+	    background: 'rgba(255, 255, 255, 1)',
+	    borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
+	    borderImageSlice: 1
+	  }
 	};
 	
 	var SectionItem = function SectionItem(_ref) {
-	  var children = _ref.children;
+	  var children = _ref.children,
+	      style = _ref.style;
 	  return _react2.default.createElement(
 	    'div',
-	    { style: style },
+	    { style: _extends({}, styles.sectionItem, style) },
 	    children
 	  );
 	};
@@ -39223,11 +39122,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Cell = __webpack_require__(458);
+	var _Cell = __webpack_require__(453);
 	
 	var _Cell2 = _interopRequireDefault(_Cell);
 	
-	var _Title = __webpack_require__(453);
+	var _Title = __webpack_require__(454);
 	
 	var _Title2 = _interopRequireDefault(_Title);
 	
@@ -39235,36 +39134,20 @@
 	
 	var _Section2 = _interopRequireDefault(_Section);
 	
-	var _ChangeSection = __webpack_require__(455);
+	var _SectionFoot = __webpack_require__(690);
 	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	var _SectionFoot2 = _interopRequireDefault(_SectionFoot);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Skills = function Skills(_ref) {
-	  var styling = _ref.styling,
+	  var style = _ref.style,
 	      content = _ref.content;
 	
 	  return _react2.default.createElement(
 	    _Section2.default,
 	    { id: 'skills' },
-	    _react2.default.createElement(
-	      _Title2.default,
-	      { className: 'shadow', style: styling.title },
-	      'MY SKILLS'
-	    ),
-	    _react2.default.createElement(
-	      _Cell2.default,
-	      null,
-	      content.proficient.map(function (skill) {
-	        return _react2.default.createElement(
-	          'div',
-	          { key: skill },
-	          skill
-	        );
-	      })
-	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { to: '', text: 'TO THE TOP' })
+	    _react2.default.createElement(_SectionFoot2.default, { to: '', text: 'TO THE TOP' })
 	  );
 	};
 	
@@ -39296,34 +39179,20 @@
 	
 	var _SectionItem2 = _interopRequireDefault(_SectionItem);
 	
-	var _ChangeSection = __webpack_require__(455);
+	var _SectionFoot = __webpack_require__(690);
 	
-	var _ChangeSection2 = _interopRequireDefault(_ChangeSection);
+	var _SectionFoot2 = _interopRequireDefault(_SectionFoot);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Projects = function Projects(_ref) {
-	  var styling = _ref.styling;
+	  var style = _ref.style;
 	
 	  return _react2.default.createElement(
 	    _Section2.default,
 	    { id: 'projects' },
 	    _react2.default.createElement(_Sidebar2.default, { title: 'Projects' }),
-	    _react2.default.createElement(
-	      'h1',
-	      { className: 'shadow', style: styling.title },
-	      'PROJECTS'
-	    ),
-	    _react2.default.createElement(
-	      _SectionItem2.default,
-	      null,
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-	      )
-	    ),
-	    _react2.default.createElement(_ChangeSection2.default, { to: 'skills', text: 'NEXT', sidebar: true })
+	    _react2.default.createElement(_SectionFoot2.default, { to: 'skills', text: 'NEXT', sidebar: true })
 	  );
 	};
 	
@@ -71946,6 +71815,142 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 689 */,
+/* 690 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactScroll = __webpack_require__(423);
+	
+	var _reactScroll2 = _interopRequireDefault(_reactScroll);
+	
+	var _scrollHelpers = __webpack_require__(435);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Link = _reactScroll2.default.Link;
+	
+	
+	var styles = {
+	  foot: {
+	    position: 'absolute',
+	    left: 0,
+	    bottom: '0%',
+	    width: '100%',
+	    height: '3em',
+	    background: 'rgba(45, 45, 45, 0.1)',
+	    textAlign: 'center'
+	  },
+	  button: {
+	    verticalAlign: 'middle',
+	    color: 'rgba(255, 255, 255, 1)',
+	    background: 'rgb(68, 77, 255)',
+	    display: 'inline-block',
+	    textDecoration: 'none',
+	    appearance: 'none',
+	    WebkitAppearance: 'none',
+	    height: '100%',
+	    padding: '5pt 20px',
+	    cursor: 'pointer',
+	    WebkitTransition: 'all .3s ease-in-out',
+	    MozTransition: 'all .3s ease-in-out',
+	    transition: 'all .3s ease-in-out'
+	  }
+	};
+	
+	var hover = function hover(event) {
+	  event.target.style.background = 'rgb(255, 68, 62)';
+	};
+	
+	var leave = function leave(event) {
+	  event.target.style.background = 'rgb(68, 77, 255)';
+	};
+	
+	var SectionFoot = function SectionFoot(_ref) {
+	  var to = _ref.to,
+	      text = _ref.text,
+	      sidebar = _ref.sidebar;
+	  return _react2.default.createElement(
+	    'div',
+	    { style: sidebar ? _extends({}, styles.foot, { width: 'calc(77%)' }) : styles.foot
+	    },
+	    to.length === 0 ? _react2.default.createElement(
+	      'a',
+	      {
+	        onMouseEnter: hover,
+	        onMouseLeave: leave,
+	        style: styles.button,
+	        onClick: _scrollHelpers.scrollToTop
+	      },
+	      text
+	    ) : _react2.default.createElement(
+	      Link,
+	      {
+	        to: to,
+	        smooth: true,
+	        duration: 500,
+	        onMouseEnter: hover,
+	        onMouseLeave: leave,
+	        style: styles.button
+	      },
+	      text
+	    )
+	  );
+	};
+	
+	exports.default = SectionFoot;
+
+/***/ },
+/* 691 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var styles = {
+	  fillView: {
+	    height: '100%',
+	    padding: '3vmin',
+	    overflow: 'hidden',
+	    background: 'none'
+	  }
+	};
+	
+	var FillView = function FillView(_ref) {
+	  var children = _ref.children,
+	      style = _ref.style;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'fillView', style: _extends({}, styles.fillView, style) },
+	    children
+	  );
+	};
+	
+	exports.default = FillView;
 
 /***/ }
 /******/ ]);

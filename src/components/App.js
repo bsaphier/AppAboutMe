@@ -17,11 +17,6 @@ const ResumeApp = connect(
 )(loadAppHOC);
 
 
-const App = () => (
-  <main style={{ fontFamily: '"Roboto", sans-serif' }}>
-    <Route component={ResumeApp} />
-  </main>
-);
-
+const App = () => (<Route component={ResumeApp} />);
 
 export default App;

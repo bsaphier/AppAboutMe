@@ -4,18 +4,16 @@ import Title from './Title';
 
 const styles = {
   sidebarContainer: {
-    // position: 'relative',
     float: 'right',
-    width: '25%',
+    width: '23%',
     height: '100%',
-    minWidth: '300px',
-    backgroundColor: 'rgb(45, 45, 45)'
+    minWidth: 'calc(340px)',
+    background: 'rgb(45, 45, 45)'
   },
   title: {
     fontWeight: 400,
     fontSize: '5vh',
     textAlign: 'left',
-    // lineHeight: 'vh',
     marginLeft: 0,
     padding: '0.8em',
     letterSpacing: '-0.1em'

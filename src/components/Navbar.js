@@ -7,29 +7,30 @@ const { Link } = Scroll;
 
 const styles = {
   navWrap: {
+    // float: 'right',
     width: '100%',
     maxHeight: '5em',
     textTransform: 'uppercase',
     // letterSpacing: '2.5px',
-    margin: '0 auto',
-    zIndex: 100,
+    // margin: '0 auto',
+    // zIndex: 100,
     // position: 'fixed',
-    left: 0,
-    right: 0,
-    top: 0,
+    // left: 0,
+    // right: 0,
+    // top: 0,
     backgroundColor: 'rgb(45, 45, 45)'
   },
   navList: {
-    margin: '0px',
-    padding: '0px',
-    border: 'none',
-    outline: 'none',
+    // margin: '0px',
+    // padding: '0px',
+    // border: 'none',
+    // outline: 'none',
     minHeight: '3em',
-    width: 'auto',
+    // width: 'auto',
     textAlign: 'center'
   },
   listItem: {
-    position: 'relative',
+    // position: 'relative',
     listStyle: 'none',
     height: '3em',
     display: 'inline-block'

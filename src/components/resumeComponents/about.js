@@ -4,24 +4,31 @@ import Cell from '../Cell';
 import Title from '../Title';
 import Sidebar from '../Sidebar';
 import Section from '../Section';
+import FillView from '../FillView';
 import SectionItem from '../SectionItem';
-import ChangeSection from '../ChangeSection';
+import SectionFoot from '../SectionFoot';
 
-const About = ({ content, styling }) => {
+const About = ({ content, style }) => {
   return (
     <Section id="about">
       <Sidebar title="Contact" />
-      <div style={styling.banner}>
-        <Cell style={{position: 'absolute'}}>
-          <Title className="shadow" style={styling.title}>
-            ABOUT
-          </Title>
-          <SectionItem>
-            <p>{content}</p>
+      <FillView style={{background: 'rgb(81, 81, 81)'}}>
+        <Cell>
+          <SectionItem style={{
+            top: '47%',
+            left: '49%',
+            width: '74%',
+            height: '65%',
+            transform: 'translate(-50%, -50%)'
+          }}>
+            <Title className="shadow" style={style.title}>
+              ABOUT ME
+            </Title>
+            <p style={style.text}>{content}</p>
           </SectionItem>
         </Cell>
-      </div>
-      <ChangeSection to="projects" text="NEXT" sidebar />
+      </FillView>
+      <SectionFoot to="projects" text="NEXT" sidebar />
     </Section>
   );
 };

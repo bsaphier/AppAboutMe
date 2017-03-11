@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "nodemon --watch server -e js,html server/start.js && webpack -w",
-    "test": "echo \"Maybe write some tests, FOOL!\" && exit 1"
+    "start": "npm run start-dev-server && npm run build-watch",
+    "test": "echo \"Maybe write some tests, FOOL!\" && exit 1",
+    "start-dev-server": "node server/start.js",
+    "build-watch": "webpack -w"
   },
   "author": "Benjamin Saphier",
   "license": "ISC",
@@ -20,11 +22,10 @@
     "express": "^4.14.0",
     "morgan": "^1.8.1",
     "node-sass": "^4.1.1",
-    "nodemon": "^1.11.0",
     "redux-logger": "^2.7.4",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
-    "webpack": "^1.14.0"
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "body-parser": "^1.16.1",

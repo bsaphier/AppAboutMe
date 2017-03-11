@@ -5,8 +5,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Section from './Section';
 import Welcome from './Welcome';
+import SectionFoot from './SectionFoot';
 import { toggleWelcome } from '../actions';
-import ChangeSection from './ChangeSection';
 import ResumeComponents from './resumeComponents';
 
 
@@ -32,20 +32,20 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div>
+      <main style={{ fontFamily: '"Roboto", sans-serif' }}>
         <Section id="home">
-          <Navbar navLinks={this.state.navItems} />
+          {/* <Navbar navLinks={this.state.navItems} /> */}
           <Welcome />
-          <ChangeSection to="about" text="ABOUT ME" />
+          <SectionFoot to="about" text="ABOUT ME" />
         </Section>
 
         <ResumeComponents
           about={this.state.about}
           skills={this.state.skills}
           projects={this.state.projects}
-        />
+          />
         <Footer />
-      </div>
+      </main>
     );
   }
 }

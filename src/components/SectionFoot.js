@@ -40,33 +40,32 @@ const leave = event => {
   event.target.style.background = 'rgb(68, 77, 255)';
 };
 
-const ChangeSection = ({ to, text, sidebar }) => (
+const SectionFoot = ({ to, text, sidebar }) => (
   <div style={sidebar
-    ? {...styles.foot, width: '75%'}
+    ? {...styles.foot, width: 'calc(77%)'}
     : styles.foot}
     >
-    { to.length === 0 ? (
-      <a
+    { to.length === 0
+    ? <a
         onMouseEnter={hover}
         onMouseLeave={leave}
         style={styles.button}
         onClick={scrollToTop}
-      >
+        >
         { text }
       </a>
-    ) : (
-      <Link
+    : <Link
         to={to}
         smooth={true}
         duration={500}
         onMouseEnter={hover}
         onMouseLeave={leave}
         style={styles.button}
-      >
+        >
         { text }
       </Link>
-    )}
+    }
   </div>
 );
 
-export default ChangeSection;
+export default SectionFoot;

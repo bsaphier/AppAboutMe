@@ -2,34 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Motion, presets, spring } from 'react-motion';
 
+import Cell from './Cell';
 import Title from './Title';
-
-const styles = {
-  banner: {
-    position: 'relative',
-    background: 'none',
-    textAlign: 'center',
-    color: 'rgba(255, 68, 62, 1)',
-    padding: '40pt',
-    width: '100%',
-    height: '100%',
-    paddingTop: 0,
-  },
-  cell: {
-    position: 'absolute',
-    top: '38%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    verticalAlign: 'middle',
-  }
-};
+import FillView from './FillView';
 
 
 const Welcome = ({ welcomeIn, currSection }) => {
 
   let titleIn = (welcomeIn && currSection === 'home')
     ? {
-        top: spring(38, presets.stiff),
+        top: spring(8, presets.stiff),
         letterSpacing0: spring(-0.03, presets.gentle),
         letterSpacing1: spring(0.25, presets.gentle),
         letterSpacing2: spring(-0.06, presets.wobbly),
@@ -38,7 +20,7 @@ const Welcome = ({ welcomeIn, currSection }) => {
         letterSpacing5: spring(-0.1, presets.gentle)
       }
     : {
-        top: -38,
+        top: -13,
         letterSpacing0: 3,
         letterSpacing1: 2,
         letterSpacing2: 6,
@@ -49,11 +31,10 @@ const Welcome = ({ welcomeIn, currSection }) => {
 
   //*TODO create title components by iterating instead of inline
   return (
-    <div style={styles.banner}>
-      {/* <a onClick={exit}>button</a> */}
+    <FillView>
       <Motion style={titleIn}>
         {(interpStyle) => (
-          <div id="cell" style={{...styles.cell, top: `${interpStyle.top}%`}}>
+          <Cell style={{paddingTop: `${interpStyle.top}%`}}>
             <Title style={{
               fontWeight: 500,
               fontSize: '14vh',
@@ -111,10 +92,10 @@ const Welcome = ({ welcomeIn, currSection }) => {
             }}>
               sound & code
             </Title>
-          </div>
+          </Cell>
         )}
       </Motion>
-    </div>
+    </FillView>
   );
 };
 

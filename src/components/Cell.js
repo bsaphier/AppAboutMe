@@ -2,16 +2,14 @@ import React from 'react';
 
 const styles = {
   cell: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    verticalAlign: 'middle',
+    height: '100%',
+    overflow: 'hidden',
+    position: 'relative'
   }
 };
 
 const Cell = ({ children, style }) => (
-  <div style={{...styles.cell, ...style}}>
+  <div className="cell" style={{...styles.cell, ...style}}>
     { children }
   </div>
 );
