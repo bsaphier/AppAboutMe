@@ -38930,6 +38930,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -38971,7 +38973,18 @@
 	  return _react2.default.createElement(
 	    _Section2.default,
 	    { id: 'about' },
-	    _react2.default.createElement(_Sidebar2.default, { title: 'Contact' }),
+	    _react2.default.createElement(
+	      _Sidebar2.default,
+	      { title: 'Contact' },
+	      _react2.default.createElement(
+	        _Title2.default,
+	        { style: _extends({}, style.title, {
+	            fontSize: '6vh',
+	            letterSpacing: '-0.05em'
+	          }) },
+	        'Contact'
+	      )
+	    ),
 	    _react2.default.createElement(
 	      _FillView2.default,
 	      { style: { background: 'rgb(81, 81, 81)' } },
@@ -39020,10 +39033,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Title = __webpack_require__(454);
-	
-	var _Title2 = _interopRequireDefault(_Title);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var styles = {
@@ -39031,31 +39040,18 @@
 	    float: 'right',
 	    width: '23%',
 	    height: '100%',
+	    padding: '2vmin',
 	    minWidth: 'calc(340px)',
 	    background: 'rgb(45, 45, 45)'
-	  },
-	  title: {
-	    fontWeight: 400,
-	    fontSize: '5vh',
-	    textAlign: 'left',
-	    marginLeft: 0,
-	    padding: '0.8em',
-	    letterSpacing: '-0.1em'
 	  }
 	};
 	
 	var Sidebar = function Sidebar(_ref) {
-	  var children = _ref.children,
-	      title = _ref.title;
+	  var children = _ref.children;
 	
 	  return _react2.default.createElement(
 	    'div',
 	    { style: styles.sidebarContainer },
-	    _react2.default.createElement(
-	      _Title2.default,
-	      { style: styles.title },
-	      title
-	    ),
 	    children && _react2.default.createElement(
 	      'div',
 	      null,
@@ -71863,7 +71859,8 @@
 	    appearance: 'none',
 	    WebkitAppearance: 'none',
 	    height: '100%',
-	    padding: '5pt 20px',
+	    padding: '1em',
+	    minWidth: '10em',
 	    cursor: 'pointer',
 	    WebkitTransition: 'all .3s ease-in-out',
 	    MozTransition: 'all .3s ease-in-out',

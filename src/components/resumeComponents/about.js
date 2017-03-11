@@ -11,7 +11,15 @@ import SectionFoot from '../SectionFoot';
 const About = ({ content, style }) => {
   return (
     <Section id="about">
-      <Sidebar title="Contact" />
+      <Sidebar title="Contact">
+        <Title style={{
+          ...style.title,
+          fontSize: '6vh',
+          letterSpacing: '-0.05em'
+        }}>
+          Contact
+        </Title>
+      </Sidebar>
       <FillView style={{background: 'rgb(81, 81, 81)'}}>
         <Cell>
           <SectionItem style={{
