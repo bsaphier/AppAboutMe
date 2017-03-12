@@ -5,15 +5,16 @@ const styles = {
     float: 'right',
     width: '23%',
     height: '100%',
-    padding: '2vmin',
+    padding: '10pt 20pt',
     minWidth: 'calc(340px)',
-    background: 'rgb(45, 45, 45)'
+    background: 'rgb(255, 255, 255)',
+    boxShadow: 'inset 0em -1.3em 1.3em -1em rgba(81, 81, 81, 0.1)'
   }
 };
 
-const SideSection = ({ children }) => {
+const SideSection = ({ style, children }) => {
   return (
-    <div style={styles.rightSideContainer}>
+    <div style={{...styles.rightSideContainer, ...style}}>
       { children }
     </div>
   );

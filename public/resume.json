@@ -4,121 +4,147 @@
     {
       "location": "New York, NY",
       "email": "b.saphier@gmail.com",
-      "github": "https://github.com/bsaphier",
-      "linkedin": "https://www.linkedin.com/in/bsaphier"
+      "links":
+        [
+          {
+            "name": "github",
+            "link": "https://github.com/bsaphier"
+          },
+          {
+            "name": "linkedin",
+            "link": "https://www.linkedin.com/in/bsaphier"
+          }
+        ]
     },
   "resume":
     {
       "about": "A full stack web developer intrigued by the crossover between music and technology",
-      "experience": [
-        {
-          "business": "Audio Engineer & Consultant",
-          "title": "Freelance",
-          "location": "New York, NY",
-          "duration": "2016 - present",
-          "description": [
-            "Supported the design and setup of a custom sound installation, controlled with Qlab, via OSC, for Deloitte Greenhouse",
-            "Submitted demos of various audio assets, such as sonic-logos, for brands including NatGeo, Allstate & FX",
-            "Provided efficient solutions for clients seeking to achieve a professional quality recording, in their home studios",
-            "Kept pace with rapidly changing industry standards, in a very competetive and opinionated industry"
-          ]
-        }, {
-          "business": "Man Made Music",
-          "title": "Freelance",
-          "location": "New York, NY",
-          "duration": "October 2015 - June 2016",
-          "description": [
-            "Developed two proof-of-concept programs for ”Data Sonification”, mining data from Huffington Pollster API and parsing it into useable formats, with Max/MSP & Ableton Live",
-            "Met the challenge of producing highly-creative content in a fast-paced work environment",
-            "Learned to work in an Agile work environment with daily standups and bi-weekly sprints"
-          ]
-        }
-      ],
+      "experience":
+        [
+          {
+            "business": "Audio Engineer & Consultant",
+            "title": "Freelance",
+            "location": "New York, NY",
+            "duration": "2016 - present",
+            "description":
+              [
+                "Supported the design and setup of a custom sound installation, controlled with Qlab, via OSC, for Deloitte Greenhouse",
+                "Submitted demos of various audio assets, such as sonic-logos, for brands including NatGeo, Allstate & FX",
+                "Provided efficient solutions for clients seeking to achieve a professional quality recording, in their home studios",
+                "Kept pace with rapidly changing industry standards, in a very competetive and opinionated industry"
+              ]
+          },
+          {
+            "business": "Man Made Music",
+            "title": "Freelance",
+            "location": "New York, NY",
+            "duration": "October 2015 - June 2016",
+            "description":
+              [
+                "Developed two proof-of-concept programs for ”Data Sonification”, mining data from Huffington Pollster API and parsing it into useable formats, with Max/MSP & Ableton Live",
+                "Met the challenge of producing highly-creative content in a fast-paced work environment",
+                "Learned to work in an Agile work environment with daily standups and bi-weekly sprints"
+              ]
+          }
+        ],
       "skills":
         {
-          "proficient": [
-            "Javascript / ES6",
-            "The NERP stack (Node.js, ExpressJs, React, PostgreSQL)",
-            "Redux",
-            "HTML5 / CSS3 / Sass / Bootstrap",
-            "Webpack",
-            "Git"
-          ],
-          "knowledgeable": [
-            "Mocha & Chai",
-            "Axios / AJAX",
-            "OAuth",
-            "SQL",
-            "RESTful architecture",
-            "Tone.js",
-            "Socket.io",
-            "Paper.js",
-            "P5.js"
-          ]
+          "proficient":
+            [
+              "Javascript / ES6",
+              "The NERP stack (Node.js, ExpressJs, React, PostgreSQL)",
+              "Redux",
+              "HTML5 / CSS3 / Sass / Bootstrap",
+              "Webpack",
+              "Git"
+            ],
+          "knowledgeable":
+            [
+              "Mocha & Chai",
+              "Axios / AJAX",
+              "OAuth",
+              "SQL",
+              "RESTful architecture",
+              "Tone.js",
+              "Socket.io",
+              "Paper.js",
+              "P5.js"
+            ]
         },
-      "education": [
-        {
-          "school": "Fullstack Academy",
-          "location": "New York, NY",
-          "duration": "2016 - 2017",
-          "description": [
-            "A competetive, 17 week immersive program (less than 8% acceptance rate)",
-            "Studied full stack Javascript with a focus on Node.js, ExpressJs, React & PostgreSQL",
-            "Accumulated experience in web-design, product management, lean startups, scalability techniques, and Agile workflow"
-          ]
-        }, {
-          "school": "Hunter College",
-          "location": "New York, NY",
-          "duration": "2009 - 2010",
-          "description": [
-            "Earned over 25 credits as a non-degreee student"
-          ]
-        }
-      ],
-      "projects": [
-        {
-          "title": "react-redux-webaudio",
-          "date": "December 2016 - Present",
-          "role": "Sole Developer",
-          "link": "https://www.npmjs.com/package/react-redux-webaudio",
-          "description": [
-            "A package that provides an easy and intuitive way to create sounds in a React-Redux app",
-            "200+ downloads within the first week of the beta release"
-          ]
-        }, {
-          "title": "The Sound of Tweets",
-          "date": "January 2017 - Present",
-          "role": "Sole Developer",
-          "link": "https://www.github.com/bsaphier/data-sonification",
-          "description": [
-            "An experimental data-sonification engine built into a React-Redux app",
-            "Utilizes the Twitter API and IBM-Watson Tone Analyzer to collect and analyze data",
-            "Data is passed client-side with socket.io where sound is generated with the Web Audio API"
-          ]
-        }, {
-          "title": "Youphonic",
-          "date": "January 2017 - February 2017",
-          "role": "Developer",
-          "link": "https://www.youphonic.co",
-          "description": [
-            "An online musical machine building interface where users make soundscapes and musical compositions using abstract shapes that interact in a physical-based environment",
-            "Node.js backend server built using Express and PostgreSQL with Sequelize ORM for the database",
-            "Frontend built with Paper.js and integrated with React-Re- dux through a custom React-Paper.js wrapper component",
-            "Built a custom physics engine",
-            "Designed sounds using Tone.js"
-          ]
-        }
-      ],
-      "interests": [
-        "The Internet of Things (IoT)",
-        "Graphic Design",
-        "Electronic Music",
-        "Generative Art",
-        "Permaculture",
-        "Fractal Geometry",
-        "Synthesizers",
-        "Acoustics"
-      ]
+      "education":
+        [
+          {
+            "school": "Fullstack Academy",
+            "location": "New York, NY",
+            "duration": "2016 - 2017",
+            "description":
+              [
+                "A competetive, 17 week immersive program (less than 8% acceptance rate)",
+                "Studied full stack Javascript with a focus on Node.js, ExpressJs, React & PostgreSQL",
+                "Accumulated experience in web-design, product management, lean startups, scalability techniques, and Agile workflow"
+              ]
+          },
+          {
+            "school": "Hunter College",
+            "location": "New York, NY",
+            "duration": "2009 - 2010",
+            "description":
+              [
+                "Earned over 25 credits as a non-degreee student"
+              ]
+          }
+        ],
+      "projects":
+        [
+          {
+            "title": "react-redux-webaudio",
+            "date": "December 2016 - Present",
+            "role": "Sole Developer",
+            "link": "https://www.npmjs.com/package/react-redux-webaudio",
+            "description":
+              [
+                "A package that provides an easy and intuitive way to create sounds in a React-Redux app",
+                "200+ downloads within the first week of the beta release"
+              ]
+          },
+          {
+            "title": "The Sound of Tweets",
+            "date": "January 2017 - Present",
+            "role": "Sole Developer",
+            "link": "https://www.github.com/bsaphier/data-sonification",
+            "description":
+              [
+                "An experimental data-sonification engine built into a React-Redux app",
+                "Utilizes the Twitter API and IBM-Watson Tone Analyzer to collect and analyze data",
+                "Data is passed client-side with socket.io where sound is generated with the Web Audio API"
+              ]
+          },
+          {
+            "title": "Youphonic",
+            "date": "January 2017 - February 2017",
+            "role": "Developer",
+            "link": "https://www.youphonic.co",
+            "description":
+              [
+                "An online musical machine building interface where users make soundscapes and musical compositions using abstract shapes that interact in a physical-based environment",
+                "Node.js backend server built using Express and PostgreSQL with Sequelize ORM for the database",
+                "Frontend built with Paper.js and integrated with React-Re- dux through a custom React-Paper.js wrapper component",
+                "Built a custom physics engine",
+                "Designed sounds using Tone.js"
+              ]
+          }
+        ],
+      "interests":
+        [
+          "The Internet of Things (IoT)",
+          "Graphic Design",
+          "Electronic Music",
+          "Generative Art",
+          "Permaculture",
+          "Fractal Geometry",
+          "Synthesizers",
+          "Acoustics"
+        ]
     },
-    "portfolio": {}
+  "portfolio": {}
 }

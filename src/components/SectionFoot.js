@@ -17,7 +17,7 @@ const styles = {
   button: {
     verticalAlign: 'middle',
     color: 'rgba(255, 255, 255, 1)',
-    background: 'rgb(68, 77, 255)',
+    background: 'rgb(45, 45, 45)',
     display: 'inline-block',
     textDecoration: 'none',
     appearance: 'none',
@@ -37,7 +37,7 @@ const hover = event => {
 };
 
 const leave = event => {
-  event.target.style.background = 'rgb(68, 77, 255)';
+  event.target.style.background = 'rgb(45, 45, 45)';
 };
 
 const SectionFoot = ({ to, text }) => (

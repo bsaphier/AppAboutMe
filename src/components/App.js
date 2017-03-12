@@ -11,7 +11,7 @@ import { loadAppWithSpinner } from './HOC';
 const loadAppHOC = loadAppWithSpinner( () => store.dispatch(fetchData()) )(Main);
 
 const ResumeApp = connect(
-  ({ app: { isLoading }, resume: { resume } }) => ({ resume, isLoading })
+  ({ app: { isLoading }, resume: { resume, contact } }) => ({ resume, contact, isLoading })
 )(loadAppHOC);
 
 

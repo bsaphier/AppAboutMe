@@ -7,7 +7,6 @@ const staticMiddleware = require('./static.middleware');
 
 const app = express();
 const logger = morgan('dev');
-module.exports = app;
 
 app.use(logger);
 
@@ -28,3 +27,6 @@ app.use((error, req, res, next) => {
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', '..', 'index.html'));
 });
+
+
+module.exports = app;

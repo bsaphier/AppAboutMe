@@ -3,7 +3,7 @@ import { DATA_LOADED } from '../constants';
 const initialState = {
   name: '',
   contact: {},
-  reume: {},
+  resume: {},
   portfolio: {}
 };
 

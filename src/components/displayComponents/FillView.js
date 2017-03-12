@@ -3,7 +3,7 @@ import React from 'react';
 const styles = {
   fillView: {
     height: '100%',
-    padding: '3vmin',
+    padding: '1em',
     overflow: 'hidden',
     background: 'none',
     position: 'relative'

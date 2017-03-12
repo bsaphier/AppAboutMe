@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Motion, presets, spring } from 'react-motion';
 
-import Cell from './Cell';
-import Title from './Title';
+import { Cell, Title } from './displayComponents';
 
 
 const Welcome = ({ welcomeIn, currSection }) => {

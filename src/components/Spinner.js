@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircularProgress } from 'material-ui';
 
-import Section from './Section';
+import { Section } from './displayComponents';
 
 const styles = {
   before: {

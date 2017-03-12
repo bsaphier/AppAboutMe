@@ -1,9 +1,11 @@
 import React from 'react';
 
-import Cell from '../Cell';
-import Title from '../Title';
-import Section from '../Section';
-import FillView from '../FillView';
+import {
+  Cell,
+  Title,
+  Section,
+  FillView
+} from '../displayComponents';
 import SectionFoot from '../SectionFoot';
 
 const Skills = ({ style, content }) => {
