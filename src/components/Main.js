@@ -1,7 +1,7 @@
 import React from 'react';
 
 import store from '../store';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 import Footer from './Footer';
 import Welcome from './Welcome';
 import SectionFoot from './SectionFoot';
@@ -36,6 +36,7 @@ class Main extends React.Component {
 
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
+
         <Section id="home">
           {/* <Navbar navLinks={this.state.navItems} /> */}
           <FillView>
@@ -51,6 +52,7 @@ class Main extends React.Component {
           projects={projects}
         />
         <Footer />
+
       </main>
     );
   }

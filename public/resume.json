@@ -8,11 +8,23 @@
         [
           {
             "name": "github",
-            "link": "https://github.com/bsaphier"
+            "icon": "github-circled",
+            "url": "https://www.github.com/bsaphier"
+          },
+          {
+            "name": "angellist",
+            "icon": "angellist",
+            "url": "https://angel.co/bsaphier"
+          },
+          {
+            "name": "stackoverflow",
+            "icon": "stackoverflow",
+            "url": "http://stackoverflow.com/story/bsaphier"
           },
           {
             "name": "linkedin",
-            "link": "https://www.linkedin.com/in/bsaphier"
+            "icon": "linkedin",
+            "url": "https://www.linkedin.com/in/bsaphier"
           }
         ]
     },

@@ -15,6 +15,7 @@ const styles = {
     textAlign: 'center',
   },
   button: {
+    fontSize: '100%',
     verticalAlign: 'middle',
     color: 'rgba(255, 255, 255, 1)',
     background: 'rgb(45, 45, 45)',

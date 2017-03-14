@@ -1,29 +1,49 @@
 import {
-  DATA_LOADED,
+  FONTS_LOADED,
+  RESUME_LOADED,
   SECTION_ENTER,
   TOGGLE_WELCOME
 } from '../constants';
 
+
 const initialState = {
   isLoading: true,
   welcomeIn: false,
+  fontsDidLoad: false,
+  resumeDidLoad: false,
   currSection: 'home'
 };
 
+
 export default (state = initialState, action) => {
+
   const nextState = Object.assign({}, state);
 
+
   switch (action.type) {
+
+    case FONTS_LOADED:
+      nextState.fontsDidLoad = true;
+      break;
+
+    case RESUME_LOADED:
+      nextState.resumeDidLoad = true;
+      break;
+
     case SECTION_ENTER:
-    nextState.currSection = action.section;
-      return nextState;
+      nextState.currSection = action.section;
+      break;
+
     case TOGGLE_WELCOME:
       nextState.welcomeIn = !nextState.welcomeIn;
-      return nextState;
-    case DATA_LOADED:
-      nextState.isLoading = false;
-      return nextState;
+      break;
+
     default:
-      return state;
+      return nextState;
   }
+
+
+  nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad);
+
+  return nextState;
 };

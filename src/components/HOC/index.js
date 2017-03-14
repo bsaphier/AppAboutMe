@@ -1,3 +1,7 @@
-import _loadAppWithSpinner from './loadAppWithSpinner';
+import carousel3D from './carousel3D';
+import loadAppWithSpinner from './loadAppWithSpinner';
 
-export const loadAppWithSpinner = _loadAppWithSpinner;
+export {
+  carousel3D,
+  loadAppWithSpinner
+};

@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('./font/fontello.eot?25033128');
+  src: url('./font/fontello.eot?25033128#iefix') format('embedded-opentype'),
+       url('./font/fontello.woff2?25033128') format('woff2'),
+       url('./font/fontello.woff?25033128') format('woff'),
+       url('./font/fontello.ttf?25033128') format('truetype'),
+       url('./font/fontello.svg?25033128#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-spin6:before { content: '\e839'; } /* '' */
+.icon-github-circled:before { content: '\f09b'; } /* '' */
+.icon-linkedin:before { content: '\f0e1'; } /* '' */
+.icon-angle-down:before { content: '\f107'; } /* '' */
+.icon-stackoverflow:before { content: '\f16c'; } /* '' */
+.icon-file-pdf:before { content: '\f1c1'; } /* '' */
+.icon-angellist:before { content: '\f209'; } /* '' */
