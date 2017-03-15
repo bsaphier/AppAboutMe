@@ -3,35 +3,33 @@ import React from 'react';
 
 const styles = {
 
-  socialButton: {
-    fontSize: '24px',
-    lineHeight: '32px',
-    display: 'inline-block'
-  },
+  iconStyle: {
+    width: '1.5em',
+    height: '1.5em',
+    lineHeight: '1.5em',
+    borderRadius: '50%',
+    color: 'rgb(255, 255, 255)',
+    background: 'rgba(45, 45, 45, 1)',
 
-  fontIcon: {
+/* -~- styling & comments from the fontello.com package -~- */
     fontFamily: 'fontello',
     fontStyle: 'normal',
     fontWeight: 'normal',
     speak: 'none',
 
-    display: 'inline-block',
+    display: 'block',
     textDecoration: 'inherit',
-    width: '1em',
-    marginRight: '.2em',
+    // marginRight: '.2em',
     textAlign: 'center',
-    /* opacity: .8, */
+    // opacity: '0.8',
 
     /* For safety - reset parent styles, that can break glyph codes*/
     fontVariant: 'normal',
     textTransform: 'none',
 
-    /* fix buttons height, for twitter bootstrap */
-    lineHeight: '1em',
-
     /* Animation center compensation - margins should be symmetric */
     /* remove if not needed */
-    marginLeft: '.2em',
+    // marginLeft: '.2em',
 
     /* you can be more comfortable with increased icons size */
     fontSize: '200%',
@@ -41,21 +39,19 @@ const styles = {
     MozOsxFontSmoothing: 'grayscale',
 
     /* Uncomment for 3D effect */
-    /* textShadow: '1px 1px 1px rgba(127, 127, 127, 0.3)' */
+    // textShadow: '1px 1px 1px rgba(81, 81, 81, 0.3)'
   }
-
 };
 
 
-const SocialButton = ({ url, icon }) => {
+const SocialButton = ({ url, name, icon, style }) => {
+
+  const iconStyle = { ...styles.iconStyle, ...style };
+
   return (
-    <span className="social-button" style={styles.socialButton}>
-
-      <a href={url}>
-        <i className={`icon-${icon}`} style={styles.fontIcon} />
-      </a>
-
-    </span>
+    <a className="social-button"  href={url} title={name}>
+      <i className={`icon-${icon}`} style={iconStyle} />
+    </a>
   );
 };
 

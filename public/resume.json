@@ -7,24 +7,24 @@
       "links":
         [
           {
-            "name": "github",
+            "name": "Github",
             "icon": "github-circled",
             "url": "https://www.github.com/bsaphier"
           },
           {
-            "name": "angellist",
-            "icon": "angellist",
-            "url": "https://angel.co/bsaphier"
+            "name": "LinkedIn",
+            "icon": "linkedin",
+            "url": "https://www.linkedin.com/in/bsaphier"
           },
           {
-            "name": "stackoverflow",
+            "name": "Stack Overflow",
             "icon": "stackoverflow",
             "url": "http://stackoverflow.com/story/bsaphier"
           },
           {
-            "name": "linkedin",
-            "icon": "linkedin",
-            "url": "https://www.linkedin.com/in/bsaphier"
+            "name": "Angel List",
+            "icon": "angellist",
+            "url": "https://angel.co/bsaphier"
           }
         ]
     },

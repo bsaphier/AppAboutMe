@@ -10,10 +10,29 @@ import {
   SideSection,
   SocialButton
 } from '../displayComponents';
+import { hoverSpin } from '../HOC';
 import SectionFoot from '../SectionFoot';
 
 
+// hoverSpin takes two props: initialColor & hoverColor
+// which are arrays of RGB values. If hoverColor is a nested array the
+// color is rendered as a gradient –– only the first two arrays are used
+const SpinButton = hoverSpin(SocialButton);
+
 const About = ({ content: { about, contact }, style }) => {
+
+  const socialButtons = contact.links.map( link =>
+    <SpinButton
+      url={link.url}
+      key={link.name}
+      name={link.name}
+      icon={link.icon}
+      initialColor={[45, 45, 45]}
+      hoverColor={[[255, 68, 62], [252, 255, 88]]}
+    />
+  );
+
+
   return (
     <Section id="about">
 
@@ -28,20 +47,12 @@ const About = ({ content: { about, contact }, style }) => {
           <span>Contact</span>
         </Title>
 
-        <Cell style={{height: '62%'}} />
-
+        <Cell style={{height: '62%'}}>
+          { 'FILLER' }
+        </Cell>
         <Divider />
-
         <Cell style={{height: '21%', textAlign: 'center'}}>
-          {
-            contact.links.map( link =>
-              <SocialButton
-                url={link.url}
-                key={link.name}
-                icon={link.icon}
-              />
-            )
-          }
+          { socialButtons }
         </Cell>
 
       </SideSection>

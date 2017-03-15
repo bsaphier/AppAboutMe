@@ -27,7 +27,7 @@ const Welcome = ({ welcomeIn, currSection }) => {
         letterSpacing5: 1
       };
 
-  //*TODO create title components by iterating instead of inline
+  //*TODO create title components by iterating instead of hard-coded
   return (
     <Motion style={titleIn}>
       {(interpStyle) => (
