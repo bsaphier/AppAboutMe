@@ -1,0 +1,44 @@
+@keyframes rotation0{
+	0%, 1%{
+		transform: rotate(0deg) scale(1);
+		opacity: 1;
+	}
+  48%, 52% {
+    transform: rotate(180deg) scale(0.62);
+    opacity: 0.62;
+  }
+	99%, 100%{
+		transform: rotate(360deg) scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes rotation120{
+	0%, 1%{
+		transform: rotate(120deg) scale(1);
+		opacity: 1;
+	}
+  48%, 52% {
+    transform: rotate(300deg) scale(0.62);
+    opacity: 0.62;
+  }
+	99%, 100%{
+		transform: rotate(480deg) scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes rotation240{
+	0%, 1%{
+		transform: rotate(240deg) scale(1);
+		opacity: 1;
+	}
+  48%, 52% {
+    transform: rotate(420deg) scale(0.62);
+    opacity: 0.62;
+  }
+	99%, 100%{
+		transform: rotate(600deg) scale(1);
+		opacity: 1;
+	}
+}

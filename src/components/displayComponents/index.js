@@ -5,7 +5,6 @@ import Divider from './Divider';
 import FillView from './FillView';
 import BorderGrad from './BorderGrad';
 import SideSection from './SideSection';
-import SocialButton from './SocialButton';
 
 export {
   Cell,
@@ -14,6 +13,5 @@ export {
   Divider,
   FillView,
   BorderGrad,
-  SideSection,
-  SocialButton
+  SideSection
 };

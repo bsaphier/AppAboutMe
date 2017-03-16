@@ -45,7 +45,6 @@ export const fetchData = () => dispatch =>
   fetch(_RESUME)
     .then( response => response.json() )
     .then( json => dispatch(resumeDidLoad(json)) )
-    .then(
-      fontLoader( () => dispatch(fontsDidLoad()) ))
+    .then( fontLoader( () => dispatch(fontsDidLoad()) ))
     .catch( err =>
       console.log(`There was an error fetching the data. ERROR: ${err}`));

@@ -7,22 +7,22 @@ import {
   Divider,
   FillView,
   BorderGrad,
-  SideSection,
-  SocialButton
+  SideSection
 } from '../displayComponents';
 import { hoverSpin } from '../HOC';
+import IconButton from '../IconButton';
 import SectionFoot from '../SectionFoot';
 
 
-// hoverSpin takes two props: initialColor & hoverColor
+// the hoverSpin HOC takes two props: initialColor & hoverColor
 // which are arrays of RGB values. If hoverColor is a nested array the
 // color is rendered as a gradient –– only the first two arrays are used
-const SpinButton = hoverSpin(SocialButton);
+const SocialButton = hoverSpin(IconButton);
 
 const About = ({ content: { about, contact }, style }) => {
 
   const socialButtons = contact.links.map( link =>
-    <SpinButton
+    <SocialButton
       url={link.url}
       key={link.name}
       name={link.name}
@@ -48,7 +48,7 @@ const About = ({ content: { about, contact }, style }) => {
         </Title>
 
         <Cell style={{height: '62%'}}>
-          { 'FILLER' }
+          <span>FILLER</span>
         </Cell>
         <Divider />
         <Cell style={{height: '21%', textAlign: 'center'}}>

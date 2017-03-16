@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Spinner from '../Spinner';
+import Preload from '../Preload';
 
 
 // curried HOC to make the "fetchAction" modular
@@ -16,14 +16,14 @@ const loadAppWithSpinner = (fetchAction) => {
       if (isLoading) {
 
         // fake delay to test loading animation
-        setTimeout(fetchAction, 1000);
+        setTimeout(fetchAction, 2000);
 
         // only call the "fetchAction" once
         fetchAction = () => {};
       }
 
       return isLoading
-        ? <Spinner />
+        ? <Preload />
         : <Component {...props} />;
 
     };

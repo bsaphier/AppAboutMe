@@ -44,15 +44,15 @@ const styles = {
 };
 
 
-const SocialButton = ({ url, name, icon, style }) => {
+const IconButton = ({ url, name, icon, style }) => {
 
   const iconStyle = { ...styles.iconStyle, ...style };
 
   return (
-    <a className="social-button"  href={url} title={name}>
+    <a className="icon-button"  href={url} title={name}>
       <i className={`icon-${icon}`} style={iconStyle} />
     </a>
   );
 };
 
-export default SocialButton;
+export default IconButton;

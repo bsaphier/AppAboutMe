@@ -16,6 +16,6 @@ const webFontConfigCurry = (fontsActiveCB) => ({
 });
 
 
-// pass in a callback so the app will not render until the state/store knows
-// the fonts have loaded
+// pass in a callback so the app will not render until the
+// state/store knows that the fonts have loaded
 export default fontsDidLoadCB => WebFont.load(webFontConfigCurry(fontsDidLoadCB));
