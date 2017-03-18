@@ -1,0 +1,19 @@
+{
+  "minify": true,
+  "options": [
+    "setClasses",
+    "prefixed",
+    "prefixes",
+    "domPrefixes",
+    "testAllProps",
+    "testProp",
+    "testStyles"
+  ],
+  "feature-detects": [
+    "css/transforms",
+    "css/transformslevel2",
+    "css/transforms3d",
+    "css/transformstylepreserve3d",
+    "css/transitions"
+  ]
+}
