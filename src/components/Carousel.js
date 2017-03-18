@@ -6,8 +6,10 @@ const transformProp = Modernizr.prefixed('transform');
 
 const styles = {
   container: {
-    width: '80%',
-    height: '49.44%',
+    // width: '80%',
+    width: '210px',
+    // height: '49.44%',
+    height: '140px',
     position: 'relative',
     margin: '0 auto 40px',
     border: '1px solid #CCC',
@@ -36,9 +38,11 @@ const styles = {
     position: 'absolute',
     width: '186px',
     height: '116px',
-    // left: '50%',
-    // top: '50%',
+    top: '10px',
+    left: '10px',
     border: '2px solid black',
+    lineHeight: '116px',
+    textAlign: 'center',
   },
 
   button: {
