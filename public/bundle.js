@@ -12875,13 +12875,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _modernizrrc = __webpack_require__(190);
-
-var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _modernizrrc = __webpack_require__(190);
+
+var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12896,8 +12896,8 @@ var transformProp = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   container: {
-    width: '210px',
-    height: '140px',
+    width: '80%',
+    height: '49.44%',
     position: 'relative',
     margin: '0 auto 40px',
     border: '1px solid #CCC',
@@ -12915,7 +12915,10 @@ var styles = {
     transformStyle: 'preserve-3d',
     WebkitTransitionStyle: '-webkit-transform 1s',
     MozTransitionStyle: '-moz-transform 1s',
-    transitionStyle: 'transform 1s'
+    transitionStyle: 'transform 1s',
+    WebkitTransition: 'all .3s ease-in-out',
+    MozTransition: 'all .3s ease-in-out',
+    transition: 'all .3s ease-in-out'
   },
 
   panel: {
@@ -12923,10 +12926,9 @@ var styles = {
     position: 'absolute',
     width: '186px',
     height: '116px',
-    left: '10px',
-    top: '10px',
-    border: '2px solid black',
-    backgroundColor: 'aquamarine'
+    // left: '50%',
+    // top: '50%',
+    border: '2px solid black'
   },
 
   button: {
@@ -13010,25 +13012,25 @@ var Carousel = function (_Component) {
 
         // adjust rotation so panels are always flat
         var newRotation = Math.round(rotation / theta) * theta;
-        /*
-              // adjust panels
-              for ( i = 0; i < panelCount; i++ ) {
-                panel = this.element.children[i];
-                angle = theta * i;
-                panel.style.opacity = 1;
-                panel.style.backgroundColor = 'hsla(' + angle + ', 100%, 50%, 0.8)';
-        
-                // rotate panel, then push it out in 3D space
-                panel.style[ transformProp ] = rotateFn + '(' + angle + 'deg) translateZ(' + radius + 'px)';
-              }
-        
-              // hide other panels
-              for (  ; i < this.state.totalPanelCount; i++ ) {
-                panel = this.element.children[i];
-                panel.style.opacity = 0;
-                panel.style[ transformProp ] = 'none';
-              }
-        */
+
+        // adjust panels
+        for (i = 0; i < panelCount; i++) {
+          panel = _this2.element.children[i];
+          angle = theta * i;
+          panel.style.opacity = 1;
+          panel.style.backgroundColor = 'hsla(' + angle + ', 100%, 50%, 0.8)';
+
+          // rotate panel, then push it out in 3D space
+          panel.style[transformProp] = rotateFn + '(' + angle + 'deg) translateZ(' + radius + 'px)';
+        }
+
+        // hide other panels
+        // for ( i = 0; i < this.state.totalPanelCount - 1; i++ ) {
+        //   panel = this.element.children[i];
+        //   panel.style.opacity = 0;
+        //   panel.style[ transformProp ] = 'none';
+        // }
+
 
         return { theta: theta, radius: radius, rotateFn: rotateFn, panelSize: panelSize, rotation: newRotation };
       });
@@ -13041,7 +13043,6 @@ var Carousel = function (_Component) {
   }, {
     key: 'transform',
     value: function transform() {
-      console.log(this.element);
       var _state = this.state,
           radius = _state.radius,
           rotateFn = _state.rotateFn,
@@ -13053,10 +13054,10 @@ var Carousel = function (_Component) {
   }, {
     key: 'navigate',
     value: function navigate(dir) {
-      console.log(dir);
       this.setState(function (prevState) {
         return { rotation: prevState.rotation + prevState.theta * dir };
       });
+      this.modify();
     }
 
     // create a refrence to the carousel node on the Carousel instance
@@ -13071,36 +13072,34 @@ var Carousel = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var panels = new Array(this.state.panelCount);
+      var panels = [];
+
+      for (var i = 0; i < this.props.panelCount; i++) {
+        panels.push(_react2.default.createElement(
+          CarouselPanel,
+          { key: 'carPan' + i },
+          'TempFiller'
+        ));
+      }
 
       return _react2.default.createElement(
         'div',
-        { style: { position: 'relative' } },
+        { className: 'carouselContainer', style: styles.container },
         _react2.default.createElement('div', {
           className: 'carouselButtonLeft',
-          style: _extends({}, styles.button, { left: '33.33%' }),
+          style: _extends({}, styles.button, { left: '-6%' }),
           onClick: function onClick() {
             return _this3.navigate(1);
           }
         }),
         _react2.default.createElement(
           'div',
-          { className: 'carouselContainer', style: styles.container },
-          _react2.default.createElement(
-            'div',
-            { className: 'carousel', style: styles.carousel, ref: this.getElement },
-            panels.map(function (panel, idx) {
-              return _react2.default.createElement(
-                CarouselPanel,
-                { key: 'carPan' + +idx },
-                'TempFiller'
-              );
-            })
-          )
+          { className: 'carousel', style: styles.carousel, ref: this.getElement },
+          panels
         ),
         _react2.default.createElement('div', {
           className: 'carouselButtonRight',
-          style: _extends({}, styles.button, { left: '66.66%' }),
+          style: _extends({}, styles.button, { left: '106%' }),
           onClick: function onClick() {
             return _this3.navigate(-1);
           }
@@ -14501,10 +14500,8 @@ var Projects = function Projects(_ref) {
       ),
       _react2.default.createElement(
         _Carousel2.default,
-        { panelCount: 3 },
-        _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null)
+        { panelCount: 5 },
+        'FIller'
       ),
       _react2.default.createElement(_SectionFoot2.default, { to: 'skills', text: 'NEXT' })
     )

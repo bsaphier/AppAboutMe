@@ -1,13 +1,13 @@
 /* eslint-disable no-return-assign */
-import Modernizr from '../../.modernizrrc';
 import React, { Component } from 'react';
 
+import Modernizr from '../../.modernizrrc';
 const transformProp = Modernizr.prefixed('transform');
 
 const styles = {
   container: {
-    width: '210px',
-    height: '140px',
+    width: '80%',
+    height: '49.44%',
     position: 'relative',
     margin: '0 auto 40px',
     border: '1px solid #CCC',
@@ -26,6 +26,9 @@ const styles = {
     WebkitTransitionStyle: '-webkit-transform 1s',
        MozTransitionStyle: '-moz-transform 1s',
           transitionStyle: 'transform 1s',
+    WebkitTransition: 'all .3s ease-in-out',
+       MozTransition: 'all .3s ease-in-out',
+          transition: 'all .3s ease-in-out'
   },
 
   panel: {
@@ -33,10 +36,9 @@ const styles = {
     position: 'absolute',
     width: '186px',
     height: '116px',
-    left: '10px',
-    top: '10px',
+    // left: '50%',
+    // top: '50%',
     border: '2px solid black',
-    backgroundColor: 'aquamarine'
   },
 
   button: {
@@ -106,7 +108,7 @@ class Carousel extends Component {
 
       // adjust rotation so panels are always flat
       let newRotation = Math.round( rotation / theta ) * theta;
-/*
+
       // adjust panels
       for ( i = 0; i < panelCount; i++ ) {
         panel = this.element.children[i];
@@ -119,12 +121,12 @@ class Carousel extends Component {
       }
 
       // hide other panels
-      for (  ; i < this.state.totalPanelCount; i++ ) {
-        panel = this.element.children[i];
-        panel.style.opacity = 0;
-        panel.style[ transformProp ] = 'none';
-      }
-*/
+      // for ( i = 0; i < this.state.totalPanelCount - 1; i++ ) {
+      //   panel = this.element.children[i];
+      //   panel.style.opacity = 0;
+      //   panel.style[ transformProp ] = 'none';
+      // }
+
 
       return { theta, radius, rotateFn, panelSize, rotation: newRotation };
     });
@@ -135,7 +137,6 @@ class Carousel extends Component {
 
   // *TODO - do this with React-Motion
   transform() {
-    console.log(this.element);
     let { radius, rotateFn, rotation } = this.state;
     // push the carousel back in 3D space and rotate it
     this.element.style[ transformProp ] = 'translateZ(-' + radius + 'px) ' + rotateFn + '(' + rotation + 'deg)';
@@ -143,10 +144,10 @@ class Carousel extends Component {
 
 
   navigate(dir) {
-    console.log(dir);
     this.setState((prevState) => (
       { rotation: prevState.rotation + prevState.theta * dir }
     ));
+    this.modify();
   }
 
 
@@ -158,29 +159,29 @@ class Carousel extends Component {
 
   render() {
 
-    const panels = new Array(this.state.panelCount);
+    const panels = [];
+
+    for (let i = 0; i < this.props.panelCount; i++) {
+      panels.push(<CarouselPanel key={`carPan${i}`}>{ 'TempFiller' }</CarouselPanel>);
+    }
 
     return (
-      <div style={{position: 'relative'}}>
-
+      <div className="carouselContainer" style={styles.container}>
         <div
           className="carouselButtonLeft"
-          style={{...styles.button, left: '33.33%'}}
+          style={{...styles.button, left: '-6%'}}
           onClick={() => this.navigate(1)}
         />
 
-        <div className="carouselContainer" style={styles.container}>
-          <div className="carousel" style={styles.carousel} ref={this.getElement}>
-            { panels.map( (panel, idx) => <CarouselPanel key={`carPan${+idx}`}>{ 'TempFiller' }</CarouselPanel>) }
-          </div>
+        <div className="carousel" style={styles.carousel} ref={this.getElement}>
+          { panels }
         </div>
 
         <div
           className="carouselButtonRight"
-          style={{...styles.button, left: '66.66%'}}
+          style={{...styles.button, left: '106%'}}
           onClick={() => this.navigate(-1)}
         />
-
       </div>
     );
   }
