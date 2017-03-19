@@ -1,7 +1,7 @@
 import React from 'react';
 
 const styles = {
-  fillView: {
+  fillSection: {
     height: '100%',
     padding: '20px',
     overflow: 'hidden',
@@ -10,10 +10,10 @@ const styles = {
   }
 };
 
-const FillView = ({ children, style }) => (
-  <div className="fillView" style={{...styles.fillView, ...style}}>
+const FillSection = ({ children, style }) => (
+  <div style={{...styles.fillSection, ...style}}>
     { children }
   </div>
 );
 
-export default FillView;
+export default FillSection;

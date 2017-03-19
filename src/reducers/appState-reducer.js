@@ -17,7 +17,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
 
-  const nextState = Object.assign({}, state);
+  const nextState = {...state};
 
 
   switch (action.type) {

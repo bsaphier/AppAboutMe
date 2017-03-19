@@ -4,14 +4,14 @@ import {
   Cell,
   Title,
   Section,
-  FillView
+  FillSection
 } from '../displayComponents';
 import SectionFoot from '../SectionFoot';
 
 const Skills = ({ style, content }) => {
   return (
     <Section id="skills">
-      <FillView>
+      <FillSection>
         {/* <Title className="shadow" style={style.title}>
           MY SKILLS
         </Title> */}
@@ -19,7 +19,7 @@ const Skills = ({ style, content }) => {
           {content.proficient.map((skill) => (<div key={skill}>{skill}</div>))}
         </Cell>
         <SectionFoot to="" text="TO THE TOP" />
-      </FillView>
+      </FillSection>
 
     </Section>
   );

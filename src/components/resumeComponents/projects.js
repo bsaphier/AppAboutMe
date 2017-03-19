@@ -1,16 +1,19 @@
 import React from 'react';
 
-import Carousel from '../Carousel';
-
 import {
   Title,
   Section,
-  FillView,
+  Carousel3D,
+  FillSection,
   SideSection
 } from '../displayComponents';
 import SectionFoot from '../SectionFoot';
 
-const Projects = ({ style }) => {
+const Projects = ({ style, content }) => {
+
+  const panels = content.map( (project, idx) =>
+    <div key={`tempPanel${+idx}`}>{project.title}</div>);
+
   return (
     <Section id="projects">
 
@@ -24,13 +27,16 @@ const Projects = ({ style }) => {
       </Title>
       </SideSection>
 
-      <FillView style={{boxShadow: 'inset -1.3em 0em 1.3em -1em rgba(81, 81, 81, 0.3)'}}>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <Carousel panelCount={5}>{ 'FIller' }</Carousel>
+
+      <FillSection style={{boxShadow: 'inset -1.3em 0em 1.3em -1em rgba(81, 81, 81, 0.3)'}}>
+
+        <Carousel3D>
+          { panels }
+        </Carousel3D>
+
         <SectionFoot to="skills" text="NEXT" />
-      </FillView>
+
+      </FillSection>
 
     </Section>
   );

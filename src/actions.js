@@ -1,15 +1,18 @@
 import {
   FONTS_LOADED,
+  CAROUSEL_INIT,
   RESUME_LOADED,
   SECTION_ENTER,
-  TOGGLE_WELCOME
+  TOGGLE_WELCOME,
+  CAROUSEL_ROTATE,
+  CAROUSEL_RESIZE
 } from './constants';
 import fontLoader from './bin/fontLoader';
 
 
-  // –––––––––––––––––––––––––––––––––––––––––– \\
- // -~-~-~-~-~-~- ACTIONS-CREATORS -~-~-~-~-~-~- \\
-// ______________________________________________ \\
+  // ––––––––––––––––––––––––––––––––––––––––– \\
+ // -~-~-~-~-~-~- ACTION-CREATORS -~-~-~-~-~-~- \\
+// _____________________________________________ \\
 
 // *TODO call this using waypoint events
 export const sectionChange = (section) => ({
@@ -33,9 +36,27 @@ export const resumeDidLoad = ({ name, contact, resume }) => ({
 });
 
 
-  // –––––––––––––––––––––––––––––––––––––––––– \\
- // ~-~-~-~-~-~-~-~-~- THUNKS -~-~-~-~-~-~-~-~-~ \\
-// ______________________________________________ \\
+export const createCarousel = (panelsCount, panelSize) => ({
+  type: CAROUSEL_INIT,
+  panelsCount,
+  panelSize
+});
+
+export const rotateCarousel = (direction) => ({
+  type: CAROUSEL_ROTATE,
+  direction
+});
+
+export const resizeCarousel = (panelsCount, panelSize) => ({
+  type: CAROUSEL_RESIZE,
+  panelsCount,
+  panelSize
+});
+
+
+  // ––––––––––––––––––––––––––––––––––––––––––––––––– \\
+ // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
+// _____________________________________________________ \\
 
 // *TODO _RESUME needs to change if running locally vs gh-pages
 // '/app-about-me/public/resume.json'
@@ -45,6 +66,5 @@ export const fetchData = () => dispatch =>
   fetch(_RESUME)
     .then( response => response.json() )
     .then( json => dispatch(resumeDidLoad(json)) )
-    .then( fontLoader( () => dispatch(fontsDidLoad()) ))
-    .catch( err =>
-      console.log(`There was an error fetching the data. ERROR: ${err}`));
+    .then( fontLoader(() => dispatch(fontsDidLoad())) )
+    .catch( err => console.log(`There was an error fetching the data. ERROR: ${err}`));

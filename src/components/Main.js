@@ -7,7 +7,7 @@ import Welcome from './Welcome';
 import SectionFoot from './SectionFoot';
 import { toggleWelcome } from '../actions';
 import ResumeComponents from './resumeComponents';
-import { Section, FillView } from './displayComponents';
+import { Section, FillSection } from './displayComponents';
 
 
 class Main extends React.Component {
@@ -39,10 +39,10 @@ class Main extends React.Component {
 
         <Section id="home">
           {/* <Navbar navLinks={this.state.navItems} /> */}
-          <FillView>
+          <FillSection>
             <Welcome />
             <SectionFoot to="about" text="ABOUT ME" />
-          </FillView>
+          </FillSection>
         </Section>
 
         <ResumeComponents

@@ -1,4 +1,11 @@
 export const FONTS_LOADED = 'FONTS_LOADED';
 export const RESUME_LOADED = 'DATA_LOADED';
+
+
 export const SECTION_ENTER = 'SECTION_ENTER';
 export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
+
+
+export const CAROUSEL_INIT = 'CAROUSEL_INIT';
+export const CAROUSEL_ROTATE = 'CAROUSEL_ROTATE';
+export const CAROUSEL_RESIZE = 'CAROUSEL_RESIZE';

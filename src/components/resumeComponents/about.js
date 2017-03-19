@@ -5,8 +5,8 @@ import {
   Title,
   Section,
   Divider,
-  FillView,
   BorderGrad,
+  FillSection,
   SideSection
 } from '../displayComponents';
 import { hoverSpin } from '../HOC';
@@ -50,7 +50,9 @@ const About = ({ content: { about, contact }, style }) => {
         <Cell style={{height: '62%'}}>
           <span>FILLER</span>
         </Cell>
+
         <Divider />
+
         <Cell style={{height: '21%', textAlign: 'center'}}>
           { socialButtons }
         </Cell>
@@ -58,7 +60,7 @@ const About = ({ content: { about, contact }, style }) => {
       </SideSection>
 
 
-      <FillView style={{
+      <FillSection style={{
         background: 'rgb(81, 81, 81)',
         boxShadow: 'inset -1em 0em 1em -0.7em rgba(45, 45, 45, 0.7)'
       }}>
@@ -86,7 +88,7 @@ const About = ({ content: { about, contact }, style }) => {
 
         <SectionFoot to="projects" text="NEXT" />
 
-      </FillView>
+      </FillSection>
 
 
     </Section>

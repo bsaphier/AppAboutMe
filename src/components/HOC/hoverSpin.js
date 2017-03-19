@@ -86,31 +86,26 @@ const hoverSpin = (Component) => {
         <div className="hoverSpinHOC" style={styles.content}>
           <Motion style={this.state}>
 
-            {(interp) => {
-
-              let { redA, redB, blueA, blueB, greenA, greenB, degree, shadow, shadowX, shadowY } = interp;
-
-              return (
-                <div
-                  onMouseOver={this.hover}
-                  onMouseLeave={this.leave}
+            {({ redA, redB, blueA, blueB, greenA, greenB, degree, shadow, shadowX, shadowY }) => (
+              <div
+                onMouseOver={this.hover}
+                onMouseLeave={this.leave}
+                style={{
+                  MozTransform: `rotateY(${degree}deg)`,
+                  WebkitTransform: `rotateY(${degree}deg)`,
+                  transform: `rotateY(${degree}deg)`
+                }}
+                >
+                <Component
+                  {...this.props}
                   style={{
-                    MozTransform: `rotateY(${degree}deg)`,
-                    WebkitTransform: `rotateY(${degree}deg)`,
-                    transform: `rotateY(${degree}deg)`
+                    boxShadow: `${shadowX}px ${shadowY}px 5px -1px rgba(81, 81, 81, ${shadow})`,
+                    background:
+                      `linear-gradient(to top right, rgb(${int(redA)}, ${int(greenA)}, ${int(blueA)}) 62%, rgb(${int(redB)}, ${int(greenB)}, ${int(blueB)}) 162%)`
                   }}
-                  >
-                  <Component
-                    {...this.props}
-                    style={{
-                      boxShadow: `${shadowX}px ${shadowY}px 5px -1px rgba(81, 81, 81, ${shadow})`,
-                      background:
-                        `linear-gradient(to top right, rgb(${int(redA)}, ${int(greenA)}, ${int(blueA)}) 62%, rgb(${int(redB)}, ${int(greenB)}, ${int(blueB)}) 162%)`
-                    }}
-                  />
-                </div>
-              );
-            }}
+                />
+              </div>
+            )}
 
           </Motion>
         </div>
