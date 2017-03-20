@@ -3,16 +3,20 @@ import React from 'react';
 import {
   Title,
   Section,
-  Carousel3D,
   FillSection,
   SideSection
 } from '../displayComponents';
+import { carousel3D } from '../HOC';
 import SectionFoot from '../SectionFoot';
+
 
 const Projects = ({ style, content }) => {
 
-  const panels = content.map( (project, idx) =>
-    <div key={`tempPanel${+idx}`}>{project.title}</div>);
+  const panels = content.map( (project) => {
+    return ( <div key={project.title}>{project.title}</div> );
+  });
+
+  const Carousel3D = carousel3D(panels);
 
   return (
     <Section id="projects">
@@ -30,9 +34,7 @@ const Projects = ({ style, content }) => {
 
       <FillSection style={{boxShadow: 'inset -1.3em 0em 1.3em -1em rgba(81, 81, 81, 0.3)'}}>
 
-        <Carousel3D>
-          { panels }
-        </Carousel3D>
+        <Carousel3D />
 
         <SectionFoot to="skills" text="NEXT" />
 

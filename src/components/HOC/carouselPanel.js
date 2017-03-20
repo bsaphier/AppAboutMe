@@ -1,12 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-import Modernizr from '../../../.modernizrrc';
-const transform = Modernizr.prefixed('transform');
-
 
 const styles = {
-    panel: {
+    carouselPanel: {
       display: 'block',
       position: 'absolute',
       width: '50%',
@@ -23,34 +18,22 @@ const styles = {
 };
 
 
-const mapStateToProps = ({ carousel: { axis, theta, radius, currPanel }}) => ({
-  axis,
-  theta,
-  radius,
-  currPanel
-});
+const carouselPanel = ({ idx, axis, theta, radius, transform }) => Component => {
 
-
-const carouselPanel = (Component, key = 0) => {
-  const Panel = ({ axis, theta, radius }) => {
-
-    let angle = theta * key;
+    let angle = theta * idx;
 
     return (
       <div
+        key={`carouselPanel${idx}`}
         className="carousel-panel"
-        key={`carouselPanel${key + 1}`}
         style={{
-          ...styles.panel,
-          [transform]: `rotate${axis}(${angle}deg) translateZ(${radius}px)`
+          ...styles.carouselPanel,
+          [ transform ]: `rotate${axis}(${angle}deg) translateZ(${radius}px)`
         }}
         >
-        { Component }
-      </div>
-    );
-  };
-  return connect(mapStateToProps)(Panel);
+          { Component }
+        </div>
+      );
 };
-
 
 export default carouselPanel;
