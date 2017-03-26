@@ -113,6 +113,7 @@
             "date": "December 2016 - Present",
             "role": "Sole Developer",
             "link": "https://www.npmjs.com/package/react-redux-webaudio",
+            "shortDescription": "...brief description goes here",
             "description":
               [
                 "A package that provides an easy and intuitive way to create sounds in a React-Redux app",
@@ -124,6 +125,7 @@
             "date": "January 2017 - Present",
             "role": "Sole Developer",
             "link": "https://www.github.com/bsaphier/data-sonification",
+            "shortDescription": "...brief description goes here",
             "description":
               [
                 "An experimental data-sonification engine built into a React-Redux app",
@@ -136,6 +138,7 @@
             "date": "January 2017 - February 2017",
             "role": "Developer",
             "link": "https://www.youphonic.co",
+            "shortDescription": "...brief description goes here",
             "description":
               [
                 "An online musical machine building interface where users make soundscapes and musical compositions using abstract shapes that interact in a physical-based environment",

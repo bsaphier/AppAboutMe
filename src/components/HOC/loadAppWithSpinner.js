@@ -16,7 +16,7 @@ const loadAppWithSpinner = (fetchAction) => {
       if (isLoading) {
 
         // fake delay to test loading animation
-        setTimeout(fetchAction, 2000);
+        setTimeout(fetchAction, 1500);
 
         // only call the "fetchAction" once
         fetchAction = () => {};

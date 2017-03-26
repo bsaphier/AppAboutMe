@@ -4,15 +4,15 @@ import React from 'react';
 const styles = {
   divider: {
     display: 'block',
-    margin: '5pt 0',
+    margin: '5px 0',
     background: 'rgba(81, 81, 81, 0.5)'
   },
   horizontal: {
     width: '100%',
-    height: '1pt',
+    height: '1px',
   },
   vertical: {
-    width: '1pt',
+    width: '1px',
     height: '100%'
   }
 };

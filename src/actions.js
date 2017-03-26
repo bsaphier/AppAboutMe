@@ -36,21 +36,27 @@ export const resumeDidLoad = ({ name, contact, resume }) => ({
 });
 
 
-export const createCarousel = (panelsCount, panelSize) => ({
+export const createCarousel = (panels, panelSize) => ({
   type: CAROUSEL_INIT,
-  panelsCount,
+  radius: Math.round( ( panelSize / 2 ) /
+          Math.tan( Math.PI / panels.length ) ),
+  theta: 360 / panels.length,
+  currPanel: 0,
   panelSize
-});
-
-export const rotateCarousel = (direction) => ({
-  type: CAROUSEL_ROTATE,
-  direction
 });
 
 export const resizeCarousel = (panelsCount, panelSize) => ({
   type: CAROUSEL_RESIZE,
+  radius: Math.round( ( panelSize / 2 ) /
+    Math.tan( Math.PI / panelsCount ) ),
   panelsCount,
   panelSize
+});
+
+export const rotateCarousel = (rotation, currPanel) => ({
+  type: CAROUSEL_ROTATE,
+  currPanel,
+  rotation
 });
 
 
@@ -58,7 +64,7 @@ export const resizeCarousel = (panelsCount, panelSize) => ({
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
-// *TODO _RESUME needs to change if running locally vs gh-pages
+// *TODO _RESUME needs to change if running on local server vs gh-pages
 // '/app-about-me/public/resume.json'
 const _RESUME = '/public/resume.json';
 

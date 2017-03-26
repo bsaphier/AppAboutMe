@@ -16,36 +16,31 @@ const initialState = {
 
   // user updates these
   rotation: 0,
-  currPanel: 0
+  currPanel: ''
 };
 
 
-export default (state = initialState, { type, direction, panelSize, panelsCount }) => {
+export default (state = initialState, { type, ...action }) => {
 
-  let radius;
   const nextState = {...state};
-
-  if (panelSize && panelsCount) {
-    radius = Math.round((panelSize / 2) / Math.tan(Math.PI / panelsCount));
-  }
-
 
   switch (type) {
 
     case CAROUSEL_INIT:
-      nextState.theta = 360 / panelsCount;
-      nextState.panelSize = panelSize;
-      nextState.radius = radius;
+      nextState.currPanel = action.currPanel;
+      nextState.panelSize = action.panelSize;
+      nextState.radius = action.radius;
+      nextState.theta = action.theta;
       return nextState;
 
     case CAROUSEL_ROTATE:
-      nextState.rotation += nextState.theta * direction;
-      nextState.currPanel += direction;
+      nextState.currPanel = action.currPanel;
+      nextState.rotation = action.rotation;
       return nextState;
 
     case CAROUSEL_RESIZE:
-      nextState.panelSize = panelSize;
-      nextState.radius = radius;
+      nextState.panelSize = action.panelSize;
+      nextState.radius = action.radius;
       return nextState;
 
     default:

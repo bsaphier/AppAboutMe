@@ -4,16 +4,13 @@ const styles = {
     carouselPanel: {
       display: 'block',
       position: 'absolute',
-      width: '50%',
-      height: '50%',
-      top: '25%',
-      left: '25%',
-      border: '2px solid black',
-      lineHeight: '20em',
-      textAlign: 'center',
+      width: '100%',
+      height: '100%',
 
-      backgroundColor: 'aquamarine',
-      opacity: 0.3
+      // WbkitBackfaceVisibility: 'hidden',
+      //   MozBackfaceVisibility: 'hidden',
+      //     OBackfaceVisibility: 'hidden',
+      //      backfaceVisibility: 'hidden'
     }
 };
 

@@ -28,8 +28,8 @@ const leave = event => {
 };
 
 
-const Title = ({ style, children }) => (
-  <div style={styles.title}>
+const Title = ({ style, children, parentStyle }) => (
+  <div style={{...styles.title, ...parentStyle}}>
     <span
       onMouseOver={hover}
       onMouseLeave={leave}
