@@ -32,28 +32,65 @@ const styles = {
     width: '100%',
     padding: '0.5em 2em',
     textTransform: 'capitalize',
+    textShadow: 'rgba(255, 255, 255, 0.3) -1px 1px 8px',
     background: 'rgba(45, 45, 45, 0.3)'
   },
   modalTitle: {
     display: 'inline-block',
     fontWeight: 400,
   },
+  modalHeaderText: {
+    color: 'rgb(45, 45, 45)',
+  },
   buttonContainer: {
     position: 'absolute',
     top: '0.5em',
-    right: '2em',
+    right: '2em'
   },
   button: {
     margin: 0,
+    padding: '0.5em 0 0 1em',
+    boxShadow: null,
+
     WebkitBackgroundClip: 'text',
     MozBackgroundClip: 'text',
     MsBackgroundClip: 'text',
     OBackgroundClip: 'text',
 
-    WebkitTextFillColor: 'transparent',
-    MozTextFillColor: 'transparent',
-    MsTextFillColor: 'transparent',
-    OTextFillColor: 'transparent',
+    WebkitTextFillColor: 'rgb(45, 45, 45)',
+    MozTextFillColor: 'rgb(45, 45, 45)',
+    MsTextFillColor: 'rgb(45, 45, 45)',
+    OTextFillColor: 'rgb(45, 45, 45)',
+  },
+
+  before: {
+    zIndex: -1,
+    position: 'absolute',
+    left: '5px',
+    bottom: '13px',
+    width: '50%',
+    height: '15%',
+    maxHeight: '20px',
+
+    WebkitBoxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+    MozBoxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+    boxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+
+    WebkitTransform: 'rotate(-3deg)',
+    MozTransform: 'rotate(-3deg)',
+    OTransform: 'rotate(-3deg)',
+    MsTransform: 'rotate(-3deg)',
+    transform: 'rotate(-3deg)',
+  },
+  after: {
+    right: '5px',
+    left: null,
+
+    WebkitTransform: 'rotate(3deg)',
+    MozTransform: 'rotate(3deg)',
+    OTransform: 'rotate(3deg)',
+    MsTransform: 'rotate(3deg)',
+    transform: 'rotate(3deg)',
   }
 };
 
@@ -69,34 +106,42 @@ const ProjectModal = ({ currPanel, projects, toggleModal, projectModalOpen }) =>
       style={styles.modalBack}
       onClick={handleBackgroundClick}
       >
-      <BorderGrad style={styles.modal}>
+      <div style={styles.modal}>
+        <div style={styles.before} />
 
-        <div style={styles.modalHeader}>
-          <h2 style={styles.modalTitle}>
-            {projects[currPanel].title}
-          </h2>
-          <div style={{display: 'inline', fontStyle: 'italic'}}>
-            {` - ${projects[currPanel].date}`}
+        <BorderGrad style={{position: 'relative'}}>
+
+          <div style={styles.modalHeader}>
+
+            <h2 style={{...styles.modalTitle, ...styles.modalHeaderText}}>
+              {projects[currPanel].title}
+            </h2>
+            <div style={{display: 'inline', fontStyle: 'italic', ...styles.modalHeaderText}}>
+              {` - ${projects[currPanel].date}`}
+            </div>
+
+            <div style={styles.buttonContainer}>
+              <Button onClick={toggleModal} style={styles.button}>
+                {'Close'}
+              </Button>
+            </div>
+
           </div>
 
-          <div style={styles.buttonContainer}>
-            <Button onClick={toggleModal} style={styles.button}>
-              {'Close'}
-            </Button>
-          </div>
-        </div>
+          <div style={{height: '2.5em'}} />
 
-        <div style={{height: '2.5em'}} />
+          <ul style={{listStylePosition: 'inside', fontWeight: 900}}>
+            {projects[currPanel].description.map((bullet, idx) => (
+              <li key={`projMod-${projects[currPanel].title}-${+idx}`}>
+                {bullet}
+              </li>
+            ))}
+          </ul>
 
-        <ul style={{listStylePosition: 'inside', fontWeight: 900}}>
-          {projects[currPanel].description.map((bullet, idx) => (
-            <li key={`projMod-${projects[currPanel].title}-${+idx}`}>
-              {bullet}
-            </li>
-          ))}
-        </ul>
+        </BorderGrad>
 
-      </BorderGrad>
+        <div style={{...styles.before, ...styles.after}} />
+      </div>
     </div>
   );
 };

@@ -13856,6 +13856,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -13895,11 +13897,15 @@ var styles = {
     width: '100%',
     padding: '0.5em 2em',
     textTransform: 'capitalize',
+    textShadow: 'rgba(255, 255, 255, 0.3) -1px 1px 8px',
     background: 'rgba(45, 45, 45, 0.3)'
   },
   modalTitle: {
     display: 'inline-block',
     fontWeight: 400
+  },
+  modalHeaderText: {
+    color: 'rgb(45, 45, 45)'
   },
   buttonContainer: {
     position: 'absolute',
@@ -13908,15 +13914,48 @@ var styles = {
   },
   button: {
     margin: 0,
+    padding: '0.5em 0 0 1em',
+    boxShadow: null,
+
     WebkitBackgroundClip: 'text',
     MozBackgroundClip: 'text',
     MsBackgroundClip: 'text',
     OBackgroundClip: 'text',
 
-    WebkitTextFillColor: 'transparent',
-    MozTextFillColor: 'transparent',
-    MsTextFillColor: 'transparent',
-    OTextFillColor: 'transparent'
+    WebkitTextFillColor: 'rgb(45, 45, 45)',
+    MozTextFillColor: 'rgb(45, 45, 45)',
+    MsTextFillColor: 'rgb(45, 45, 45)',
+    OTextFillColor: 'rgb(45, 45, 45)'
+  },
+
+  before: {
+    zIndex: -1,
+    position: 'absolute',
+    left: '5px',
+    bottom: '13px',
+    width: '50%',
+    height: '15%',
+    maxHeight: '20px',
+
+    WebkitBoxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+    MozBoxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+    boxShadow: '0 13px 10px rgba(45, 45, 45, 0.7)',
+
+    WebkitTransform: 'rotate(-3deg)',
+    MozTransform: 'rotate(-3deg)',
+    OTransform: 'rotate(-3deg)',
+    MsTransform: 'rotate(-3deg)',
+    transform: 'rotate(-3deg)'
+  },
+  after: {
+    right: '5px',
+    left: null,
+
+    WebkitTransform: 'rotate(3deg)',
+    MozTransform: 'rotate(3deg)',
+    OTransform: 'rotate(3deg)',
+    MsTransform: 'rotate(3deg)',
+    transform: 'rotate(3deg)'
   }
 };
 
@@ -13938,43 +13977,49 @@ var ProjectModal = function ProjectModal(_ref) {
       onClick: handleBackgroundClick
     },
     _react2.default.createElement(
-      _displayComponents.BorderGrad,
+      'div',
       { style: styles.modal },
+      _react2.default.createElement('div', { style: styles.before }),
       _react2.default.createElement(
-        'div',
-        { style: styles.modalHeader },
-        _react2.default.createElement(
-          'h2',
-          { style: styles.modalTitle },
-          projects[currPanel].title
-        ),
+        _displayComponents.BorderGrad,
+        { style: { position: 'relative' } },
         _react2.default.createElement(
           'div',
-          { style: { display: 'inline', fontStyle: 'italic' } },
-          ' - ' + projects[currPanel].date
-        ),
-        _react2.default.createElement(
-          'div',
-          { style: styles.buttonContainer },
+          { style: styles.modalHeader },
           _react2.default.createElement(
-            _displayComponents.Button,
-            { onClick: toggleModal, style: styles.button },
-            'Close'
+            'h2',
+            { style: _extends({}, styles.modalTitle, styles.modalHeaderText) },
+            projects[currPanel].title
+          ),
+          _react2.default.createElement(
+            'div',
+            { style: _extends({ display: 'inline', fontStyle: 'italic' }, styles.modalHeaderText) },
+            ' - ' + projects[currPanel].date
+          ),
+          _react2.default.createElement(
+            'div',
+            { style: styles.buttonContainer },
+            _react2.default.createElement(
+              _displayComponents.Button,
+              { onClick: toggleModal, style: styles.button },
+              'Close'
+            )
           )
+        ),
+        _react2.default.createElement('div', { style: { height: '2.5em' } }),
+        _react2.default.createElement(
+          'ul',
+          { style: { listStylePosition: 'inside', fontWeight: 900 } },
+          projects[currPanel].description.map(function (bullet, idx) {
+            return _react2.default.createElement(
+              'li',
+              { key: 'projMod-' + projects[currPanel].title + '-' + +idx },
+              bullet
+            );
+          })
         )
       ),
-      _react2.default.createElement('div', { style: { height: '2.5em' } }),
-      _react2.default.createElement(
-        'ul',
-        { style: { listStylePosition: 'inside', fontWeight: 900 } },
-        projects[currPanel].description.map(function (bullet, idx) {
-          return _react2.default.createElement(
-            'li',
-            { key: 'projMod-' + projects[currPanel].title + '-' + +idx },
-            bullet
-          );
-        })
-      )
+      _react2.default.createElement('div', { style: _extends({}, styles.before, styles.after) })
     )
   );
 };
@@ -14326,6 +14371,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactMotion = __webpack_require__(68);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -14340,6 +14387,7 @@ var styles = {
     textAlign: 'center',
     textTransform: 'uppercase',
 
+    color: 'rgb(45, 45, 45)',
     borderRadius: '.3em',
     background: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
   }
@@ -14352,13 +14400,43 @@ var Button = function Button(_ref) {
       title = _ref.title,
       props = _objectWithoutProperties(_ref, ['children', 'style', 'link', 'title']);
 
+  var buttonUp = true;
+
+  var clickStyle = buttonUp ? {
+    buttonDepth: 0
+  } : {
+    buttonDepth: (0, _reactMotion.spring)(2.0)
+  };
+
+  var toggleButton = function toggleButton() {
+    buttonUp = !buttonUp;
+  };
+
   return _react2.default.createElement(
     'a',
     { href: link ? link : null, title: title },
     _react2.default.createElement(
-      'div',
-      _extends({ className: 'button', style: _extends({}, styles.button, style) }, props),
-      children
+      _reactMotion.Motion,
+      { style: clickStyle },
+      function (interpStyle) {
+
+        var motionStyle = {
+          boxShadow: 'inset rgba(45, 45, 45, 0.5) 0 0 5px ' + interpStyle.buttonDepth + 'px'
+        };
+
+        return _react2.default.createElement(
+          'div',
+          _extends({
+            className: 'button',
+            style: _extends({}, styles.button, motionStyle, style),
+            onMouseDown: function onMouseDown() {
+              console.log(buttonUp);
+              toggleButton();
+            }
+          }, props),
+          children
+        );
+      }
     )
   );
 };
