@@ -2,7 +2,8 @@ import {
   FONTS_LOADED,
   RESUME_LOADED,
   SECTION_ENTER,
-  TOGGLE_WELCOME
+  TOGGLE_WELCOME,
+  TOGGLE_PROJECT_MODAL
 } from '../constants';
 
 
@@ -11,6 +12,7 @@ const initialState = {
   welcomeIn: false,
   fontsDidLoad: false,
   resumeDidLoad: false,
+  projectModalOpen: false,
   currSection: 'home'
 };
 
@@ -36,6 +38,10 @@ export default (state = initialState, action) => {
 
     case TOGGLE_WELCOME:
       nextState.welcomeIn = !nextState.welcomeIn;
+      break;
+
+    case TOGGLE_PROJECT_MODAL:
+      nextState.projectModalOpen = !nextState.projectModalOpen;
       break;
 
     default:

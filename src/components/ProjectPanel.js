@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
+import { toggleProjectModal } from '../actions';
 import { Cell, Title, Button, FillSection } from './displayComponents';
 
 
@@ -47,61 +49,47 @@ const styles = {
 };
 
 
-class ProjectPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { viewModal: false };
-    this.toggleModal = this.toggleModal.bind(this);
-  }
+const ProjectPanel = ({
+  style,
+  toggleModal,
+  backgroundImg,
+  project: { link, title, shortDescription }
+}) => {
 
+  return (
+    <FillSection className="project-panel" style={{padding: 0}}>
 
-  toggleModal() {
-    this.setState({ viewModal: !this.state.viewModal });
-  }
+      <div style={{...styles.background, backgroundImage: backgroundImg}} />
 
+      <Cell>
+        <div style={styles.banner}>
+          <div style={styles.bannerInfo}>
 
-  render() {
-    const {
-      style,
-      backgroundImg,
-      project: { date, link, title, description }
-    } = this.props;
+            <Title style={style.title} parentStyle={styles.titleMain}>
+              <span>{ title }</span>
+            </Title>
 
-    // const myContributions = description.map( (bullet, idx) => (
-    //   <li key={`projectDescription${+idx}`}>{ bullet }</li>
-    // ));
+            <div>{ shortDescription }</div>
 
-    return (
-      <FillSection style={{padding: 0}}>
+            <div style={{display: 'inline-block'}}>
+              <Button link={link} title={`Link To ${title}`}>
+                {'Check it out!'}
+              </Button>
 
-        <div style={{...styles.background, backgroundImage: backgroundImg}} />
-
-        <Cell>
-          <div style={styles.banner}>
-            <div style={styles.bannerInfo}>
-              <Title style={style.title} parentStyle={styles.titleMain}>
-                <span>{ title }</span>
-              </Title>
-              <div>{ date }</div>
-              <a href={link} title={`Link To ${title}`}>
-                <Button>Click me to check out this project!</Button>
-              </a>
-              {/* <div onClick={this.toggleModal}>
-                <span>My Contributions To This Project</span>
-              </div> */}
+              <Button title="More Info" onClick={toggleModal}>
+                {'More Info'}
+              </Button>
             </div>
+
           </div>
+        </div>
+      </Cell>
 
-          {/* <BorderGrad style={styles.banner}>
-            <div style={{...style.text, padding: 0}}>
-              { this.state.viewModal ? myContributions : shortDescription }
-            </div>
-          </BorderGrad> */}
-        </Cell>
+    </FillSection>
+  );
+};
 
-      </FillSection>
-    );
-  }
-}
-
-export default ProjectPanel;
+export default connect(
+  state => state,
+  dispatch => ({ toggleModal: () => dispatch(toggleProjectModal()) })
+)(ProjectPanel);

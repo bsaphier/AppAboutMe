@@ -5,7 +5,8 @@ import {
   SECTION_ENTER,
   TOGGLE_WELCOME,
   CAROUSEL_ROTATE,
-  CAROUSEL_RESIZE
+  CAROUSEL_RESIZE,
+  TOGGLE_PROJECT_MODAL
 } from './constants';
 import fontLoader from './bin/fontLoader';
 
@@ -35,6 +36,9 @@ export const resumeDidLoad = ({ name, contact, resume }) => ({
   contact
 });
 
+export const toggleProjectModal = () => ({
+  type: TOGGLE_PROJECT_MODAL
+});
 
 export const createCarousel = (panels, panelSize) => ({
   type: CAROUSEL_INIT,

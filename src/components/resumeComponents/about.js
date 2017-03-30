@@ -60,10 +60,7 @@ const About = ({ content: { about, contact }, style }) => {
       </SideSection>
 
 
-      <FillSection style={{
-        background: 'rgb(81, 81, 81)',
-        boxShadow: 'inset -1em 0em 1em -0.7em rgba(45, 45, 45, 0.7)'
-      }}>
+      <FillSection style={{ background: 'rgb(81, 81, 81)' }}>
 
         <Cell>
 

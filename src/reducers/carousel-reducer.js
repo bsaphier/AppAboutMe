@@ -16,7 +16,7 @@ const initialState = {
 
   // user updates these
   rotation: 0,
-  currPanel: ''
+  currPanel: 0
 };
 
 

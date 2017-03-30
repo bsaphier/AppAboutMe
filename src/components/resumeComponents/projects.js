@@ -9,6 +9,7 @@ import {
 import { carousel3D } from '../HOC';
 import SectionFoot from '../SectionFoot';
 import ProjectPanel from '../ProjectPanel';
+import ProjectModal from '../ProjectModal';
 
 
 const Projects = ({ style, content }) => {
@@ -38,10 +39,9 @@ const Projects = ({ style, content }) => {
       </SideSection>
 
 
-      <FillSection style={{
-        padding: 0,
-        boxShadow: 'inset -1.3em 0em 1.3em -1em rgba(81, 81, 81, 0.3)'
-      }}>
+      <FillSection style={{ padding: 0 }}>
+
+        <ProjectModal />
 
         <Carousel3D />
 

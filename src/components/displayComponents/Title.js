@@ -9,10 +9,20 @@ const styles = {
   },
   text: {
     margin: '0 auto',
+    paddingRight: '5px',
     display: 'inline-block',
     whiteSpace: 'pre-line',
+
     WebkitBackgroundClip: 'text',
+    MozBackgroundClip: 'text',
+    MsBackgroundClip: 'text',
+    OBackgroundClip: 'text',
+
     WebkitTextFillColor: 'transparent',
+    MozTextFillColor: 'transparent',
+    MsTextFillColor: 'transparent',
+    OTextFillColor: 'transparent',
+
     backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
   }
 };

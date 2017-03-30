@@ -9,9 +9,9 @@ const styles = {
     margin: '.3em .3em',
     display: 'inline-block',
 
-    WebkitTransition: 'all .8s ease-in-out',
-    MozTransition: 'all .8s ease-in-out',
-    transition: 'all .8s ease-in-out'
+    // WebkitTransition: 'all .8s ease-in-out',
+    // MozTransition: 'all .8s ease-in-out',
+    // transition: 'all .8s ease-in-out'
   }
 };
 

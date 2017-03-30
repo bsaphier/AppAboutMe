@@ -86,7 +86,9 @@ const carousel3D = (panels) => {
 
 
     // get the current panel index
-    getPanelIndex( current ) {
+    getPanelIndex( dir ) {
+      let current = (this.props.currPanel + dir) % panels.length;
+
       return current >= 0 ? current : panels.length - current * -1;
     }
 
@@ -104,7 +106,8 @@ const carousel3D = (panels) => {
 
 
     render() {
-      let { axis, theta, rotate, radius, rotation, currPanel } = this.props;
+      let { axis, theta, rotate, radius, rotation } = this.props;
+
 
       return (
         <div className="carousel-container" style={styles.container}>
@@ -112,7 +115,7 @@ const carousel3D = (panels) => {
             style={{...styles.button, left: '5%'}}
             onClick={() => {
               let newRotation = rotation + theta;
-              rotate(newRotation, this.getPanelIndex((currPanel - 1) % panels.length));
+              rotate(newRotation, this.getPanelIndex(-1));
             }}
           />
 
@@ -140,7 +143,7 @@ const carousel3D = (panels) => {
             style={{...styles.button, left: '95%'}}
             onClick={() => {
               let newRotation = rotation + theta * -1;
-              rotate(newRotation, this.getPanelIndex((currPanel + 1) % panels.length));
+              rotate(newRotation, this.getPanelIndex(1));
             }}
           />
         </div>
