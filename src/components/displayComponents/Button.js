@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component} from 'react';
 import { Motion, presets, spring } from 'react-motion';
 
 const styles = {
@@ -17,48 +17,74 @@ const styles = {
   }
 };
 
-const Button = ({ children, style, link, title, ...props }) => {
+class Button extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonUp: true
+    };
 
-  let buttonUp = true;
+    this.buttonUp = this.buttonUp.bind(this);
+    this.buttondown = this.buttondown.bind(this);
+  }
 
-  let clickStyle = buttonUp
-    ? {
-        buttonDepth: 0
-      }
-    : {
-        buttonDepth: spring(2.0)
-      };
 
-  const toggleButton = () => {
-    buttonUp = !buttonUp;
-  };
+  buttonUp() {
+    this.setState({ buttonUp: true });
+  }
 
-  return (
-    <a href={link ? link : null} title={title}>
-      <Motion style={clickStyle}>
-        {(interpStyle) => {
 
-          let motionStyle = {
-            boxShadow: `inset rgba(45, 45, 45, 0.5) 0 0 5px ${interpStyle.buttonDepth}px`
-          };
+  buttondown() {
+    this.setState({ buttonUp: false });
+    // setTimeout(this.buttonUp, 300);
+  }
 
-          return (
-            <div
-              className="button"
-              style={{...styles.button, ...motionStyle, ...style}}
-              onMouseDown={() => {
-                console.log(buttonUp);
-                toggleButton();
-              }}
-              {...props}
-              >
-              { children }
-            </div>
-          );
-        }}
-      </Motion>
-    </a>
-  );
-};
+
+  render() {
+
+    let { buttonUp } = this.state;
+    let { style, link, title, children, ...props } = this.props;
+
+    let motion = buttonUp
+      ? {
+          bx: 0.5,
+          by: -1.5,
+          bdepth: 1
+        }
+      : {
+          bx: -0.5,
+          by: 1.5,
+          bdepth: 2
+        };
+
+    return (
+      <a href={link ? link : null} title={title}>
+
+        <Motion style={motion}>
+          {(interpStyle) => {
+
+            let motionStyle = {
+              boxShadow: `inset rgba(45, 45, 45, 0.5) ${interpStyle.bx}px ${interpStyle.by}px 3px ${interpStyle.bdepth}px`
+            };
+
+            return (
+              <div
+                className="button"
+                style={{...styles.button, ...motionStyle, ...style}}
+                onMouseUp={this.buttonUp}
+                onMouseOut={this.buttonUp}
+                onMouseDown={this.buttondown}
+                {...props}
+                >
+                { children }
+              </div>
+            );
+          }}
+        </Motion>
+
+      </a>
+    );
+  }
+}
 
 export default Button;
