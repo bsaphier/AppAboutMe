@@ -14400,7 +14400,6 @@ var styles = {
     textAlign: 'center',
     textTransform: 'uppercase',
 
-    color: 'rgb(45, 45, 45)',
     borderRadius: '.3em',
     background: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
   }
@@ -14451,11 +14450,16 @@ var Button = function (_Component) {
       var motion = buttonUp ? {
         bx: 0.5,
         by: -1.5,
-        bdepth: 1
+        bcolor: 1,
+        bdepth: 1,
+        bspread: 3
       } : {
         bx: -0.5,
-        by: 1.5,
-        bdepth: 2
+        by: 0.5,
+        bdepth: 3,
+        bcolor: 0.3,
+        bspread: 8,
+        bshadow: 1
       };
 
       return _react2.default.createElement(
@@ -14464,10 +14468,19 @@ var Button = function (_Component) {
         _react2.default.createElement(
           _reactMotion.Motion,
           { style: motion },
-          function (interpStyle) {
+          function (_ref) {
+            var bx = _ref.bx,
+                by = _ref.by,
+                bspread = _ref.bspread,
+                bcolor = _ref.bcolor,
+                bdepth = _ref.bdepth,
+                bshadow = _ref.bshadow;
+
 
             var motionStyle = {
-              boxShadow: 'inset rgba(45, 45, 45, 0.5) ' + interpStyle.bx + 'px ' + interpStyle.by + 'px 3px ' + interpStyle.bdepth + 'px'
+              color: 'rgba(45, 45, 45, ' + bcolor + ')',
+              textShadow: bshadow ? 'rgba(45, 45, 45, 0.8) -' + bshadow + 'px ' + bshadow + 'px 0px' : null,
+              boxShadow: 'inset rgba(45, 45, 45, 0.5) ' + bx + 'px ' + by + 'px ' + bspread + 'px ' + bdepth + 'px'
             };
 
             return _react2.default.createElement(
