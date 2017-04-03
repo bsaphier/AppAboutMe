@@ -6,6 +6,7 @@ import {
   TOGGLE_WELCOME,
   CAROUSEL_ROTATE,
   CAROUSEL_RESIZE,
+  CAROUSEL_LOADED,
   TOGGLE_PROJECT_MODAL
 } from './constants';
 import fontLoader from './bin/fontLoader';
@@ -57,6 +58,8 @@ export const resizeCarousel = (panelsCount, panelSize) => ({
   panelSize
 });
 
+//:TODO fix this so this action only needs one arg - an int that
+// means how many panels to move - i.e. "-2" to go back two panels
 export const rotateCarousel = (rotation, currPanel) => ({
   type: CAROUSEL_ROTATE,
   currPanel,
@@ -68,12 +71,12 @@ export const rotateCarousel = (rotation, currPanel) => ({
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
-// *TODO _RESUME needs to change if running on local server vs gh-pages
+// *TODO _RESUME_PATH needs to change if running on local server vs gh-pages
 // '/app-about-me/public/resume.json'
-const _RESUME = '/public/resume.json';
+const _RESUME_PATH = '/public/resume.json';
 
 export const fetchData = () => dispatch =>
-  fetch(_RESUME)
+  fetch(_RESUME_PATH)
     .then( response => response.json() )
     .then( json => dispatch(resumeDidLoad(json)) )
     .then( fontLoader(() => dispatch(fontsDidLoad())) )

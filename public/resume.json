@@ -109,7 +109,9 @@
       "projects":
         [
           {
+            "index": 0,
             "title": "react-redux-webaudio",
+            "backgroundImg": "",
             "date": "December 2016 - Present",
             "role": "Sole Developer",
             "link": "https://www.npmjs.com/package/react-redux-webaudio",
@@ -121,7 +123,9 @@
               ]
           },
           {
+            "index": 1,
             "title": "The Sound of Tweets",
+            "backgroundImg": "",
             "date": "January 2017 - Present",
             "role": "Sole Developer",
             "link": "https://www.github.com/bsaphier/data-sonification",
@@ -134,7 +138,9 @@
               ]
           },
           {
+            "index": 2,
             "title": "Youphonic",
+            "backgroundImg": "",
             "date": "January 2017 - February 2017",
             "role": "Developer",
             "link": "https://www.youphonic.co",

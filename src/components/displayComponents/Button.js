@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { Motion, presets, spring } from 'react-motion';
+import { Motion, spring } from 'react-motion';
 
 const styles = {
   button: {
@@ -35,41 +35,42 @@ class Button extends Component {
 
   buttondown() {
     this.setState({ buttonUp: false });
-    // setTimeout(this.buttonUp, 300);
   }
 
 
   render() {
 
     let { buttonUp } = this.state;
-    let { style, link, title, children, ...props } = this.props;
+    let { style, link, title, target, children, ...props } = this.props;
+
+    let motionConfig = {stiffness: 390, damping: 20};
 
     let motion = buttonUp
       ? {
-          bx: 0.5,
-          by: -1.5,
+          bx: spring(0.5, motionConfig),
+          by: spring(-1.5, motionConfig),
           bcolor: 1,
-          bdepth: 1,
-          bspread: 3,
+          bdepth: spring(1, motionConfig),
+          bspread: spring(3, motionConfig)
         }
       : {
-          bx: -0.5,
-          by: 0.5,
-          bdepth: 3,
-          bcolor: 0.3,
-          bspread: 8,
-          bshadow: 1,
+          bx: spring(-0.5, motionConfig),
+          by: spring(2.5, motionConfig),
+          bdepth: spring(2, motionConfig),
+          bcolor: 0,
+          bspread: spring(5, motionConfig),
+          bshadow: 1
         };
 
     return (
-      <a href={link ? link : null} title={title}>
+      <a href={link ? link : null} title={title} target={target ? target : '_blank'}>
 
         <Motion style={motion}>
           {({ bx, by, bspread, bcolor, bdepth, bshadow }) => {
 
             let motionStyle = {
               color: `rgba(45, 45, 45, ${bcolor})`,
-              textShadow: bshadow ? `rgba(45, 45, 45, 0.8) -${bshadow}px ${bshadow}px 0px` : null,
+              textShadow: bshadow ? `rgba(81, 81, 81, 1) -${bshadow}px ${bshadow}px 0px` : null,
               boxShadow: `inset rgba(45, 45, 45, 0.5) ${bx}px ${by}px ${bspread}px ${bdepth}px`
             };
 

@@ -1,6 +1,7 @@
 import {
   FONTS_LOADED,
   RESUME_LOADED,
+  CAROUSEL_INIT,
   SECTION_ENTER,
   TOGGLE_WELCOME,
   TOGGLE_PROJECT_MODAL
@@ -12,6 +13,7 @@ const initialState = {
   welcomeIn: false,
   fontsDidLoad: false,
   resumeDidLoad: false,
+  carouselDidLoad: false,
   projectModalOpen: false,
   currSection: 'home'
 };
@@ -30,6 +32,10 @@ export default (state = initialState, action) => {
 
     case RESUME_LOADED:
       nextState.resumeDidLoad = true;
+      break;
+
+    case CAROUSEL_INIT:
+      nextState.carouselDidLoad = true;
       break;
 
     case SECTION_ENTER:

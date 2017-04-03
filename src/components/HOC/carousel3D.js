@@ -56,7 +56,7 @@ const styles = {
 };
 
 
-// the panels arg passed in here must be an array of valid React components
+// the "panels" passed in here must be an array of valid React components
 const carousel3D = (panels) => {
 
   class Carousel3D extends Component {
@@ -85,11 +85,11 @@ const carousel3D = (panels) => {
     }
 
 
-    // get the current panel index
+    // get the new panel's index
     getPanelIndex( dir ) {
-      let current = (this.props.currPanel + dir) % panels.length;
+      let nextPanel = (this.props.currPanel + dir) % panels.length;
 
-      return current >= 0 ? current : panels.length - current * -1;
+      return nextPanel >= 0 ? nextPanel : panels.length - nextPanel * -1;
     }
 
 

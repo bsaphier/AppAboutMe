@@ -79,8 +79,6 @@ const ProjectPanel = ({
               <Button title="More Info" onClick={toggleModal}>
                 {'More Info'}
               </Button>
-
-              <Button>test</Button>
             </div>
 
           </div>
