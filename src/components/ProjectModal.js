@@ -63,6 +63,7 @@ const styles = {
     OTextFillColor: 'rgb(45, 45, 45)',
   },
 
+  // 3D shadow effect
   before: {
     zIndex: -1,
     position: 'absolute',

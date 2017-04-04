@@ -16,6 +16,8 @@ const styles = {
     padding: '10px 20px',
     background: 'rgb(255, 255, 255)',
   },
+
+  // 3D shadow effect
   before: {
     zIndex: -1,
     position: 'absolute',

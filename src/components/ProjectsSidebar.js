@@ -1,31 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  Cell,
-  Title,
-  Divider,
-  SideSection
-} from './displayComponents';
 import { rotateCarousel } from '../actions';
+import { Cell, Title, Divider, SideSection } from './displayComponents';
 
 
 const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {
 
-    const getPanelDistance = index => {
-      return currPanel > index
-        ? currPanel - index
-        : index - currPanel;
+    const getPanelMovement = index => {
+      let { length } = content;
+
+      // proper modulus math...
+      let forwards = (((currPanel - index) % length) + length) % length;
+      let backwards = (((index - currPanel) % length) + length) % length;
+
+      return backwards > forwards ? forwards : backwards * -1;
     };
 
-    const getNewRotation = index => (rotation + theta * getPanelDistance(index)) % 360;
+
+    const getNewRotation = index => rotation + theta * getPanelMovement(index);
 
 
     const sidebarItems = content.map( (project, idx) => (
       <div
         key={`projects-sidebar-item-${project.index}`}
-        onClick={() => rotate(getNewRotation(idx), idx)}
-        >
+        onClick={() => {
+          if (currPanel !== idx) rotate(getNewRotation(idx), idx);
+        }}>
         <Title style={{
           fontSize: '3vh',
           letterSpacing: '-0.05em'
@@ -52,7 +53,7 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
 
         <Cell style={{height: '5%'}} />
 
-        <Cell style={{height: '62%', textAlign: 'left'}}>
+        <Cell style={{height: '66%'}}>
           { sidebarItems }
         </Cell>
 

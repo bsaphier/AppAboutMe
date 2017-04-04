@@ -44,12 +44,17 @@ const styles = {
 };
 
 
-const IconButton = ({ url, name, icon, style }) => {
+const IconButton = ({ url, name, icon, style, target }) => {
 
   const iconStyle = { ...styles.iconStyle, ...style };
 
   return (
-    <a className="icon-button"  href={url} title={name}>
+    <a
+      className="icon-button"
+      title={name}
+      href={url ? url : null}
+      target={target ? target : '_blank'}
+      >
       <i className={`icon-${icon}`} style={iconStyle} />
     </a>
   );

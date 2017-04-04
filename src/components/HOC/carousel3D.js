@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Motion, spring, presets } from 'react-motion';
 
+import IconButton from '../IconButton';
 import carouselPanel from './carouselPanel';
 import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
 
@@ -44,14 +45,10 @@ const styles = {
   //:TODO fix or replace this
   button: {
     zIndex: 9,
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    border: '5px solid black',
     position: 'absolute',
-    top: '5%',
-    transform: 'translate(-50%, -50%)',
-    boxShadow: '-0.2em 0.2em 1.5em -0.382em rgba(81, 81, 81, 0.9)'
+    top: '50%',
+    borderRadius: '50%',
+    border: '2px solid rgb(255, 68, 62)',
   }
 };
 
@@ -111,13 +108,24 @@ const carousel3D = (panels) => {
 
       return (
         <div className="carousel-container" style={styles.container}>
+
           <div
-            style={{...styles.button, left: '5%'}}
+            style={{
+              ...styles.button,
+              left: '5%',
+              [transform]: 'translate(-50%, -50%) rotate(90deg)',
+              boxShadow: 'inset 0.2em 0.2em 1.5em -0.382em rgba(252, 255, 88, 0.9)'
+            }}
             onClick={() => {
               let newRotation = rotation + theta;
               rotate(newRotation, this.getPanelIndex(-1));
-            }}
-          />
+            }}>
+            <IconButton
+              name="previous-panel"
+              icon="angle-down"
+              style={{color: 'rgb(255, 68, 62)', background: 'transparent'}}
+            />
+          </div>
 
           {/* //:TODO TransitionMotion? to animate forward and then back */}
           <Motion style={{ degree: spring(rotation, presets.wobbly) }}>
@@ -140,12 +148,22 @@ const carousel3D = (panels) => {
           </Motion>
 
           <div
-            style={{...styles.button, left: '95%'}}
+            style={{
+              ...styles.button,
+              left: '95%',
+              [transform]: 'translate(-50%, -50%) rotate(-90deg)',
+              boxShadow: 'inset -0.2em -0.2em 1.5em -0.382em rgba(252, 255, 88, 0.9)'
+            }}
             onClick={() => {
               let newRotation = rotation + theta * -1;
               rotate(newRotation, this.getPanelIndex(1));
-            }}
-          />
+            }}>
+            <IconButton
+              name="next-panel"
+              icon="angle-down"
+              style={{color: 'rgb(255, 68, 62)', background: 'transparent'}}
+            />
+          </div>
         </div>
       );
     }
