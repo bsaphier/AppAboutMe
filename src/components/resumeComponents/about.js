@@ -14,9 +14,6 @@ import IconButton from '../IconButton';
 import SectionFoot from '../SectionFoot';
 
 
-// the hoverSpin HOC takes two props: initialColor & hoverColor
-// which are arrays of RGB values. If hoverColor is a nested array the
-// color is rendered as a gradient –– only the first two arrays are used
 const SocialButton = hoverSpin(IconButton);
 
 const About = ({ content: { about, contact }, style }) => {

@@ -52,8 +52,8 @@ const IconButton = ({ url, name, icon, style, target }) => {
     <a
       className="icon-button"
       title={name}
-      href={url ? url : null}
-      target={target ? target : '_blank'}
+      href={url || null}
+      target={target || '_blank'}
       >
       <i className={`icon-${icon}`} style={iconStyle} />
     </a>

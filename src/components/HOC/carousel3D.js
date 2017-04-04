@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Motion, spring, presets } from 'react-motion';
 
+import { hoverSpin } from '../HOC';
 import IconButton from '../IconButton';
 import carouselPanel from './carouselPanel';
 import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
@@ -43,11 +44,17 @@ const styles = {
   },
 
   //:TODO fix or replace this
-  button: {
+  buttonWrap: {
     zIndex: 9,
     position: 'absolute',
     top: '50%',
+    [transform]: 'translate(-50%, -50%)'
+  },
+
+  button: {
     borderRadius: '50%',
+    color: 'rgb(255, 68, 62)',
+    background: 'transparent',
     border: '2px solid rgb(255, 68, 62)',
   }
 };
@@ -102,32 +109,59 @@ const carousel3D = (panels) => {
     }
 
 
-    render() {
-      let { axis, theta, rotate, radius, rotation } = this.props;
+    makeButton(top, left, icon, iconRotate) {
+      let { theta, rotate, rotation } = this.props;
 
+      return (
+        <div
+          style={{
+            ...styles.button,
+            top: `${top}%`,
+            left: `${left}%`,
+            // [transform]: `translate(-50%, -50%) rotate(${iconRotate}deg)`,
+            // boxShadow: 'inset 2px 2px 10px -3px rgba(252, 255, 88, 0.9)'
+          }}
+          onClick={() => {
+            let newRotation = rotation + theta;
+            rotate(newRotation, this.getPanelIndex(-1));
+          }}>
+          <IconButton
+            name="previous-panel"
+            icon={`${iconRotate}`}
+            style={styles.button}
+          />
+        </div>
+      );
+    }
+
+
+    render() {
+      const { axis, theta, rotate, radius, rotation } = this.props;
+
+      const DirButton = hoverSpin(IconButton);
 
       return (
         <div className="carousel-container" style={styles.container}>
 
           <div
             style={{
-              ...styles.button,
+              ...styles.buttonWrap,
               left: '5%',
-              [transform]: 'translate(-50%, -50%) rotate(90deg)',
-              boxShadow: 'inset 0.2em 0.2em 1.5em -0.382em rgba(252, 255, 88, 0.9)'
+              // boxShadow: 'inset 2px 2px 10px -3px rgba(252, 255, 88, 0.9)'
             }}
             onClick={() => {
               let newRotation = rotation + theta;
               rotate(newRotation, this.getPanelIndex(-1));
             }}>
-            <IconButton
+            <DirButton
               name="previous-panel"
               icon="angle-down"
-              style={{color: 'rgb(255, 68, 62)', background: 'transparent'}}
+              initialColor={[45, 45, 45, 0]}
+              hoverColor={[[255, 68, 62], [252, 255, 88]]}
+              style={{...styles.button, [transform]: 'rotate(90deg)'}}
             />
           </div>
 
-          {/* //:TODO TransitionMotion? to animate forward and then back */}
           <Motion style={{ degree: spring(rotation, presets.wobbly) }}>
             {({ degree }) => (
               <div
@@ -149,19 +183,20 @@ const carousel3D = (panels) => {
 
           <div
             style={{
-              ...styles.button,
+              ...styles.buttonWrap,
               left: '95%',
-              [transform]: 'translate(-50%, -50%) rotate(-90deg)',
-              boxShadow: 'inset -0.2em -0.2em 1.5em -0.382em rgba(252, 255, 88, 0.9)'
+              // boxShadow: 'inset -2px -2px 10px -3px rgba(252, 255, 88, 0.9)'
             }}
             onClick={() => {
               let newRotation = rotation + theta * -1;
               rotate(newRotation, this.getPanelIndex(1));
             }}>
-            <IconButton
+            <DirButton
               name="next-panel"
               icon="angle-down"
-              style={{color: 'rgb(255, 68, 62)', background: 'transparent'}}
+              initialColor={[45, 45, 45, 0]}
+              hoverColor={[[255, 68, 62], [252, 255, 88]]}
+              style={{...styles.button, [transform]: 'rotate(-90deg)'}}
             />
           </div>
         </div>
