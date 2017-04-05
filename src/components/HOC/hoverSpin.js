@@ -2,45 +2,40 @@ import React from 'react';
 import { Motion, presets, spring } from 'react-motion';
 
 import { int } from '../../bin/utils';
+import Modernizr from '../../../.modernizrrc';
+
+
+const transform = Modernizr.prefixed('transform');
 
 
 const styles = {
   content: {
     margin: '.3em .3em',
-    display: 'inline-block',
-
-    // WebkitTransition: 'all .8s ease-in-out',
-    // MozTransition: 'all .8s ease-in-out',
-    // transition: 'all .8s ease-in-out'
+    display: 'inline-block'
   }
 };
 
 
-// the hoverSpin HOC takes two props: initialColor & hoverColor
-// which are arrays of RGB values. If hoverColor is a nested array the
-// color is rendered as a gradient –– only the first two arrays are used
+// the hoverSpin HOC takes two props: initialColor & hoverColor which are
+// arrays of RGB values
 const hoverSpin = (Component) => {
   return class HoverSpin extends React.Component {
 
     constructor(props) {
       super(props);
 
-      let [red, green, blue, tran = 1] = props.initialColor;
+      let [red, green, blue, opac = 1] = props.initialColor;
 
       this.state = {
-        redA: red,
-        redB: red,
-        greenA: green,
-        greenB: green,
-        blueA: blue,
-        blueB: blue,
-        tranA: tran,
-        tranB: tran,
+        red,
+        green,
+        blue,
+        opac,
 
-        shadow: props.shadow || 0.25,
+        degree: 0,
         shadowX: -1,
         shadowY: 1,
-        degree: 0,
+        shadow: props.shadow || 0.25
       };
 
       this.hover = this.hover.bind(this);
@@ -49,85 +44,59 @@ const hoverSpin = (Component) => {
 
 
     hover() {
-      // *TODO check if hoverColor is nested array
-      let [redA, greenA, blueA, tranA = 1] = this.props.hoverColor[0];
-      let [redB, greenB, blueB, tranB = 1] = this.props.hoverColor[1];
+
+      let [red, green, blue, opac = 1] = this.props.hoverColor;
 
       this.setState({
-        redA: spring(redA),
-        greenA: spring(greenA),
-        blueA: spring(blueA),
-        redB: spring(redB),
-        greenB: spring(greenB),
-        blueB: spring(blueB),
-        aA: spring(tranA),
-        aB: spring(tranB),
+        red: spring(red),
+        green: spring(green),
+        blue: spring(blue),
+        opac: spring(opac),
 
-        shadow: spring(0.4, presets.stiff),
+        degree: spring(360, presets.gentle),
         shadowX: spring(-3, presets.stiff),
         shadowY: spring(2, presets.stiff),
-        degree: spring(360, presets.gentle)
+        shadow: spring((this.props.shadow || 0.4), presets.stiff)
       });
     }
 
 
     leave() {
 
-      let [red, green, blue, tran = 1] = this.props.initialColor;
+      let [red, green, blue, opac = 1] = this.props.initialColor;
 
       this.setState({
-        redA: spring(red),
-        greenA: spring(green),
-        blueA: spring(blue),
-        tranA: spring(tran),
-        redB: spring(red),
-        greenB: spring(green),
-        blueB: spring(blue),
-        tranB: spring(tran),
+        red: spring(red),
+        green: spring(green),
+        blue: spring(blue),
+        opac: spring(opac),
 
-        shadow: spring(this.props.shadow || 0.25, presets.stiff),
+        degree: spring(0, presets.gentle),
         shadowX: spring(-1, presets.stiff),
         shadowY: spring(1, presets.stiff),
-        degree: spring(0, presets.gentle)
+        shadow: spring((this.props.shadow || 0.25), presets.stiff)
       });
     }
 
 
     render() {
       return (
-        <div className="hoverSpinHOC" style={styles.content}>
+        <div
+          className="hoverSpinHOC"
+          style={styles.content}
+          onMouseOver={this.hover}
+          onMouseOut={this.leave}
+          >
           <Motion style={this.state}>
 
-            {({
-              redA,
-              redB,
-              blueA,
-              blueB,
-              greenA,
-              greenB,
-              tranA,
-              tranB,
-              degree,
-              shadow,
-              shadowX,
-              shadowY
-            }) => (
-              <div
-                onMouseOver={this.hover}
-                onMouseOut={this.leave}
-                style={{
-                  MozTransform: `rotateY(${degree}deg)`,
-                  WebkitTransform: `rotateY(${degree}deg)`,
-                  transform: `rotateY(${degree}deg)`
-                }}
-                >
+            {({ red, blue, green, opac, degree, shadow, shadowX, shadowY }) => (
+              <div style={{ [ transform ]: `rotateY(${degree}deg)` }}>
                 <Component
                   {...this.props}
                   style={{
                     ...this.props.style,
                     boxShadow: `${shadowX}px ${shadowY}px 5px -1px rgba(81, 81, 81, ${shadow})`,
-                    background:
-                      `linear-gradient(to top right, rgba(${int(redA)}, ${int(greenA)}, ${int(blueA)}, ${tranA}) 62%, rgba(${int(redB)}, ${int(greenB)}, ${int(blueB)}, ${tranB}) 162%)`
+                    background: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
                   }}
                 />
               </div>

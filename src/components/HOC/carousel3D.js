@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Motion, spring, presets } from 'react-motion';
 
-import { hoverSpin } from '../HOC';
+import { clickSpin } from '../HOC';
 import IconButton from '../IconButton';
 import carouselPanel from './carouselPanel';
 import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
@@ -55,7 +55,7 @@ const styles = {
     borderRadius: '50%',
     color: 'rgb(255, 68, 62)',
     background: 'transparent',
-    border: '2px solid rgb(255, 68, 62)',
+    border: '2px solid rgb(255, 68, 62)'
   }
 };
 
@@ -69,11 +69,13 @@ const carousel3D = (panels) => {
       super(props);
       this.getSize = this.getSize.bind(this);
       this.getElement = this.getElement.bind(this);
+      this.makeButton = this.makeButton.bind(this);
       this.getPanelIndex = this.getPanelIndex.bind(this);
     }
 
 
     componentDidMount() {
+
       let { create, axis, resize } = this.props;
 
       create(panels, this.getSize(axis));
@@ -83,6 +85,7 @@ const carousel3D = (panels) => {
 
 
     componentWillUnmount() {
+
       let { axis, resize } = this.props;
 
       window.removeEventListener( 'resize', () => resize(panels.length, this.getSize(axis)));
@@ -91,6 +94,7 @@ const carousel3D = (panels) => {
 
     // get the new panel's index
     getPanelIndex( dir ) {
+
       let nextPanel = (this.props.currPanel + dir) % panels.length;
 
       return nextPanel >= 0 ? nextPanel : panels.length - nextPanel * -1;
@@ -99,36 +103,35 @@ const carousel3D = (panels) => {
 
     // get the size of the carousel DOM node
     getSize( axis ) {
+
       return this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
     }
 
 
-    // create a refrence on the Carousel instance to the
+    // create a refrence to the DOM node to listen for windowResize
     getElement( ref ) {
+
       this.domNode = ref;
     }
 
+    // a button generator for moving the carousel left/right
+    makeButton(left, back, icon, style) {
 
-    makeButton(top, left, icon, iconRotate) {
       let { theta, rotate, rotation } = this.props;
 
       return (
         <div
           style={{
-            ...styles.button,
-            top: `${top}%`,
-            left: `${left}%`,
-            // [transform]: `translate(-50%, -50%) rotate(${iconRotate}deg)`,
-            // boxShadow: 'inset 2px 2px 10px -3px rgba(252, 255, 88, 0.9)'
+            ...styles.buttonWrap,
+            left: `${left}%`
           }}
           onClick={() => {
-            let newRotation = rotation + theta;
-            rotate(newRotation, this.getPanelIndex(-1));
+            let newRotation = rotation + theta * (back) ? 1 : -1;
+            rotate(newRotation, this.getPanelIndex((back) ? -1 : 1));
           }}>
           <IconButton
-            name="previous-panel"
-            icon={`${iconRotate}`}
-            style={styles.button}
+            icon={`${icon}`}
+            style={{...styles.button, ...style}}
           />
         </div>
       );
@@ -136,9 +139,16 @@ const carousel3D = (panels) => {
 
 
     render() {
+
       const { axis, theta, rotate, radius, rotation } = this.props;
 
-      const DirButton = hoverSpin(IconButton);
+      // const BBHOC = this.makeButton(5, true, 'angle-down', {[transform]: 'rotate(90deg)'});
+      // const FBHOC = this.makeButton(95, false, 'angle-down', {[transform]: 'rotate(-90deg)'});
+
+      //:TODO pass in the component that makeButton returns
+      // const BackButton = clickSpin(BBHOC);
+      // const ForwardButton = clickSpin(FBHOC);
+      const DirButton = clickSpin(IconButton);
 
       return (
         <div className="carousel-container" style={styles.container}>
@@ -146,8 +156,7 @@ const carousel3D = (panels) => {
           <div
             style={{
               ...styles.buttonWrap,
-              left: '5%',
-              // boxShadow: 'inset 2px 2px 10px -3px rgba(252, 255, 88, 0.9)'
+              left: '5%'
             }}
             onClick={() => {
               let newRotation = rotation + theta;
@@ -156,8 +165,8 @@ const carousel3D = (panels) => {
             <DirButton
               name="previous-panel"
               icon="angle-down"
-              initialColor={[45, 45, 45, 0]}
-              hoverColor={[[255, 68, 62], [252, 255, 88]]}
+              initialColor={[45, 45, 45]}
+              clickColor={[255, 68, 62, 0]}
               style={{...styles.button, [transform]: 'rotate(90deg)'}}
             />
           </div>
@@ -184,18 +193,16 @@ const carousel3D = (panels) => {
           <div
             style={{
               ...styles.buttonWrap,
-              left: '95%',
-              // boxShadow: 'inset -2px -2px 10px -3px rgba(252, 255, 88, 0.9)'
+              left: '95%'
             }}
             onClick={() => {
               let newRotation = rotation + theta * -1;
               rotate(newRotation, this.getPanelIndex(1));
             }}>
             <DirButton
-              name="next-panel"
               icon="angle-down"
-              initialColor={[45, 45, 45, 0]}
-              hoverColor={[[255, 68, 62], [252, 255, 88]]}
+              initialColor={[45, 45, 45]}
+              clickColor={[255, 68, 62, 0]}
               style={{...styles.button, [transform]: 'rotate(-90deg)'}}
             />
           </div>

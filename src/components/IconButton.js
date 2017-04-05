@@ -51,7 +51,7 @@ const IconButton = ({ url, name, icon, style, target }) => {
   return (
     <a
       className="icon-button"
-      title={name}
+      title={name || null}
       href={url || null}
       target={target || '_blank'}
       >

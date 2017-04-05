@@ -25,7 +25,7 @@ const About = ({ content: { about, contact }, style }) => {
       name={link.name}
       icon={link.icon}
       initialColor={[45, 45, 45]}
-      hoverColor={[[255, 68, 62], [252, 255, 88]]}
+      hoverColor={[255, 68, 62]}
     />
   );
 
