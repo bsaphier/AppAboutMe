@@ -147,7 +147,11 @@ const carousel3D = (panels, navButtons) => {
             icon="angle-down"
             initialColor={[45, 45, 45, 1]}
             clickColor={[255, 68, 62, 1]}
-            style={{[transform]: `rotate(${dir}deg)`}}
+            style={{
+              fontSize: '4.2rem',
+              [transform]: `rotate(${dir}deg)`,
+              backgroundColor: 'transparent'
+            }}
           />
         </div>
       );

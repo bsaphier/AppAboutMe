@@ -13331,6 +13331,8 @@ var carousel3D = function carousel3D(panels, navButtons) {
         var dir = back ? 90 : -90;
 
         return function () {
+          var _ref;
+
           return _react2.default.createElement(
             'div',
             {
@@ -13344,7 +13346,9 @@ var carousel3D = function carousel3D(panels, navButtons) {
               icon: 'angle-down',
               initialColor: [45, 45, 45, 1],
               clickColor: [255, 68, 62, 1],
-              style: _defineProperty({}, transform, 'rotate(' + dir + 'deg)')
+              style: (_ref = {
+                fontSize: '4.2rem'
+              }, _defineProperty(_ref, transform, 'rotate(' + dir + 'deg)'), _defineProperty(_ref, 'backgroundColor', 'transparent'), _ref)
             })
           );
         };
@@ -13475,17 +13479,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var transform = _modernizrrc2.default.prefixed('transform');
 
-var styles = {
-  content: {
-    // margin: '.3em .3em',
-    // display: 'inline-block'
-  }
-};
-
 // the clickSpin HOC takes two props: initialColor & clickColor which are
 // arrays of RGBA values
 var clickSpin = function clickSpin(Component) {
-
   return function (_React$Component) {
     _inherits(ClickSpin, _React$Component);
 
@@ -13495,7 +13491,6 @@ var clickSpin = function clickSpin(Component) {
       var _this = _possibleConstructorReturn(this, (ClickSpin.__proto__ || Object.getPrototypeOf(ClickSpin)).call(this, props));
 
       _this.state = { buttonUp: true };
-
       _this.clicked = _this.clicked.bind(_this);
       _this.unClicked = _this.unClicked.bind(_this);
       return _this;
@@ -13509,6 +13504,9 @@ var clickSpin = function clickSpin(Component) {
       value: function componentDidMount() {
         this._mounted = true;
       }
+
+      // . . . and again
+
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
@@ -13519,14 +13517,15 @@ var clickSpin = function clickSpin(Component) {
       value: function clicked() {
         this.setState({ buttonUp: false });
 
-        // setTimeout(this.unClicked, 1000);
+        setTimeout(this.unClicked, 1000);
       }
     }, {
       key: 'unClicked',
       value: function unClicked() {
-        // because of the setTimeout callback in this.clicked()
-        // if (this._mounted) {}
-        this.setState({ buttonUp: true });
+        // because of the setTimeout callback in this.clicked
+        if (this._mounted) {
+          this.setState({ buttonUp: true });
+        }
       }
     }, {
       key: 'render',
@@ -13555,28 +13554,19 @@ var clickSpin = function clickSpin(Component) {
           blue: (0, _reactMotion.spring)(blueIC),
           opac: (0, _reactMotion.spring)(aIC),
 
-          degree: (0, _reactMotion.spring)(360, _reactMotion.presets.gentle),
-          shadowX: (0, _reactMotion.spring)(-3, _reactMotion.presets.stiff),
-          shadowY: (0, _reactMotion.spring)(2, _reactMotion.presets.stiff)
+          degree: (0, _reactMotion.spring)(360, _reactMotion.presets.gentle)
         } : {
           red: (0, _reactMotion.spring)(redCC),
           green: (0, _reactMotion.spring)(greenCC),
           blue: (0, _reactMotion.spring)(blueCC),
           opac: (0, _reactMotion.spring)(aCC),
 
-          degree: (0, _reactMotion.spring)(0, _reactMotion.presets.wobbly),
-          shadowX: (0, _reactMotion.spring)(-1, _reactMotion.presets.gentle),
-          shadowY: (0, _reactMotion.spring)(1, _reactMotion.presets.gentle)
+          degree: (0, _reactMotion.spring)(0, _reactMotion.presets.wobbly)
         };
 
         return _react2.default.createElement(
           'div',
-          {
-            className: 'clickSpinHOC',
-            onMouseOut: this.unClicked,
-            onMouseDown: this.clicked,
-            style: styles.content
-          },
+          { className: 'clickSpinHOC', onMouseOut: this.unClicked, onMouseDown: this.clicked },
           _react2.default.createElement(
             _reactMotion.Motion,
             { style: motion },
@@ -13585,16 +13575,13 @@ var clickSpin = function clickSpin(Component) {
                   blue = _ref.blue,
                   green = _ref.green,
                   opac = _ref.opac,
-                  degree = _ref.degree,
-                  shadowX = _ref.shadowX,
-                  shadowY = _ref.shadowY;
+                  degree = _ref.degree;
               return _react2.default.createElement(
                 'div',
                 { style: _defineProperty({}, transform, 'rotateY(' + degree + 'deg)') },
                 _react2.default.createElement(Component, _extends({}, _this2.props, {
                   style: _extends({}, componentStyle, {
-                    boxShadow: shadowX + 'px ' + shadowY + 'px 5px -1px rgba(81, 81, 81, 0.3)',
-                    background: 'rgba(' + (0, _utils.int)(red) + ', ' + (0, _utils.int)(green) + ', ' + (0, _utils.int)(blue) + ', ' + opac + ')'
+                    color: 'rgba(' + (0, _utils.int)(red) + ', ' + (0, _utils.int)(green) + ', ' + (0, _utils.int)(blue) + ', ' + opac + ')'
                   })
                 }))
               );

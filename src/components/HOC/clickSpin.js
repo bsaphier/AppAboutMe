@@ -12,24 +12,14 @@ import { int } from '../../bin/utils';
 const transform = Modernizr.prefixed('transform');
 
 
-const styles = {
-  content: {
-    // margin: '.3em .3em',
-    // display: 'inline-block'
-  }
-};
-
-
 // the clickSpin HOC takes two props: initialColor & clickColor which are
 // arrays of RGBA values
 const clickSpin = (Component) => {
-
   return class ClickSpin extends React.Component {
 
     constructor(props) {
       super(props);
       this.state = { buttonUp: true };
-
       this.clicked = this.clicked.bind(this);
       this.unClicked = this.unClicked.bind(this);
     }
@@ -40,7 +30,7 @@ const clickSpin = (Component) => {
       this._mounted = true;
     }
 
-
+    // . . . and again
     componentWillUnmount() {
       this._mounted = false;
     }
@@ -49,14 +39,15 @@ const clickSpin = (Component) => {
     clicked() {
       this.setState({ buttonUp: false });
 
-      // setTimeout(this.unClicked, 1000);
+      setTimeout(this.unClicked, 1000);
     }
 
 
     unClicked() {
-      // because of the setTimeout callback in this.clicked()
-      // if (this._mounted) {}
-      this.setState({ buttonUp: true });
+      // because of the setTimeout callback in this.clicked
+      if (this._mounted) {
+        this.setState({ buttonUp: true });
+      }
     }
 
 
@@ -74,9 +65,7 @@ const clickSpin = (Component) => {
             blue: spring(blueIC),
             opac: spring(aIC),
 
-            degree: spring(360, presets.gentle),
-            shadowX: spring(-3, presets.stiff),
-            shadowY: spring(2, presets.stiff),
+            degree: spring(360, presets.gentle)
           }
         : {
             red: spring(redCC),
@@ -84,29 +73,21 @@ const clickSpin = (Component) => {
             blue: spring(blueCC),
             opac: spring(aCC),
 
-            degree: spring(0, presets.wobbly),
-            shadowX: spring(-1, presets.gentle),
-            shadowY: spring(1, presets.gentle),
+            degree: spring(0, presets.wobbly)
           };
 
 
       return (
-        <div
-          className="clickSpinHOC"
-          onMouseOut={this.unClicked}
-          onMouseDown={this.clicked}
-          style={styles.content}
-          >
+        <div className="clickSpinHOC" onMouseOut={this.unClicked} onMouseDown={this.clicked}>
           <Motion style={motion}>
 
-            {({ red, blue, green, opac, degree, shadowX, shadowY }) => (
+            {({ red, blue, green, opac, degree }) => (
               <div style={{ [ transform ]: `rotateY(${degree}deg)` }}>
                 <Component
                   {...this.props}
                   style={{
                     ...componentStyle,
-                    boxShadow: `${shadowX}px ${shadowY}px 5px -1px rgba(81, 81, 81, 0.3)`,
-                    background: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
+                    color: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
                   }}
                 />
               </div>
@@ -117,7 +98,6 @@ const clickSpin = (Component) => {
       );
     }
   };
-
 };
 
 
