@@ -140,10 +140,10 @@
           {
             "index": 2,
             "title": "Youphonic",
-            "backgroundImg": "",
+            "backgroundImg": "youphonic-img-sm-min.png",
             "date": "January 2017 - February 2017",
             "role": "Developer",
-            "link": "https://www.youphonic.co",
+            "link": "http://www.youphonic.co/$2a$10$c5nJeeamyBV2vcGmQ0NJuOY91OgHzuLNNOyTTeXevULcGmYufCDgu",
             "shortDescription": "...brief description goes here",
             "description":
               [

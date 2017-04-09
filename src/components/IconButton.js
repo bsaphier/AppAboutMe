@@ -2,7 +2,6 @@ import React from 'react';
 
 
 const styles = {
-
   iconStyle: {
     width: '1.5em',
     height: '1.5em',
@@ -11,7 +10,7 @@ const styles = {
     color: 'rgb(255, 255, 255)',
     background: 'rgba(45, 45, 45, 1)',
 
-/* -~- styling & comments from the fontello.com package -~- */
+  /* -~- styling & comments from the fontello.com package -~- */
     fontFamily: 'fontello',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -44,16 +43,16 @@ const styles = {
 };
 
 
-const IconButton = ({ url, name, icon, style, target }) => {
+const IconButton = ({ icon, style, url = null, name = null, target = '_blank' }) => {
 
   const iconStyle = { ...styles.iconStyle, ...style };
 
   return (
     <a
       className="icon-button"
-      title={name || null}
-      href={url || null}
-      target={target || '_blank'}
+      href={url}
+      title={name}
+      target={target}
       >
       <i className={`icon-${icon}`} style={iconStyle} />
     </a>

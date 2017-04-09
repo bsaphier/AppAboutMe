@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { rotateCarousel } from '../actions';
 import { Cell, Title, Divider, SideSection } from './displayComponents';
+import { rotateCarousel } from '../actions';
 
 
 const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {

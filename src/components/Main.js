@@ -1,44 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import store from '../store';
-// import Navbar from './Navbar';
 import Footer from './Footer';
 import Welcome from './Welcome';
 import SectionFoot from './SectionFoot';
-import { toggleWelcome } from '../actions';
 import ResumeComponents from './resumeComponents';
 import { Section, FillSection } from './displayComponents';
+import { toggleWelcome } from '../actions';
 
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contact: props.contact,
-      about: props.resume.about,
-      skills: props.resume.skills,
-      projects: props.resume.projects,
-      navItems: {
-        home: 'Home',
-        about: 'About',
-        skills: 'Skills',
-        projects: 'Projects'
-      }
-    };
-  }
-
+class Main extends Component {
   componentDidMount() {
-    store.dispatch(toggleWelcome());
+    this.props.dispatch(toggleWelcome());
   }
 
   render() {
-    let { about, skills, contact, projects } = this.state;
+    const { contact, resume: { about, skills, projects } } = this.props;
 
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
 
         <Section id="home">
-          {/* <Navbar navLinks={this.state.navItems} /> */}
           <FillSection>
             <Welcome />
             <SectionFoot to="about" text="ABOUT ME" />
@@ -50,6 +31,7 @@ class Main extends React.Component {
           skills={skills}
           contact={contact}
           projects={projects}
+          {...this.props}
         />
         <Footer />
 

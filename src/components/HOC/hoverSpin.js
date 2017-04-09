@@ -19,6 +19,7 @@ const styles = {
 // the hoverSpin HOC takes two props: initialColor & hoverColor which are
 // arrays of RGB values
 const hoverSpin = (Component) => {
+
   return class HoverSpin extends React.Component {
 
     constructor(props) {
@@ -44,7 +45,6 @@ const hoverSpin = (Component) => {
 
 
     hover() {
-
       let [red, green, blue, opac = 1] = this.props.hoverColor;
 
       this.setState({
@@ -62,7 +62,6 @@ const hoverSpin = (Component) => {
 
 
     leave() {
-
       let [red, green, blue, opac = 1] = this.props.initialColor;
 
       this.setState({
@@ -107,6 +106,8 @@ const hoverSpin = (Component) => {
       );
     }
   };
+
 };
+
 
 export default hoverSpin;

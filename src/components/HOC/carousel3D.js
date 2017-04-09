@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Motion, spring, presets } from 'react-motion';
 
-import { clickSpin } from '../HOC';
 import IconButton from '../IconButton';
 import carouselPanel from './carouselPanel';
-import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
-
 import Modernizr from '../../../.modernizrrc';
+import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
+import { clickSpin } from '../HOC';
+
+
 const transform = Modernizr.prefixed('transform');
 
 
@@ -43,7 +44,6 @@ const styles = {
     transitionStyle: 'transform 0.6s',
   },
 
-  //:TODO fix or replace this
   buttonWrap: {
     zIndex: 9,
     position: 'absolute',
@@ -51,6 +51,8 @@ const styles = {
     [transform]: 'translate(-50%, -50%)'
   },
 
+
+  //:TODO fix or replace this
   button: {
     borderRadius: '50%',
     color: 'rgb(255, 68, 62)',
@@ -60,22 +62,24 @@ const styles = {
 };
 
 
-// the "panels" passed in here must be an array of valid React components
-const carousel3D = (panels) => {
+// panels passed in here must be an array of valid React components. navButtons (optional) can
+// be a valid React component or an array of two valid React components. If navButtons is an
+// array, only the first two indexes will be used
+const carousel3D = (panels, navButtons) => {
 
   class Carousel3D extends Component {
 
-    constructor(props) {
+    constructor( props ) {
       super(props);
       this.getSize = this.getSize.bind(this);
       this.getElement = this.getElement.bind(this);
-      this.makeButton = this.makeButton.bind(this);
       this.getPanelIndex = this.getPanelIndex.bind(this);
+      this.createNavButton = this.createNavButton.bind(this);
+      this.navButtonAction = this.navButtonAction.bind(this);
     }
 
 
     componentDidMount() {
-
       let { create, axis, resize } = this.props;
 
       create(panels, this.getSize(axis));
@@ -85,10 +89,21 @@ const carousel3D = (panels) => {
 
 
     componentWillUnmount() {
-
       let { axis, resize } = this.props;
 
       window.removeEventListener( 'resize', () => resize(panels.length, this.getSize(axis)));
+    }
+
+
+    // get the size of the carousel DOM node
+    getSize( axis ) {
+      return this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
+    }
+
+
+    // create a refrence to the DOM node to listen for windowResize
+    getElement( ref ) {
+      this.domNode = ref;
     }
 
 
@@ -101,37 +116,38 @@ const carousel3D = (panels) => {
     }
 
 
-    // get the size of the carousel DOM node
-    getSize( axis ) {
-
-      return this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
-    }
-
-
-    // create a refrence to the DOM node to listen for windowResize
-    getElement( ref ) {
-
-      this.domNode = ref;
-    }
-
-    // a button generator for moving the carousel left/right
-    makeButton(left, back, icon, style) {
-
+    // navButton helper function
+    navButtonAction( dir ) {
       let { theta, rotate, rotation } = this.props;
 
-      return (
+      let newRotation = rotation + theta * ( (dir) ? 1 : -1 );
+
+      rotate(newRotation, this.getPanelIndex( (dir) ? -1 : 1) );
+    }
+
+
+    //:TODO move the navButtons to the parent component for easier modularity
+    //:TODO move the navButtons to the parent component for easier modularity
+    // a default navButton generator for moving the carousel left/right
+    createNavButton( back ) {
+
+      // the default navButton
+      const ClickSpin = clickSpin(IconButton);
+
+      let left = (back) ? 5 : 95;
+      let dir = (back) ? 90 : -90;
+
+      return () => (
         <div
-          style={{
-            ...styles.buttonWrap,
-            left: `${left}%`
-          }}
-          onClick={() => {
-            let newRotation = rotation + theta * (back) ? 1 : -1;
-            rotate(newRotation, this.getPanelIndex((back) ? -1 : 1));
-          }}>
-          <IconButton
-            icon={`${icon}`}
-            style={{...styles.button, ...style}}
+          className="nav-button"
+          style={{ ...styles.buttonWrap, left: `${left}%` }}
+          onClick={() => this.navButtonAction( back )}
+          >
+          <ClickSpin
+            icon="angle-down"
+            initialColor={[45, 45, 45, 1]}
+            clickColor={[255, 68, 62, 1]}
+            style={{[transform]: `rotate(${dir}deg)`}}
           />
         </div>
       );
@@ -139,39 +155,16 @@ const carousel3D = (panels) => {
 
 
     render() {
+      let { axis, theta, radius, rotation } = this.props;
 
-      const { axis, theta, rotate, radius, rotation } = this.props;
-
-      // const BBHOC = this.makeButton(5, true, 'angle-down', {[transform]: 'rotate(90deg)'});
-      // const FBHOC = this.makeButton(95, false, 'angle-down', {[transform]: 'rotate(-90deg)'});
-
-      //:TODO pass in the component that makeButton returns
-      // const BackButton = clickSpin(BBHOC);
-      // const ForwardButton = clickSpin(FBHOC);
-      const DirButton = clickSpin(IconButton);
+      const NavBack = this.createNavButton(true);
+      const NavFwd = this.createNavButton(false);
 
       return (
         <div className="carousel-container" style={styles.container}>
-
-          <div
-            style={{
-              ...styles.buttonWrap,
-              left: '5%'
-            }}
-            onClick={() => {
-              let newRotation = rotation + theta;
-              rotate(newRotation, this.getPanelIndex(-1));
-            }}>
-            <DirButton
-              name="previous-panel"
-              icon="angle-down"
-              initialColor={[45, 45, 45]}
-              clickColor={[255, 68, 62, 0]}
-              style={{...styles.button, [transform]: 'rotate(90deg)'}}
-            />
-          </div>
-
+          <NavBack />
           <Motion style={{ degree: spring(rotation, presets.wobbly) }}>
+
             {({ degree }) => (
               <div
                 className="carousel"
@@ -180,40 +173,22 @@ const carousel3D = (panels) => {
                   ...styles.carousel,
                   [ transform ]: `translateZ(-${radius}px) rotate${axis}(${degree}deg)`
                 }}>
-
                 {
                   panels.map( (Panel, idx) =>
                     carouselPanel({ idx, axis, theta, radius, transform })(Panel) )
                 }
-
               </div>
             )}
-          </Motion>
 
-          <div
-            style={{
-              ...styles.buttonWrap,
-              left: '95%'
-            }}
-            onClick={() => {
-              let newRotation = rotation + theta * -1;
-              rotate(newRotation, this.getPanelIndex(1));
-            }}>
-            <DirButton
-              icon="angle-down"
-              initialColor={[45, 45, 45]}
-              clickColor={[255, 68, 62, 0]}
-              style={{...styles.button, [transform]: 'rotate(-90deg)'}}
-            />
-          </div>
+          </Motion>
+          <NavFwd />
         </div>
       );
     }
   }
 
-  const mapStateToProps = ({
-    carousel: { axis, theta, radius, rotation, panelSize, currPanel }
-  }) => ({
+
+  const mapStateToProps = ({ carousel: { axis, theta, radius, rotation, panelSize, currPanel } }) => ({
     axis,
     theta,
     radius,
@@ -222,11 +197,13 @@ const carousel3D = (panels) => {
     currPanel
   });
 
+
   const mapDispatchToProps = dispatch => ({
     rotate: (newRotation, currPanel) => dispatch(rotateCarousel(newRotation, currPanel)),
     resize: (panelsCount, panelSize) => dispatch(resizeCarousel(panelsCount, panelSize)),
     create: (projectPanels, panelSize) => dispatch(createCarousel(projectPanels, panelSize)),
   });
+
 
   return connect(mapStateToProps, mapDispatchToProps)(Carousel3D);
 };

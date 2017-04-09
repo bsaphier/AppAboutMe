@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from './reducers/root-reducer';
 
+// check node ENV if this should be applied . . .
 const reduxLogger = createLogger({collapsed: true});
 
 export default createStore(

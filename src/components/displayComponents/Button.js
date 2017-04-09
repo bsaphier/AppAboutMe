@@ -4,20 +4,23 @@ import { Motion, spring } from 'react-motion';
 const styles = {
   button: {
     cursor: 'pointer',
-    margin: '.3em 0em',
-    padding: '.3em 1em',
+    margin: '.5em',
+    padding: '0.8em 0.1em',
+
+    width: '8em',
 
     fontWeight: 400,
     textAlign: 'center',
+    letterSpacing: '-0.08em',
     textTransform: 'uppercase',
 
-    borderRadius: '.3em',
+    borderRadius: '5rem',
     background: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
   }
 };
 
 class Button extends Component {
-  constructor(props) {
+  constructor( props ) {
     super(props);
     this.state = {
       buttonUp: true
@@ -63,33 +66,33 @@ class Button extends Component {
         };
 
     return (
-      <a href={link ? link : null} title={title} target={target ? target : '_blank'}>
+      <div
+        className="button"
+        onMouseUp={this.buttonUp}
+        onMouseOut={this.buttonUp}
+        onMouseDown={this.buttondown}
+        >
+        <a href={link ? link : null} title={title} target={target ? target : '_blank'}>
 
-        <Motion style={motion}>
-          {({ bx, by, bspread, bcolor, bdepth, bshadow }) => {
+          <Motion style={motion}>
+            {({ bx, by, bspread, bcolor, bdepth, bshadow }) => {
 
-            let motionStyle = {
-              color: `rgba(45, 45, 45, ${bcolor})`,
-              textShadow: bshadow ? `rgba(81, 81, 81, 1) -${bshadow}px ${bshadow}px 0px` : null,
-              boxShadow: `inset rgba(45, 45, 45, 0.5) ${bx}px ${by}px ${bspread}px ${bdepth}px`
-            };
+              let motionStyle = {
+                color: `rgba(45, 45, 45, ${bcolor})`,
+                textShadow: bshadow ? `rgba(81, 81, 81, 1) -${bshadow}px ${bshadow}px 0px` : null,
+                boxShadow: `inset rgba(45, 45, 45, 0.5) ${bx}px ${by}px ${bspread}px ${bdepth}px`
+              };
 
-            return (
-              <div
-                className="button"
-                style={{...styles.button, ...motionStyle, ...style}}
-                onMouseUp={this.buttonUp}
-                onMouseOut={this.buttonUp}
-                onMouseDown={this.buttondown}
-                {...props}
-                >
-                { children }
-              </div>
-            );
-          }}
-        </Motion>
+              return (
+                <div style={{...styles.button, ...motionStyle, ...style}} {...props}>
+                  { children }
+                </div>
+              );
+            }}
+          </Motion>
 
-      </a>
+        </a>
+      </div>
     );
   }
 }

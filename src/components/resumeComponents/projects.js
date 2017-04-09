@@ -1,21 +1,24 @@
 import React from 'react';
 
-import { carousel3D } from '../HOC';
 import SectionFoot from '../SectionFoot';
 import ProjectPanel from '../ProjectPanel';
 import ProjectModal from '../ProjectModal';
 import ProjectsSidebar from '../ProjectsSidebar';
 import { Section, FillSection } from '../displayComponents';
+import { toggleProjectModal } from '../../actions';
+import { carousel3D } from '../HOC';
 
 
-const Projects = ({ style, content }) => {
+const Projects = ({ style, content, dispatch, ...props }) => {
+
+  const toggleModal = () => dispatch(toggleProjectModal());
 
   const panels = content.map( (project) =>
     <ProjectPanel
       key={`project-panel-${project.index}`}
       style={style}
       project={project}
-      backgroundImg={project.backgroundImg}
+      toggleModal={toggleModal}
     />
   );
 
@@ -31,7 +34,9 @@ const Projects = ({ style, content }) => {
 
         <ProjectModal />
 
+        {/* <NavBack /> */}
         <Carousel3D />
+        {/* <NavFwd /> */}
 
         <SectionFoot to="skills" text="NEXT" />
 

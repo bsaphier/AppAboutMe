@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { toggleProjectModal } from '../actions';
 import { Cell, Title, Button, FillSection } from './displayComponents';
 
 
@@ -12,10 +10,11 @@ const styles = {
     left: 0,
     width: '100%',
     height: '100%',
+    backgroundSize: 'auto 100%',
     backgroundColor: 'rgba(127, 255, 212, 0.95)'
   },
   backgroundBlur: {
-    // boolean will include these styles
+    //:TODO boolean will include these styles
   },
   banner: {
     textAlign: 'center',
@@ -24,7 +23,7 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    background: 'rgba(45, 45, 45, 0.3)',
+    backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.8), rgba(45, 45, 45, 0.3))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -52,14 +51,13 @@ const styles = {
 const ProjectPanel = ({
   style,
   toggleModal,
-  backgroundImg,
-  project: { link, title, shortDescription }
+  project: { link, title, backgroundImg, shortDescription }
 }) => {
 
   return (
     <FillSection className="project-panel" style={{padding: 0}}>
 
-      <div style={{...styles.background, backgroundImage: backgroundImg}} />
+      <div style={{...styles.background, backgroundImage: `url(public/images/${backgroundImg})`}} />
 
       <Cell>
         <div style={styles.banner}>
@@ -89,7 +87,5 @@ const ProjectPanel = ({
   );
 };
 
-export default connect(
-  state => state,
-  dispatch => ({ toggleModal: () => dispatch(toggleProjectModal()) })
-)(ProjectPanel);
+
+export default ProjectPanel;
