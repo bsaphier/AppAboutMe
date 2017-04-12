@@ -23,12 +23,10 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      },
-      {
+      }, {
        test: /\.modernizrrc.js$/,
        loader: 'modernizr-loader'
-     },
-     {
+     }, {
        test: /\.modernizrrc(\.json)?$/,
        loader: 'modernizr-loader!json-loader'
      }
