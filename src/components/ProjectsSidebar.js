@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Cell, Title, Divider, SideSection } from './displayComponents';
+import { Cell, Title, Divider, SideSection, SidebarButton } from './displayComponents';
 import { rotateCarousel } from '../actions';
 
 
@@ -21,39 +21,39 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
     const getNewRotation = index => rotation + theta * getPanelMovement(index);
 
 
-    const sidebarItems = content.map( (project, idx) => (
-      <div
-        key={`projects-sidebar-item-${project.index}`}
-        onClick={() => {
-          if (currPanel !== idx) rotate(getNewRotation(idx), idx);
-        }}>
-        <Title style={{
-          fontSize: '3vh',
-          letterSpacing: '-0.05em'
-        }}>
-          <span>{ project.title }</span>
-        </Title>
+    const sidebarItems = content.map( (project, idx) => {
+      let navigate = () => {
+        if (currPanel !== idx) rotate(getNewRotation(idx), idx);
+      };
 
-        <Divider />
-      </div>
-    ));
+      return (
+        <div
+          key={`projects-sidebar-item-${project.index}`}
+          onClick={navigate}
+          style={{ margin: '15px auto' }}>
+            <SidebarButton>
+              <Title style={{ fontSize: '1.1rem' }}>
+                <span>{ project.title }</span>
+              </Title>
+            </SidebarButton>
+        </div>
+      );
+    });
 
 
     return (
       <SideSection title="Projects">
         <Title style={{
           ...style.title,
-          fontSize: '6vh',
+          fontSize: '3rem',
           letterSpacing: '-0.05em'
         }}>
           <span>Projects</span>
         </Title>
 
         <Divider />
-
-        <Cell style={{height: '5%'}} />
-
-        <Cell style={{height: '66%'}}>
+        {/* <Cell style={{height: '5%'}} /> */}
+        <Cell style={{height: '66%', overflow: 'visible'}}>
           { sidebarItems }
         </Cell>
 

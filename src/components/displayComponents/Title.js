@@ -4,6 +4,7 @@ import React from 'react';
 const styles = {
   title: {
     display: 'flex',
+    cursor: 'default',
     textAlign: 'justify',
     textTransform: 'uppercase',
   },
@@ -27,24 +28,10 @@ const styles = {
   }
 };
 
-const hover = event => {
-  let { color } = event.target.style;
-  // color = 'rgb(68, 77, 255)';
-};
-
-const leave = event => {
-  let { color } = event.target.style;
-  // color = 'rgb(255, 255, 255)';
-};
-
 
 const Title = ({ style, children, parentStyle }) => (
   <div style={{...styles.title, ...parentStyle}}>
-    <span
-      onMouseOver={hover}
-      onMouseLeave={leave}
-      style={{ ...styles.text, ...style }}
-      >
+    <span style={{ ...styles.text, ...style }}>
       { children }
     </span>
   </div>

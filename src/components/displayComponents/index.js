@@ -6,6 +6,7 @@ import Divider from './Divider';
 import BorderGrad from './BorderGrad';
 import FillSection from './FillSection';
 import SideSection from './SideSection';
+import SidebarButton from './SidebarButton';
 
 export {
   Cell,
@@ -15,5 +16,6 @@ export {
   Divider,
   BorderGrad,
   FillSection,
-  SideSection
+  SideSection,
+  SidebarButton
 };

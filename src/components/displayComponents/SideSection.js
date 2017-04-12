@@ -13,7 +13,7 @@ const styles = {
     position: 'relative',
     width: '100%',
     height: '100%',
-    padding: '10px 20px',
+    padding: '20px',
     background: 'rgb(255, 255, 255)',
   },
 

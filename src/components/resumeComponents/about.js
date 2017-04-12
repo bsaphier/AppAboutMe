@@ -38,7 +38,7 @@ const About = ({ content: { about, contact }, style }) => {
 
         <Title style={{
           ...style.title,
-          fontSize: '300%',
+          fontSize: '3rem',
           letterSpacing: '-0.05em'
         }}>
           <span>Contact</span>
