@@ -10,7 +10,6 @@ const styles = {
   },
   text: {
     margin: '0 auto',
-    paddingRight: '5px',
     display: 'inline-block',
     whiteSpace: 'pre-line',
 

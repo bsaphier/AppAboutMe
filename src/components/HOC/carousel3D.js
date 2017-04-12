@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Motion, spring, presets } from 'react-motion';
 
-import IconButton from '../IconButton';
 import carouselPanel from './carouselPanel';
 import Modernizr from '../../../.modernizrrc';
 import { createCarousel, rotateCarousel, resizeCarousel } from '../../actions';
+import { buttons } from '../displayComponents';
 import { clickSpin } from '../HOC';
+const { IconButton } = buttons;
 
 
 const transform = Modernizr.prefixed('transform');

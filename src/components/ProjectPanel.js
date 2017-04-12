@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Cell, Title, Button, FillSection } from './displayComponents';
-
+import { buttons, Cell, Title, Divider, FillSection } from './displayComponents';
+const { Button } = buttons;
 
 const styles = {
   background: {
@@ -16,6 +16,7 @@ const styles = {
   backgroundBlur: {
     //:TODO boolean will include these styles
   },
+
   banner: {
     textAlign: 'center',
     position: 'absolute',
@@ -23,7 +24,7 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.8), rgba(45, 45, 45, 0.3))',
+    backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -31,19 +32,22 @@ const styles = {
     transform: 'translate(-50%, -50%)',
   },
   bannerInfo: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
     width: '100%',
-
-    WebkitTransform: '-webkit-translate(-50%, -50%)',
-    MozTransform: '-moz-translate(-50%, -50%)',
-    OTransform: '-o-translate(-50%, -50%)',
-    transform: 'translate(-50%, -50%)',
+    height: '100%',
+    overflow: 'hidden',
   },
+
   titleMain: {
     display: 'block',
+    position: 'relative',
     textAlign: 'inherit'
+  },
+  title: {
+    display: 'inherit'
+  },
+  buttonWrap: {
+    width: '13rem',
+    margin: 'auto'
   }
 };
 
@@ -69,14 +73,17 @@ const ProjectPanel = ({
 
             <div>{ shortDescription }</div>
 
-            <div style={{display: 'inline-block'}}>
-              <Button link={link} title={`Link To ${title}`}>
-                {'Check it out!'}
-              </Button>
-
-              <Button title="More Info" onClick={toggleModal}>
-                {'More Info'}
-              </Button>
+            <div style={styles.buttonWrap}>
+              <div style={{padding: '5px'}}>
+                <Button link={link} title={`Link To ${title}`}>
+                  {'Check it out!'}
+                </Button>
+              </div>
+              <div style={{padding: '5px'}}>
+                <Button title="More Info" onClick={toggleModal}>
+                  {'More Info'}
+                </Button>
+              </div>
             </div>
 
           </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { buttons, BorderGrad } from './displayComponents';
 import { toggleProjectModal } from '../actions';
-import { Button, BorderGrad } from './displayComponents';
-
+const { Button } = buttons;
 
 const styles = {
   modalBack: {

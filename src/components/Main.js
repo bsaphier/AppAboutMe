@@ -26,13 +26,7 @@ class Main extends Component {
           </FillSection>
         </Section>
 
-        <ResumeComponents
-          about={about}
-          skills={skills}
-          contact={contact}
-          projects={projects}
-          {...this.props}
-        />
+        <ResumeComponents about={about} skills={skills} contact={contact} projects={projects} {...this.props} />
         <Footer />
 
       </main>

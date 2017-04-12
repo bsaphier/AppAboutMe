@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
 import { Motion, spring } from 'react-motion';
 
-import Modernizr from '../../../.modernizrrc';
-import { int } from '../../bin/utils';
+import Modernizr from '../../../../.modernizrrc';
+import { int } from '../../../bin/utils';
 
 
 // React motion settings //:TODO move to ../../bin
@@ -14,6 +14,7 @@ const transform = Modernizr.prefixed('transform');
 
 const styles = {
   sidebarButton: {
+    cursor: 'default',
     padding: '0.5rem',
     whiteSpace: 'pre-line',
 
@@ -48,13 +49,18 @@ class SidebarButton extends Component {
     let { buttonUp } = this.state;
     let { style, link, title, target, children, ...props } = this.props;
 
-    let motion = (buttonUp) ? {
-      offset: spring(5, bounce),
-      bgColor: spring(255)
-    } : {
-      offset: spring(0, fade),
-      bgColor: spring(45)
-    };
+
+    //:TODO get the bgColor from props
+    let motion = (buttonUp)
+      ? {
+          offset: spring(5, bounce),
+          bgColor: spring(255)
+        }
+      : {
+          offset: spring(0, fade),
+          bgColor: spring(45)
+        };
+
 
     const motionCallback = ({ offset, bgColor }) => {
       let i, boxShadow = [];

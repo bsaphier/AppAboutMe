@@ -1,6 +1,9 @@
 import React from 'react';
 
+import SectionFoot from '../SectionFoot';
+import { hoverSpin } from '../HOC';
 import {
+  buttons,
   Cell,
   Title,
   Section,
@@ -9,9 +12,7 @@ import {
   FillSection,
   SideSection
 } from '../displayComponents';
-import { hoverSpin } from '../HOC';
-import IconButton from '../IconButton';
-import SectionFoot from '../SectionFoot';
+const { IconButton } = buttons;
 
 
 const SocialButton = hoverSpin(IconButton);
