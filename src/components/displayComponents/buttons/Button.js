@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Motion, spring } from 'react-motion';
 
+import Modernizr from '../../../../.modernizrrc';
+import { int } from '../../../bin/utils';
+
 
 // React motion settings //:TODO move to ../../bin
-const motionConfig = {stiffness: 390, damping: 20};
+const motionConfig = {stiffness: 390, damping: 15};
 
+
+const transform = Modernizr.prefixed('transform');
 
 const styles = {
   button: {
@@ -12,7 +17,7 @@ const styles = {
     padding: '0.5rem',
     whiteSpace: 'pre-line',
 
-    width: '100%',
+    // width: '100%',
 
     fontWeight: 400,
     textAlign: 'center',
@@ -23,6 +28,7 @@ const styles = {
     background: 'rgb(255, 68, 62)'
   }
 };
+
 
 class Button extends Component {
   constructor( props ) {
@@ -51,22 +57,32 @@ class Button extends Component {
 
     let motion = (buttonUp)
       ? {
-          textOpac: spring(1, motionConfig),
-          bshadow: spring(0, motionConfig)
+          offset: spring(0, motionConfig),
+          textOpac: spring(1),
         }
       : {
-          textOpac: spring(0, motionConfig),
-          bshadow: spring(1, motionConfig)
+          offset: spring(5, motionConfig),
+          textOpac: spring(0.2),
         };
 
 
-    const motionCallback = ({ textOpac, bshadow }) => {
+    const motionCallback = ({ textOpac, offset }) => {
+      let i, boxShadow = [], textShadow = [], offsetInt = Math.round(offset);
+
+      for (i = offsetInt; i > 0; i--) {
+        let shadowOffset = offset - i + 1;
+        boxShadow.push(`rgb(45, 45, 45) ${shadowOffset}px ${shadowOffset}px`);
+        textShadow.push(`rgba(45, 45, 45, ${i * textOpac}) ${shadowOffset}px ${shadowOffset}px 0.1px`);
+      }
+
       return (
         <div
           style={{
             ...styles.button,
-            color: `rgba(45, 45, 45, ${textOpac})`,
-            textShadow: `rgba(45, 45, 45, 1) -${bshadow}px ${bshadow}px 0px`,
+            color: `rgb(255, 255, 255)`,
+            [ transform ]: `translate(-${offset}px, -${offset}px)`,
+            boxShadow: boxShadow.join(', '),
+            textShadow: textShadow.join(', '),
             ...style
           }}
           {...props}>
@@ -85,11 +101,9 @@ class Button extends Component {
         onMouseOver={this.buttondown}
         >
         <a href={link} title={title} target={target}>
-
           <Motion style={motion}>
             { motionCallback }
           </Motion>
-
         </a>
       </div>
     );

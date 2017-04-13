@@ -9,8 +9,8 @@ import { int } from '../../../bin/utils';
 const fade = {stiffness: 160, damping: 21};
 const bounce = {stiffness: 400, damping: 15};
 
-const transform = Modernizr.prefixed('transform');
 
+const transform = Modernizr.prefixed('transform');
 
 const styles = {
   sidebarButton: {
@@ -47,7 +47,7 @@ class SidebarButton extends Component {
 
   render() {
     let { buttonUp } = this.state;
-    let { style, link, title, target, children, ...props } = this.props;
+    let { style, target, children, link = null, title = '_blank', ...props } = this.props;
 
 
     //:TODO get the bgColor from props
@@ -67,7 +67,7 @@ class SidebarButton extends Component {
 
       for (i = Math.round(offset); i > 0; i--) {
         let shadowOffset = offset - i + 1;
-        boxShadow.push(`${shadowOffset}px ${shadowOffset}px rgb(45, 45, 45)`);
+        boxShadow.push(`rgb(45, 45, 45) ${shadowOffset}px ${shadowOffset}px`);
       }
 
       return (
@@ -95,7 +95,7 @@ class SidebarButton extends Component {
         onMouseOut={this.buttondown}
         onMouseDown={this.buttondown}
         >
-        <a href={link ? link : null} title={title} target={target ? target : '_blank'}>
+        <a href={link} title={title} target={target}>
           <Motion style={motion}>
             { motionCallback }
           </Motion>

@@ -39,7 +39,7 @@ const clickSpin = (Component) => {
     clicked() {
       this.setState({ buttonUp: false });
 
-      setTimeout(this.unClicked, 1000);
+      setTimeout(this.unClicked, 1200);
     }
 
 
@@ -52,11 +52,11 @@ const clickSpin = (Component) => {
 
 
     render() {
-
       let { buttonUp } = this.state;
       let componentStyle = this.props.style;
       let [redCC, greenCC, blueCC, aCC] = this.props.clickColor;
       let [redIC, greenIC, blueIC, aIC] = this.props.initialColor;
+
 
       let motion = buttonUp
         ? {
@@ -65,7 +65,8 @@ const clickSpin = (Component) => {
             blue: spring(blueIC),
             opac: spring(aIC),
 
-            degree: spring(360, presets.gentle)
+            scale: spring(1, presets.wobbly),
+            degree: spring(360, presets.wobbly)
           }
         : {
             red: spring(redCC),
@@ -73,26 +74,30 @@ const clickSpin = (Component) => {
             blue: spring(blueCC),
             opac: spring(aCC),
 
+            scale: spring(1.62, presets.wobbly),
             degree: spring(0, presets.wobbly)
           };
 
 
+      const motionCallback = ({ red, blue, green, opac, scale, degree }) => (
+        <Component
+          {...this.props}
+          style={{
+            ...componentStyle,
+            [ transform ]: `${componentStyle[ transform ]} rotateY(${degree}deg) scale(${scale})`,
+            color: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
+          }}
+        />
+      );
+
+
       return (
-        <div className="clickSpinHOC" onMouseOut={this.unClicked} onMouseDown={this.clicked}>
+        <div
+          className="clickSpinHOC"
+          onMouseOver={this.clicked}
+          onMouseDown={this.unClicked}>
           <Motion style={motion}>
-
-            {({ red, blue, green, opac, degree }) => (
-              <div style={{ [ transform ]: `rotateY(${degree}deg)` }}>
-                <Component
-                  {...this.props}
-                  style={{
-                    ...componentStyle,
-                    color: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
-                  }}
-                />
-              </div>
-            )}
-
+            { motionCallback }
           </Motion>
         </div>
       );
