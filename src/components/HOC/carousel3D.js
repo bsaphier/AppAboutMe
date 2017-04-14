@@ -146,7 +146,7 @@ const carousel3D = (panels, navButtons) => {
           >
           <ClickSpin
             icon="angle-down"
-            initialColor={[45, 45, 45, 1]}
+            initialColor={[45, 45, 45, 0.62]}
             clickColor={[255, 68, 62, 1]}
             style={{
               fontSize: '4.2rem',

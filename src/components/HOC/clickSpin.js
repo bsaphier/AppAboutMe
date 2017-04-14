@@ -9,6 +9,13 @@ import { int } from '../../bin/utils';
 //:TODO DRY this up with hoverSpin
 //:TODO DRY this up with hoverSpin
 
+
+// React motion settings //:TODO move to ../../bin
+const motionConfig = {
+  scale: {stiffness: 300, damping: 10},
+  degree: {stiffness: 150, damping: 25}
+};
+
 const transform = Modernizr.prefixed('transform');
 
 
@@ -23,31 +30,31 @@ const clickSpin = (Component) => {
       this.clicked = this.clicked.bind(this);
       this.unClicked = this.unClicked.bind(this);
     }
-
-
-    // only for the setTimeout . . .
-    componentDidMount() {
-      this._mounted = true;
-    }
-
-    // . . . and again
-    componentWillUnmount() {
-      this._mounted = false;
-    }
+    //
+    //
+    // // only for the setTimeout . . .
+    // componentDidMount() {
+    //   this._mounted = true;
+    // }
+    //
+    // // . . . and again
+    // componentWillUnmount() {
+    //   this._mounted = false;
+    // }
 
 
     clicked() {
       this.setState({ buttonUp: false });
 
-      setTimeout(this.unClicked, 1200);
+      // setTimeout(this.unClicked, 1200);
     }
 
 
     unClicked() {
       // because of the setTimeout callback in this.clicked
-      if (this._mounted) {
+      // if (this._mounted) {
         this.setState({ buttonUp: true });
-      }
+      // }
     }
 
 
@@ -65,8 +72,8 @@ const clickSpin = (Component) => {
             blue: spring(blueIC),
             opac: spring(aIC),
 
-            scale: spring(1, presets.wobbly),
-            degree: spring(360, presets.wobbly)
+            scale: spring(1, motionConfig.scale),
+            degree: spring(360, motionConfig.degree)
           }
         : {
             red: spring(redCC),
@@ -74,8 +81,8 @@ const clickSpin = (Component) => {
             blue: spring(blueCC),
             opac: spring(aCC),
 
-            scale: spring(1.62, presets.wobbly),
-            degree: spring(0, presets.wobbly)
+            scale: spring(1.62, motionConfig.scale),
+            degree: spring(0, motionConfig.degree)
           };
 
 
@@ -95,6 +102,7 @@ const clickSpin = (Component) => {
         <div
           className="clickSpinHOC"
           onMouseOver={this.clicked}
+          onMouseOut={this.unClicked}
           onMouseDown={this.unClicked}>
           <Motion style={motion}>
             { motionCallback }

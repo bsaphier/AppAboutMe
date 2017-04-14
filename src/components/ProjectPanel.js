@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { buttons, Cell, Title, Divider, FillSection } from './displayComponents';
+import { buttons, Cell, Title, FillSection } from './displayComponents';
 const { Button } = buttons;
 
 const styles = {
@@ -15,6 +15,9 @@ const styles = {
   },
   backgroundBlur: {
     //:TODO boolean will include these styles
+  },
+  parallaxDiv: {
+    //:TODO parallax styles . . .
   },
 
   banner: {
@@ -51,6 +54,31 @@ const styles = {
   }
 };
 
+// create the background elements based on the project.backgroundImg Prop
+const getBackground = (bgImg) => {
+  let backgroundStyle;
+
+  if (Array.isArray(bgImg)) {
+    // create the parallax effect with layers
+    let backgroundLayers = bgImg.map( (fileName, i) => (
+      <div
+        key={`bg-layer-${+i}-${fileName}`}
+        style={{...styles.background, backgroundColor: 'transparent', backgroundImage: `url(public/images/${fileName})`}}
+      />
+    ));
+    backgroundLayers.unshift( <div style={{...styles.background, backgroundColor: 'rgb(81, 81, 81)'}} /> );
+
+    return (<div className="parallax-mouse">{ backgroundLayers }</div>);
+  } else {
+
+    backgroundStyle = (bgImg.length)
+      ? {...styles.background, backgroundImage: `url(public/images/${bgImg})`}
+      : styles.background;
+
+    return (<div style={backgroundStyle} />);
+  }
+};
+
 
 const ProjectPanel = ({
   style,
@@ -61,7 +89,7 @@ const ProjectPanel = ({
   return (
     <FillSection className="project-panel" style={{padding: 0}}>
 
-      <div style={{...styles.background, backgroundImage: `url(public/images/${backgroundImg})`}} />
+      { getBackground(backgroundImg) }
 
       <Cell>
         <div style={styles.banner}>
@@ -79,6 +107,7 @@ const ProjectPanel = ({
                   {'Check it out!'}
                 </Button>
               </div>
+
               <div style={{padding: '5px'}}>
                 <Button title="More Info" onClick={toggleModal}>
                   {'More Info'}
@@ -89,7 +118,6 @@ const ProjectPanel = ({
           </div>
         </div>
       </Cell>
-
     </FillSection>
   );
 };

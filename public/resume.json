@@ -111,7 +111,14 @@
           {
             "index": 0,
             "title": "react-redux-webaudio",
-            "backgroundImg": "",
+            "backgroundImg":
+              [
+                "rrwaRed.png",
+                "rrwaBlue.png",
+                "rrwaOther.png",
+                "rrwaPurple.png",
+                "rrwaGreenYellow.png"
+              ],
             "date": "December 2016 - Present",
             "role": "Sole Developer",
             "link": "https://www.npmjs.com/package/react-redux-webaudio",
