@@ -14228,7 +14228,8 @@ var styles = {
     width: '100%',
     height: '100%',
     backgroundSize: 'auto 100%',
-    backgroundColor: 'rgba(127, 255, 212, 0.95)'
+    backgroundColor: 'rgba(255, 255, 255, 1)'
+    // backgroundColor: 'rgba(127, 255, 212, 0.95)'
   },
   backgroundBlur: {
     //:TODO boolean will include these styles
