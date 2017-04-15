@@ -10,8 +10,8 @@ const styles = {
   }
 };
 
-const FillSection = ({ children, style }) => (
-  <div style={{...styles.fillSection, ...style}}>
+const FillSection = ({ children, style, ...props }) => (
+  <div style={{...styles.fillSection, ...style}} {...props}>
     { children }
   </div>
 );

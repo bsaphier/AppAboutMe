@@ -39,10 +39,10 @@ const styles = {
     MozTransformStyle: 'preserve-3d',
     OTransformStyle: 'preserve-3d',
     transformStyle: 'preserve-3d',
-    WebkitTransitionStyle: '-webkit-transform 0.6s',
-    MozTransitionStyle: '-moz-transform 0.6s',
-    OTransitionStyle: '-o-transform 0.6s',
-    transitionStyle: 'transform 0.6s',
+    // WebkitTransitionStyle: '-webkit-transform 0.6s',
+    // MozTransitionStyle: '-moz-transform 0.6s',
+    // OTransitionStyle: '-o-transform 0.6s',
+    // transitionStyle: 'transform 0.6s',
   },
 
   buttonWrap: {
@@ -110,7 +110,6 @@ const carousel3D = (panels, navButtons) => {
 
     // get the new panel's index
     getPanelIndex( dir ) {
-
       let nextPanel = (this.props.currPanel + dir) % panels.length;
 
       return nextPanel >= 0 ? nextPanel : panels.length - nextPanel * -1;
@@ -131,7 +130,6 @@ const carousel3D = (panels, navButtons) => {
     //:TODO move the navButtons to the parent component for easier modularity
     // a default navButton generator for moving the carousel left/right
     createNavButton( back ) {
-
       // the default navButton
       const ClickSpin = clickSpin(IconButton);
 

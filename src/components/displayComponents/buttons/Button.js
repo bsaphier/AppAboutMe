@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Motion, spring } from 'react-motion';
 
 import Modernizr from '../../../../.modernizrrc';
-import { int } from '../../../bin/utils';
 
 
 // React motion settings //:TODO move to ../../bin
