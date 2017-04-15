@@ -13541,11 +13541,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = __webpack_require__(29);
 
-var _utils = __webpack_require__(35);
-
 var _modernizrrc = __webpack_require__(23);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
+
+var _utils = __webpack_require__(35);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14204,6 +14204,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -14220,6 +14222,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Button = _displayComponents.buttons.Button;
 
 
@@ -14227,7 +14235,10 @@ var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   parallaxWrap: {
+    position: 'relative',
     overflow: 'hidden',
+    width: '100%',
+    height: '100%',
 
     WebkitPerspective: 'inherit',
     MozPerspective: 'inherit',
@@ -14236,6 +14247,13 @@ var styles = {
   },
   parallaxDiv: {
     //:TODO parallax styles . . .
+    position: 'absolute',
+    backgroundColor: 'transparent',
+
+    WebkitTransformStyle: 'preserve-3d',
+    MozTransformStyle: 'preserve-3d',
+    OTransformStyle: 'preserve-3d',
+    transformStyle: 'preserve-3d'
   },
 
   background: {
@@ -14245,13 +14263,7 @@ var styles = {
     width: '100%',
     height: '100%',
     backgroundSize: 'auto 100%',
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    // backgroundColor: 'rgba(127, 255, 212, 0.95)',
-
-    WebkitTransformStyle: 'preserve-3d',
-    MozTransformStyle: 'preserve-3d',
-    OTransformStyle: 'preserve-3d',
-    transformStyle: 'preserve-3d'
+    backgroundColor: 'rgba(255, 255, 255, 1)'
   },
   backgroundBlur: {
     //:TODO boolean will include these styles
@@ -14291,111 +14303,253 @@ var styles = {
   }
 };
 
-var getMousePos = function getMousePos(event) {
-  console.log({ x: event.pageX, y: event.pageY });
-};
+var ProjectPanel = function (_Component) {
+  _inherits(ProjectPanel, _Component);
 
-// create the background elements based on the project.backgroundImg Prop
-var getBackground = function getBackground(bgImg) {
-  var backgroundStyle = void 0;
+  function ProjectPanel(props) {
+    _classCallCheck(this, ProjectPanel);
 
-  if (Array.isArray(bgImg)) {
-    // create the parallax effect with layers
-    var backgroundLayers = bgImg.map(function (fileName, i) {
-      return _react2.default.createElement(
-        'div',
-        {
-          key: 'bg-layer-' + +i + '-' + fileName,
-          style: _extends({}, styles.background, { backgroundColor: 'transparent' }) },
-        _react2.default.createElement('img', {
-          src: 'public/images/' + fileName,
-          alt: fileName,
-          style: _defineProperty({}, transform, 'translateZ(' + (0, _utils.int)(bgImg.length / (i + 1) * 10) + 'px)')
-        })
-      );
-    });
-    backgroundLayers.unshift(_react2.default.createElement('div', {
-      key: 'bg-layer-00-base',
-      style: _extends({}, styles.background, { backgroundColor: 'rgb(81, 81, 81)' })
-    }));
+    var _this = _possibleConstructorReturn(this, (ProjectPanel.__proto__ || Object.getPrototypeOf(ProjectPanel)).call(this, props));
 
-    return _react2.default.createElement(
-      'div',
-      { className: 'parallax-mouse', style: styles.parallaxWrap },
-      backgroundLayers
-    );
-  } else {
+    _this.state = {
+      mouseX: 0,
+      mouseY: 0
+    };
 
-    backgroundStyle = bgImg.length ? _extends({}, styles.background, { backgroundImage: 'url(public/images/' + bgImg + ')' }) : styles.background;
-
-    return _react2.default.createElement('div', { style: backgroundStyle });
+    _this.getElement = _this.getElement.bind(_this);
+    _this.handleMouseMove = _this.handleMouseMove.bind(_this);
+    return _this;
   }
-};
 
-var ProjectPanel = function ProjectPanel(_ref2) {
-  var style = _ref2.style,
-      toggleModal = _ref2.toggleModal,
-      _ref2$project = _ref2.project,
-      link = _ref2$project.link,
-      title = _ref2$project.title,
-      backgroundImg = _ref2$project.backgroundImg,
-      shortDescription = _ref2$project.shortDescription;
+  _createClass(ProjectPanel, [{
+    key: 'handleMouseMove',
+    value: function handleMouseMove(event) {
+      var clientX = event.clientX,
+          clientY = event.clientY;
+      var _domNode = this.domNode,
+          offsetWidth = _domNode.offsetWidth,
+          offsetHeight = _domNode.offsetHeight;
+
+      this.setState({
+        mouseX: (0, _utils.int)((clientX - offsetWidth / 2) / (offsetWidth / 2) * 100),
+        mouseY: (0, _utils.int)((clientY - offsetHeight / 2) / (offsetHeight / 2) * 100)
+      });
+    }
+
+    // create a refrence to the DOM node to listen for mouseMove
+
+  }, {
+    key: 'getElement',
+    value: function getElement(ref) {
+      this.domNode = ref;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          style = _props.style,
+          toggleModal = _props.toggleModal,
+          _props$project = _props.project,
+          link = _props$project.link,
+          title = _props$project.title,
+          backgroundImg = _props$project.backgroundImg,
+          shortDescription = _props$project.shortDescription;
+      var _state = this.state,
+          mouseX = _state.mouseX,
+          mouseY = _state.mouseY;
 
 
-  return _react2.default.createElement(
-    _displayComponents.FillSection,
-    { className: 'project-panel', style: { padding: 0 }, onMouseMove: getMousePos },
-    getBackground(backgroundImg),
-    _react2.default.createElement(
-      _displayComponents.Cell,
-      null,
-      _react2.default.createElement(
-        'div',
-        { style: styles.banner },
-        _react2.default.createElement(
+      var parallax = false;
+
+      var backgroundStyle = void 0,
+          backgroundLayers = void 0;
+
+      if (Array.isArray(backgroundImg)) {
+        // create the parallax effect with layers
+        backgroundLayers = backgroundImg.map(function (fileName, i) {
+          return _react2.default.createElement(
+            'div',
+            {
+              key: 'bg-layer-' + +i + '-' + fileName,
+              style: styles.parallaxDiv },
+            _react2.default.createElement('img', {
+              src: 'public/images/' + fileName,
+              alt: fileName,
+              style: _defineProperty({}, transform, 'translateZ(' + (0, _utils.int)(backgroundImg.length + i) + 'px) rotateX(' + mouseX * (i + 1) + 'deg) rotateY(' + mouseY * (i + 1) + 'deg)')
+            })
+          );
+        });
+
+        backgroundLayers.unshift(_react2.default.createElement('div', {
+          key: 'bg-layer-00-base',
+          ref: this.getElement,
+          style: _extends({}, styles.background, { backgroundColor: 'rgb(81, 81, 81)' })
+        }));
+
+        parallax = true;
+      } else {
+        backgroundStyle = backgroundImg.length ? _extends({}, styles.background, { backgroundImage: 'url(public/images/' + backgroundImg + ')' }) : styles.background;
+      }
+
+      return _react2.default.createElement(
+        _displayComponents.FillSection,
+        { className: 'project-panel', style: { padding: 0 }, onMouseMove: this.handleMouseMove },
+        parallax ? _react2.default.createElement(
           'div',
-          { style: styles.bannerInfo },
-          _react2.default.createElement(
-            _displayComponents.Title,
-            { style: style.title, parentStyle: styles.titleMain },
-            _react2.default.createElement(
-              'span',
-              null,
-              title
-            )
-          ),
+          { className: 'parallax-mouse', style: styles.parallaxWrap },
+          backgroundLayers
+        ) : _react2.default.createElement('div', { style: backgroundStyle }),
+        _react2.default.createElement(
+          _displayComponents.Cell,
+          { style: { position: null } },
           _react2.default.createElement(
             'div',
-            null,
-            shortDescription
-          ),
-          _react2.default.createElement(
-            'div',
-            { style: styles.buttonWrap },
+            { style: styles.banner },
             _react2.default.createElement(
               'div',
-              { style: { padding: '5px' } },
+              { style: styles.bannerInfo },
               _react2.default.createElement(
-                Button,
-                { link: link, title: 'Link To ' + title },
-                'Check it out!'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { style: { padding: '5px' } },
+                _displayComponents.Title,
+                { style: style.title, parentStyle: styles.titleMain },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  title
+                )
+              ),
               _react2.default.createElement(
-                Button,
-                { title: 'More Info', onClick: toggleModal },
-                'More Info'
+                'div',
+                null,
+                shortDescription
+              ),
+              _react2.default.createElement(
+                'div',
+                { style: styles.buttonWrap },
+                _react2.default.createElement(
+                  'div',
+                  { style: { padding: '5px' } },
+                  _react2.default.createElement(
+                    Button,
+                    { link: link, title: 'Link To ' + title },
+                    'Check it out!'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { style: { padding: '5px' } },
+                  _react2.default.createElement(
+                    Button,
+                    { title: 'More Info', onClick: toggleModal },
+                    'More Info'
+                  )
+                )
               )
             )
           )
         )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return ProjectPanel;
+}(_react.Component);
+
+// const ProjectPanel = ({
+//   style,
+//   toggleModal,
+//   project: { link, title, backgroundImg, shortDescription }
+// }) => {
+//   let xDiff = null;
+//   let yDiff = null;
+//   let domNode = null;
+//
+//
+//   const getMousePos = (event) => {
+//     let { clientX, clientY } = event;
+//     let { offsetWidth, offsetHeight } = domNode;
+//     xDiff = int(((clientX - (offsetWidth / 2)) / (offsetWidth / 2)) * 100);
+//     yDiff = int(((clientY - (offsetHeight / 2)) / (offsetHeight / 2)) * 100);
+//   };
+//
+//
+//   // create the background elements based on the project.backgroundImg Prop
+//   const getBackground = (bgImg) => {
+//     // console.log(xDiff, yDiff, domNode.offsetWidth, `rotateX(${xDiff}deg)`);
+//
+//     if (Array.isArray(bgImg)) {
+//       // create the parallax effect with layers
+//       let backgroundLayers = bgImg.map( (fileName, i) => (
+//         <div
+//           key={`bg-layer-${+i}-${fileName}`}
+//           style={{...styles.background, backgroundColor: 'transparent'}}>
+//           <img
+//             src={`public/images/${fileName}`}
+//             alt={fileName}
+//             style={{
+//               [transform]: `translateZ(${int((bgImg.length / (i + 1)) * 10)}px)`
+//             }}
+//           />
+//         </div>
+//       ));
+//       backgroundLayers.unshift(
+//         <div
+//           key={`bg-layer-00-base`}
+//           ref={(ref) => { domNode = ref; }}
+//           style={{...styles.background, backgroundColor: 'rgb(81, 81, 81)'}}
+//         />
+//       );
+//
+//       return (
+//         <div className="parallax-mouse" style={styles.parallaxWrap}>
+//           { backgroundLayers }
+//         </div>
+//       );
+//     } else {
+//       let backgroundStyle = (bgImg.length)
+//         ? {...styles.background, backgroundImage: `url(public/images/${bgImg})`}
+//         : styles.background;
+//
+//       return (<div style={backgroundStyle} />);
+//     }
+//   };
+//
+//
+//   return (
+//     <FillSection className="project-panel" style={{padding: 0}} onMouseMove={getMousePos}>
+//
+//       { getBackground(backgroundImg) }
+//
+//       <Cell>
+//         <div style={styles.banner}>
+//           <div style={styles.bannerInfo}>
+//
+//             <Title style={style.title} parentStyle={styles.titleMain}>
+//               <span>{ title }</span>
+//             </Title>
+//
+//             <div>{ shortDescription }</div>
+//
+//             <div style={styles.buttonWrap}>
+//               <div style={{padding: '5px'}}>
+//                 <Button link={link} title={`Link To ${title}`}>
+//                   {'Check it out!'}
+//                 </Button>
+//               </div>
+//
+//               <div style={{padding: '5px'}}>
+//                 <Button title="More Info" onClick={toggleModal}>
+//                   {'More Info'}
+//                 </Button>
+//               </div>
+//             </div>
+//
+//           </div>
+//         </div>
+//       </Cell>
+//     </FillSection>
+//   );
+// };
+
 
 exports.default = ProjectPanel;
 

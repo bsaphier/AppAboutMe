@@ -113,9 +113,9 @@
             "title": "react-redux-webaudio",
             "backgroundImg":
               [
+                "rrwaOther.png",
                 "rrwaRed.png",
                 "rrwaBlue.png",
-                "rrwaOther.png",
                 "rrwaPurple.png",
                 "rrwaGreenYellow.png"
               ],

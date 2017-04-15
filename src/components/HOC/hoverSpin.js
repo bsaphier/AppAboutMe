@@ -1,8 +1,8 @@
 import React from 'react';
 import { Motion, presets, spring } from 'react-motion';
 
-import { int } from '../../bin/utils';
 import Modernizr from '../../../.modernizrrc';
+import { int } from '../../bin/utils';
 
 
 const transform = Modernizr.prefixed('transform');
