@@ -9,14 +9,13 @@ const transform = Modernizr.prefixed('transform');
 
 const styles = {
   parallaxWrap: {
-    // position: 'relative',
+    position: 'relative',
     overflow: 'hidden',
-    width: '100%',
-    height: '100%',
+    width: '50%',
+    height: '50%',
     backgroundColor: 'rgb(81, 81, 81)'
   },
   parallaxDiv: {
-    //:TODO parallax styles . . .
     position: 'absolute',
     width: '100%',
     height: '100%',

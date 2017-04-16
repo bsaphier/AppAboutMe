@@ -51,7 +51,7 @@ class Button extends Component {
 
   render() {
     let { buttonUp } = this.state;
-    let { style, target, children, link = null, title = '_blank', ...props } = this.props;
+    let { style, target = '_blank', children, link = null, title = null, ...props } = this.props;
 
 
     let motion = (buttonUp)
