@@ -14252,17 +14252,20 @@ var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   parallaxWrap: {
-    position: 'relative',
-    overflow: 'hidden',
-    width: '50%',
-    height: '50%',
-    backgroundColor: 'rgb(81, 81, 81)'
+    // position: 'absolute',
+    // overflow: 'hidden',
+    // top: 0,
+    // left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(45, 45, 45)'
   },
   parallaxDiv: {
     position: 'absolute',
+    top: 0,
+    left: '3vmin',
     width: '100%',
     height: '100%',
-    left: '3vmin',
     backgroundColor: 'transparent'
   },
 
@@ -14280,13 +14283,14 @@ var styles = {
   },
 
   banner: {
-    textAlign: 'center',
     position: 'absolute',
+    textAlign: 'center',
     top: '50%',
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
+    backgroundColor: 'rgba(81, 81, 81, 0.55)',
+    // backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -14449,8 +14453,7 @@ var ProjectPanel = function (_Component) {
               src: 'public/images/' + fileName,
               alt: fileName,
               style: _defineProperty({
-                width: panelWidth + 'px',
-                height: panelHeight + 'px'
+                width: panelWidth + 'px'
               }, transform, '\n                    translateZ(' + 2 * distance / maxDistance * Math.sqrt(perspective * i) + 'px)\n                    rotateY(' + mouseX * -1 / (panelWidth / 2) + 'deg)\n                    rotateX(' + mouseY / (panelHeight / 2) + 'deg)\n                    ')
             })
           );
@@ -15053,9 +15056,9 @@ var styles = {
     top: '2px',
     maxWidth: '13px',
 
-    WebkitBoxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
-    MozBoxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
-    boxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
+    WebkitBoxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
+    MozBoxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
+    boxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
 
     WebkitTransform: 'rotate(-3deg)',
     MozTransform: 'rotate(-3deg)',

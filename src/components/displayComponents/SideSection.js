@@ -27,9 +27,9 @@ const styles = {
     top: '2px',
     maxWidth: '13px',
 
-    WebkitBoxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
-    MozBoxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
-    boxShadow: '-13px 0 10px rgba(45, 45, 45, 0.7)',
+    WebkitBoxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
+    MozBoxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
+    boxShadow: '-13px 0 10px rgba(0, 0, 0, 0.38)',
 
     WebkitTransform: 'rotate(-3deg)',
     MozTransform: 'rotate(-3deg)',

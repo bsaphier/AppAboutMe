@@ -9,17 +9,20 @@ const transform = Modernizr.prefixed('transform');
 
 const styles = {
   parallaxWrap: {
-    position: 'relative',
-    overflow: 'hidden',
-    width: '50%',
-    height: '50%',
-    backgroundColor: 'rgb(81, 81, 81)'
+    // position: 'absolute',
+    // overflow: 'hidden',
+    // top: 0,
+    // left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(45, 45, 45)'
   },
   parallaxDiv: {
     position: 'absolute',
+    top: 0,
+    left: '3vmin',
     width: '100%',
     height: '100%',
-    left: '3vmin',
     backgroundColor: 'transparent',
   },
 
@@ -31,25 +34,20 @@ const styles = {
     height: '100%',
     backgroundSize: 'auto 100%',
     backgroundColor: 'rgba(255, 255, 255, 1)',
-    // backgroundColor: 'rgba(127, 255, 212, 0.95)',
-
-    // WebkitTransformStyle: 'preserve-3d',
-    // MozTransformStyle: 'preserve-3d',
-    // OTransformStyle: 'preserve-3d',
-    // transformStyle: 'preserve-3d'
   },
   backgroundBlur: {
     //:TODO boolean will include these styles
   },
 
   banner: {
-    textAlign: 'center',
     position: 'absolute',
+    textAlign: 'center',
     top: '50%',
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
+    backgroundColor: 'rgba(81, 81, 81, 0.55)',
+    // backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -197,7 +195,7 @@ class ProjectPanel extends Component {
                 alt={fileName}
                 style={{
                   width: `${panelWidth}px`,
-                  height: `${panelHeight}px`,
+                  // height: `${panelHeight}px`,
                   [transform]: `
                     translateZ(${(2 * distance / maxDistance) * Math.sqrt(perspective * i)}px)
                     rotateY(${(mouseX * -1) / (panelWidth / 2)}deg)
