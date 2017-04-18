@@ -8,21 +8,25 @@ const { Button } = buttons;
 const transform = Modernizr.prefixed('transform');
 
 const styles = {
-  parallaxWrap: {
-    // position: 'absolute',
-    // overflow: 'hidden',
-    // top: 0,
-    // left: 0,
+  parallaxWrapA: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgb(45, 45, 45)'
+    backgroundColor: 'rgb(45, 45, 45)',
+  },
+  parallaxWrapB: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(255, 255, 255)',
+
+    // WebkitPerspectiveOrigin: '25% 10%',
+    // MozPerspectiveOrigin: '25% 10%',
+    // OPerspectiveOrigin: '25% 10%',
+    // perspectiveOrigin: '25% 10%',
   },
   parallaxDiv: {
     position: 'absolute',
-    top: 0,
-    left: '3vmin',
-    width: '100%',
-    height: '100%',
+    width: '120%',
+    height: '120%',
     backgroundColor: 'transparent',
   },
 
@@ -79,12 +83,15 @@ class ProjectPanel extends Component {
 
   constructor( props ) {
     super(props);
+    let { project: { backgroundImg }} = props;
+
     this.state = {
       mouseX: 0,
       mouseY: 0,
       panelWidth: 0,
       panelHeight: 0,
-      parallax: Array.isArray(props.project.backgroundImg)
+      parallax: Array.isArray(backgroundImg),
+      parallaxVar: Array.isArray(backgroundImg) && (backgroundImg.length > 5)
     };
 
     this.getElement = this.getElement.bind(this);
@@ -159,8 +166,9 @@ class ProjectPanel extends Component {
 
 
   createBackground() {
+    let perspective;
     let { project: { backgroundImg } } = this.props;
-    let { mouseX, mouseY, parallax, panelWidth, panelHeight } = this.state;
+    let { mouseX, mouseY, parallax, parallaxVar, panelWidth, panelHeight } = this.state;
 
     // the maxDistance is the distance from the center to the corner of the panel
     let maxDistance = Math.sqrt(Math.pow(panelWidth, 2) + Math.pow(panelHeight, 2));
@@ -168,13 +176,21 @@ class ProjectPanel extends Component {
     // the distance of the mouse, from the center of the panel, as a cartesian coordinate
     let distance = Math.sqrt(Math.pow((mouseX), 2) + Math.pow((mouseY), 2));
 
-    let perspective = panelWidth < panelHeight
-      ? (panelHeight * 100 / panelWidth)
-      : (panelWidth  * 100 / panelHeight);
+    // vary the style for different panels
+    if (parallaxVar) {
+      // distance *= -1;
+      perspective = panelWidth < panelHeight
+        ? (panelHeight * 100 / panelWidth)
+        : (panelWidth  * 100 / panelHeight);
+    } else {
+      perspective = panelWidth < panelHeight
+        ? (panelHeight * 100 / panelWidth)
+        : (panelWidth  * 100 / panelHeight);
+    }
 
     const backgroundStyle = (parallax)
       ? {
-          ...styles.parallaxWrap,
+          ...styles[ parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA' ],
           WebkitPerspective: `${perspective}px`,
           MozPerspective: `${perspective}px`,
           OPerspective: `${perspective}px`,
@@ -188,23 +204,27 @@ class ProjectPanel extends Component {
 
     return (parallax)
       ? (<div className="parallax-mouse" style={backgroundStyle}>
-          { backgroundImg.map( (fileName, i) => (
-            <div key={`bg-layer-${+i}-${fileName}`} style={styles.parallaxDiv}>
+          { backgroundImg.map( (fileName, i) => {
+
+            let translateZ = (parallaxVar)
+              ? distance / Math.pow((i + 1), 2)
+              : 2 * distance / maxDistance * Math.sqrt(perspective * (i + 1));
+
+            return (<div key={`bg-layer-${+i}-${fileName}`} style={styles.parallaxDiv}>
               <img
                 src={`public/images/${fileName}`}
                 alt={fileName}
                 style={{
-                  width: `${panelWidth}px`,
-                  // height: `${panelHeight}px`,
+                  height: `${panelHeight * 1.5}px`,
                   [transform]: `
-                    translateZ(${(2 * distance / maxDistance) * Math.sqrt(perspective * i)}px)
-                    rotateY(${(mouseX * -1) / (panelWidth / 2)}deg)
-                    rotateX(${mouseY / (panelHeight / 2)}deg)
+                    translateZ(${translateZ}px)
+                    rotateY(${(mouseX * -1) / (panelWidth * (i + 1))}deg)
+                    rotateX(${(mouseY) / (panelHeight * (i + 1))}deg)
                     `
                 }}
               />
-            </div>
-          ))}
+            </div>);
+          })}
         </div>)
       : (<div style={backgroundStyle} />);
   }

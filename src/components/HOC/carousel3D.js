@@ -56,9 +56,9 @@ const styles = {
   //:TODO fix or replace this
   button: {
     borderRadius: '50%',
-    color: 'rgb(255, 68, 62)',
+    color: 'rgb(255, 64, 64)',
     background: 'transparent',
-    border: '2px solid rgb(255, 68, 62)'
+    border: '2px solid rgb(255, 64, 64)'
   }
 };
 

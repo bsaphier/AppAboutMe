@@ -4037,7 +4037,7 @@ var styles = {
 };
 
 var hover = function hover(event) {
-  event.target.style.background = 'rgb(255, 68, 62)';
+  event.target.style.background = 'rgb(255, 64, 64)';
 };
 
 var leave = function leave(event) {
@@ -13145,9 +13145,9 @@ var styles = {
   //:TODO fix or replace this
   button: {
     borderRadius: '50%',
-    color: 'rgb(255, 68, 62)',
+    color: 'rgb(255, 64, 64)',
     background: 'transparent',
-    border: '2px solid rgb(255, 68, 62)'
+    border: '2px solid rgb(255, 64, 64)'
   }
 };
 
@@ -13806,8 +13806,8 @@ var styles = {
     height: '57.735%',
     top: '21.1325%',
     left: 0,
-    borderLeft: '3px solid rgb(255, 68, 62)',
-    borderRight: '3px solid rgb(255, 68, 62)'
+    borderLeft: '3px solid rgb(255, 64, 64)',
+    borderRight: '3px solid rgb(255, 64, 64)'
   }
 };
 
@@ -14251,21 +14251,21 @@ var Button = _displayComponents.buttons.Button;
 var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
-  parallaxWrap: {
-    // position: 'absolute',
-    // overflow: 'hidden',
-    // top: 0,
-    // left: 0,
+  parallaxWrapA: {
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)'
   },
-  parallaxDiv: {
-    position: 'absolute',
-    top: 0,
-    left: '3vmin',
+  parallaxWrapB: {
     width: '100%',
     height: '100%',
+    backgroundColor: 'rgb(255, 255, 255)'
+
+  },
+  parallaxDiv: {
+    position: 'absolute',
+    width: '120%',
+    height: '120%',
     backgroundColor: 'transparent'
   },
 
@@ -14325,12 +14325,16 @@ var ProjectPanel = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (ProjectPanel.__proto__ || Object.getPrototypeOf(ProjectPanel)).call(this, props));
 
+    var backgroundImg = props.project.backgroundImg;
+
+
     _this.state = {
       mouseX: 0,
       mouseY: 0,
       panelWidth: 0,
       panelHeight: 0,
-      parallax: Array.isArray(props.project.backgroundImg)
+      parallax: Array.isArray(backgroundImg),
+      parallaxVar: Array.isArray(backgroundImg) && backgroundImg.length > 5
     };
 
     _this.getElement = _this.getElement.bind(_this);
@@ -14416,11 +14420,13 @@ var ProjectPanel = function (_Component) {
   }, {
     key: 'createBackground',
     value: function createBackground() {
+      var perspective = void 0;
       var backgroundImg = this.props.project.backgroundImg;
       var _state = this.state,
           mouseX = _state.mouseX,
           mouseY = _state.mouseY,
           parallax = _state.parallax,
+          parallaxVar = _state.parallaxVar,
           panelWidth = _state.panelWidth,
           panelHeight = _state.panelHeight;
 
@@ -14431,9 +14437,15 @@ var ProjectPanel = function (_Component) {
       // the distance of the mouse, from the center of the panel, as a cartesian coordinate
       var distance = Math.sqrt(Math.pow(mouseX, 2) + Math.pow(mouseY, 2));
 
-      var perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
+      // vary the style for different panels
+      if (parallaxVar) {
+        // distance *= -1;
+        perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
+      } else {
+        perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
+      }
 
-      var backgroundStyle = parallax ? _extends({}, styles.parallaxWrap, {
+      var backgroundStyle = parallax ? _extends({}, styles[parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA'], {
         WebkitPerspective: perspective + 'px',
         MozPerspective: perspective + 'px',
         OPerspective: perspective + 'px',
@@ -14446,6 +14458,9 @@ var ProjectPanel = function (_Component) {
         'div',
         { className: 'parallax-mouse', style: backgroundStyle },
         backgroundImg.map(function (fileName, i) {
+
+          var translateZ = parallaxVar ? distance / Math.pow(i + 1, 2) : 2 * distance / maxDistance * Math.sqrt(perspective * (i + 1));
+
           return _react2.default.createElement(
             'div',
             { key: 'bg-layer-' + +i + '-' + fileName, style: styles.parallaxDiv },
@@ -14453,8 +14468,8 @@ var ProjectPanel = function (_Component) {
               src: 'public/images/' + fileName,
               alt: fileName,
               style: _defineProperty({
-                width: panelWidth + 'px'
-              }, transform, '\n                    translateZ(' + 2 * distance / maxDistance * Math.sqrt(perspective * i) + 'px)\n                    rotateY(' + mouseX * -1 / (panelWidth / 2) + 'deg)\n                    rotateX(' + mouseY / (panelHeight / 2) + 'deg)\n                    ')
+                height: panelHeight * 1.5 + 'px'
+              }, transform, '\n                    translateZ(' + translateZ + 'px)\n                    rotateY(' + mouseX * -1 / (panelWidth * (i + 1)) + 'deg)\n                    rotateX(' + mouseY / (panelHeight * (i + 1)) + 'deg)\n                    ')
             })
           );
         })
@@ -14827,7 +14842,7 @@ var styles = {
     border: '0.162em solid',
     position: 'absolute',
     background: 'rgba(255, 255, 255, 1)',
-    borderImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)',
+    borderImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)',
     borderImageSlice: 1
   }
 };
@@ -15138,7 +15153,7 @@ var styles = {
     MsTextFillColor: 'transparent',
     OTextFillColor: 'transparent',
 
-    backgroundImage: 'linear-gradient(to top right, rgb(255, 68, 62) 62%, rgb(252, 255, 88) 162%)'
+    backgroundImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)'
   }
 };
 
@@ -15215,7 +15230,7 @@ var styles = {
     textTransform: 'uppercase',
 
     borderRadius: '0.13rem',
-    background: 'rgb(255, 68, 62)'
+    background: 'rgb(255, 64, 64)'
   }
 };
 
@@ -15838,12 +15853,7 @@ var Projects = function Projects(_ref) {
   };
 
   var panels = content.map(function (project) {
-    return project.title === 'react-redux-webaudio' ? _react2.default.createElement(_ProjectPanel2.default, {
-      key: 'project-panel-' + project.index,
-      style: style,
-      project: project,
-      toggleModal: toggleModal
-    }) : _react2.default.createElement(_ProjectPanel2.default, {
+    return _react2.default.createElement(_ProjectPanel2.default, {
       key: 'project-panel-' + project.index,
       style: style,
       project: project,

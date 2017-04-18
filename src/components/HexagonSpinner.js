@@ -23,8 +23,8 @@ const styles = {
     height: '57.735%',
     top: '21.1325%',
     left: 0,
-    borderLeft: '3px solid rgb(255, 68, 62)',
-    borderRight: '3px solid rgb(255, 68, 62)'
+    borderLeft: '3px solid rgb(255, 64, 64)',
+    borderRight: '3px solid rgb(255, 64, 64)'
   }
 };
 

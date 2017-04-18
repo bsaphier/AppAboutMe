@@ -34,7 +34,7 @@ const styles = {
 };
 
 const hover = event => {
-  event.target.style.background = 'rgb(255, 68, 62)';
+  event.target.style.background = 'rgb(255, 64, 64)';
 };
 
 const leave = event => {

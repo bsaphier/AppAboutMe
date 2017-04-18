@@ -13,22 +13,14 @@ const Projects = ({ style, content, dispatch, ...props }) => {
 
   const toggleModal = () => dispatch(toggleProjectModal());
 
-  const panels = content.map( (project) => {
-    return (project.title === 'react-redux-webaudio')
-    ? <ProjectPanel
-        key={`project-panel-${project.index}`}
-        style={style}
-        project={project}
-        toggleModal={toggleModal}
-      />
-    : <ProjectPanel
-        key={`project-panel-${project.index}`}
-        style={style}
-        project={project}
-        toggleModal={toggleModal}
-      />;
-    }
-  );
+  const panels = content.map( (project) => (
+    <ProjectPanel
+      key={`project-panel-${project.index}`}
+      style={style}
+      project={project}
+      toggleModal={toggleModal}
+    />
+  ));
 
   const Carousel3D = carousel3D(panels);
 

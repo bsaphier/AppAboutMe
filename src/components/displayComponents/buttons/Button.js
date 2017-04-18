@@ -24,7 +24,7 @@ const styles = {
     textTransform: 'uppercase',
 
     borderRadius: '0.13rem',
-    background: 'rgb(255, 68, 62)'
+    background: 'rgb(255, 64, 64)'
   }
 };
 

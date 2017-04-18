@@ -132,7 +132,16 @@
           {
             "index": 1,
             "title": "The Sound of Tweets",
-            "backgroundImg": "",
+            "backgroundImg":
+              [
+                "sot0.svg",
+                "sot2.svg",
+                "sot4.svg",
+                "sot8.svg",
+                "sot16.svg",
+                "sot32.svg",
+                "sot64.svg"
+              ],
             "date": "January 2017 - Present",
             "role": "Sole Developer",
             "link": "https://www.github.com/bsaphier/data-sonification",
