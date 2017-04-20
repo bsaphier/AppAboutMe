@@ -28,7 +28,7 @@ const styles = {
   }
 };
 
-const HexagonSpinner = ({ reverse, children, animation, duration }) => {
+const Hexagon = ({ reverse, children, animation, duration }) => {
 
   let direction = reverse ? 'reverse' : '';
 
@@ -64,4 +64,4 @@ const HexagonSpinner = ({ reverse, children, animation, duration }) => {
   );
 };
 
-export default HexagonSpinner;
+export default Hexagon;

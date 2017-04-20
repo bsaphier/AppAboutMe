@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { rotateCarousel } from '../actions';
-import { buttons, Cell, Title, Divider, SideSection } from './displayComponents';
+import { buttons, Title, Divider, SideSection } from './displayComponents';
 const { SidebarButton } = buttons;
 
 

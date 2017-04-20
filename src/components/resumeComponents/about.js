@@ -1,6 +1,5 @@
 import React from 'react';
 
-import SectionFoot from '../SectionFoot';
 import { hoverSpin } from '../HOC';
 import {
   buttons,
@@ -10,7 +9,8 @@ import {
   Divider,
   BorderGrad,
   FillSection,
-  SideSection
+  SideSection,
+  SectionFoot
 } from '../displayComponents';
 const { IconButton } = buttons;
 

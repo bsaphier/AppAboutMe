@@ -1,0 +1,55 @@
+<––––––––––––TODO TODO TODO TODO TODO––––––––––––>
+
+<––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
+> Welcome
+  • mouse hover triggers motion in letters
+  •
+  •
+>
+
+> About
+  •
+  •
+  •
+>
+
+> Projects
+  • Move Carousel navButtons to parent c as a
+  •
+  •
+  •
+>
+
+> Skills
+  •
+  •
+  •
+>
+
+> Footer
+  • add social links
+  • signature - mini tech-stack descriptions
+  • copyright?
+  •
+  •
+>
+
+
+
+<––––––––––––––––––––Component Map––––––––––––––––––––>
+/src
+- index
+  - Router
+    /components
+    - App ∞
+      - Main
+        - Welcome ∞
+        - ResumeComponents
+          - About
+          - Projects
+            - carousel3D-HOC ∞
+            - ProjectsPanel ∞
+            - ProjectsModal ∞
+            - ProjectsSidebar ∞
+          - Skills
+        - Footer

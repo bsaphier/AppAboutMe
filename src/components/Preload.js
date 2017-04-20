@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Section } from './displayComponents';
-import HexagonSpinner from './HexagonSpinner';
-
+import { Hexagon, Section } from './displayComponents';
 
 const styles = {
   preloader: {
@@ -20,15 +18,15 @@ const styles = {
 const Preload = () => (
   <Section>
     <div className="preloader hex" style={styles.preloader}>
-      <HexagonSpinner animation="rotation" duration={3} reverse>
-        <HexagonSpinner animation="rotation" duration={3}>
-          <HexagonSpinner animation="rotation" duration={3} reverse>
-            <HexagonSpinner animation="rotation" duration={3}>
-              <HexagonSpinner animation="rotation" duration={3} />
-            </HexagonSpinner>
-          </HexagonSpinner>
-        </HexagonSpinner>
-      </HexagonSpinner>
+      <Hexagon animation="rotation" duration={3} reverse>
+        <Hexagon animation="rotation" duration={3}>
+          <Hexagon animation="rotation" duration={3} reverse>
+            <Hexagon animation="rotation" duration={3}>
+              <Hexagon animation="rotation" duration={3} />
+            </Hexagon>
+          </Hexagon>
+        </Hexagon>
+      </Hexagon>
     </div>
   </Section>
 );

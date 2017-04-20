@@ -15796,18 +15796,15 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var styles = {
   title: {
     fontWeight: 100,
-    fontSize: '3em',
-    // letterSpacing: '0.1em',
-    marginLeft: 0,
-    WebkitTransition: 'all .3s ease-in-out',
-    MozTransition: 'all .3s ease-in-out',
-    transition: 'all .3s ease-in-out'
+    fontSize: '4rem',
+    // letterSpacing: '0.1rem',
+    marginLeft: 0
   },
   text: {
-    fontWeight: 500,
-    fontSize: '1.2em',
-    paddingTop: '2em',
-    letterSpacing: '-0.02em'
+    fontWeight: 900,
+    fontSize: '1.6rem',
+    paddingTop: '2rem',
+    letterSpacing: '-0.02rem'
   }
 };
 
@@ -15918,21 +15915,49 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _displayComponents = __webpack_require__(12);
+var _colors = __webpack_require__(342);
+
+var _colors2 = _interopRequireDefault(_colors);
 
 var _SectionFoot = __webpack_require__(37);
 
 var _SectionFoot2 = _interopRequireDefault(_SectionFoot);
 
+var _displayComponents = __webpack_require__(12);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var styles = {
+  text: {
+    cursor: 'default',
+    fontWeight: 900,
+    fontSize: '1.6rem',
+    color: _colors2.default.MENU_DARK,
+    letterSpacing: '-0.02rem',
+
+    textShadow: '1px -1px 0 ' + _colors2.default.OPERA_MAUVE
+  },
+  title: {
+    fontWeight: 100,
+    fontSize: '4rem'
+  },
+  itemWrapper: {
+    padding: '0.5rem 1rem',
+    display: 'inline-block',
+    margin: '1.6rem',
+    border: 'solid ' + _colors2.default.AMETHYST
+  },
+  item: {}
+};
+
 var Skills = function Skills(_ref) {
-  var style = _ref.style,
-      content = _ref.content;
+  var proficient = _ref.content.proficient;
 
   return _react2.default.createElement(
     _displayComponents.Section,
@@ -15941,13 +15966,24 @@ var Skills = function Skills(_ref) {
       _displayComponents.FillSection,
       null,
       _react2.default.createElement(
+        _displayComponents.Title,
+        { style: styles.title },
+        'STUFF I\'M GOOD AT'
+      ),
+      _react2.default.createElement(
         _displayComponents.Cell,
-        null,
-        content.proficient.map(function (skill) {
+        { style: { width: '100%', overflow: 'visible' } },
+        proficient.map(function (skill, idx) {
+          var itemWrapStyle = _extends({}, styles.itemWrapper);
+
           return _react2.default.createElement(
             'div',
-            { key: skill },
-            skill
+            { key: skill, style: itemWrapStyle },
+            _react2.default.createElement(
+              'div',
+              { style: styles.text },
+              skill
+            )
           );
         })
       ),
@@ -34671,6 +34707,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   { store: _store2.default },
   _react2.default.createElement(_Router2.default, null)
 ), document.getElementById('app'));
+
+/***/ }),
+/* 342 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  CORAL_RED: '#FF4040', //'rgba(255, 64, 64, 1)'
+  AMETHYST: '#9067C6', //'rgba(144, 103, 198, 1)'
+  OPERA_MAUVE: '#A188A6', //'rgba(161, 136, 166, 1)'
+  CHINESE_VIOLET: '#7F5A83', //'rgba(127, 90, 131, 1)'
+
+  MENU_DARK: '#515151', //'rgba(81, 81, 81, 1)'
+  MENU_DARKER: '#2D2D2D' };
 
 /***/ })
 /******/ ]);

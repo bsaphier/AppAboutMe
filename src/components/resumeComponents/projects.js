@@ -1,10 +1,9 @@
 import React from 'react';
 
-import SectionFoot from '../SectionFoot';
 import ProjectPanel from '../ProjectPanel';
 import ProjectModal from '../ProjectModal';
 import ProjectsSidebar from '../ProjectsSidebar';
-import { Section, FillSection } from '../displayComponents';
+import { Section, SectionFoot, FillSection } from '../displayComponents';
 import { toggleProjectModal } from '../../actions';
 import { carousel3D } from '../HOC';
 

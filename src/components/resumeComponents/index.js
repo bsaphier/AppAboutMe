@@ -8,18 +8,15 @@ import Projects from './projects';
 const styles = {
   title: {
     fontWeight: 100,
-    fontSize: '3em',
-    // letterSpacing: '0.1em',
-    marginLeft: 0,
-    WebkitTransition: 'all .3s ease-in-out',
-    MozTransition: 'all .3s ease-in-out',
-    transition: 'all .3s ease-in-out'
+    fontSize: '4rem',
+    // letterSpacing: '0.1rem',
+    marginLeft: 0
   },
   text: {
-    fontWeight: 500,
-    fontSize: '1.2em',
-    paddingTop: '2em',
-    letterSpacing: '-0.02em',
+    fontWeight: 900,
+    fontSize: '1.6rem',
+    paddingTop: '2rem',
+    letterSpacing: '-0.02rem',
   }
 };
 
