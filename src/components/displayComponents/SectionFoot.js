@@ -1,7 +1,7 @@
 import React from 'react';
 import Scroll from 'react-scroll';
 
-import { scrollToTop } from '../bin/scrollHelpers';
+import { scrollToTop } from '../../bin/scrollHelpers';
 
 const { Link } = Scroll;
 

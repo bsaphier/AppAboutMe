@@ -31,6 +31,7 @@ class Main extends Component {
           contact={contact}
           projects={projects} {...this.props}
         />
+
         <Footer />
 
       </main>

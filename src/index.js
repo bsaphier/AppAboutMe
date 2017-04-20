@@ -1,16 +1,16 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { Provider } from 'react-redux';
+import { render } from 'react-dom';
 
 import store from './store';
-import Router from './Router';
+import App from './components/App';
 
 injectTapEventPlugin();
 
 render(
   <Provider store={store}>
-    <Router />
+    <App />
   </Provider>,
   document.getElementById('app')
 );

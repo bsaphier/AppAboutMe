@@ -8,21 +8,24 @@
 >
 
 > About
-  •
-  •
+  • Background Image
+  • Sidebar Information
+  • Edit the content
   •
 >
 
 > Projects
   • Move Carousel navButtons to parent c as a
-  •
+  • Project modal flashes on button hover - CSS position
   •
   •
 >
 
 > Skills
-  •
-  •
+  • Title style
+  • Skills content....
+  • Item style
+  • Item interaction - ?
   •
 >
 
@@ -39,17 +42,16 @@
 <––––––––––––––––––––Component Map––––––––––––––––––––>
 /src
 - index
-  - Router
-    /components
-    - App ∞
-      - Main
-        - Welcome ∞
-        - ResumeComponents
-          - About
-          - Projects
-            - carousel3D-HOC ∞
-            - ProjectsPanel ∞
-            - ProjectsModal ∞
-            - ProjectsSidebar ∞
-          - Skills
-        - Footer
+  /components
+  - App ∞
+    - Main
+      - Welcome ∞
+      - ResumeComponents
+        - About
+        - Projects
+          - carousel3D-HOC ∞
+          - ProjectsPanel ∞
+          - ProjectsModal ∞
+          - ProjectsSidebar ∞
+        - Skills
+      - Footer
