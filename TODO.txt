@@ -1,5 +1,8 @@
 <––––––––––––TODO TODO TODO TODO TODO––––––––––––>
 
+>> • Sidebar Width is not right....
+>> • SectionFoot styling....
+
 <––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
 > Welcome
   • mouse hover triggers motion in letters
@@ -17,7 +20,7 @@
 > Projects
   • Move Carousel navButtons to parent c as a
   • Project modal flashes on button hover - CSS position
-  •
+  • Sidebar styling...
   •
 >
 
