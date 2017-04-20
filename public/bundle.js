@@ -3925,6 +3925,11 @@ var int = exports.int = function int(float) {
   return parseInt(float, 10);
 };
 
+// pythagorean theorem (a^2 + b^2 = c^2) given a and b, this func returns c
+var hypote = exports.hypote = function hypote(x, y) {
+  return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+};
+
 var _normHelpA = function _normHelpA(max, min, newMax, newMin) {
   return (newMax - newMin) / (max - min);
 };
@@ -14252,20 +14257,26 @@ var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   parallaxWrapA: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)'
   },
   parallaxWrapB: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgb(255, 255, 255)'
+    backgroundColor: 'rgb(255, 255, 255)',
 
+    WebkitPerspectiveOrigin: '50% 50%',
+    MozPerspectiveOrigin: '50% 50%',
+    OPerspectiveOrigin: '50% 50%',
+    perspectiveOrigin: '50% 50%'
   },
   parallaxDiv: {
     position: 'absolute',
-    width: '120%',
-    height: '120%',
+    width: '100%',
+    height: '100%',
     backgroundColor: 'transparent'
   },
 
@@ -14289,7 +14300,7 @@ var styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(81, 81, 81, 0.55)',
+    backgroundColor: 'rgba(0, 0, 0, 0.62)',
     // backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
@@ -14432,14 +14443,13 @@ var ProjectPanel = function (_Component) {
 
       // the maxDistance is the distance from the center to the corner of the panel
 
-      var maxDistance = Math.sqrt(Math.pow(panelWidth, 2) + Math.pow(panelHeight, 2));
+      var maxDistance = (0, _utils.hypote)(panelWidth, panelHeight);
 
       // the distance of the mouse, from the center of the panel, as a cartesian coordinate
-      var distance = Math.sqrt(Math.pow(mouseX, 2) + Math.pow(mouseY, 2));
+      var distance = (0, _utils.hypote)(mouseX, mouseY);
 
       // vary the style for different panels
       if (parallaxVar) {
-        // distance *= -1;
         perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
       } else {
         perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
@@ -14459,7 +14469,22 @@ var ProjectPanel = function (_Component) {
         { className: 'parallax-mouse', style: backgroundStyle },
         backgroundImg.map(function (fileName, i) {
 
-          var translateZ = parallaxVar ? distance / Math.pow(i + 1, 2) : 2 * distance / maxDistance * Math.sqrt(perspective * (i + 1));
+          var layer = i + 1;
+
+          // vary the style for different panels
+          var translateX = parallaxVar ? -50 : 0;
+          var translateY = parallaxVar ? -50 : 0;
+          var translateZ = parallaxVar ? distance / maxDistance * (layer * -40) : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
+          var rotateY = parallaxVar ? mouseX * -1 * (layer * 0.5 / panelWidth) : mouseX * -1 / panelWidth * layer;
+          var rotateX = parallaxVar ? mouseY * (layer * 0.5 / panelHeight) : mouseY / (panelHeight * layer);
+          var imgStyle = parallaxVar ? {
+            position: 'absolute',
+            width: '425%',
+            left: '50%',
+            top: '55%'
+          } : {
+            height: panelHeight * 1.5 + 'px'
+          };
 
           return _react2.default.createElement(
             'div',
@@ -14467,9 +14492,7 @@ var ProjectPanel = function (_Component) {
             _react2.default.createElement('img', {
               src: 'public/images/' + fileName,
               alt: fileName,
-              style: _defineProperty({
-                height: panelHeight * 1.5 + 'px'
-              }, transform, '\n                    translateZ(' + translateZ + 'px)\n                    rotateY(' + mouseX * -1 / (panelWidth * (i + 1)) + 'deg)\n                    rotateX(' + mouseY / (panelHeight * (i + 1)) + 'deg)\n                    ')
+              style: _extends({}, imgStyle, _defineProperty({}, transform, '\n                        translateY(' + translateY + '%)\n                        translateX(' + translateX + '%)\n                        translateZ(' + translateZ + 'px)\n                        rotateY(' + rotateY + 'deg)\n                        rotateX(' + rotateX + 'deg)\n                      '))
             })
           );
         })
@@ -14515,7 +14538,7 @@ var ProjectPanel = function (_Component) {
               ),
               _react2.default.createElement(
                 'div',
-                null,
+                { style: { color: 'rgb(161, 136, 166)' } },
                 shortDescription
               ),
               _react2.default.createElement(
@@ -14588,7 +14611,6 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
       rotation = _ref.rotation,
       currPanel = _ref.currPanel;
 
-
   var getPanelMovement = function getPanelMovement(index) {
     var length = content.length;
 
@@ -14609,12 +14631,14 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
       if (currPanel !== idx) rotate(getNewRotation(idx), idx);
     };
 
+    var marginBottom = 62 / content.length;
+
     return _react2.default.createElement(
       'div',
       {
         key: 'projects-sidebar-item-' + project.index,
         onClick: navigate,
-        style: { margin: '15px auto' } },
+        style: { margin: '0 auto ' + marginBottom + '%' } },
       _react2.default.createElement(
         SidebarButton,
         null,
@@ -14648,8 +14672,8 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
     ),
     _react2.default.createElement(_displayComponents.Divider, null),
     _react2.default.createElement(
-      _displayComponents.Cell,
-      { style: { height: '66%', overflow: 'visible' } },
+      'div',
+      { style: { height: '83%', overflow: 'visible' } },
       sidebarItems
     )
   );
@@ -14878,6 +14902,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 var styles = {
   cell: {
     height: '100%',
@@ -14888,10 +14914,12 @@ var styles = {
 
 var Cell = function Cell(_ref) {
   var children = _ref.children,
-      style = _ref.style;
+      style = _ref.style,
+      props = _objectWithoutProperties(_ref, ['children', 'style']);
+
   return _react2.default.createElement(
     'div',
-    { className: 'cell', style: _extends({}, styles.cell, style) },
+    _extends({ className: 'cell', style: _extends({}, styles.cell, style) }, props),
     children
   );
 };
@@ -15050,8 +15078,8 @@ var styles = {
     zIndex: 9,
     float: 'right',
     height: '100%',
-    minWidth: '300px',
-    maxWidth: '33.33%'
+    minWidth: '300px', //:TODO fix or replace this
+    maxWidth: '33.33%' //:TODO fix or replace this
   },
   rightSideContainer: {
     position: 'relative',
@@ -15402,7 +15430,7 @@ var IconButton = function IconButton(_ref) {
       _ref$url = _ref.url,
       url = _ref$url === undefined ? null : _ref$url,
       _ref$name = _ref.name,
-      name = _ref$name === undefined ? null : _ref$name,
+      name = _ref$name === undefined ? '' : _ref$name,
       _ref$target = _ref.target,
       target = _ref$target === undefined ? '_blank' : _ref$target;
 

@@ -8,8 +8,8 @@ const styles = {
   }
 };
 
-const Cell = ({ children, style }) => (
-  <div className="cell" style={{...styles.cell, ...style}}>
+const Cell = ({ children, style, ...props }) => (
+  <div className="cell" style={{...styles.cell, ...style}} {...props}>
     { children }
   </div>
 );

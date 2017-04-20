@@ -43,7 +43,7 @@ const styles = {
 };
 
 
-const IconButton = ({ icon, style, url = null, name = null, target = '_blank' }) => {
+const IconButton = ({ icon, style, url = null, name = '', target = '_blank' }) => {
 
   const iconStyle = { ...styles.iconStyle, ...style };
 

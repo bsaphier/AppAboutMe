@@ -2,31 +2,34 @@ import React, { Component } from 'react';
 
 import Modernizr from '../../.modernizrrc';
 import { buttons, Cell, Title, FillSection } from './displayComponents';
-import { normal as _normal } from '../bin/utils';
+import { hypote, normal as _normal } from '../bin/utils';
 const { Button } = buttons;
+
 
 const transform = Modernizr.prefixed('transform');
 
 const styles = {
   parallaxWrapA: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)',
   },
   parallaxWrapB: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(255, 255, 255)',
 
-    // WebkitPerspectiveOrigin: '25% 10%',
-    // MozPerspectiveOrigin: '25% 10%',
-    // OPerspectiveOrigin: '25% 10%',
-    // perspectiveOrigin: '25% 10%',
+    WebkitPerspectiveOrigin: '50% 50%',
+    MozPerspectiveOrigin: '50% 50%',
+    OPerspectiveOrigin: '50% 50%',
+    perspectiveOrigin: '50% 50%',
   },
   parallaxDiv: {
     position: 'absolute',
-    width: '120%',
-    height: '120%',
+    width: '100%',
+    height: '100%',
     backgroundColor: 'transparent',
   },
 
@@ -50,7 +53,7 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(81, 81, 81, 0.55)',
+    backgroundColor: 'rgba(0, 0, 0, 0.62)',
     // backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
@@ -171,14 +174,13 @@ class ProjectPanel extends Component {
     let { mouseX, mouseY, parallax, parallaxVar, panelWidth, panelHeight } = this.state;
 
     // the maxDistance is the distance from the center to the corner of the panel
-    let maxDistance = Math.sqrt(Math.pow(panelWidth, 2) + Math.pow(panelHeight, 2));
+    let maxDistance = hypote(panelWidth, panelHeight);
 
     // the distance of the mouse, from the center of the panel, as a cartesian coordinate
-    let distance = Math.sqrt(Math.pow((mouseX), 2) + Math.pow((mouseY), 2));
+    let distance = hypote(mouseX, mouseY);
 
     // vary the style for different panels
     if (parallaxVar) {
-      // distance *= -1;
       perspective = panelWidth < panelHeight
         ? (panelHeight * 100 / panelWidth)
         : (panelWidth  * 100 / panelHeight);
@@ -203,29 +205,60 @@ class ProjectPanel extends Component {
 
 
     return (parallax)
-      ? (<div className="parallax-mouse" style={backgroundStyle}>
-          { backgroundImg.map( (fileName, i) => {
+      ? (
+          <div className="parallax-mouse" style={backgroundStyle}>
 
-            let translateZ = (parallaxVar)
-              ? distance / Math.pow((i + 1), 2)
-              : 2 * distance / maxDistance * Math.sqrt(perspective * (i + 1));
+            { backgroundImg.map( (fileName, i) => {
 
-            return (<div key={`bg-layer-${+i}-${fileName}`} style={styles.parallaxDiv}>
-              <img
-                src={`public/images/${fileName}`}
-                alt={fileName}
-                style={{
-                  height: `${panelHeight * 1.5}px`,
-                  [transform]: `
-                    translateZ(${translateZ}px)
-                    rotateY(${(mouseX * -1) / (panelWidth * (i + 1))}deg)
-                    rotateX(${(mouseY) / (panelHeight * (i + 1))}deg)
-                    `
-                }}
-              />
-            </div>);
-          })}
-        </div>)
+              let layer = i + 1;
+
+              // vary the style for different panels
+              let translateX = (parallaxVar) ? -50 : 0;
+              let translateY = (parallaxVar) ? -50 : 0;
+              let translateZ = (parallaxVar)
+                ? (distance / maxDistance) * (layer * -40)
+                : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
+              let rotateY = (parallaxVar)
+                ? (mouseX * -1) * (layer * 0.5 / panelWidth)
+                : (mouseX * -1) / panelWidth * layer;
+              let rotateX = (parallaxVar)
+                ? mouseY * (layer * 0.5 / panelHeight)
+                : mouseY / (panelHeight * layer);
+              let imgStyle = (parallaxVar)
+                ? {
+                    position: 'absolute',
+                    width: `425%`,
+                    left: '50%',
+                    top: '55%'
+                  }
+                : {
+                    height: `${panelHeight * 1.5}px`
+                  };
+
+
+              return (
+                <div key={`bg-layer-${+i}-${fileName}`} style={styles.parallaxDiv}>
+                  <img
+                    src={`public/images/${fileName}`}
+                    alt={fileName}
+                    style={{
+                      ...imgStyle,
+                      [transform]: `
+                        translateY(${translateY}%)
+                        translateX(${translateX}%)
+                        translateZ(${translateZ}px)
+                        rotateY(${rotateY}deg)
+                        rotateX(${rotateX}deg)
+                      `
+                    }}
+                  />
+                </div>
+              );
+            })}
+
+          </div>
+        )
+
       : (<div style={backgroundStyle} />);
   }
 
@@ -248,7 +281,7 @@ class ProjectPanel extends Component {
                 <span>{ title }</span>
               </Title>
 
-              <div>{ shortDescription }</div>
+              <div style={{color: 'rgb(161, 136, 166)'}}>{ shortDescription }</div>
 
               <div style={styles.buttonWrap}>
                 <div style={{padding: '5px'}}>
