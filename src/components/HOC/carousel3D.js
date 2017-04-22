@@ -126,8 +126,8 @@ const carousel3D = (panels, navButtons) => {
     }
 
 
-    //:TODO move the navButtons to the parent component for easier modularity
-    //:TODO move the navButtons to the parent component for easier modularity
+    //:TODO move the navButtons to the parent component for easier modularity and creating the
+    //:TODO buttons here cause them to rerender along with the entire carousel
     // a default navButton generator for moving the carousel left/right
     createNavButton( back ) {
       // the default navButton
@@ -158,7 +158,7 @@ const carousel3D = (panels, navButtons) => {
 
 
     render() {
-      let { axis, theta, radius, rotation } = this.props;
+      let { axis, theta, radius, currPanel, rotation } = this.props;
 
       const NavBack = this.createNavButton(true);
       const NavFwd = this.createNavButton(false);
@@ -178,7 +178,8 @@ const carousel3D = (panels, navButtons) => {
                 }}>
                 {
                   panels.map( (Panel, idx) =>
-                    carouselPanel({ idx, axis, theta, radius, transform })(Panel) )
+                    carouselPanel({ idx, axis, theta, radius })(Panel)
+                  )
                 }
               </div>
             )}

@@ -1,5 +1,10 @@
 import React from 'react';
 
+import Modernizr from '../../../.modernizrrc';
+
+
+const transform = Modernizr.prefixed('transform');
+
 const styles = {
     carouselPanel: {
       display: 'block',
@@ -15,7 +20,7 @@ const styles = {
 };
 
 
-const carouselPanel = ({ idx, axis, theta, radius, transform }) => Component => {
+const carouselPanel = ({ idx, axis, theta, radius }) => Component => {
 
     let angle = theta * idx;
 

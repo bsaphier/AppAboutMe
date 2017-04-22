@@ -1,7 +1,7 @@
 <––––––––––––TODO TODO TODO TODO TODO––––––––––––>
 
->> • Sidebar Width is not right....
->> • SectionFoot styling....
+• Sidebar Width is not right....
+• SectionFoot styling....
 
 <––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
 > Welcome
@@ -19,9 +19,10 @@
 
 > Projects
   • Move Carousel navButtons to parent c as a
-  • Project modal flashes on button hover - CSS position
+  • Project modal flashes on button hover - CSS position || canvas issue ?
+  • Project Sidebar flashes on  hover - CSS positioning || canvas issue ?
   • Sidebar styling...
-  •
+  • don't render the background (entire panel?) if the panel is not in view
 >
 
 > Skills
@@ -45,16 +46,16 @@
 <––––––––––––––––––––Component Map––––––––––––––––––––>
 /src
 - index
+- App ∞
   /components
-  - App ∞
-    - Main
-      - Welcome ∞
-      - ResumeComponents
-        - About
-        - Projects
-          - carousel3D-HOC ∞
-          - ProjectsPanel ∞
-          - ProjectsModal ∞
-          - ProjectsSidebar ∞
-        - Skills
-      - Footer
+  - Main
+    - Welcome ∞
+    - ResumeComponents
+      - About
+      - Projects
+        - carousel3D-HOC ∞
+        - ProjectsPanel ∞
+        - ProjectsModal ∞
+        - ProjectsSidebar ∞
+      - Skills
+    - Footer

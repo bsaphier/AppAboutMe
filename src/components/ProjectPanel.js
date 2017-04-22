@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 import Modernizr from '../../.modernizrrc';
@@ -33,7 +34,7 @@ const styles = {
     backgroundColor: 'transparent',
   },
 
-  background: {
+  backgroundFlat: {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -45,10 +46,18 @@ const styles = {
   backgroundBlur: {
     //:TODO boolean will include these styles
   },
+  background: {
+    position: 'absolute',
+    top: 0,
+    zIndex: -1,
+    width: '100%',
+    height: '100%',
+  },
 
   banner: {
     position: 'absolute',
     textAlign: 'center',
+    zIndex: 99,
     top: '50%',
     left: '50%',
     width: '100%',
@@ -170,8 +179,14 @@ class ProjectPanel extends Component {
 
   createBackground() {
     let perspective;
-    let { project: { backgroundImg } } = this.props;
+    let { currPanel, project: { index, backgroundImg } } = this.props;
     let { mouseX, mouseY, parallax, parallaxVar, panelWidth, panelHeight } = this.state;
+
+    //:TODO fix or replace this
+    // don't render the background if the panel is not in view
+    // if (index !== currPanel) {
+    //   return null;
+    // }
 
     // the maxDistance is the distance from the center to the corner of the panel
     let maxDistance = hypote(panelWidth, panelHeight);
@@ -199,7 +214,7 @@ class ProjectPanel extends Component {
           perspective: `${perspective}px`,
         }
       : {
-          ...styles.background,
+          ...styles.backgroundFlat,
           backgroundImage: `url(public/images/${backgroundImg})`
         };
 
@@ -269,10 +284,6 @@ class ProjectPanel extends Component {
     return (
       <FillSection className="project-panel" style={{padding: 0}}>
 
-        <div className="background" ref={this.getElement} style={{width: '100%', height: '100%'}}>
-          { this.createBackground() }
-        </div>
-
         <Cell style={{position: null}}>
           <div style={styles.banner}>
             <div style={styles.bannerInfo}>
@@ -301,10 +312,17 @@ class ProjectPanel extends Component {
           </div>
         </Cell>
 
+        <div className="background" ref={this.getElement} style={styles.background}>
+          { this.createBackground() }
+        </div>
+
       </FillSection>
     );
   }
 }
 
 
-export default ProjectPanel;
+const mapStateToProps = ({ carousel: { currPanel } }) => ({ currPanel });
+
+
+export default connect(mapStateToProps)(ProjectPanel);

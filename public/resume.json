@@ -60,29 +60,24 @@
           }
         ],
       "skills":
-        {
-          "proficient":
-            [
-              "Javascript / ES6",
-              "The NERP stack (Node.js, ExpressJs, React, PostgreSQL)",
-              "Redux",
-              "HTML5 / CSS3 / Sass / Bootstrap",
-              "Webpack",
-              "Git"
-            ],
-          "knowledgeable":
-            [
-              "Mocha & Chai",
-              "Axios / AJAX",
-              "OAuth",
-              "SQL",
-              "RESTful architecture",
-              "Tone.js",
-              "Socket.io",
-              "Paper.js",
-              "P5.js"
-            ]
-        },
+        [
+          "Javascript / ES6",
+          "Node.js",
+          "ExpressJs",
+          "PostgreSQL",
+
+          "React",
+          "Redux",
+          "HTML5",
+          "AJAX",
+          "CSS3",
+          "Sass",
+          "Bootstrap",
+          "Webpack",
+          "Mocha",
+          "Chai",
+          "Git"
+        ],
       "education":
         [
           {
@@ -134,13 +129,13 @@
             "title": "The Sound of Tweets",
             "backgroundImg":
               [
-                "sot0.svg",
-                "sot2.svg",
-                "sot4.svg",
-                "sot8.svg",
-                "sot16.svg",
-                "sot32.svg",
-                "sot64.svg"
+                "sot0.png",
+                "sot2.png",
+                "sot4.png",
+                "sot8.png",
+                "sot16.png",
+                "sot32.png",
+                "sot64.png"
               ],
             "date": "January 2017 - Present",
             "role": "Sole Developer",

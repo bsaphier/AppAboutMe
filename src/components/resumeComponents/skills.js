@@ -5,23 +5,30 @@ import { Cell, Title, Section, SectionFoot, FillSection } from '../displayCompon
 
 
 const styles = {
+  title: {
+    margin: 0,
+    fontWeight: 900,
+    fontSize: '5rem',
+    letterSpacing: '-0.25rem',
+  },
   text: {
     cursor: 'default',
-    fontWeight: 900,
-    fontSize: '1.6rem',
-    color: colors.MENU_DARK,
-    letterSpacing: '-0.02rem',
+    color: colors.OPERA_MAUVE,
 
-    textShadow: `1px -1px 0 ${colors.OPERA_MAUVE}`
-  },
-  title: {
-    fontWeight: 100,
-    fontSize: '4rem',
+    fontWeight: 400,
+    fontSize: '1.6rem',
+
+    textShadow: `
+      1px 1px 0 ${colors.MENU_DARKER},
+      1px 2px 0 ${colors.MENU_DARKER},
+      1px 3px 0 ${colors.MENU_DARKER},
+      1px 4px 0 ${colors.MENU_DARKER}`
   },
   itemWrapper: {
     padding: '0.5rem 1rem',
     display: 'inline-block',
     margin: '1.6rem',
+    background: colors.MENU_DARK,
     border: `solid ${colors.AMETHYST}`
   },
   item: {
@@ -29,15 +36,15 @@ const styles = {
 };
 
 
-const Skills = ({ content: { proficient } }) => {
+const Skills = ({ content }) => {
   return (
     <Section id="skills">
       <FillSection>
 
-        <Title style={styles.title}>{`STUFF I'M GOOD AT`}</Title>
+        <Title style={styles.title}>{`STUFF I AM GOOD AT`}</Title>
 
         <Cell style={{ width: '100%', overflow: 'visible' }}>
-          { proficient.map((skill, idx) => {
+          { content.map((skill, idx) => {
             let itemWrapStyle = {
               ...styles.itemWrapper
             };
