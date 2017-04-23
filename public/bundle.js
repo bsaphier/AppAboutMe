@@ -14005,6 +14005,10 @@ var _displayComponents = __webpack_require__(12);
 
 var _utils = __webpack_require__(35);
 
+var _images = __webpack_require__(342);
+
+var _images2 = _interopRequireDefault(_images);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -14127,6 +14131,7 @@ var ProjectPanel = function (_Component) {
     _this.handleResize = _this.handleResize.bind(_this);
     _this.handleMouseMove = _this.handleMouseMove.bind(_this);
     _this.createBackground = _this.createBackground.bind(_this);
+    _this.getBackgroundLayer = _this.getBackgroundLayer.bind(_this);
     return _this;
   }
 
@@ -14202,27 +14207,14 @@ var ProjectPanel = function (_Component) {
       });
     }
   }, {
-    key: 'createBackground',
-    value: function createBackground() {
-      var perspective = void 0;
-      var _props = this.props,
-          currPanel = _props.currPanel,
-          _props$project = _props.project,
-          index = _props$project.index,
-          backgroundImg = _props$project.backgroundImg;
+    key: 'getBackgroundLayer',
+    value: function getBackgroundLayer(layer, fileName) {
       var _state = this.state,
           mouseX = _state.mouseX,
           mouseY = _state.mouseY,
-          parallax = _state.parallax,
           parallaxVar = _state.parallaxVar,
           panelWidth = _state.panelWidth,
           panelHeight = _state.panelHeight;
-
-      //:TODO fix or replace this
-      // don't render the background if the panel is not in view
-      // if (index !== currPanel) {
-      //   return null;
-      // }
 
       // the maxDistance is the distance from the center to the corner of the panel
 
@@ -14232,11 +14224,41 @@ var ProjectPanel = function (_Component) {
       var distance = (0, _utils.hypote)(mouseX, mouseY);
 
       // vary the style for different panels
-      if (parallaxVar) {
-        perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
-      } else {
-        perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
-      }
+      var translateX = parallaxVar ? -50 : 0;
+      var translateY = parallaxVar ? -50 : 0;
+
+      var perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
+      // let translateZ = (distance / maxDistance) * (layer * -40);
+      var translateZ = parallaxVar ? distance / maxDistance * (layer * -40) : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
+
+      var rotateY = parallaxVar ? mouseX * (layer * 0.5 / panelWidth) : mouseX * -1 / panelWidth * layer;
+      var rotateX = parallaxVar ? mouseY * (layer * 0.5 / panelHeight) : mouseY / (panelHeight * layer);
+      var imgStyle = parallaxVar ? {
+        position: 'absolute',
+        width: '425%',
+        left: '50%',
+        top: '55%'
+      } : { height: panelHeight * 1.5 + 'px' };
+
+      return _react2.default.createElement('img', {
+        src: _images2.default[fileName],
+        alt: fileName,
+        style: _extends({}, imgStyle, _defineProperty({}, transform, '\n            translateY(' + translateY + '%)\n            translateX(' + translateX + '%)\n            translateZ(' + translateZ + 'px)\n            rotateY(' + rotateY + 'deg)\n            rotateX(' + rotateX + 'deg)\n          '))
+      });
+    }
+  }, {
+    key: 'createBackground',
+    value: function createBackground() {
+      var _this2 = this;
+
+      var backgroundImg = this.props.project.backgroundImg;
+      var _state2 = this.state,
+          parallax = _state2.parallax,
+          parallaxVar = _state2.parallaxVar,
+          panelWidth = _state2.panelWidth,
+          panelHeight = _state2.panelHeight;
+
+      var perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
 
       var backgroundStyle = parallax ? _extends({}, styles[parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA'], {
         WebkitPerspective: perspective + 'px',
@@ -14244,7 +14266,7 @@ var ProjectPanel = function (_Component) {
         OPerspective: perspective + 'px',
         perspective: perspective + 'px'
       }) : _extends({}, styles.backgroundFlat, {
-        backgroundImage: 'url(public/images/' + backgroundImg + ')'
+        backgroundImage: 'url(' + _images2.default[backgroundImg] + ')'
       });
 
       return parallax ? _react2.default.createElement(
@@ -14254,29 +14276,10 @@ var ProjectPanel = function (_Component) {
 
           var layer = i + 1;
 
-          // vary the style for different panels
-          var translateX = parallaxVar ? -50 : 0;
-          var translateY = parallaxVar ? -50 : 0;
-          var translateZ = parallaxVar ? distance / maxDistance * (layer * -40) : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
-          var rotateY = parallaxVar ? mouseX * -1 * (layer * 0.5 / panelWidth) : mouseX * -1 / panelWidth * layer;
-          var rotateX = parallaxVar ? mouseY * (layer * 0.5 / panelHeight) : mouseY / (panelHeight * layer);
-          var imgStyle = parallaxVar ? {
-            position: 'absolute',
-            width: '425%',
-            left: '50%',
-            top: '55%'
-          } : {
-            height: panelHeight * 1.5 + 'px'
-          };
-
           return _react2.default.createElement(
             'div',
             { key: 'bg-layer-' + +i + '-' + fileName, style: styles.parallaxDiv },
-            _react2.default.createElement('img', {
-              src: 'public/images/' + fileName,
-              alt: fileName,
-              style: _extends({}, imgStyle, _defineProperty({}, transform, '\n                        translateY(' + translateY + '%)\n                        translateX(' + translateX + '%)\n                        translateZ(' + translateZ + 'px)\n                        rotateY(' + rotateY + 'deg)\n                        rotateX(' + rotateX + 'deg)\n                      '))
-            })
+            _this2.getBackgroundLayer(layer, fileName)
           );
         })
       ) : _react2.default.createElement('div', { style: backgroundStyle });
@@ -14284,13 +14287,13 @@ var ProjectPanel = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props,
-          style = _props2.style,
-          toggleModal = _props2.toggleModal,
-          _props2$project = _props2.project,
-          link = _props2$project.link,
-          title = _props2$project.title,
-          shortDescription = _props2$project.shortDescription;
+      var _props = this.props,
+          style = _props.style,
+          toggleModal = _props.toggleModal,
+          _props$project = _props.project,
+          link = _props$project.link,
+          title = _props$project.title,
+          shortDescription = _props$project.shortDescription;
 
 
       return _react2.default.createElement(
@@ -34727,6 +34730,165 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   { store: _store2.default },
   _react2.default.createElement(_App2.default, null)
 ), document.getElementById('app'));
+
+/***/ }),
+/* 342 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _rrwaRed = __webpack_require__(347);
+
+var _rrwaRed2 = _interopRequireDefault(_rrwaRed);
+
+var _rrwaBlue = __webpack_require__(343);
+
+var _rrwaBlue2 = _interopRequireDefault(_rrwaBlue);
+
+var _rrwaOther = __webpack_require__(345);
+
+var _rrwaOther2 = _interopRequireDefault(_rrwaOther);
+
+var _rrwaPurple = __webpack_require__(346);
+
+var _rrwaPurple2 = _interopRequireDefault(_rrwaPurple);
+
+var _rrwaGreenYellow = __webpack_require__(344);
+
+var _rrwaGreenYellow2 = _interopRequireDefault(_rrwaGreenYellow);
+
+var _sot = __webpack_require__(348);
+
+var _sot2 = _interopRequireDefault(_sot);
+
+var _sot3 = __webpack_require__(350);
+
+var _sot4 = _interopRequireDefault(_sot3);
+
+var _sot5 = __webpack_require__(352);
+
+var _sot6 = _interopRequireDefault(_sot5);
+
+var _sot7 = __webpack_require__(354);
+
+var _sot8 = _interopRequireDefault(_sot7);
+
+var _sot9 = __webpack_require__(349);
+
+var _sot10 = _interopRequireDefault(_sot9);
+
+var _sot11 = __webpack_require__(351);
+
+var _sot12 = _interopRequireDefault(_sot11);
+
+var _sot13 = __webpack_require__(353);
+
+var _sot14 = _interopRequireDefault(_sot13);
+
+var _youphonicImgSmMin = __webpack_require__(355);
+
+var _youphonicImgSmMin2 = _interopRequireDefault(_youphonicImgSmMin);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  rrwaRed: _rrwaRed2.default,
+  rrwaBlue: _rrwaBlue2.default,
+  rrwaOther: _rrwaOther2.default,
+  rrwaPurple: _rrwaPurple2.default,
+  rrwaGreenYellow: _rrwaGreenYellow2.default,
+  sot0: _sot2.default,
+  sot2: _sot4.default,
+  sot4: _sot6.default,
+  sot8: _sot8.default,
+  sot16: _sot10.default,
+  sot32: _sot12.default,
+  sot64: _sot14.default,
+  yImg: _youphonicImgSmMin2.default
+};
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "783a8491c43ecb10497cf5af625dee4a.png";
+
+/***/ }),
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "6fb6bd274983c3fefb665dcbe6936cc5.png";
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "1a96116c7f51d243a8894e2bbbe48966.png";
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "3543048872a2cabee116520afbc4d3ce.png";
+
+/***/ }),
+/* 347 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "0f22d32b461819ae3676f1c55fdfb790.png";
+
+/***/ }),
+/* 348 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "a295085c8fd31c3c972566162fc22d06.png";
+
+/***/ }),
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "76887a2a92e70c77d6f760c13f5c3b97.png";
+
+/***/ }),
+/* 350 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "d57aceb20f8e1e45463aae945fcced60.png";
+
+/***/ }),
+/* 351 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "27f31fb9b4724314dfbf00b568bbb505.png";
+
+/***/ }),
+/* 352 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "b54cd516a938606472eb09e263e1a678.png";
+
+/***/ }),
+/* 353 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "0033ca06bcf58c8a19f481b519f28e82.png";
+
+/***/ }),
+/* 354 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "6492bfff02427f505f31c3748ed502a1.png";
+
+/***/ }),
+/* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "d34e1d0e73debb940e0faff9e2d5bb6c.png";
 
 /***/ })
 /******/ ]);

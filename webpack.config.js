@@ -29,6 +29,9 @@ module.exports = {
      }, {
        test: /\.modernizrrc(\.json)?$/,
        loader: 'modernizr-loader!json-loader'
+     }, {
+       test: /\.(jpe?g|png|gif|svg)$/i,
+       loader: 'file-loader'
      }
     ]
   },

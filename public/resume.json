@@ -108,11 +108,11 @@
             "title": "react-redux-webaudio",
             "backgroundImg":
               [
-                "rrwaOther.png",
-                "rrwaRed.png",
-                "rrwaBlue.png",
-                "rrwaPurple.png",
-                "rrwaGreenYellow.png"
+                "rrwaOther",
+                "rrwaRed",
+                "rrwaBlue",
+                "rrwaPurple",
+                "rrwaGreenYellow"
               ],
             "date": "December 2016 - Present",
             "role": "Sole Developer",
@@ -129,13 +129,13 @@
             "title": "The Sound of Tweets",
             "backgroundImg":
               [
-                "sot0.png",
-                "sot2.png",
-                "sot4.png",
-                "sot8.png",
-                "sot16.png",
-                "sot32.png",
-                "sot64.png"
+                "sot0",
+                "sot2",
+                "sot4",
+                "sot8",
+                "sot16",
+                "sot32",
+                "sot64"
               ],
             "date": "January 2017 - Present",
             "role": "Sole Developer",
@@ -151,7 +151,7 @@
           {
             "index": 2,
             "title": "Youphonic",
-            "backgroundImg": "youphonic-img-sm-min.png",
+            "backgroundImg": "yImg",
             "date": "January 2017 - February 2017",
             "role": "Developer",
             "link": "http://www.youphonic.co/$2a$10$c5nJeeamyBV2vcGmQ0NJuOY91OgHzuLNNOyTTeXevULcGmYufCDgu",

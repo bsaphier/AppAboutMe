@@ -1,7 +1,9 @@
 <––––––––––––TODO TODO TODO TODO TODO––––––––––––>
 
+• load the carousel images better!!!
 • Sidebar Width is not right....
 • SectionFoot styling....
+
 
 <––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
 > Welcome
@@ -19,8 +21,6 @@
 
 > Projects
   • Move Carousel navButtons to parent c as a
-  • Project modal flashes on button hover - CSS position || canvas issue ?
-  • Project Sidebar flashes on  hover - CSS positioning || canvas issue ?
   • Sidebar styling...
   • don't render the background (entire panel?) if the panel is not in view
 >
