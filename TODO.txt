@@ -30,6 +30,7 @@
   • Skills content....
   • Item style
   • Item interaction - ?
+    - make position relative to Cell. -> absolute items
   •
 >
 

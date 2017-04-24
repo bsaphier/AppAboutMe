@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
-import Modernizr from '../../.modernizrrc';
-import { buttons, Cell, Title, FillSection } from './displayComponents';
-import { hypote, normal as _normal } from '../bin/utils';
-import { default as imgs } from '../bin/images';
-const { Button } = buttons;
+import Modernizr from '../../../../.modernizrrc';
+import { buttons, Cell, Title, FillSection } from '../../displayComponents';
+import { hypote, normal as _normal } from '../../../bin/utils';
+//:TODO do I really want to load the images this way??
+// i.e. with webpack and part of the bundle
+import imgs from '../../../bin/images';
+const  { Button } = buttons;
 
 
 const transform = Modernizr.prefixed('transform');

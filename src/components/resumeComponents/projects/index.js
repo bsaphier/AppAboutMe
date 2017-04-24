@@ -1,11 +1,11 @@
 import React from 'react';
 
-import ProjectPanel from '../ProjectPanel';
-import ProjectModal from '../ProjectModal';
-import ProjectsSidebar from '../ProjectsSidebar';
-import { Section, SectionFoot, FillSection } from '../displayComponents';
-import { toggleProjectModal } from '../../actions';
-import { carousel3D } from '../HOC';
+import ProjectPanel from './ProjectPanel';
+import ProjectModal from './ProjectModal';
+import ProjectsSidebar from './ProjectsSidebar';
+import { Section, SectionFoot, FillSection } from '../../displayComponents';
+import { toggleProjectModal } from '../../../actions';
+import { carousel3D } from '../../HOC';
 
 
 const Projects = ({ style, content, dispatch, ...props }) => {
