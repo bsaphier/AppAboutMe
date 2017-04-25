@@ -118,9 +118,9 @@ class Skill extends Component {
                 onMouseLeave={ () => this.handleLeave(index) }
                 ref={ ref => { this[index] = ref; } }
                 >
-                <span id="1" style={styleBefore}>{ char }</span>
-                <span id="2" >{ char }</span>
-                <span id="3" style={styleAfter}>{ char }</span>
+                <span style={styleBefore}>{ char }</span>
+                <span>{ char }</span>
+                <span style={styleAfter}>{ char }</span>
               </span>
             );
           })
