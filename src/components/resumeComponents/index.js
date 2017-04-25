@@ -23,8 +23,8 @@ const styles = {
 const ResumeComponents = ({ about, skills, contact, projects, ...props }) => {
   return (
     <div>
-      <About style={styles} content={{ about, contact }} {...props} />
-      <Projects style={styles} content={ projects } {...props} />
+      {/* <About style={styles} content={{ about, contact }} {...props} /> */}
+      {/* <Projects style={styles} content={ projects } {...props} /> */}
       <Skills style={styles} content={ skills } {...props} />
     </div>
   );

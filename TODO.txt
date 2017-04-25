@@ -23,6 +23,8 @@
   • Move Carousel navButtons to parent c as a
   • Sidebar styling...
   • don't render the background (entire panel?) if the panel is not in view
+  ----> images are being fetched more than once? because of component updates?
+  ----> load the images when the app loads... with a redux action?
 >
 
 > Skills
