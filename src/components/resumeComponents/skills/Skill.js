@@ -10,7 +10,7 @@ const transform = Modernizr.prefixed('transform');
 const styles = {
   skillContainer: {
     color: '#fff',
-    fontSize: '4em',
+    fontSize: '4rem',
     fontWeight: 900
   },
   skillChar: {
@@ -18,7 +18,7 @@ const styles = {
     display: 'inline-block',
     position: 'relative',
 
-    perspective: 500,
+    perspective: 600,
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -39,20 +39,20 @@ const styles = {
     transformOrigin: 'left top',
 
     //:TODO do I want to refactor to React-Motion spring??
-    WebkitTransition: 'all ease-out .3s',
-    MozTransition: 'all ease-out .3s',
-    OTransition: 'all ease-out .3s',
-    transition: 'all ease-out .3s'
+    WebkitTransition: 'all ease-out .1s',
+    MozTransition: 'all ease-out .1s',
+    OTransition: 'all ease-out .1s',
+    transition: 'all ease-out .1s'
   },
   charBefore: {
     zIndex: 1,
     color: 'rgba(0, 0, 0, 0.2)',
-    [ transform ]: 'scale(1.1, 1) skew(0deg, 20deg)'
+    [ transform ]: 'scale(1.062, 1) skew(0deg, 20deg)'
   },
   charAfter: {
     zIndex: 2,
     color: colors.AMETHYST,
-    textShadow: `-1px 0 1px ${colors.AMETHYST}, 1px 0 1px rgba(0, 0, 0, .8)`,
+    textShadow: `-1px 0 0.5px ${colors.AMETHYST}, 1px 0 0.5px rgba(0, 0, 0, .8)`,
     [ transform ]: 'rotateY(-40deg)'
   }
 };
@@ -62,10 +62,12 @@ class Skill extends Component {
   constructor(props ) {
     super(props);
     this.state = {
-      shadowScale: 1.1,
+      shadowScale: 1.062,
       letterSpacing: 0.3,
       initialSkew: -40,
       hoverSkew: -10,
+      hoverShadowSkew: ((-10 / 2) * -1),
+      initialShadowSkew: ((-40 / 2) * -1),
 
       characters: props.skill.split('')
     };
@@ -75,49 +77,50 @@ class Skill extends Component {
   }
 
 
-  handleLeave({ target }) {
-    let { shadowScale, initialSkew } = this.state;
-    let { before, after } = this[target.innerText];
-    let initialShadowSkew = ((initialSkew / 2) * -1);
+  handleLeave( index ) {
+    let { shadowScale, initialSkew, initialShadowSkew } = this.state;
+    let [ before, _, after ] = this[index].children;
 
     before.style[transform] = `scale(${shadowScale}, 1) skew(0deg, ${initialShadowSkew}deg)`;
     after.style[transform] = `rotateY(${initialSkew}deg)`;
   }
 
 
-  handleEnter({ target }) {
-    let { before, after } = this[target.innerText];
-    before.style[transform] = ``;
-    after.style[transform] = ``;
+  handleEnter( index ) {
+    let { shadowScale, hoverSkew, hoverShadowSkew } = this.state;
+    let [ before, _, after ] = this[index].children;
+
+    before.style[transform] = `scale(${shadowScale}, 1) skew(0deg, ${hoverShadowSkew}deg)`;
+    after.style[transform] = `rotateY(${hoverSkew}deg)`;
   }
 
 
   render() {
-    let { characters, initialSkew, hoverSkew } = this.state;
-
-    const initialShadowSkew = ((initialSkew / 2) * -1);
-    const hoverShadowSkew = ((hoverSkew / 2) * -1);
+    let { characters } = this.state;
 
     return (
       <div className="skill" style={styles.skillContainer}>
         {
           characters.map((char, idx) => {
-            this[char] = { before: null, after: null };
-
-            let key = `${this.props.skill}-${+idx}`;
+            let key = `${this.props.skill}-${idx}`;
+            let index = `${char}-${idx}`;
             let styleAfter = { ...styles.charPseudo, ...styles.charAfter};
             let styleBefore = { ...styles.charPseudo, ...styles.charBefore};
+            let styleParent = idx === 0
+              ? styles.skillChar
+              : { ...styles.skillChar, marginLeft: '0.16em' };
 
             return (
               <span
                 key={key}
-                style={styles.skillChar}
-                onMouseEnter={this.handleEnter}
-                onMouseLeave={this.handleLeave}
+                style={styleParent}
+                onMouseEnter={ () => this.handleEnter(index) }
+                onMouseLeave={ () => this.handleLeave(index) }
+                ref={ ref => { this[index] = ref; } }
                 >
-                <span style={styleBefore} ref={ref => { this[char].before = ref; }}>{ char }</span>
-                { char }
-                <span style={styleAfter} ref={ref => { this[char].after = ref; }}>{ char }</span>
+                <span id="1" style={styleBefore}>{ char }</span>
+                <span id="2" >{ char }</span>
+                <span id="3" style={styleAfter}>{ char }</span>
               </span>
             );
           })

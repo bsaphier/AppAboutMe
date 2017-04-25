@@ -26,9 +26,9 @@ const styles = {
   //     1px 4px 0 ${colors.MENU_DARKER}`
   // },
   itemWrapper: {
-    padding: '0.5rem 1rem',
+    padding: '0.6rem 1.6rem',
     display: 'inline-block',
-    margin: '1rem 1.6rem',
+    margin: '5px',
     background: colors.AMETHYST,
     borderRadius: '0.5rem'
     // border: `solid 5px ${colors.AMETHYST}`
@@ -45,19 +45,21 @@ const Skills = ({ content }) => {
 
         <Title style={styles.title}>{`STUFF I AM GOOD AT`}</Title>
 
-        <Cell style={{ width: '100%', overflow: 'visible' }}>
-          { content.map((skill, idx) => {
-            // let itemWrapStyle = { ...styles.itemWrapper };
-            // return (<div key={skill} style={itemWrapStyle}>
-            //   <div style={styles.text}>{skill}</div>
-            // </div>);
+        <Cell style={{ width: '100%' }}>
 
-            return (
-              <div key={`skill-${skill}`} style={styles.itemWrapper}>
-                <Skill skill={skill} />
-              </div>
-            );
-          })}
+          {/* <div style={styles.itemWrapper}>
+            <Skill skill="Hi" />
+          </div> */}
+
+          {
+            content.map((skill) => {
+              return (
+                <div key={`skill-${skill}`} style={styles.itemWrapper}>
+                  <Skill skill={skill} />
+                </div>
+              );
+            })
+          }
         </Cell>
 
         <SectionFoot to="" text="TO THE TOP" />
