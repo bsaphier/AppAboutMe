@@ -61,21 +61,28 @@
         ],
       "skills":
         [
-          "Javascript / ES6",
-          "Node.js",
-          "ExpressJs",
+          "Node",
+          "Express",
+          "AJAX",
+
           "PostgreSQL",
+
+          "Javascript",
+          "ES6",
 
           "React",
           "Redux",
+
           "HTML5",
-          "AJAX",
           "CSS3",
           "Sass",
           "Bootstrap",
+
           "Webpack",
+
           "Mocha",
           "Chai",
+
           "Git"
         ],
       "education":

@@ -8621,6 +8621,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = {
+  UNMELLOW_YELLOW: '#FFFF66', //'rgba(255, 255, 102, 1)'
+
   CORAL_RED: '#FF4040', //'rgba(255, 64, 64, 1)'
   AMETHYST: '#9067C6', //'rgba(144, 103, 198, 1)'
   OPERA_MAUVE: '#A188A6', //'rgba(161, 136, 166, 1)'
@@ -14519,7 +14521,7 @@ var styles = {
     MsTextFillColor: 'transparent',
     OTextFillColor: 'transparent',
 
-    backgroundImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)'
+    backgroundImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(255, 255, 102) 162%)'
   }
 };
 
@@ -15984,16 +15986,18 @@ var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   skillContainer: {
-    color: '#fff',
-    fontSize: '4rem',
-    fontWeight: 900
+    color: _colors2.default.CHINESE_VIOLET,
+    letterSpacing: '-0.03em',
+    fontSize: '3.8rem',
+    fontWeight: 400,
+    textAlign: 'center'
   },
   skillChar: {
     cursor: 'default',
     display: 'inline-block',
     position: 'relative',
 
-    perspective: 600,
+    perspective: 800,
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -16022,12 +16026,12 @@ var styles = {
   charBefore: _defineProperty({
     zIndex: 1,
     color: 'rgba(0, 0, 0, 0.2)'
-  }, transform, 'scale(1.062, 1) skew(0deg, 20deg)'),
+  }, transform, 'scale(1.038, 1) skew(0deg, 4deg)'),
   charAfter: _defineProperty({
     zIndex: 2,
-    color: _colors2.default.AMETHYST,
-    textShadow: '-1px 0 0.5px ' + _colors2.default.AMETHYST + ', 1px 0 0.5px rgba(0, 0, 0, .8)'
-  }, transform, 'rotateY(-40deg)')
+    color: 'rgb(255, 255, 255)',
+    textShadow: /*`-1px 0 1px ${colors.OPERA_MAUVE},*/'1px 0 1px ' + _colors2.default.MENU_DARK
+  }, transform, 'rotateY(-8deg)')
 };
 
 var Skill = function (_Component) {
@@ -16039,12 +16043,11 @@ var Skill = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Skill.__proto__ || Object.getPrototypeOf(Skill)).call(this, props));
 
     _this.state = {
-      shadowScale: 1.062,
-      letterSpacing: 0.3,
-      initialSkew: -40,
-      hoverSkew: -10,
-      hoverShadowSkew: -10 / 2 * -1,
-      initialShadowSkew: -40 / 2 * -1,
+      shadowScale: 1.038,
+      initialSkew: -8,
+      hoverSkew: -38,
+      hoverShadowSkew: -38 / 2 * -1,
+      initialShadowSkew: -8 / 2 * -1,
 
       characters: props.skill.split('')
     };
@@ -16067,6 +16070,9 @@ var Skill = function (_Component) {
           _ = _index$children[1],
           after = _index$children[2];
 
+      //:TODO refactor to React-Motion spring??
+
+
       before.style[transform] = 'scale(' + shadowScale + ', 1) skew(0deg, ' + initialShadowSkew + 'deg)';
       after.style[transform] = 'rotateY(' + initialSkew + 'deg)';
     }
@@ -16083,6 +16089,9 @@ var Skill = function (_Component) {
           _ = _index$children2[1],
           after = _index$children2[2];
 
+      //:TODO refactor to React-Motion spring??
+
+
       before.style[transform] = 'scale(' + shadowScale + ', 1) skew(0deg, ' + hoverShadowSkew + 'deg)';
       after.style[transform] = 'rotateY(' + hoverSkew + 'deg)';
     }
@@ -16098,11 +16107,12 @@ var Skill = function (_Component) {
         'div',
         { className: 'skill', style: styles.skillContainer },
         characters.map(function (char, idx) {
-          var key = _this2.props.skill + '-' + idx;
           var index = char + '-' + idx;
+          var key = _this2.props.skill + '-' + idx;
+
+          var styleParent = styles.skillChar;
           var styleAfter = _extends({}, styles.charPseudo, styles.charAfter);
           var styleBefore = _extends({}, styles.charPseudo, styles.charBefore);
-          var styleParent = idx === 0 ? styles.skillChar : _extends({}, styles.skillChar, { marginLeft: '0.16em' });
 
           return _react2.default.createElement(
             'span',
@@ -16121,17 +16131,17 @@ var Skill = function (_Component) {
             },
             _react2.default.createElement(
               'span',
-              { id: '1', style: styleBefore },
+              { style: styleBefore },
               char
             ),
             _react2.default.createElement(
               'span',
-              { id: '2' },
+              null,
               char
             ),
             _react2.default.createElement(
               'span',
-              { id: '3', style: styleAfter },
+              { style: styleAfter },
               char
             )
           );
@@ -16179,32 +16189,44 @@ var styles = {
     fontSize: '5rem',
     letterSpacing: '-0.25rem'
   },
-  // text: {
-  //   cursor: 'default',
-  //   color: colors.OPERA_MAUVE,
-  //
-  //   fontWeight: 400,
-  //   fontSize: '1.6rem',
-  //
-  //   textShadow: `
-  //     1px 1px 0 ${colors.MENU_DARKER},
-  //     1px 2px 0 ${colors.MENU_DARKER},
-  //     1px 3px 0 ${colors.MENU_DARKER},
-  //     1px 4px 0 ${colors.MENU_DARKER}`
-  // },
-  itemWrapper: {
-    padding: '0.6rem 1.6rem',
-    display: 'inline-block',
-    margin: '5px',
-    background: _colors2.default.AMETHYST,
-    borderRadius: '0.5rem'
-    // border: `solid 5px ${colors.AMETHYST}`
+
+  flexContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+
+    width: '83%',
+    height: '66%',
+    margin: '40px auto',
+
+    WebkitFlexWrap: 'wrap',
+    MSFlexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
-  item: {}
+  itemWrapper: {
+    padding: '0.3em 1em',
+    margin: '10px 5px',
+
+    borderRadius: '0.33rem',
+    background: _colors2.default.AMETHYST
+
+  }
 };
 
-var Skills = function Skills(_ref) {
-  var content = _ref.content;
+var handleEnter = function handleEnter(_ref) {
+  var target = _ref.target;
+
+  console.log({ target: target });
+};
+
+var handleLeave = function handleLeave(_ref2) {
+  var target = _ref2.target;
+
+  console.log({ target: target });
+};
+
+var Skills = function Skills(_ref3) {
+  var content = _ref3.content;
 
   return _react2.default.createElement(
     _displayComponents.Section,
@@ -16220,13 +16242,21 @@ var Skills = function Skills(_ref) {
       _react2.default.createElement(
         _displayComponents.Cell,
         { style: { width: '100%' } },
-        content.map(function (skill) {
-          return _react2.default.createElement(
-            'div',
-            { key: 'skill-' + skill, style: styles.itemWrapper },
-            _react2.default.createElement(_Skill2.default, { skill: skill })
-          );
-        })
+        _react2.default.createElement(
+          'div',
+          { className: 'skillWrapper', style: styles.flexContainer },
+          content.map(function (skill) {
+            return _react2.default.createElement(
+              'div',
+              {
+                key: 'skill-' + skill,
+                style: styles.itemWrapper,
+                onMouseEnter: handleEnter,
+                onMouseLeave: handleLeave },
+              _react2.default.createElement(_Skill2.default, { skill: skill })
+            );
+          })
+        )
       ),
       _react2.default.createElement(_displayComponents.SectionFoot, { to: '', text: 'TO THE TOP' })
     )
@@ -16450,7 +16480,7 @@ exports = module.exports = __webpack_require__(170)();
 
 
 // module
-exports.push([module.i, "/*~~~~~~~~~~~~~~ resume about ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume work ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume education ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume skills ~~~~~~~~~~~~~~*/\n/*~~~~~~~~~~~~~~ resume portfolio ~~~~~~~~~~~~~~*/\n@keyframes gradwave {\n  0% {\n    background-position: 0% 50%; }\n  50% {\n    background-position: 100% 51%; }\n  100% {\n    background-position: 0% 50%; } }\n\n@keyframes hueShift {\n  0% {\n    -webkit-filter: hue-rotate(45deg); }\n  50% {\n    -webkit-filter: hue-rotate(0deg); }\n  100% {\n    -webkit-filter: hue-rotate(45deg); } }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: white; }\n\nh1, h2, h3, h4, h5, h6 {\n  letter-spacing: -.038em; }\n\nh1 a, h2 a, h3 a, h4 a, h5 a, h6 a {\n  font-weight: inherit; }\n\na {\n  text-decoration: none; }\n\n.shadow {\n  color: #444dff;\n  margin: auto;\n  text-shadow: 0.5px 0.5px 0px #2f0446, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229;\n  -webkit-animation: hueShift 13s infinite linear;\n  -webkit-transition: all .2s ease-in-out;\n  -moz-transition: all .2s ease-in-out;\n  -ms-transition: all .2s ease-in-out;\n  transition: all 0.2s ease-out; }\n  .shadow:hover {\n    position: relative;\n    top: -1.5px;\n    left: -1.5px;\n    text-shadow: 0.5px 0.5px 0px #450a65, 1px 1px 0px #2f0446, 1.5px 1.5px 0px #1c0229, 2px 2px 0px #1c0229, 2.5px 2.5px 0px #0a0017, 3px 3px 0px #0a0017; }\n\n.active {\n  background-image: linear-gradient(#515151, #2d2d2d); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n", ""]);
+exports.push([module.i, "* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  background-color: #FFF; }\n\na {\n  text-decoration: none; }\n", ""]);
 
 // exports
 

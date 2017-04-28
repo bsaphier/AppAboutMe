@@ -5,6 +5,13 @@
 • SectionFoot styling....
 
 
+
+<–––––––––––––HIGHER ORDER COMPONENTS––––––––––––>
+> clickSpin / hoverSpin
+  • DRY DRY
+
+
+
 <––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
 > Welcome
   • mouse hover triggers motion in letters

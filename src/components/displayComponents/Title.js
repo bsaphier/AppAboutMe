@@ -23,7 +23,7 @@ const styles = {
     MsTextFillColor: 'transparent',
     OTextFillColor: 'transparent',
 
-    backgroundImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)'
+    backgroundImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(255, 255, 102) 162%)'
   }
 };
 

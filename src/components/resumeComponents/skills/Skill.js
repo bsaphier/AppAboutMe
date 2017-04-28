@@ -9,16 +9,18 @@ const transform = Modernizr.prefixed('transform');
 
 const styles = {
   skillContainer: {
-    color: '#fff',
-    fontSize: '4rem',
-    fontWeight: 900
+    color: colors.CHINESE_VIOLET,
+    letterSpacing: '-0.03em',
+    fontSize: '3.8rem',
+    fontWeight: 400,
+    textAlign: 'center'
   },
   skillChar: {
     cursor: 'default',
     display: 'inline-block',
     position: 'relative',
 
-    perspective: 600,
+    perspective: 800,
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -47,13 +49,13 @@ const styles = {
   charBefore: {
     zIndex: 1,
     color: 'rgba(0, 0, 0, 0.2)',
-    [ transform ]: 'scale(1.062, 1) skew(0deg, 20deg)'
+    [ transform ]: 'scale(1.038, 1) skew(0deg, 4deg)'
   },
   charAfter: {
     zIndex: 2,
-    color: colors.AMETHYST,
-    textShadow: `-1px 0 0.5px ${colors.AMETHYST}, 1px 0 0.5px rgba(0, 0, 0, .8)`,
-    [ transform ]: 'rotateY(-40deg)'
+    color: 'rgb(255, 255, 255)',
+    textShadow: /*`-1px 0 1px ${colors.OPERA_MAUVE},*/ `1px 0 1px ${colors.MENU_DARK}`,
+    [ transform ]: 'rotateY(-8deg)'
   }
 };
 
@@ -62,12 +64,11 @@ class Skill extends Component {
   constructor(props ) {
     super(props);
     this.state = {
-      shadowScale: 1.062,
-      letterSpacing: 0.3,
-      initialSkew: -40,
-      hoverSkew: -10,
-      hoverShadowSkew: ((-10 / 2) * -1),
-      initialShadowSkew: ((-40 / 2) * -1),
+      shadowScale: 1.038,
+      initialSkew: -8,
+      hoverSkew: -38,
+      hoverShadowSkew: ((-38 / 2) * -1),
+      initialShadowSkew: ((-8 / 2) * -1),
 
       characters: props.skill.split('')
     };
@@ -81,6 +82,7 @@ class Skill extends Component {
     let { shadowScale, initialSkew, initialShadowSkew } = this.state;
     let [ before, _, after ] = this[index].children;
 
+    //:TODO refactor to React-Motion spring??
     before.style[transform] = `scale(${shadowScale}, 1) skew(0deg, ${initialShadowSkew}deg)`;
     after.style[transform] = `rotateY(${initialSkew}deg)`;
   }
@@ -90,6 +92,7 @@ class Skill extends Component {
     let { shadowScale, hoverSkew, hoverShadowSkew } = this.state;
     let [ before, _, after ] = this[index].children;
 
+    //:TODO refactor to React-Motion spring??
     before.style[transform] = `scale(${shadowScale}, 1) skew(0deg, ${hoverShadowSkew}deg)`;
     after.style[transform] = `rotateY(${hoverSkew}deg)`;
   }
@@ -102,13 +105,12 @@ class Skill extends Component {
       <div className="skill" style={styles.skillContainer}>
         {
           characters.map((char, idx) => {
-            let key = `${this.props.skill}-${idx}`;
             let index = `${char}-${idx}`;
+            let key = `${this.props.skill}-${idx}`;
+
+            let styleParent = styles.skillChar;
             let styleAfter = { ...styles.charPseudo, ...styles.charAfter};
             let styleBefore = { ...styles.charPseudo, ...styles.charBefore};
-            let styleParent = idx === 0
-              ? styles.skillChar
-              : { ...styles.skillChar, marginLeft: '0.16em' };
 
             return (
               <span

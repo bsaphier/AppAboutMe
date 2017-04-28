@@ -12,29 +12,40 @@ const styles = {
     fontSize: '5rem',
     letterSpacing: '-0.25rem',
   },
-  // text: {
-  //   cursor: 'default',
-  //   color: colors.OPERA_MAUVE,
-  //
-  //   fontWeight: 400,
-  //   fontSize: '1.6rem',
-  //
-  //   textShadow: `
-  //     1px 1px 0 ${colors.MENU_DARKER},
-  //     1px 2px 0 ${colors.MENU_DARKER},
-  //     1px 3px 0 ${colors.MENU_DARKER},
-  //     1px 4px 0 ${colors.MENU_DARKER}`
-  // },
-  itemWrapper: {
-    padding: '0.6rem 1.6rem',
-    display: 'inline-block',
-    margin: '5px',
-    background: colors.AMETHYST,
-    borderRadius: '0.5rem'
-    // border: `solid 5px ${colors.AMETHYST}`
+
+  flexContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+
+    width: '83%',
+    height: '66%',
+    margin: '40px auto',
+
+    WebkitFlexWrap: 'wrap',
+    MSFlexWrap: 'wrap',
+    flexWrap: 'wrap',
   },
-  item: {
+  itemWrapper: {
+    padding: '0.3em 1em',
+    margin: '10px 5px',
+
+    borderRadius: '0.33rem',
+    background: colors.AMETHYST,
+
+    // WebkitFlexGrow: 1,
+    // flexGrow: 1
   }
+};
+
+
+const handleEnter = ({ target }) => {
+  console.log({target});
+};
+
+
+const handleLeave = ({ target }) => {
+  console.log({target});
 };
 
 
@@ -46,20 +57,21 @@ const Skills = ({ content }) => {
         <Title style={styles.title}>{`STUFF I AM GOOD AT`}</Title>
 
         <Cell style={{ width: '100%' }}>
-
-          {/* <div style={styles.itemWrapper}>
-            <Skill skill="Hi" />
-          </div> */}
-
-          {
-            content.map((skill) => {
-              return (
-                <div key={`skill-${skill}`} style={styles.itemWrapper}>
-                  <Skill skill={skill} />
-                </div>
-              );
-            })
-          }
+          <div className="skillWrapper" style={styles.flexContainer}>
+            {
+              content.map((skill) => {
+                return (
+                  <div
+                    key={`skill-${skill}`}
+                    style={styles.itemWrapper}
+                    onMouseEnter={ handleEnter }
+                    onMouseLeave={ handleLeave }>
+                    <Skill skill={skill} />
+                  </div>
+                );
+              })
+            }
+          </div>
         </Cell>
 
         <SectionFoot to="" text="TO THE TOP" />

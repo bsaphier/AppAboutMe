@@ -1,6 +1,17 @@
 @charset 'UTF-8';
 
-@import 'abstracts/all';
-@import 'base/all';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-@import '/shame';
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background-color: #FFF;
+}
+
+a { text-decoration: none; }
