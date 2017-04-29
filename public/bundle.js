@@ -1598,6 +1598,21 @@ module.exports = ReactCurrentOwner;
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+;(function(window){
+var hadGlobal = 'Modernizr' in window;
+var oldGlobal = window.Modernizr;
+/*! modernizr 3.4.0 (Custom Build) | MIT *
+ * https://modernizr.com/download/?-csstransforms-csstransforms3d-csstransformslevel2-csstransitions-preserve3d-domprefixes-prefixed-prefixes-setclasses-testallprops-testprop-teststyles !*/
+!function(e,t,n){function r(e,t){return typeof e===t}function s(){var e,t,n,s,i,o,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],t=C[l],t.name&&(e.push(t.name.toLowerCase()),t.options&&t.options.aliases&&t.options.aliases.length))for(n=0;n<t.options.aliases.length;n++)e.push(t.options.aliases[n].toLowerCase());for(s=r(t.fn,"function")?t.fn():t.fn,i=0;i<e.length;i++)o=e[i],a=o.split("."),1===a.length?Modernizr[a[0]]=s:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=s),S.push((s?"":"no-")+a.join("-"))}}function i(e){var t=w.className,n=Modernizr._config.classPrefix||"";if(_&&(t=t.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+n+"no-js(\\s|$)");t=t.replace(r,"$1"+n+"js$2")}Modernizr._config.enableClasses&&(t+=" "+n+e.join(" "+n),_?w.className.baseVal=t:w.className=t)}function o(e,t){return!!~(""+e).indexOf(t)}function a(){return"function"!=typeof t.createElement?t.createElement(arguments[0]):_?t.createElementNS.call(t,"http://www.w3.org/2000/svg",arguments[0]):t.createElement.apply(t,arguments)}function l(){var e=t.body;return e||(e=a(_?"svg":"body"),e.fake=!0),e}function f(e,n,r,s){var i,o,f,u,p="modernizr",d=a("div"),c=l();if(parseInt(r,10))for(;r--;)f=a("div"),f.id=s?s[r]:p+(r+1),d.appendChild(f);return i=a("style"),i.type="text/css",i.id="s"+p,(c.fake?c:d).appendChild(i),c.appendChild(d),i.styleSheet?i.styleSheet.cssText=e:i.appendChild(t.createTextNode(e)),d.id=p,c.fake&&(c.style.background="",c.style.overflow="hidden",u=w.style.overflow,w.style.overflow="hidden",w.appendChild(c)),o=n(d,e),c.fake?(c.parentNode.removeChild(c),w.style.overflow=u,w.offsetHeight):d.parentNode.removeChild(d),!!o}function u(e){return e.replace(/([A-Z])/g,function(e,t){return"-"+t.toLowerCase()}).replace(/^ms-/,"-ms-")}function p(t,n,r){var s;if("getComputedStyle"in e){s=getComputedStyle.call(e,t,n);var i=e.console;if(null!==s)r&&(s=s.getPropertyValue(r));else if(i){var o=i.error?"error":"log";i[o].call(i,"getComputedStyle returning null, its possible modernizr test results are inaccurate")}}else s=!n&&t.currentStyle&&t.currentStyle[r];return s}function d(t,r){var s=t.length;if("CSS"in e&&"supports"in e.CSS){for(;s--;)if(e.CSS.supports(u(t[s]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var i=[];s--;)i.push("("+u(t[s])+":"+r+")");return i=i.join(" or "),f("@supports ("+i+") { #modernizr { position: absolute; } }",function(e){return"absolute"==p(e,null,"position")})}return n}function c(e){return e.replace(/([a-z])-([a-z])/g,function(e,t,n){return t+n.toUpperCase()}).replace(/^-/,"")}function m(e,t,s,i){function l(){u&&(delete z.style,delete z.modElem)}if(i=r(i,"undefined")?!1:i,!r(s,"undefined")){var f=d(e,s);if(!r(f,"undefined"))return f}for(var u,p,m,g,v,h=["modernizr","tspan","samp"];!z.style&&h.length;)u=!0,z.modElem=a(h.shift()),z.style=z.modElem.style;for(m=e.length,p=0;m>p;p++)if(g=e[p],v=z.style[g],o(g,"-")&&(g=c(g)),z.style[g]!==n){if(i||r(s,"undefined"))return l(),"pfx"==t?g:!0;try{z.style[g]=s}catch(y){}if(z.style[g]!=v)return l(),"pfx"==t?g:!0}return l(),!1}function g(e,t){return function(){return e.apply(t,arguments)}}function v(e,t,n){var s;for(var i in e)if(e[i]in t)return n===!1?e[i]:(s=t[e[i]],r(s,"function")?g(s,n||t):s);return!1}function h(e,t,n,s,i){var o=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+P.join(o+" ")+o).split(" ");return r(t,"string")||r(t,"undefined")?m(a,t,s,i):(a=(e+" "+k.join(o+" ")+o).split(" "),v(a,t,n))}function y(e,t,r){return h(e,n,n,t,r)}var C=[],x={_version:"3.4.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,t){var n=this;setTimeout(function(){t(n[e])},0)},addTest:function(e,t,n){C.push({name:e,fn:t,options:n})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=x,Modernizr=new Modernizr;var S=[],w=t.documentElement,_="svg"===w.nodeName.toLowerCase(),b="Moz O ms Webkit",P=x._config.usePrefixes?b.split(" "):[];x._cssomPrefixes=P;var T={elem:a("modernizr")};Modernizr._q.push(function(){delete T.elem});var z={style:T.elem.style};Modernizr._q.unshift(function(){delete z.style});var k=x._config.usePrefixes?b.toLowerCase().split(" "):[];x._domPrefixes=k,x.testAllProps=h;var E=function(t){var r,s=N.length,i=e.CSSRule;if("undefined"==typeof i)return n;if(!t)return!1;if(t=t.replace(/^@/,""),r=t.replace(/-/g,"_").toUpperCase()+"_RULE",r in i)return"@"+t;for(var o=0;s>o;o++){var a=N[o],l=a.toUpperCase()+"_"+r;if(l in i)return"@-"+a.toLowerCase()+"-"+t}return!1};x.atRule=E;var N=(x.prefixed=function(e,t,n){return 0===e.indexOf("@")?E(e):(-1!=e.indexOf("-")&&(e=c(e)),t?h(e,t,n):h(e,"pfx"))},x._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""]);x._prefixes=N,x.testAllProps=y;var A=(x.testProp=function(e,t,r){return m([e],n,t,r)},x.testStyles=f);Modernizr.addTest("csstransforms",function(){return-1===navigator.userAgent.indexOf("Android 2.")&&y("transform","scale(1)",!0)}),Modernizr.addTest("csstransformslevel2",function(){return y("translate","45px",!0)});var j="CSS"in e&&"supports"in e.CSS,L="supportsCSS"in e;Modernizr.addTest("supports",j||L),Modernizr.addTest("csstransforms3d",function(){var e=!!y("perspective","1px",!0),t=Modernizr._config.usePrefixes;if(e&&(!t||"webkitPerspective"in w.style)){var n,r="#modernizr{width:0;height:0}";Modernizr.supports?n="@supports (perspective: 1px)":(n="@media (transform-3d)",t&&(n+=",(-webkit-transform-3d)")),n+="{#modernizr{width:7px;height:18px;margin:0;padding:0;border:0}}",A(r+n,function(t){e=7===t.offsetWidth&&18===t.offsetHeight})}return e}),Modernizr.addTest("preserve3d",function(){var t,n,r=e.CSS,s=!1;return r&&r.supports&&r.supports("(transform-style: preserve-3d)")?!0:(t=a("a"),n=a("a"),t.style.cssText="display: block; transform-style: preserve-3d; transform-origin: right; transform: rotateY(40deg);",n.style.cssText="display: block; width: 9px; height: 1px; background: #000; transform-origin: right; transform: rotateY(40deg);",t.appendChild(n),w.appendChild(t),s=n.getBoundingClientRect(),w.removeChild(t),s=s.width&&s.width<4)}),Modernizr.addTest("csstransitions",y("transition","all",!0)),s(),i(S),delete x.addTest,delete x.addAsyncTest;for(var O=0;O<Modernizr._q.length;O++)Modernizr._q[O]();e.Modernizr=Modernizr}(window,document);
+module.exports = window.Modernizr;
+if (hadGlobal) { window.Modernizr = oldGlobal; }
+else { delete window.Modernizr; }
+})(window);
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1869,21 +1884,6 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
   }
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-;(function(window){
-var hadGlobal = 'Modernizr' in window;
-var oldGlobal = window.Modernizr;
-/*! modernizr 3.4.0 (Custom Build) | MIT *
- * https://modernizr.com/download/?-csstransforms-csstransforms3d-csstransformslevel2-csstransitions-preserve3d-domprefixes-prefixed-prefixes-setclasses-testallprops-testprop-teststyles !*/
-!function(e,t,n){function r(e,t){return typeof e===t}function s(){var e,t,n,s,i,o,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],t=C[l],t.name&&(e.push(t.name.toLowerCase()),t.options&&t.options.aliases&&t.options.aliases.length))for(n=0;n<t.options.aliases.length;n++)e.push(t.options.aliases[n].toLowerCase());for(s=r(t.fn,"function")?t.fn():t.fn,i=0;i<e.length;i++)o=e[i],a=o.split("."),1===a.length?Modernizr[a[0]]=s:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=s),S.push((s?"":"no-")+a.join("-"))}}function i(e){var t=w.className,n=Modernizr._config.classPrefix||"";if(_&&(t=t.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+n+"no-js(\\s|$)");t=t.replace(r,"$1"+n+"js$2")}Modernizr._config.enableClasses&&(t+=" "+n+e.join(" "+n),_?w.className.baseVal=t:w.className=t)}function o(e,t){return!!~(""+e).indexOf(t)}function a(){return"function"!=typeof t.createElement?t.createElement(arguments[0]):_?t.createElementNS.call(t,"http://www.w3.org/2000/svg",arguments[0]):t.createElement.apply(t,arguments)}function l(){var e=t.body;return e||(e=a(_?"svg":"body"),e.fake=!0),e}function f(e,n,r,s){var i,o,f,u,p="modernizr",d=a("div"),c=l();if(parseInt(r,10))for(;r--;)f=a("div"),f.id=s?s[r]:p+(r+1),d.appendChild(f);return i=a("style"),i.type="text/css",i.id="s"+p,(c.fake?c:d).appendChild(i),c.appendChild(d),i.styleSheet?i.styleSheet.cssText=e:i.appendChild(t.createTextNode(e)),d.id=p,c.fake&&(c.style.background="",c.style.overflow="hidden",u=w.style.overflow,w.style.overflow="hidden",w.appendChild(c)),o=n(d,e),c.fake?(c.parentNode.removeChild(c),w.style.overflow=u,w.offsetHeight):d.parentNode.removeChild(d),!!o}function u(e){return e.replace(/([A-Z])/g,function(e,t){return"-"+t.toLowerCase()}).replace(/^ms-/,"-ms-")}function p(t,n,r){var s;if("getComputedStyle"in e){s=getComputedStyle.call(e,t,n);var i=e.console;if(null!==s)r&&(s=s.getPropertyValue(r));else if(i){var o=i.error?"error":"log";i[o].call(i,"getComputedStyle returning null, its possible modernizr test results are inaccurate")}}else s=!n&&t.currentStyle&&t.currentStyle[r];return s}function d(t,r){var s=t.length;if("CSS"in e&&"supports"in e.CSS){for(;s--;)if(e.CSS.supports(u(t[s]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var i=[];s--;)i.push("("+u(t[s])+":"+r+")");return i=i.join(" or "),f("@supports ("+i+") { #modernizr { position: absolute; } }",function(e){return"absolute"==p(e,null,"position")})}return n}function c(e){return e.replace(/([a-z])-([a-z])/g,function(e,t,n){return t+n.toUpperCase()}).replace(/^-/,"")}function m(e,t,s,i){function l(){u&&(delete z.style,delete z.modElem)}if(i=r(i,"undefined")?!1:i,!r(s,"undefined")){var f=d(e,s);if(!r(f,"undefined"))return f}for(var u,p,m,g,v,h=["modernizr","tspan","samp"];!z.style&&h.length;)u=!0,z.modElem=a(h.shift()),z.style=z.modElem.style;for(m=e.length,p=0;m>p;p++)if(g=e[p],v=z.style[g],o(g,"-")&&(g=c(g)),z.style[g]!==n){if(i||r(s,"undefined"))return l(),"pfx"==t?g:!0;try{z.style[g]=s}catch(y){}if(z.style[g]!=v)return l(),"pfx"==t?g:!0}return l(),!1}function g(e,t){return function(){return e.apply(t,arguments)}}function v(e,t,n){var s;for(var i in e)if(e[i]in t)return n===!1?e[i]:(s=t[e[i]],r(s,"function")?g(s,n||t):s);return!1}function h(e,t,n,s,i){var o=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+P.join(o+" ")+o).split(" ");return r(t,"string")||r(t,"undefined")?m(a,t,s,i):(a=(e+" "+k.join(o+" ")+o).split(" "),v(a,t,n))}function y(e,t,r){return h(e,n,n,t,r)}var C=[],x={_version:"3.4.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,t){var n=this;setTimeout(function(){t(n[e])},0)},addTest:function(e,t,n){C.push({name:e,fn:t,options:n})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=x,Modernizr=new Modernizr;var S=[],w=t.documentElement,_="svg"===w.nodeName.toLowerCase(),b="Moz O ms Webkit",P=x._config.usePrefixes?b.split(" "):[];x._cssomPrefixes=P;var T={elem:a("modernizr")};Modernizr._q.push(function(){delete T.elem});var z={style:T.elem.style};Modernizr._q.unshift(function(){delete z.style});var k=x._config.usePrefixes?b.toLowerCase().split(" "):[];x._domPrefixes=k,x.testAllProps=h;var E=function(t){var r,s=N.length,i=e.CSSRule;if("undefined"==typeof i)return n;if(!t)return!1;if(t=t.replace(/^@/,""),r=t.replace(/-/g,"_").toUpperCase()+"_RULE",r in i)return"@"+t;for(var o=0;s>o;o++){var a=N[o],l=a.toUpperCase()+"_"+r;if(l in i)return"@-"+a.toLowerCase()+"-"+t}return!1};x.atRule=E;var N=(x.prefixed=function(e,t,n){return 0===e.indexOf("@")?E(e):(-1!=e.indexOf("-")&&(e=c(e)),t?h(e,t,n):h(e,"pfx"))},x._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""]);x._prefixes=N,x.testAllProps=y;var A=(x.testProp=function(e,t,r){return m([e],n,t,r)},x.testStyles=f);Modernizr.addTest("csstransforms",function(){return-1===navigator.userAgent.indexOf("Android 2.")&&y("transform","scale(1)",!0)}),Modernizr.addTest("csstransformslevel2",function(){return y("translate","45px",!0)});var j="CSS"in e&&"supports"in e.CSS,L="supportsCSS"in e;Modernizr.addTest("supports",j||L),Modernizr.addTest("csstransforms3d",function(){var e=!!y("perspective","1px",!0),t=Modernizr._config.usePrefixes;if(e&&(!t||"webkitPerspective"in w.style)){var n,r="#modernizr{width:0;height:0}";Modernizr.supports?n="@supports (perspective: 1px)":(n="@media (transform-3d)",t&&(n+=",(-webkit-transform-3d)")),n+="{#modernizr{width:7px;height:18px;margin:0;padding:0;border:0}}",A(r+n,function(t){e=7===t.offsetWidth&&18===t.offsetHeight})}return e}),Modernizr.addTest("preserve3d",function(){var t,n,r=e.CSS,s=!1;return r&&r.supports&&r.supports("(transform-style: preserve-3d)")?!0:(t=a("a"),n=a("a"),t.style.cssText="display: block; transform-style: preserve-3d; transform-origin: right; transform: rotateY(40deg);",n.style.cssText="display: block; width: 9px; height: 1px; background: #000; transform-origin: right; transform: rotateY(40deg);",t.appendChild(n),w.appendChild(t),s=n.getBoundingClientRect(),w.removeChild(t),s=s.width&&s.width<4)}),Modernizr.addTest("csstransitions",y("transition","all",!0)),s(),i(S),delete x.addTest,delete x.addAsyncTest;for(var O=0;O<Modernizr._q.length;O++)Modernizr._q[O]();e.Modernizr=Modernizr}(window,document);
-module.exports = window.Modernizr;
-if (hadGlobal) { window.Modernizr = oldGlobal; }
-else { delete window.Modernizr; }
-})(window);
 
 /***/ }),
 /* 17 */
@@ -3545,7 +3545,7 @@ module.exports = ReactReconciler;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 var getEventTarget = __webpack_require__(64);
 
@@ -8671,7 +8671,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -13025,7 +13025,7 @@ var _carouselPanel = __webpack_require__(87);
 
 var _carouselPanel2 = _interopRequireDefault(_carouselPanel);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -13330,7 +13330,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = __webpack_require__(29);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -13501,7 +13501,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = __webpack_require__(29);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -13779,6 +13779,16 @@ var Main = function (_Component) {
       return _react2.default.createElement(
         'main',
         { style: { fontFamily: '"Roboto", sans-serif' } },
+        _react2.default.createElement(
+          _displayComponents.Section,
+          { id: 'home' },
+          _react2.default.createElement(
+            _displayComponents.FillSection,
+            null,
+            _react2.default.createElement(_Welcome2.default, null),
+            _react2.default.createElement(_displayComponents.SectionFoot, { to: 'about', text: 'ABOUT ME' })
+          )
+        ),
         _react2.default.createElement(_resumeComponents2.default, _extends({
           about: about,
           skills: skills,
@@ -14563,7 +14573,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = __webpack_require__(29);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -14812,7 +14822,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = __webpack_require__(29);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -15154,6 +15164,8 @@ var ResumeComponents = function ResumeComponents(_ref) {
   return _react2.default.createElement(
     'div',
     null,
+    _react2.default.createElement(_about2.default, _extends({ style: styles, content: { about: about, contact: contact } }, props)),
+    _react2.default.createElement(_projects2.default, _extends({ style: styles, content: projects }, props)),
     _react2.default.createElement(_skills2.default, _extends({ style: styles, content: skills }, props))
   );
 };
@@ -15375,7 +15387,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -15968,7 +15980,7 @@ var _colors = __webpack_require__(85);
 
 var _colors2 = _interopRequireDefault(_colors);
 
-var _modernizrrc = __webpack_require__(16);
+var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
@@ -15986,9 +15998,9 @@ var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   skillContainer: {
-    color: _colors2.default.CHINESE_VIOLET,
+    color: _colors2.default.OPERA_MAUVE,
     letterSpacing: '-0.03em',
-    fontSize: '3.8rem',
+    fontSize: '2rem',
     fontWeight: 400,
     textAlign: 'center'
   },
@@ -15997,7 +16009,7 @@ var styles = {
     display: 'inline-block',
     position: 'relative',
 
-    perspective: 800,
+    perspective: 900,
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -16018,20 +16030,20 @@ var styles = {
     transformOrigin: 'left top',
 
     //:TODO do I want to refactor to React-Motion spring??
-    WebkitTransition: 'all ease-out .1s',
-    MozTransition: 'all ease-out .1s',
-    OTransition: 'all ease-out .1s',
-    transition: 'all ease-out .1s'
+    WebkitTransition: 'all ease .2s',
+    MozTransition: 'all ease .2s',
+    OTransition: 'all ease .2s',
+    transition: 'all ease .2s'
   },
   charBefore: _defineProperty({
     zIndex: 1,
-    color: 'rgba(0, 0, 0, 0.2)'
-  }, transform, 'scale(1.038, 1) skew(0deg, 4deg)'),
+    color: 'rgba(0, 0, 0, 0.3)'
+  }, transform, 'scale(1.038, 1) skew(0deg, 10deg)'),
   charAfter: _defineProperty({
     zIndex: 2,
-    color: 'rgb(255, 255, 255)',
-    textShadow: /*`-1px 0 1px ${colors.OPERA_MAUVE},*/'1px 0 1px ' + _colors2.default.MENU_DARK
-  }, transform, 'rotateY(-8deg)')
+    color: _colors2.default.MENU_DARK,
+    textShadow: '1px 0 0.01px ' + _colors2.default.MENU_DARKER
+  }, transform, 'rotateY(-20deg)')
 };
 
 var Skill = function (_Component) {
@@ -16044,10 +16056,10 @@ var Skill = function (_Component) {
 
     _this.state = {
       shadowScale: 1.038,
-      initialSkew: -8,
+      initialSkew: -10,
       hoverSkew: -38,
       hoverShadowSkew: -38 / 2 * -1,
-      initialShadowSkew: -8 / 2 * -1,
+      initialShadowSkew: -10 / 2 * -1,
 
       characters: props.skill.split('')
     };
@@ -16101,18 +16113,22 @@ var Skill = function (_Component) {
       var _this2 = this;
 
       var characters = this.state.characters;
+      var _props = this.props,
+          style = _props.style,
+          color = _props.color;
 
+      var letterColor = color ? { color: color } : {};
+
+      var styleParent = styles.skillChar;
+      var styleBefore = _extends({}, styles.charPseudo, styles.charBefore);
+      var styleAfter = _extends({}, styles.charPseudo, styles.charAfter, letterColor);
 
       return _react2.default.createElement(
         'div',
-        { className: 'skill', style: styles.skillContainer },
+        { className: 'skill', style: _extends({}, styles.skillContainer, style) },
         characters.map(function (char, idx) {
           var index = char + '-' + idx;
           var key = _this2.props.skill + '-' + idx;
-
-          var styleParent = styles.skillChar;
-          var styleAfter = _extends({}, styles.charPseudo, styles.charAfter);
-          var styleBefore = _extends({}, styles.charPseudo, styles.charBefore);
 
           return _react2.default.createElement(
             'span',
@@ -16178,9 +16194,15 @@ var _colors = __webpack_require__(85);
 
 var _colors2 = _interopRequireDefault(_colors);
 
+var _modernizrrc = __webpack_require__(15);
+
+var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
+
 var _displayComponents = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
   title: {
@@ -16190,39 +16212,62 @@ var styles = {
     letterSpacing: '-0.25rem'
   },
 
-  flexContainer: {
+  flexWrapper: {
     display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-
     width: '83%',
     height: '66%',
+
     margin: '40px auto',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
 
     WebkitFlexWrap: 'wrap',
     MSFlexWrap: 'wrap',
     flexWrap: 'wrap'
   },
-  itemWrapper: {
-    padding: '0.3em 1em',
-    margin: '10px 5px',
+  skillWrapper: {
+    position: 'relative',
+    zIndex: 1,
 
-    borderRadius: '0.33rem',
-    background: _colors2.default.AMETHYST
+    margin: '5px 10px',
+    padding: '15px 40px',
 
+    minWidth: '180px',
+    minHeight: '20px',
+
+    background: '#fff',
+    borderRadius: '0.38rem',
+    border: '2px solid ' + _colors2.default.AMETHYST,
+
+    WebkitTransition: 'all ease-in-out .3s',
+    MozTransition: 'all ease-in-out .3s',
+    OTransition: 'all ease-in-out .3s',
+    transition: 'all ease-in-out .3s',
+
+    WebkitFlexGrow: 0,
+    flexGrow: 0
   }
 };
 
 var handleEnter = function handleEnter(_ref) {
-  var target = _ref.target;
+  var style = _ref.currentTarget.style;
 
-  console.log({ target: target });
+  style.zIndex = 2;
+  style.flexGrow = 0.20;
+  style.padding = '15px 20px';
+  style.background = _colors2.default.AMETHYST;
+  style[transform] = 'translateY(-33%) scale(1.62)';
 };
 
 var handleLeave = function handleLeave(_ref2) {
-  var target = _ref2.target;
+  var style = _ref2.currentTarget.style;
 
-  console.log({ target: target });
+  style.zIndex = 1;
+  style.flexGrow = 0;
+  style.background = '#fff';
+  style.padding = '15px 40px';
+  style[transform] = 'translateY(0) scale(1)';
 };
 
 var Skills = function Skills(_ref3) {
@@ -16244,13 +16289,13 @@ var Skills = function Skills(_ref3) {
         { style: { width: '100%' } },
         _react2.default.createElement(
           'div',
-          { className: 'skillWrapper', style: styles.flexContainer },
+          { className: 'skillsFlexWrapper', style: styles.flexWrapper },
           content.map(function (skill) {
             return _react2.default.createElement(
               'div',
               {
                 key: 'skill-' + skill,
-                style: styles.itemWrapper,
+                style: styles.skillWrapper,
                 onMouseEnter: handleEnter,
                 onMouseLeave: handleLeave },
               _react2.default.createElement(_Skill2.default, { skill: skill })
@@ -20110,7 +20155,7 @@ var EventPropagators = __webpack_require__(26);
 var ExecutionEnvironment = __webpack_require__(7);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(13);
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 var getEventTarget = __webpack_require__(64);
 var isEventSupported = __webpack_require__(65);
@@ -27169,7 +27214,7 @@ var EventPropagators = __webpack_require__(26);
 var ExecutionEnvironment = __webpack_require__(7);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactInputSelection = __webpack_require__(102);
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 var getActiveElement = __webpack_require__(90);
 var isTextInputElement = __webpack_require__(111);
@@ -27369,7 +27414,7 @@ var EventPropagators = __webpack_require__(26);
 var ReactDOMComponentTree = __webpack_require__(6);
 var SyntheticAnimationEvent = __webpack_require__(264);
 var SyntheticClipboardEvent = __webpack_require__(265);
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 var SyntheticFocusEvent = __webpack_require__(268);
 var SyntheticKeyboardEvent = __webpack_require__(270);
 var SyntheticMouseEvent = __webpack_require__(42);
@@ -27595,7 +27640,7 @@ module.exports = SimpleEventPlugin;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 /**
  * @interface Event
@@ -27639,7 +27684,7 @@ module.exports = SyntheticAnimationEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 /**
  * @interface Event
@@ -27682,7 +27727,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 /**
  * @interface Event
@@ -27805,7 +27850,7 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 /**
  * @interface Event
@@ -27986,7 +28031,7 @@ module.exports = SyntheticTouchEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(15);
+var SyntheticEvent = __webpack_require__(16);
 
 /**
  * @interface Event

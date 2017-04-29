@@ -18,12 +18,12 @@ class Main extends Component {
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
 
-        {/* <Section id="home">
+        <Section id="home">
           <FillSection>
             <Welcome />
             <SectionFoot to="about" text="ABOUT ME" />
           </FillSection>
-        </Section> */}
+        </Section>
 
         <ResumeComponents
           about={about}

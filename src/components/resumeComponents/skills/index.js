@@ -2,7 +2,11 @@ import React from 'react';
 
 import Skill from './Skill';
 import colors from '../../../bin/colors';
+import Modernizr from '../../../../.modernizrrc';
 import { Cell, Title, Section, SectionFoot, FillSection } from '../../displayComponents';
+
+
+const transform = Modernizr.prefixed('transform');
 
 
 const styles = {
@@ -13,39 +17,60 @@ const styles = {
     letterSpacing: '-0.25rem',
   },
 
-  flexContainer: {
+  flexWrapper: {
     display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-
     width: '83%',
     height: '66%',
+
     margin: '40px auto',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
 
     WebkitFlexWrap: 'wrap',
     MSFlexWrap: 'wrap',
     flexWrap: 'wrap',
   },
-  itemWrapper: {
-    padding: '0.3em 1em',
-    margin: '10px 5px',
+  skillWrapper: {
+    position: 'relative',
+    zIndex: 1,
 
-    borderRadius: '0.33rem',
-    background: colors.AMETHYST,
+    margin: '5px 10px',
+    padding: '15px 40px',
 
-    // WebkitFlexGrow: 1,
-    // flexGrow: 1
+    minWidth: '180px',
+    minHeight: '20px',
+
+    background: '#fff',
+    borderRadius: '0.38rem',
+    border: `2px solid ${colors.AMETHYST}`,
+
+    WebkitTransition: 'all ease-in-out .3s',
+    MozTransition: 'all ease-in-out .3s',
+    OTransition: 'all ease-in-out .3s',
+    transition: 'all ease-in-out .3s',
+
+    WebkitFlexGrow: 0,
+    flexGrow: 0,
   }
 };
 
 
-const handleEnter = ({ target }) => {
-  console.log({target});
+const handleEnter = ({ currentTarget: { style } }) => {
+  style.zIndex = 2;
+  style.flexGrow = 0.20;
+  style.padding = '15px 20px';
+  style.background = colors.AMETHYST;
+  style[transform] = 'translateY(-33%) scale(1.62)';
 };
 
 
-const handleLeave = ({ target }) => {
-  console.log({target});
+const handleLeave = ({ currentTarget: { style } }) => {
+  style.zIndex = 1;
+  style.flexGrow = 0;
+  style.background = '#fff';
+  style.padding = '15px 40px';
+  style[transform] = 'translateY(0) scale(1)';
 };
 
 
@@ -57,19 +82,19 @@ const Skills = ({ content }) => {
         <Title style={styles.title}>{`STUFF I AM GOOD AT`}</Title>
 
         <Cell style={{ width: '100%' }}>
-          <div className="skillWrapper" style={styles.flexContainer}>
+          <div className="skillsFlexWrapper" style={styles.flexWrapper}>
             {
-              content.map((skill) => {
-                return (
-                  <div
-                    key={`skill-${skill}`}
-                    style={styles.itemWrapper}
-                    onMouseEnter={ handleEnter }
-                    onMouseLeave={ handleLeave }>
-                    <Skill skill={skill} />
-                  </div>
-                );
-              })
+              content.map( skill => (
+                <div
+                  key={`skill-${skill}`}
+                  style={styles.skillWrapper}
+                  onMouseEnter={ handleEnter }
+                  onMouseLeave={ handleLeave }>
+
+                  <Skill skill={skill} />
+
+                </div>
+              ))
             }
           </div>
         </Cell>
