@@ -8,7 +8,7 @@
     "build": "webpack --env prod",
     "build-watch": "webpack -w --env dev",
     "watch-server": "nodemon server/start.js --ignore src",
-    "test": "echo \"Maybe write some tests, FOOL!\" && exit 1"
+    "test": "echo \"Write some tests, FOOL!\" && exit 1"
   },
   "author": "Benjamin Saphier",
   "license": "ISC",
@@ -34,14 +34,12 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "paper": "^0.10.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-motion": "^0.4.7",
     "react-redux": "^5.0.1",
     "react-router-dom": "^4.0.0-beta.6",
     "react-scroll": "^1.4.7",
-    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "webfontloader": "^1.6.27"

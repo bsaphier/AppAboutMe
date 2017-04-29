@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   FONTS_LOADED,
   CAROUSEL_INIT,
@@ -6,9 +8,11 @@ import {
   TOGGLE_WELCOME,
   CAROUSEL_ROTATE,
   CAROUSEL_RESIZE,
+  CAROUSEL_LOAD_PANELS,
   TOGGLE_PROJECT_MODAL
 } from './constants';
 import fontLoader from './bin/fontLoader';
+import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
 
 
   // ––––––––––––––––––––––––––––––––––––––––– \\
@@ -21,13 +25,16 @@ export const sectionChange = (section) => ({
   section
 });
 
+
 export const toggleWelcome = () => ({
   type: TOGGLE_WELCOME
 });
 
+
 export const fontsDidLoad = () => ({
   type: FONTS_LOADED
 });
+
 
 export const resumeDidLoad = ({ name, contact, resume }) => ({
   type: RESUME_LOADED,
@@ -36,18 +43,21 @@ export const resumeDidLoad = ({ name, contact, resume }) => ({
   contact
 });
 
+
 export const toggleProjectModal = () => ({
   type: TOGGLE_PROJECT_MODAL
 });
 
-export const createCarousel = (panels, panelSize) => ({
+
+export const createCarousel = (panelsCount, panelSize) => ({
   type: CAROUSEL_INIT,
   radius: Math.round( ( panelSize / 2 ) /
-          Math.tan( Math.PI / panels.length ) ),
-  theta: 360 / panels.length,
+          Math.tan( Math.PI / panelsCount ) ),
+  theta: 360 / panelsCount,
   currPanel: 0,
   panelSize
 });
+
 
 export const resizeCarousel = (panelsCount, panelSize) => ({
   type: CAROUSEL_RESIZE,
@@ -57,6 +67,7 @@ export const resizeCarousel = (panelsCount, panelSize) => ({
   panelSize
 });
 
+
 export const rotateCarousel = (rotation, currPanel) => ({
   type: CAROUSEL_ROTATE,
   currPanel,
@@ -64,9 +75,28 @@ export const rotateCarousel = (rotation, currPanel) => ({
 });
 
 
+export const preloadCarouselPanels = (panels) => ({
+  type: CAROUSEL_LOAD_PANELS,
+  panels
+});
+
+
   // ––––––––––––––––––––––––––––––––––––––––––––––––– \\
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
+
+export const createCarouselPanels = projects => dispatch => {
+  const toggleModal = () => dispatch(toggleProjectModal());
+  const panels = projects.map( (project) => (
+    <ProjectPanel
+      key={`project-panel-${project.index}`}
+      project={project}
+      toggleModal={toggleModal}
+    />
+  ));
+  dispatch(preloadCarouselPanels(panels));
+};
+
 
 // *TODO _RESUME_PATH needs to change if running on local server vs gh-pages
 // '/app-about-me/public/resume.json'
@@ -75,6 +105,7 @@ const _RESUME_PATH = '/public/resume.json';
 export const fetchData = () => dispatch =>
   fetch(_RESUME_PATH)
     .then( response => response.json() )
-    .then( json => dispatch(resumeDidLoad(json)) )
+    .then( json => { dispatch(resumeDidLoad(json)); return json; } )
+    .then( ({ resume: { projects } }) => dispatch(createCarouselPanels(projects)) )
     .then( fontLoader(() => dispatch(fontsDidLoad())) )
     .catch( err => console.log(`There was an error fetching the data. ERROR: ${err}`));

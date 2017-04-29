@@ -4,13 +4,13 @@ import rrwaOther from './rrwaOther.png';
 import rrwaPurple from './rrwaPurple.png';
 import rrwaGreenYellow from './rrwaGreenYellow.png';
 
-import sot0 from './sot0.png';
-import sot2 from './sot2.png';
-import sot4 from './sot4.png';
-import sot8 from './sot8.png';
-import sot16 from './sot16.png';
-import sot32 from './sot32.png';
-import sot64 from './sot64.png';
+import sot0 from './sot0.svg';
+import sot2 from './sot2.svg';
+import sot4 from './sot4.svg';
+import sot8 from './sot8.svg';
+import sot16 from './sot16.svg';
+import sot32 from './sot32.svg';
+import sot64 from './sot64.svg';
 
 import yImg from './youphonic-img-sm-min.png';
 

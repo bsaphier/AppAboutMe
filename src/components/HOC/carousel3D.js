@@ -19,6 +19,7 @@ const styles = {
     height: '100%',
     position: 'relative',
     margin: '0 auto',
+    zIndex: 99,
 
     WebkitPerspectiveOrigin: '100% 50%',
     MozPerspectiveOrigin: '100% 50%',
@@ -33,7 +34,9 @@ const styles = {
   carousel: {
     width: '100%',
     height: '100%',
-    position: 'absolute',
+    // position: 'absolute',
+    // zIndex: 1,
+
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -83,7 +86,7 @@ const carousel3D = (panels, navButtons) => {
     componentDidMount() {
       let { create, axis, resize } = this.props;
 
-      create(panels, this.getSize(axis));
+      create(panels.length, this.getSize(axis));
 
       window.addEventListener( 'resize', () => resize(panels.length, this.getSize(axis)));
     }
@@ -203,9 +206,9 @@ const carousel3D = (panels, navButtons) => {
 
 
   const mapDispatchToProps = dispatch => ({
+    create: (panelCount, panelSize) => dispatch(createCarousel(panelCount, panelSize)),
     rotate: (newRotation, currPanel) => dispatch(rotateCarousel(newRotation, currPanel)),
     resize: (panelsCount, panelSize) => dispatch(resizeCarousel(panelsCount, panelSize)),
-    create: (projectPanels, panelSize) => dispatch(createCarousel(projectPanels, panelSize)),
   });
 
 

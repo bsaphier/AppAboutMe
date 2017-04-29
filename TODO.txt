@@ -15,7 +15,7 @@
 <––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
 > Welcome
   • mouse hover triggers motion in letters
-  •
+  • create title components by iterating instead of hard-coded
   •
 >
 

@@ -3,14 +3,15 @@ import React from 'react';
 const styles = {
   rightSideWrapper: {
     position: 'relative',
-    zIndex: 9,
+    zIndex: 999999,
     float: 'right',
     height: '100%',
     minWidth: '300px', //:TODO fix or replace this
     maxWidth: '33.33%' //:TODO fix or replace this
   },
   rightSideContainer: {
-    position: 'relative',
+    position: 'absolute',
+    zIndex: 9999,
     width: '100%',
     height: '100%',
     padding: '20px',
@@ -19,7 +20,7 @@ const styles = {
 
   // 3D shadow effect
   before: {
-    zIndex: -1,
+    zIndex: 999,
     position: 'absolute',
     bottom: '50%',
     left: '13px',

@@ -3,10 +3,9 @@ import React from 'react';
 import Preload from '../Preload';
 
 
-// curried HOC to make the "fetchAction" modular
-
-// Receives a callback used to load the component  --which is passed
-// to the returning function
+// this is a curried HOC to make the "fetchAction" modular
+// it receives a callback (action) used to load the component  --which is passed to the returning
+// function
 const loadAppWithSpinner = (fetchAction) => {
 
   const loadAppWithSpinnerHOC = (Component) => {
@@ -16,7 +15,7 @@ const loadAppWithSpinner = (fetchAction) => {
       if (isLoading) {
 
         // fake delay to test loading animation
-        setTimeout(fetchAction, 1500);
+        setTimeout(fetchAction, 500);
 
         // only call the "fetchAction" once
         fetchAction = () => {};

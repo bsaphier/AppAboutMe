@@ -1,20 +1,23 @@
 import {
   FONTS_LOADED,
   RESUME_LOADED,
-  CAROUSEL_INIT,
+  // CAROUSEL_INIT,
   SECTION_ENTER,
   TOGGLE_WELCOME,
-  TOGGLE_PROJECT_MODAL
+  TOGGLE_PROJECT_MODAL,
+  CAROUSEL_LOAD_PANELS
 } from '../constants';
 
 
 const initialState = {
   isLoading: true,
-  welcomeIn: false,
   fontsDidLoad: false,
   resumeDidLoad: false,
-  carouselDidLoad: false,
+  carouselPanelsDidLoad: false,
+
+  welcomeIn: false,
   projectModalOpen: false,
+
   currSection: 'home'
 };
 
@@ -34,8 +37,8 @@ export default (state = initialState, action) => {
       nextState.resumeDidLoad = true;
       break;
 
-    case CAROUSEL_INIT:
-      nextState.carouselDidLoad = true;
+    case CAROUSEL_LOAD_PANELS:
+      nextState.carouselPanelsDidLoad = true;
       break;
 
     case SECTION_ENTER:
@@ -55,7 +58,7 @@ export default (state = initialState, action) => {
   }
 
 
-  nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad);
+  nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad && nextState.carouselPanelsDidLoad);
 
   return nextState;
 };

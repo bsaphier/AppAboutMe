@@ -14,13 +14,13 @@ const transform = Modernizr.prefixed('transform');
 
 const styles = {
   parallaxWrapA: {
-    position: 'absolute',
+    // position: 'relative',
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)',
   },
   parallaxWrapB: {
-    position: 'absolute',
+    // position: 'relative',
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(255, 255, 255)',
@@ -50,9 +50,8 @@ const styles = {
     //:TODO boolean will include these styles
   },
   background: {
-    position: 'absolute',
-    top: 0,
-    zIndex: -1,
+    // position: 'relative',
+    // zIndex: -1,
     width: '100%',
     height: '100%',
   },
@@ -60,13 +59,11 @@ const styles = {
   banner: {
     position: 'absolute',
     textAlign: 'center',
-    zIndex: 99,
     top: '50%',
     left: '50%',
     width: '100%',
     height: '33.33%',
     backgroundColor: 'rgba(0, 0, 0, 0.62)',
-    // backgroundImage: 'radial-gradient(circle at 50%, rgba(45, 45, 45, 0.55), rgba(45, 45, 45, 0.21))',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -85,7 +82,9 @@ const styles = {
     textAlign: 'inherit'
   },
   title: {
-    display: 'inherit'
+    marginLeft: 0,
+    fontWeight: 100,
+    fontSize: '4rem',
   },
   buttonWrap: {
     width: '13rem',
@@ -181,6 +180,8 @@ class ProjectPanel extends Component {
   }
 
 
+  //:TODO don't return the entire element instead just modify the style. as it is, the entire
+  // element update on mouse movement
   getBackgroundLayer( layer, fileName ) {
     let { mouseX, mouseY, parallaxVar, panelWidth, panelHeight } = this.state;
 
@@ -281,42 +282,40 @@ class ProjectPanel extends Component {
 
 
   render() {
-    let { style, toggleModal, project: { link, title, shortDescription } } = this.props;
+    let { toggleModal, project: { link, title, shortDescription } } = this.props;
 
     return (
       <FillSection className="project-panel" style={{padding: 0}}>
 
-        <Cell style={{position: null}}>
-          <div style={styles.banner}>
-            <div style={styles.bannerInfo}>
-
-              <Title style={style.title} parentStyle={styles.titleMain}>
-                <span>{ title }</span>
-              </Title>
-
-              <div style={{color: 'rgb(161, 136, 166)'}}>{ shortDescription }</div>
-
-              <div style={styles.buttonWrap}>
-                <div style={{padding: '5px'}}>
-                  <Button link={link} title={`Link To ${title}`}>
-                    {'Check it out!'}
-                  </Button>
-                </div>
-
-                <div style={{padding: '5px'}}>
-                  <Button title="More Info" onClick={toggleModal}>
-                    {'More Info'}
-                  </Button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </Cell>
 
         <div className="background" ref={this.getElement} style={styles.background}>
           { this.createBackground() }
         </div>
+
+        <Cell style={styles.banner}>
+          <div style={styles.bannerInfo}>
+
+            <Title style={styles.title} parentStyle={styles.titleMain}>
+              <span>{ title }</span>
+            </Title>
+
+            <div style={{color: 'rgb(161, 136, 166)'}}>{ shortDescription }</div>
+
+            <div style={styles.buttonWrap}>
+              <div style={{padding: '5px'}}>
+                <Button link={link} title={`Link To ${title}`}>
+                  {'Check it out!'}
+                </Button>
+              </div>
+
+              <div style={{padding: '5px'}}>
+                <Button title="More Info" onClick={toggleModal}>
+                  {'More Info'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Cell>
 
       </FillSection>
     );

@@ -1,33 +1,19 @@
 import React from 'react';
 
-import ProjectPanel from './ProjectPanel';
 import ProjectModal from './ProjectModal';
 import ProjectsSidebar from './ProjectsSidebar';
 import { Section, SectionFoot, FillSection } from '../../displayComponents';
-import { toggleProjectModal } from '../../../actions';
 import { carousel3D } from '../../HOC';
 
 
-const Projects = ({ style, content, dispatch, ...props }) => {
+const Projects = ({ style, content: { projects, carouselPanels } }) => {
 
-  const toggleModal = () => dispatch(toggleProjectModal());
-
-  const panels = content.map( (project) => (
-    <ProjectPanel
-      key={`project-panel-${project.index}`}
-      style={style}
-      project={project}
-      toggleModal={toggleModal}
-    />
-  ));
-
-  const Carousel3D = carousel3D(panels);
-
+  const Carousel3D = carousel3D(carouselPanels);
 
   return (
     <Section id="projects">
 
-      <ProjectsSidebar style={style} content={content} />
+      <ProjectsSidebar style={style} content={projects} />
 
       <FillSection style={{ padding: 0 }}>
 

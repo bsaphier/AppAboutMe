@@ -15,8 +15,9 @@ import './stylesheets/main.scss';
 const loadAppHOC = loadAppWithSpinner( () => store.dispatch(fetchData()) )(Main);
 
 
-const ResumeApp = connect(({ app: { isLoading }, resume: { resume, contact }}) => ({
+const ResumeApp = connect(({ app: { isLoading }, resume: { resume, contact }, carousel: { panels } }) => ({
     resume,
+    panels,
     contact,
     isLoading,
   })

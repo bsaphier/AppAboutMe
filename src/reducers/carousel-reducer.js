@@ -1,7 +1,8 @@
 import {
   CAROUSEL_INIT,
   CAROUSEL_ROTATE,
-  CAROUSEL_RESIZE
+  CAROUSEL_RESIZE,
+  CAROUSEL_LOAD_PANELS
 } from '../constants';
 
 
@@ -16,7 +17,10 @@ const initialState = {
 
   // user updates these
   rotation: 0,
-  currPanel: 0
+  currPanel: 0,
+
+  // store the Panel components in the reducer to preload the images when the App loads
+  panels: []
 };
 
 
@@ -41,6 +45,10 @@ export default (state = initialState, { type, ...action }) => {
     case CAROUSEL_RESIZE:
       nextState.panelSize = action.panelSize;
       nextState.radius = action.radius;
+      return nextState;
+
+    case CAROUSEL_LOAD_PANELS:
+      nextState.panels = action.panels;
       return nextState;
 
     default:

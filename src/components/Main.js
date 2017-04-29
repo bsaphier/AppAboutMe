@@ -13,7 +13,7 @@ class Main extends Component {
   }
 
   render() {
-    const { contact, resume: { about, skills, projects } } = this.props;
+    const { panels, contact, resume: { about, skills, projects } } = this.props;
 
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
@@ -29,7 +29,8 @@ class Main extends Component {
           about={about}
           skills={skills}
           contact={contact}
-          projects={projects} {...this.props}
+          projects={{ projects, carouselPanels: panels}}
+          {...this.props}
         />
 
         <Footer />
