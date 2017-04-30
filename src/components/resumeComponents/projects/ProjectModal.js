@@ -8,7 +8,7 @@ const  { Button } = buttons;
 const styles = {
   modalBack: {
     position: 'absolute',
-    zIndex: 999,
+    zIndex: 10,
     height: '100%',
     width: '100%',
     overflow: 'hidden',
@@ -16,6 +16,7 @@ const styles = {
   },
   modal: {
     position: 'relative',
+    zIndex: 9,
     top: '50%',
     left: '50%',
     width: '80%',
@@ -27,6 +28,7 @@ const styles = {
   },
   modalHeader: {
     position: 'absolute',
+    zIndex: 9,
     top: 0,
     left: 0,
     width: '100%',
@@ -44,6 +46,7 @@ const styles = {
   },
   buttonContainer: {
     position: 'absolute',
+    zIndex: 9,
     top: '0.5em',
     right: '2em'
   },
@@ -65,7 +68,7 @@ const styles = {
 
   // 3D shadow effect
   before: {
-    zIndex: -1,
+    zIndex: 1,
     position: 'absolute',
     left: '5px',
     bottom: '13px',

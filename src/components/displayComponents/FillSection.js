@@ -6,7 +6,8 @@ const styles = {
     padding: '20px',
     overflow: 'hidden',
     background: 'none',
-    position: 'relative'
+    position: 'relative',
+    zIndex: 8
   }
 };
 

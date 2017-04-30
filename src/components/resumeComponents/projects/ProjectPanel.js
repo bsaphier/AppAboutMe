@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Modernizr from '../../../../.modernizrrc';
 import { buttons, Cell, Title, FillSection } from '../../displayComponents';
-import { hypote, normal as _normal } from '../../../bin/utils';
+import { int, hypote, normal as _normal } from '../../../bin/utils';
 //:TODO do I really want to load the images this way??
 // i.e. with webpack and part of the bundle
 import imgs from '../../../bin/images';
@@ -12,15 +12,38 @@ const  { Button } = buttons;
 
 const transform = Modernizr.prefixed('transform');
 
+
 const styles = {
+  background: {
+    position: 'absolute',
+    zIndex: 4,
+    width: '100%',
+    height: '100%',
+
+    WebkitTransition: 'all ease-out .8s',
+    MozTransition: 'all ease-out .8s',
+    OTransition: 'all ease-out .8s',
+    transition: 'all ease-out .8s',
+  },
+
+  backgroundFlat: {
+    position: 'relative',
+    zIndex: 9,
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'auto 100%',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+  },
   parallaxWrapA: {
-    // position: 'relative',
+    position: 'relative',
+    zIndex: 9,
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)',
   },
   parallaxWrapB: {
-    // position: 'relative',
+    position: 'relative',
+    zIndex: 9,
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(255, 255, 255)',
@@ -30,34 +53,22 @@ const styles = {
     OPerspectiveOrigin: '50% 50%',
     perspectiveOrigin: '50% 50%',
   },
+
   parallaxDiv: {
     position: 'absolute',
+    zIndex: 1,
     width: '100%',
     height: '100%',
     backgroundColor: 'transparent',
   },
 
-  backgroundFlat: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundSize: 'auto 100%',
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-  },
   backgroundBlur: {
     //:TODO boolean will include these styles
-  },
-  background: {
-    // position: 'relative',
-    // zIndex: -1,
-    width: '100%',
-    height: '100%',
   },
 
   banner: {
     position: 'absolute',
+    zIndex: 7,
     textAlign: 'center',
     top: '50%',
     left: '50%',
@@ -70,12 +81,12 @@ const styles = {
     OTransform: '-o-translate(-50%, -50%)',
     transform: 'translate(-50%, -50%)',
   },
+
   bannerInfo: {
     width: '100%',
     height: '100%',
     overflow: 'hidden',
   },
-
   titleMain: {
     display: 'block',
     position: 'relative',
@@ -114,7 +125,6 @@ class ProjectPanel extends Component {
     this.handleResize = this.handleResize.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.createBackground = this.createBackground.bind(this);
-    this.getBackgroundLayer = this.getBackgroundLayer.bind(this);
   }
 
 
@@ -182,8 +192,11 @@ class ProjectPanel extends Component {
 
   //:TODO don't return the entire element instead just modify the style. as it is, the entire
   // element update on mouse movement
-  getBackgroundLayer( layer, fileName ) {
-    let { mouseX, mouseY, parallaxVar, panelWidth, panelHeight } = this.state;
+  createBackground() {
+    let { currPanel, project: { index, backgroundImg } } = this.props;
+    let { mouseX, mouseY, parallax, parallaxVar, panelWidth, panelHeight } = this.state;
+
+    let display = currPanel === index;
 
     // the maxDistance is the distance from the center to the corner of the panel
     let maxDistance = hypote(panelWidth, panelHeight);
@@ -191,63 +204,14 @@ class ProjectPanel extends Component {
     // the distance of the mouse, from the center of the panel, as a cartesian coordinate
     let distance = hypote(mouseX, mouseY);
 
-    // vary the style for different panels
-    let translateX = (parallaxVar) ? -50 : 0;
-    let translateY = (parallaxVar) ? -50 : 0;
-
     let perspective = panelWidth < panelHeight
-      ? (panelHeight * 100 / panelWidth)
-      : (panelWidth  * 100 / panelHeight);
-    // let translateZ = (distance / maxDistance) * (layer * -40);
-    let translateZ = (parallaxVar)
-      ? (distance / maxDistance) * (layer * -40)
-      : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
-
-    let rotateY = (parallaxVar)
-      ? (mouseX) * (layer * 0.5 / panelWidth)
-      : (mouseX * -1) / panelWidth * layer;
-    let rotateX = (parallaxVar)
-      ? mouseY * (layer * 0.5 / panelHeight)
-      : mouseY / (panelHeight * layer);
-    let imgStyle = (parallaxVar)
-      ? {
-          position: 'absolute',
-          width: `425%`,
-          left: '50%',
-          top: '55%'
-        }
-      : { height: `${panelHeight * 1.5}px` };
-
-    return (
-      <img
-        src={imgs[fileName]}
-        alt={fileName}
-        style={{
-          ...imgStyle,
-          [transform]: `
-            translateY(${translateY}%)
-            translateX(${translateX}%)
-            translateZ(${translateZ}px)
-            rotateY(${rotateY}deg)
-            rotateX(${rotateX}deg)
-          `
-        }}
-      />
-    );
-  }
-
-
-  createBackground() {
-    let { project: { backgroundImg } } = this.props;
-    let { parallax, parallaxVar, panelWidth, panelHeight } = this.state;
-    let perspective = panelWidth < panelHeight
-      ? (panelHeight * 100 / panelWidth)
-      : (panelWidth  * 100 / panelHeight);
-
+      ? int(panelHeight * 500 / panelWidth)
+      : int(panelWidth  * 500 / panelHeight);
 
     const backgroundStyle = (parallax)
       ? {
           ...styles[ parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA' ],
+          display: (display) ? 'block' : 'none',
           WebkitPerspective: `${perspective}px`,
           MozPerspective: `${perspective}px`,
           OPerspective: `${perspective}px`,
@@ -255,28 +219,45 @@ class ProjectPanel extends Component {
         }
       : {
           ...styles.backgroundFlat,
+          display: (display) ? 'block' : 'none',
           backgroundImage: `url(${imgs[backgroundImg]})`
         };
 
-
     return (parallax)
-      ? (
-        <div className="parallax-mouse" style={backgroundStyle}>
+      ? (<div className="parallax-mouse" style={backgroundStyle}>
+          {
+            backgroundImg.map( (fileName, i) => {
+              const  layer = i + 1;
 
-          { backgroundImg.map( (fileName, i) => {
+              const translateZ = (parallaxVar)
+                ? (distance / maxDistance) * (layer * -40)
+                : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
 
-            let layer = i + 1;
+              const rotateY = (parallaxVar)
+                ? (mouseX) * (layer * 0.5 / panelWidth)
+                : (mouseX * -1) / panelWidth * layer;
 
-            return (
-              <div key={`bg-layer-${+i}-${fileName}`} style={styles.parallaxDiv}>
-                { this.getBackgroundLayer(layer, fileName) }
-              </div>
-            );
-          })}
+              const rotateX = (parallaxVar)
+                ? mouseY * (layer * 0.5 / panelHeight)
+                : mouseY / (panelHeight * layer);
 
-        </div>
-        )
+              const parallaxDivStyle = {
+                ...styles.parallaxDiv,
+                zIndex: layer,
+                [transform]: `
+                  translateZ(${translateZ}px)
+                  rotateY(${rotateY}deg)
+                  rotateX(${rotateX}deg)`
+              };
 
+              return (
+                <div key={`bg-layer-${+i}-${fileName}`} style={parallaxDivStyle}>
+                  <img src={imgs[fileName]} alt={fileName} />
+                </div>
+              );
+            })
+          }
+        </div>)
       : (<div style={backgroundStyle} />);
   }
 
@@ -286,7 +267,6 @@ class ProjectPanel extends Component {
 
     return (
       <FillSection className="project-panel" style={{padding: 0}}>
-
 
         <div className="background" ref={this.getElement} style={styles.background}>
           { this.createBackground() }

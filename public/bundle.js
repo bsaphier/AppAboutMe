@@ -8688,6 +8688,7 @@ var styles = {
   carouselPanel: {
     display: 'block',
     position: 'absolute',
+    zIndex: 5,
     width: '100%',
     height: '100%',
 
@@ -13060,7 +13061,7 @@ var styles = {
     height: '100%',
     position: 'relative',
     margin: '0 auto',
-    zIndex: 99,
+    zIndex: 9,
 
     WebkitPerspectiveOrigin: '100% 50%',
     MozPerspectiveOrigin: '100% 50%',
@@ -13075,9 +13076,8 @@ var styles = {
   carousel: {
     width: '100%',
     height: '100%',
-    // position: 'absolute',
-    // zIndex: 1,
-
+    position: 'relative',
+    zIndex: 9,
 
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
@@ -13086,7 +13086,7 @@ var styles = {
   },
 
   buttonWrap: _defineProperty({
-    zIndex: 9,
+    zIndex: 10,
     position: 'absolute',
     top: '50%'
   }, transform, 'translate(-50%, -50%)'),
@@ -14041,6 +14041,7 @@ var styles = {
     padding: '2em 2em',
     border: '0.162em solid',
     position: 'absolute',
+    zIndex: 9,
     background: 'rgba(255, 255, 255, 1)',
     borderImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)',
     borderImageSlice: 1
@@ -14176,7 +14177,8 @@ var styles = {
     padding: '20px',
     overflow: 'hidden',
     background: 'none',
-    position: 'relative'
+    position: 'relative',
+    zIndex: 8
   }
 };
 
@@ -14345,6 +14347,7 @@ var Link = _reactScroll2.default.Link;
 var styles = {
   foot: {
     position: 'absolute',
+    zIndex: 9,
     left: 0,
     bottom: 0,
     width: '100%',
@@ -14432,7 +14435,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   rightSideWrapper: {
     position: 'relative',
-    zIndex: 999999,
+    zIndex: 9,
     float: 'right',
     height: '100%',
     minWidth: '300px', //:TODO fix or replace this
@@ -14440,7 +14443,7 @@ var styles = {
   },
   rightSideContainer: {
     position: 'absolute',
-    zIndex: 9999,
+    zIndex: 2,
     width: '100%',
     height: '100%',
     padding: '20px',
@@ -14449,7 +14452,7 @@ var styles = {
 
   // 3D shadow effect
   before: {
-    zIndex: 999,
+    zIndex: 1,
     position: 'absolute',
     bottom: '50%',
     left: '13px',
@@ -15211,7 +15214,7 @@ var Button = _displayComponents.buttons.Button;
 var styles = {
   modalBack: {
     position: 'absolute',
-    zIndex: 999,
+    zIndex: 10,
     height: '100%',
     width: '100%',
     overflow: 'hidden',
@@ -15219,6 +15222,7 @@ var styles = {
   },
   modal: {
     position: 'relative',
+    zIndex: 9,
     top: '50%',
     left: '50%',
     width: '80%',
@@ -15230,6 +15234,7 @@ var styles = {
   },
   modalHeader: {
     position: 'absolute',
+    zIndex: 9,
     top: 0,
     left: 0,
     width: '100%',
@@ -15247,6 +15252,7 @@ var styles = {
   },
   buttonContainer: {
     position: 'absolute',
+    zIndex: 9,
     top: '0.5em',
     right: '2em'
   },
@@ -15268,7 +15274,7 @@ var styles = {
 
   // 3D shadow effect
   before: {
-    zIndex: -1,
+    zIndex: 1,
     position: 'absolute',
     left: '5px',
     bottom: '13px',
@@ -15426,14 +15432,36 @@ var Button = _displayComponents.buttons.Button;
 var transform = _modernizrrc2.default.prefixed('transform');
 
 var styles = {
+  background: {
+    position: 'absolute',
+    zIndex: 4,
+    width: '100%',
+    height: '100%',
+
+    WebkitTransition: 'all ease-out .8s',
+    MozTransition: 'all ease-out .8s',
+    OTransition: 'all ease-out .8s',
+    transition: 'all ease-out .8s'
+  },
+
+  backgroundFlat: {
+    position: 'relative',
+    zIndex: 9,
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'auto 100%',
+    backgroundColor: 'rgba(255, 255, 255, 1)'
+  },
   parallaxWrapA: {
-    // position: 'relative',
+    position: 'relative',
+    zIndex: 9,
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(45, 45, 45)'
   },
   parallaxWrapB: {
-    // position: 'relative',
+    position: 'relative',
+    zIndex: 9,
     width: '100%',
     height: '100%',
     backgroundColor: 'rgb(255, 255, 255)',
@@ -15443,34 +15471,22 @@ var styles = {
     OPerspectiveOrigin: '50% 50%',
     perspectiveOrigin: '50% 50%'
   },
+
   parallaxDiv: {
     position: 'absolute',
+    zIndex: 1,
     width: '100%',
     height: '100%',
     backgroundColor: 'transparent'
   },
 
-  backgroundFlat: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundSize: 'auto 100%',
-    backgroundColor: 'rgba(255, 255, 255, 1)'
-  },
   backgroundBlur: {
     //:TODO boolean will include these styles
-  },
-  background: {
-    // position: 'relative',
-    // zIndex: -1,
-    width: '100%',
-    height: '100%'
   },
 
   banner: {
     position: 'absolute',
+    zIndex: 7,
     textAlign: 'center',
     top: '50%',
     left: '50%',
@@ -15483,12 +15499,12 @@ var styles = {
     OTransform: '-o-translate(-50%, -50%)',
     transform: 'translate(-50%, -50%)'
   },
+
   bannerInfo: {
     width: '100%',
     height: '100%',
     overflow: 'hidden'
   },
-
   titleMain: {
     display: 'block',
     position: 'relative',
@@ -15531,7 +15547,6 @@ var ProjectPanel = function (_Component) {
     _this.handleResize = _this.handleResize.bind(_this);
     _this.handleMouseMove = _this.handleMouseMove.bind(_this);
     _this.createBackground = _this.createBackground.bind(_this);
-    _this.getBackgroundLayer = _this.getBackgroundLayer.bind(_this);
     return _this;
   }
 
@@ -15611,65 +15626,40 @@ var ProjectPanel = function (_Component) {
     // element update on mouse movement
 
   }, {
-    key: 'getBackgroundLayer',
-    value: function getBackgroundLayer(layer, fileName) {
+    key: 'createBackground',
+    value: function createBackground() {
+      var _props = this.props,
+          currPanel = _props.currPanel,
+          _props$project = _props.project,
+          index = _props$project.index,
+          backgroundImg = _props$project.backgroundImg;
       var _state = this.state,
           mouseX = _state.mouseX,
           mouseY = _state.mouseY,
+          parallax = _state.parallax,
           parallaxVar = _state.parallaxVar,
           panelWidth = _state.panelWidth,
           panelHeight = _state.panelHeight;
 
-      // the maxDistance is the distance from the center to the corner of the panel
 
+      var display = currPanel === index;
+
+      // the maxDistance is the distance from the center to the corner of the panel
       var maxDistance = (0, _utils.hypote)(panelWidth, panelHeight);
 
       // the distance of the mouse, from the center of the panel, as a cartesian coordinate
       var distance = (0, _utils.hypote)(mouseX, mouseY);
 
-      // vary the style for different panels
-      var translateX = parallaxVar ? -50 : 0;
-      var translateY = parallaxVar ? -50 : 0;
-
-      var perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
-      // let translateZ = (distance / maxDistance) * (layer * -40);
-      var translateZ = parallaxVar ? distance / maxDistance * (layer * -40) : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
-
-      var rotateY = parallaxVar ? mouseX * (layer * 0.5 / panelWidth) : mouseX * -1 / panelWidth * layer;
-      var rotateX = parallaxVar ? mouseY * (layer * 0.5 / panelHeight) : mouseY / (panelHeight * layer);
-      var imgStyle = parallaxVar ? {
-        position: 'absolute',
-        width: '425%',
-        left: '50%',
-        top: '55%'
-      } : { height: panelHeight * 1.5 + 'px' };
-
-      return _react2.default.createElement('img', {
-        src: _images2.default[fileName],
-        alt: fileName,
-        style: _extends({}, imgStyle, _defineProperty({}, transform, '\n            translateY(' + translateY + '%)\n            translateX(' + translateX + '%)\n            translateZ(' + translateZ + 'px)\n            rotateY(' + rotateY + 'deg)\n            rotateX(' + rotateX + 'deg)\n          '))
-      });
-    }
-  }, {
-    key: 'createBackground',
-    value: function createBackground() {
-      var _this2 = this;
-
-      var backgroundImg = this.props.project.backgroundImg;
-      var _state2 = this.state,
-          parallax = _state2.parallax,
-          parallaxVar = _state2.parallaxVar,
-          panelWidth = _state2.panelWidth,
-          panelHeight = _state2.panelHeight;
-
-      var perspective = panelWidth < panelHeight ? panelHeight * 100 / panelWidth : panelWidth * 100 / panelHeight;
+      var perspective = panelWidth < panelHeight ? (0, _utils.int)(panelHeight * 500 / panelWidth) : (0, _utils.int)(panelWidth * 500 / panelHeight);
 
       var backgroundStyle = parallax ? _extends({}, styles[parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA'], {
+        display: display ? 'block' : 'none',
         WebkitPerspective: perspective + 'px',
         MozPerspective: perspective + 'px',
         OPerspective: perspective + 'px',
         perspective: perspective + 'px'
       }) : _extends({}, styles.backgroundFlat, {
+        display: display ? 'block' : 'none',
         backgroundImage: 'url(' + _images2.default[backgroundImg] + ')'
       });
 
@@ -15677,13 +15667,22 @@ var ProjectPanel = function (_Component) {
         'div',
         { className: 'parallax-mouse', style: backgroundStyle },
         backgroundImg.map(function (fileName, i) {
-
           var layer = i + 1;
+
+          var translateZ = parallaxVar ? distance / maxDistance * (layer * -40) : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
+
+          var rotateY = parallaxVar ? mouseX * (layer * 0.5 / panelWidth) : mouseX * -1 / panelWidth * layer;
+
+          var rotateX = parallaxVar ? mouseY * (layer * 0.5 / panelHeight) : mouseY / (panelHeight * layer);
+
+          var parallaxDivStyle = _extends({}, styles.parallaxDiv, _defineProperty({
+            zIndex: layer
+          }, transform, '\n                  translateZ(' + translateZ + 'px)\n                  rotateY(' + rotateY + 'deg)\n                  rotateX(' + rotateX + 'deg)'));
 
           return _react2.default.createElement(
             'div',
-            { key: 'bg-layer-' + +i + '-' + fileName, style: styles.parallaxDiv },
-            _this2.getBackgroundLayer(layer, fileName)
+            { key: 'bg-layer-' + +i + '-' + fileName, style: parallaxDivStyle },
+            _react2.default.createElement('img', { src: _images2.default[fileName], alt: fileName })
           );
         })
       ) : _react2.default.createElement('div', { style: backgroundStyle });
@@ -15691,12 +15690,12 @@ var ProjectPanel = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          toggleModal = _props.toggleModal,
-          _props$project = _props.project,
-          link = _props$project.link,
-          title = _props$project.title,
-          shortDescription = _props$project.shortDescription;
+      var _props2 = this.props,
+          toggleModal = _props2.toggleModal,
+          _props2$project = _props2.project,
+          link = _props2$project.link,
+          title = _props2$project.title,
+          shortDescription = _props2$project.shortDescription;
 
 
       return _react2.default.createElement(

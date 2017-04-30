@@ -19,7 +19,7 @@ const styles = {
     height: '100%',
     position: 'relative',
     margin: '0 auto',
-    zIndex: 99,
+    zIndex: 9,
 
     WebkitPerspectiveOrigin: '100% 50%',
     MozPerspectiveOrigin: '100% 50%',
@@ -34,8 +34,8 @@ const styles = {
   carousel: {
     width: '100%',
     height: '100%',
-    // position: 'absolute',
-    // zIndex: 1,
+    position: 'relative',
+    zIndex: 9,
 
 
     WebkitTransformStyle: 'preserve-3d',
@@ -49,7 +49,7 @@ const styles = {
   },
 
   buttonWrap: {
-    zIndex: 9,
+    zIndex: 10,
     position: 'absolute',
     top: '50%',
     [transform]: 'translate(-50%, -50%)'

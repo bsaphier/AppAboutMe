@@ -3,7 +3,7 @@ import React from 'react';
 const styles = {
   rightSideWrapper: {
     position: 'relative',
-    zIndex: 999999,
+    zIndex: 9,
     float: 'right',
     height: '100%',
     minWidth: '300px', //:TODO fix or replace this
@@ -11,7 +11,7 @@ const styles = {
   },
   rightSideContainer: {
     position: 'absolute',
-    zIndex: 9999,
+    zIndex: 2,
     width: '100%',
     height: '100%',
     padding: '20px',
@@ -20,7 +20,7 @@ const styles = {
 
   // 3D shadow effect
   before: {
-    zIndex: 999,
+    zIndex: 1,
     position: 'absolute',
     bottom: '50%',
     left: '13px',

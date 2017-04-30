@@ -9,6 +9,7 @@ const styles = {
     carouselPanel: {
       display: 'block',
       position: 'absolute',
+      zIndex: 5,
       width: '100%',
       height: '100%',
 

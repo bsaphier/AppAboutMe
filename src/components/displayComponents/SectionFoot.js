@@ -8,6 +8,7 @@ const { Link } = Scroll;
 const styles = {
   foot: {
     position: 'absolute',
+    zIndex: 9,
     left: 0,
     bottom: 0,
     width: '100%',
