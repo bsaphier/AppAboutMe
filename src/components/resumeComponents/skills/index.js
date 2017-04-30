@@ -79,7 +79,7 @@ const Skills = ({ content }) => {
     <Section id="skills">
       <FillSection>
 
-        <Title style={styles.title}>{`STUFF I AM GOOD AT`}</Title>
+        <Title style={styles.title}>{`SOME STUFF I AM GOOD AT`}</Title>
 
         <Cell style={{ width: '100%' }}>
           <div className="skillsFlexWrapper" style={styles.flexWrapper}>

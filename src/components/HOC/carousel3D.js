@@ -42,10 +42,10 @@ const styles = {
     MozTransformStyle: 'preserve-3d',
     OTransformStyle: 'preserve-3d',
     transformStyle: 'preserve-3d',
-    // WebkitTransitionStyle: '-webkit-transform 0.6s',
-    // MozTransitionStyle: '-moz-transform 0.6s',
-    // OTransitionStyle: '-o-transform 0.6s',
-    // transitionStyle: 'transform 0.6s',
+    WebkitTransitionStyle: '-webkit-transform 0.1s',
+    MozTransitionStyle: '-moz-transform 0.1s',
+    OTransitionStyle: '-o-transform 0.1s',
+    transitionStyle: 'transform 0.1s',
   },
 
   buttonWrap: {

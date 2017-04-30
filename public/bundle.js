@@ -13082,7 +13082,11 @@ var styles = {
     WebkitTransformStyle: 'preserve-3d',
     MozTransformStyle: 'preserve-3d',
     OTransformStyle: 'preserve-3d',
-    transformStyle: 'preserve-3d'
+    transformStyle: 'preserve-3d',
+    WebkitTransitionStyle: '-webkit-transform 0.1s',
+    MozTransitionStyle: '-moz-transform 0.1s',
+    OTransitionStyle: '-o-transform 0.1s',
+    transitionStyle: 'transform 0.1s'
   },
 
   buttonWrap: _defineProperty({
@@ -14869,6 +14873,9 @@ var styles = {
   }
 };
 
+//  this c takes a prop, colors -  which is an object with two keys: baseColor & hoverColor which
+// are arrays of RGB values
+
 var SidebarButton = function (_Component) {
   _inherits(SidebarButton, _Component);
 
@@ -14907,24 +14914,33 @@ var SidebarButton = function (_Component) {
           link = _props$link === undefined ? null : _props$link,
           _props$title = _props.title,
           title = _props$title === undefined ? '_blank' : _props$title,
-          props = _objectWithoutProperties(_props, ['style', 'target', 'children', 'link', 'title']);
+          _props$colors = _props.colors,
+          baseColor = _props$colors.baseColor,
+          hoverColor = _props$colors.hoverColor,
+          props = _objectWithoutProperties(_props, ['style', 'target', 'children', 'link', 'title', 'colors']);
 
       //:TODO get the bgColor from props
 
 
       var motion = buttonUp ? {
         offset: (0, _reactMotion.spring)(5, bounce),
-        bgColor: (0, _reactMotion.spring)(255)
+        red: (0, _reactMotion.spring)(hoverColor[0]),
+        green: (0, _reactMotion.spring)(hoverColor[1]),
+        blue: (0, _reactMotion.spring)(hoverColor[2])
       } : {
         offset: (0, _reactMotion.spring)(0, fade),
-        bgColor: (0, _reactMotion.spring)(45)
+        red: (0, _reactMotion.spring)(baseColor[0]),
+        green: (0, _reactMotion.spring)(baseColor[1]),
+        blue: (0, _reactMotion.spring)(baseColor[2])
       };
 
       var motionCallback = function motionCallback(_ref) {
         var _extends2;
 
-        var offset = _ref.offset,
-            bgColor = _ref.bgColor;
+        var red = _ref.red,
+            green = _ref.green,
+            blue = _ref.blue,
+            offset = _ref.offset;
 
         var i = void 0,
             boxShadow = [];
@@ -14939,7 +14955,7 @@ var SidebarButton = function (_Component) {
           _extends({
             style: _extends({}, styles.sidebarButton, (_extends2 = {
               boxShadow: boxShadow.join(', ')
-            }, _defineProperty(_extends2, transform, 'translate(-' + offset + 'px, -' + offset + 'px)'), _defineProperty(_extends2, 'borderColor', 'rgba(81, 81, 81, ' + offset / 5 + ')'), _defineProperty(_extends2, 'backgroundColor', 'rgb(' + (0, _utils.int)(bgColor) + ', ' + (0, _utils.int)(bgColor) + ', ' + (0, _utils.int)(bgColor) + ')'), _extends2), style)
+            }, _defineProperty(_extends2, transform, 'translate(-' + offset + 'px, -' + offset + 'px)'), _defineProperty(_extends2, 'borderColor', 'rgba(81, 81, 81, ' + offset / 5 + ')'), _defineProperty(_extends2, 'backgroundColor', 'rgb(' + (0, _utils.int)(red) + ', ' + (0, _utils.int)(green) + ', ' + (0, _utils.int)(blue) + ')'), _extends2), style)
           }, props),
           children
         );
@@ -15401,6 +15417,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _colors = __webpack_require__(84);
+
+var _colors2 = _interopRequireDefault(_colors);
+
 var _modernizrrc = __webpack_require__(15);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
@@ -15485,6 +15505,10 @@ var styles = {
   },
 
   banner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     position: 'absolute',
     zIndex: 7,
     textAlign: 'center',
@@ -15492,7 +15516,7 @@ var styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(0, 0, 0, 0.62)',
+    backgroundColor: 'rgba(81, 81, 81, 0.62)',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -15500,20 +15524,19 @@ var styles = {
     transform: 'translate(-50%, -50%)'
   },
 
-  bannerInfo: {
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden'
-  },
-  titleMain: {
-    display: 'block',
-    position: 'relative',
-    textAlign: 'inherit'
-  },
   title: {
+    padding: '0 4px',
     marginLeft: 0,
-    fontWeight: 100,
-    fontSize: '4rem'
+    fontWeight: 600,
+    fontStyle: 'italic',
+    fontSize: '4rem',
+    letterSpacing: '-0.1rem'
+  },
+  projectDescription: {
+    fontSize: '1.62rem',
+    fontWeight: 900,
+    color: '#fff',
+    textShadow: '2px 2px 3px ' + _colors2.default.MENU_DARKER
   },
   buttonWrap: {
     width: '13rem',
@@ -15690,6 +15713,7 @@ var ProjectPanel = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var parallaxVar = this.state.parallaxVar;
       var _props2 = this.props,
           toggleModal = _props2.toggleModal,
           _props2$project = _props2.project,
@@ -15697,6 +15721,11 @@ var ProjectPanel = function (_Component) {
           title = _props2$project.title,
           shortDescription = _props2$project.shortDescription;
 
+
+      var titleStyle = parallaxVar ? styles.title : _extends({}, styles.title, {
+        textShadow: '-3px -2px ' + _colors2.default.AMETHYST,
+        backgroundImage: 'linear-gradient(to top right, ' + _colors2.default.MENU_DARKER + ' 62%, ' + _colors2.default.OPERA_MAUVE + ' 162%)'
+      });
 
       return _react2.default.createElement(
         _displayComponents.FillSection,
@@ -15711,10 +15740,10 @@ var ProjectPanel = function (_Component) {
           { style: styles.banner },
           _react2.default.createElement(
             'div',
-            { style: styles.bannerInfo },
+            null,
             _react2.default.createElement(
               _displayComponents.Title,
-              { style: styles.title, parentStyle: styles.titleMain },
+              { style: titleStyle },
               _react2.default.createElement(
                 'span',
                 null,
@@ -15723,7 +15752,7 @@ var ProjectPanel = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              { style: { color: 'rgb(161, 136, 166)' } },
+              { style: styles.projectDescription },
               shortDescription
             ),
             _react2.default.createElement(
@@ -15734,16 +15763,7 @@ var ProjectPanel = function (_Component) {
                 { style: { padding: '5px' } },
                 _react2.default.createElement(
                   Button,
-                  { link: link, title: 'Link To ' + title },
-                  'Check it out!'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { style: { padding: '5px' } },
-                _react2.default.createElement(
-                  Button,
-                  { title: 'More Info', onClick: toggleModal },
+                  { title: 'More Info', onClick: toggleModal, style: { background: _colors2.default.AMETHYST } },
                   'More Info'
                 )
               )
@@ -15783,6 +15803,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(18);
 
+var _colors = __webpack_require__(84);
+
+var _colors2 = _interopRequireDefault(_colors);
+
 var _displayComponents = __webpack_require__(12);
 
 var _actions = __webpack_require__(27);
@@ -15792,6 +15816,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SidebarButton = _displayComponents.buttons.SidebarButton;
 
 
+var styles = {
+  sidebarButtonsWrapper: {
+    display: 'flex',
+    height: '62%',
+    overflow: 'visible',
+
+    alignContent: 'flex-start',
+
+    WebkitFlexWrap: 'wrap',
+    MSFlexWrap: 'wrap',
+    flexWrap: 'wrap'
+  },
+  sidebarButton: {
+    margin: '20px auto',
+
+    WebkitFlexGrow: 1,
+    flexGrow: 1
+  }
+};
+
 var ProjectsSidebar = function ProjectsSidebar(_ref) {
   var style = _ref.style,
       rotate = _ref.rotate,
@@ -15799,12 +15843,11 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
       content = _ref.content,
       rotation = _ref.rotation,
       currPanel = _ref.currPanel;
+  var length = content.length;
+
 
   var getPanelMovement = function getPanelMovement(index) {
-    var length = content.length;
-
     // proper modulus math...
-
     var forwards = ((currPanel - index) % length + length) % length;
     var backwards = ((index - currPanel) % length + length) % length;
 
@@ -15820,17 +15863,15 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
       if (currPanel !== idx) rotate(getNewRotation(idx), idx);
     };
 
-    var marginBottom = 62 / content.length;
-
     return _react2.default.createElement(
       'div',
       {
-        key: 'projects-sidebar-item-' + project.index,
+        key: 'sidebar-item-projects' + project.index,
         onClick: navigate,
-        style: { margin: '0 auto ' + marginBottom + '%' } },
+        style: styles.sidebarButton },
       _react2.default.createElement(
         SidebarButton,
-        null,
+        { colors: { baseColor: [45, 45, 45], hoverColor: [144, 103, 198] } },
         _react2.default.createElement(
           _displayComponents.Title,
           { style: { fontSize: '1.1rem' } },
@@ -15846,7 +15887,7 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
 
   return _react2.default.createElement(
     _displayComponents.SideSection,
-    { title: 'Projects' },
+    { title: 'Projects', style: { background: _colors2.default.AMETHYST } },
     _react2.default.createElement(
       _displayComponents.Title,
       { style: _extends({}, style.title, {
@@ -15862,7 +15903,7 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
     _react2.default.createElement(_displayComponents.Divider, null),
     _react2.default.createElement(
       'div',
-      { style: { height: '83%', overflow: 'visible' } },
+      { style: styles.sidebarButtonsWrapper },
       sidebarItems
     )
   );
@@ -16267,7 +16308,7 @@ var Skills = function Skills(_ref3) {
       _react2.default.createElement(
         _displayComponents.Title,
         { style: styles.title },
-        'STUFF I AM GOOD AT'
+        'SOME STUFF I AM GOOD AT'
       ),
       _react2.default.createElement(
         _displayComponents.Cell,

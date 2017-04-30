@@ -24,7 +24,8 @@ const styles = {
   }
 };
 
-
+//  this c takes a prop, colors -  which is an object with two keys: baseColor & hoverColor which
+// are arrays of RGB values
 class SidebarButton extends Component {
   constructor( props ) {
     super(props);
@@ -47,22 +48,33 @@ class SidebarButton extends Component {
 
   render() {
     let { buttonUp } = this.state;
-    let { style, target, children, link = null, title = '_blank', ...props } = this.props;
-
+    let {
+      style,
+      target,
+      children,
+      link = null,
+      title = '_blank',
+      colors: {baseColor, hoverColor},
+      ...props
+    } = this.props;
 
     //:TODO get the bgColor from props
     let motion = (buttonUp)
       ? {
-          offset: spring(5, bounce),
-          bgColor: spring(255)
+          offset:  spring(5, bounce),
+          red:     spring(hoverColor[0]),
+          green:   spring(hoverColor[1]),
+          blue:    spring(hoverColor[2])
         }
       : {
-          offset: spring(0, fade),
-          bgColor: spring(45)
+          offset:  spring(0, fade),
+          red:     spring(baseColor[0]),
+          green:   spring(baseColor[1]),
+          blue:    spring(baseColor[2])
         };
 
 
-    const motionCallback = ({ offset, bgColor }) => {
+    const motionCallback = ({ red, green, blue, offset }) => {
       let i, boxShadow = [];
 
       for (i = Math.round(offset); i > 0; i--) {
@@ -77,7 +89,7 @@ class SidebarButton extends Component {
             boxShadow: boxShadow.join(', '),
             [ transform ]: `translate(-${offset}px, -${offset}px)`,
             borderColor: `rgba(81, 81, 81, ${offset / 5})`,
-            backgroundColor: `rgb(${int(bgColor)}, ${int(bgColor)}, ${int(bgColor)})`,
+            backgroundColor: `rgb(${int(red)}, ${int(green)}, ${int(blue)})`,
             ...style
           }}
           {...props}>

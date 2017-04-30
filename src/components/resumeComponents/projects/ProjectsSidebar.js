@@ -1,15 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import colors from '../../../bin/colors';
 import { buttons, Title, Divider, SideSection } from '../../displayComponents';
 import { rotateCarousel } from '../../../actions';
 const  { SidebarButton } = buttons;
 
 
-const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {
-  const getPanelMovement = index => {
-    let { length } = content;
+const styles = {
+  sidebarButtonsWrapper: {
+    display: 'flex',
+    height: '62%',
+    overflow: 'visible',
 
+    alignContent: 'flex-start',
+
+    WebkitFlexWrap: 'wrap',
+    MSFlexWrap: 'wrap',
+    flexWrap: 'wrap',
+  },
+  sidebarButton: {
+    margin: '20px auto',
+
+    WebkitFlexGrow: 1,
+    flexGrow: 1,
+  }
+};
+
+const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {
+  let { length } = content;
+
+  const getPanelMovement = index => {
     // proper modulus math...
     let forwards = (((currPanel - index) % length) + length) % length;
     let backwards = (((index - currPanel) % length) + length) % length;
@@ -17,34 +38,30 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
     return backwards > forwards ? forwards : backwards * -1;
   };
 
-
   const getNewRotation = index => rotation + theta * getPanelMovement(index);
 
-
   const sidebarItems = content.map( (project, idx) => {
-    let navigate = () => {
-      if (currPanel !== idx) rotate(getNewRotation(idx), idx);
-    };
-
-    let marginBottom = 62 / content.length;
+    let navigate = () => { if (currPanel !== idx) rotate(getNewRotation(idx), idx); };
 
     return (
       <div
-        key={`projects-sidebar-item-${project.index}`}
+        key={`sidebar-item-projects${project.index}`}
         onClick={navigate}
-        style={{ margin: `0 auto ${marginBottom}%` }}>
-        <SidebarButton>
+        style={styles.sidebarButton}>
+
+        <SidebarButton colors={{ baseColor: [45, 45, 45], hoverColor: [ 144, 103, 198] }}>
           <Title style={{ fontSize: '1.1rem' }}>
             <span>{ project.title }</span>
           </Title>
         </SidebarButton>
+
       </div>
     );
   });
 
 
   return (
-    <SideSection title="Projects">
+    <SideSection title="Projects" style={{ background: colors.AMETHYST }}>
       <Title style={{
         ...style.title,
         fontSize: '3rem',
@@ -54,8 +71,8 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
       </Title>
 
       <Divider />
-      {/* <Cell style={{height: '5%'}} /> */}
-      <div style={{height: '83%', overflow: 'visible'}}>
+
+      <div style={styles.sidebarButtonsWrapper}>
         { sidebarItems }
       </div>
     </SideSection>

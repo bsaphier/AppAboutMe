@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
+import colors from '../../../bin/colors';
 import Modernizr from '../../../../.modernizrrc';
 import { buttons, Cell, Title, FillSection } from '../../displayComponents';
 import { int, hypote, normal as _normal } from '../../../bin/utils';
@@ -67,6 +68,10 @@ const styles = {
   },
 
   banner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     position: 'absolute',
     zIndex: 7,
     textAlign: 'center',
@@ -74,7 +79,7 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(0, 0, 0, 0.62)',
+    backgroundColor: 'rgba(81, 81, 81, 0.62)',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -82,20 +87,19 @@ const styles = {
     transform: 'translate(-50%, -50%)',
   },
 
-  bannerInfo: {
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden',
-  },
-  titleMain: {
-    display: 'block',
-    position: 'relative',
-    textAlign: 'inherit'
-  },
   title: {
+    padding: '0 4px',
     marginLeft: 0,
-    fontWeight: 100,
+    fontWeight: 600,
+    fontStyle: 'italic',
     fontSize: '4rem',
+    letterSpacing: '-0.1rem',
+  },
+  projectDescription: {
+    fontSize: '1.62rem',
+    fontWeight: 900,
+    color: '#fff',
+    textShadow: `2px 2px 3px ${colors.MENU_DARKER}`
   },
   buttonWrap: {
     width: '13rem',
@@ -263,7 +267,16 @@ class ProjectPanel extends Component {
 
 
   render() {
+    let { parallaxVar } = this.state;
     let { toggleModal, project: { link, title, shortDescription } } = this.props;
+
+    let titleStyle = parallaxVar
+      ? styles.title
+      : {
+          ...styles.title,
+          textShadow: `-3px -2px ${colors.AMETHYST}`,
+          backgroundImage: `linear-gradient(to top right, ${colors.MENU_DARKER} 62%, ${colors.OPERA_MAUVE} 162%)`
+        };
 
     return (
       <FillSection className="project-panel" style={{padding: 0}}>
@@ -273,23 +286,24 @@ class ProjectPanel extends Component {
         </div>
 
         <Cell style={styles.banner}>
-          <div style={styles.bannerInfo}>
+          <div>
 
-            <Title style={styles.title} parentStyle={styles.titleMain}>
+            <Title style={titleStyle}>
               <span>{ title }</span>
             </Title>
 
-            <div style={{color: 'rgb(161, 136, 166)'}}>{ shortDescription }</div>
+            <div style={styles.projectDescription}>{ shortDescription }</div>
 
             <div style={styles.buttonWrap}>
-              <div style={{padding: '5px'}}>
+              {/*/TODO move this button to the modal */}
+              {/* <div style={{padding: '5px'}}>
                 <Button link={link} title={`Link To ${title}`}>
                   {'Check it out!'}
                 </Button>
-              </div>
+              </div> */}
 
               <div style={{padding: '5px'}}>
-                <Button title="More Info" onClick={toggleModal}>
+                <Button title="More Info" onClick={toggleModal} style={{background: colors.AMETHYST}}>
                   {'More Info'}
                 </Button>
               </div>
