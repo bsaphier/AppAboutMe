@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import colors from '../../../bin/colors';
 import { buttons, BorderGrad } from '../../displayComponents';
 import { toggleProjectModal } from '../../../actions';
 const  { Button } = buttons;
@@ -42,7 +43,7 @@ const styles = {
     fontWeight: 400,
   },
   modalHeaderText: {
-    color: 'rgb(45, 45, 45)',
+    color: colors.MENU_DARK,
   },
   buttonContainer: {
     position: 'absolute',
@@ -60,10 +61,10 @@ const styles = {
     MsBackgroundClip: 'text',
     OBackgroundClip: 'text',
 
-    WebkitTextFillColor: 'rgb(45, 45, 45)',
-    MozTextFillColor: 'rgb(45, 45, 45)',
-    MsTextFillColor: 'rgb(45, 45, 45)',
-    OTextFillColor: 'rgb(45, 45, 45)',
+    WebkitTextFillColor: colors.MENU_DARK,
+    MozTextFillColor: colors.MENU_DARK,
+    MsTextFillColor: colors.MENU_DARK,
+    OTextFillColor: colors.MENU_DARK,
   },
 
   // 3D shadow effect
@@ -100,6 +101,8 @@ const styles = {
 
 
 const ProjectModal = ({ currPanel, projects, toggleModal, projectModalOpen }) => {
+  let { link, title } = projects[currPanel];
+
   const handleBackgroundClick = event => {
     if (event.target === event.currentTarget) toggleModal();
   };
@@ -132,15 +135,21 @@ const ProjectModal = ({ currPanel, projects, toggleModal, projectModalOpen }) =>
 
           </div>
 
-          <div style={{height: '2.5em'}} />
-
-          <ul style={{listStylePosition: 'inside', fontWeight: 900}}>
-            {projects[currPanel].description.map((bullet, idx) => (
-              <li key={`projMod-${projects[currPanel].title}-${+idx}`}>
-                {bullet}
-              </li>
-            ))}
+          <ul style={{margin: '40px 0', listStylePosition: 'inside', fontWeight: 900}}>
+            {
+              projects[currPanel].description.map((bullet, idx) => (
+                <li key={`projMod-${projects[currPanel].title}-${+idx}`}>
+                  {bullet}
+                </li>
+              ))
+            }
           </ul>
+
+          <div style={{maxWidth: '38%', margin: '0 auto'}}>
+            <Button link={link} title={`Link To ${title}`}>
+              {'Check it out!'}
+            </Button>
+          </div>
 
         </BorderGrad>
 
@@ -151,11 +160,14 @@ const ProjectModal = ({ currPanel, projects, toggleModal, projectModalOpen }) =>
 };
 
 
-export default connect(
-  ({
-    carousel: { currPanel },
-    app: { projectModalOpen },
-    resume: { resume: { projects } },
-  }) => ({ currPanel, projects, projectModalOpen }),
-  dispatch => ({ toggleModal: () => dispatch(toggleProjectModal()) })
-)(ProjectModal);
+const mapStateToProps = ({
+  carousel: { currPanel },
+  app: { projectModalOpen },
+  resume: { resume: { projects } }
+}) => ({ currPanel, projects, projectModalOpen });
+
+
+const mapDispatchToProps = dispatch => ({ toggleModal: () => dispatch(toggleProjectModal()) });
+
+
+export default connect( mapStateToProps, mapDispatchToProps)(ProjectModal);

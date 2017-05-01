@@ -14,6 +14,17 @@ const  { Button } = buttons;
 const transform = Modernizr.prefixed('transform');
 
 
+// pseudo-styles for panel title
+let rgb = 46, textShadow = [];
+
+for (let a = 2, b = 3, c; a <= 13; c = a, a = b, b += c) {
+  textShadow.push(`${a}px ${a}px ${a}px rgb(${rgb},${rgb},${rgb})`);
+  rgb += 7;
+}
+
+textShadow.join(', ');
+
+
 const styles = {
   background: {
     position: 'absolute',
@@ -79,7 +90,7 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(81, 81, 81, 0.62)',
+    backgroundColor: 'rgba(255, 255, 255, 0.38)',
 
     WebkitTransform: '-webkit-translate(-50%, -50%)',
     MozTransform: '-moz-translate(-50%, -50%)',
@@ -98,8 +109,8 @@ const styles = {
   projectDescription: {
     fontSize: '1.62rem',
     fontWeight: 900,
-    color: '#fff',
-    textShadow: `2px 2px 3px ${colors.MENU_DARKER}`
+    color: colors.OPERA_MAUVE,
+    textShadow // `2px 2px 1px ${colors.MENU_DARKER}`
   },
   buttonWrap: {
     width: '13rem',
@@ -197,10 +208,8 @@ class ProjectPanel extends Component {
   //:TODO don't return the entire element instead just modify the style. as it is, the entire
   // element update on mouse movement
   createBackground() {
-    let { currPanel, project: { index, backgroundImg } } = this.props;
+    let { project: { backgroundImg } } = this.props;
     let { mouseX, mouseY, parallax, parallaxVar, panelWidth, panelHeight } = this.state;
-
-    let display = currPanel === index;
 
     // the maxDistance is the distance from the center to the corner of the panel
     let maxDistance = hypote(panelWidth, panelHeight);
@@ -215,7 +224,6 @@ class ProjectPanel extends Component {
     const backgroundStyle = (parallax)
       ? {
           ...styles[ parallaxVar ? 'parallaxWrapB' : 'parallaxWrapA' ],
-          display: (display) ? 'block' : 'none',
           WebkitPerspective: `${perspective}px`,
           MozPerspective: `${perspective}px`,
           OPerspective: `${perspective}px`,
@@ -223,7 +231,6 @@ class ProjectPanel extends Component {
         }
       : {
           ...styles.backgroundFlat,
-          display: (display) ? 'block' : 'none',
           backgroundImage: `url(${imgs[backgroundImg]})`
         };
 
@@ -268,7 +275,7 @@ class ProjectPanel extends Component {
 
   render() {
     let { parallaxVar } = this.state;
-    let { toggleModal, project: { link, title, shortDescription } } = this.props;
+    let { toggleModal, project: { title, shortDescription } } = this.props;
 
     let titleStyle = parallaxVar
       ? styles.title
@@ -289,20 +296,14 @@ class ProjectPanel extends Component {
           <div>
 
             <Title style={titleStyle}>
+              <span style={{ position: 'absolute', zIndex: -1, textShadow }}>{ title }</span>
               <span>{ title }</span>
             </Title>
 
             <div style={styles.projectDescription}>{ shortDescription }</div>
 
             <div style={styles.buttonWrap}>
-              {/*/TODO move this button to the modal */}
-              {/* <div style={{padding: '5px'}}>
-                <Button link={link} title={`Link To ${title}`}>
-                  {'Check it out!'}
-                </Button>
-              </div> */}
-
-              <div style={{padding: '5px'}}>
+              <div style={{padding: '10px 5px'}}>
                 <Button title="More Info" onClick={toggleModal} style={{background: colors.AMETHYST}}>
                   {'More Info'}
                 </Button>

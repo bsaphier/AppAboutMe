@@ -27,6 +27,7 @@ const styles = {
   }
 };
 
+
 const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {
   let { length } = content;
 
@@ -59,7 +60,6 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
     );
   });
 
-
   return (
     <SideSection title="Projects" style={{ background: colors.AMETHYST }}>
       <Title style={{
@@ -81,6 +81,7 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
 
 
 const mapStateToProps = ({ carousel: { theta, currPanel, rotation } }) => ({ theta, currPanel, rotation });
+
 
 const mapDispatchToProps = dispatch => ({
   rotate: (newRotation, currPanel) => dispatch(rotateCarousel(newRotation, currPanel))

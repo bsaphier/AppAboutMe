@@ -21,26 +21,23 @@
 
 > About
   • Background Image
-  • Sidebar Information
+  • Sidebar Information & styling...
   • Edit the content
   •
 >
 
 > Projects
+  • carousel bg sizes!!
   • Move Carousel navButtons to parent c as a
-  • Sidebar styling...
-  • don't render the background (entire panel?) if the panel is not in view
-  ----> images are being fetched more than once? because of component updates?
-  ----> load the images when the app loads... with a redux action?
+  • Sidebar styling?
+  • ProjectModal styling...
+  ! -> are the bg images are being fetched more than once? because of c updates?
 >
 
 > Skills
-  • Title style
+  • Title style?
   • Skills content....
-  • Item style
-  • Item interaction - ?
-    - make position relative to Cell. -> absolute items
-  •
+  • refactor from css transitions to React-Motion
 >
 
 > Footer

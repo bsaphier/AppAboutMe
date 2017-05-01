@@ -87,6 +87,7 @@ export const preloadCarouselPanels = (panels) => ({
 
 export const createCarouselPanels = projects => dispatch => {
   const toggleModal = () => dispatch(toggleProjectModal());
+  // this guarantees that the background images have loaded before anything is displayed
   const panels = projects.map( (project) => (
     <ProjectPanel
       key={`project-panel-${project.index}`}
