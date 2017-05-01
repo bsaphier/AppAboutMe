@@ -31,7 +31,7 @@ module.exports = {
        loader: 'modernizr-loader!json-loader'
      }, {
        test: /\.(jpe?g|png|gif|svg)$/i,
-       loader: 'file-loader'
+       loader: 'file-loader?name=[path][name].[ext]'
      }
     ]
   },

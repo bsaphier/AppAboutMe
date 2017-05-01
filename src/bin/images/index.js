@@ -12,7 +12,7 @@ import sot16 from './sot16.svg';
 import sot32 from './sot32.svg';
 import sot64 from './sot64.svg';
 
-import yImg from './youphonic-img-sm-min.png';
+import yImg from './youphonic-opmauve.png';
 
 export default {
   rrwaRed,
