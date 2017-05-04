@@ -50,7 +50,7 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
         onClick={navigate}
         style={styles.sidebarButton}>
 
-        <SidebarButton colors={{ baseColor: [45, 45, 45], hoverColor: [ 144, 103, 198] }}>
+        <SidebarButton colors={{ baseColor: [45, 45, 45], hoverColor: [ 81, 81, 81] }}>
           <Title style={{ fontSize: '1.1rem' }}>
             <span>{ project.title }</span>
           </Title>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import colors from '../../bin/colors';
 import { hoverSpin } from '../HOC';
 import {
   buttons,
@@ -13,9 +14,29 @@ import {
   SectionFoot
 } from '../displayComponents';
 const { IconButton } = buttons;
-
-
 const SocialButton = hoverSpin(IconButton);
+
+
+const styles = {
+  aboutPanel: {
+    top: '47%',
+    left: '49%',
+    width: '74%',
+    height: '65%',
+    transform: 'translate(-50%, -50%)',
+    boxShadow: '-0.4em 0.3em 1em -0.1em rgba(45, 45, 45, 0.7)'
+  },
+
+  before: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    //:TODO backgroundBlurr
+  }
+};
+
 
 const About = ({ content: { about, contact }, style }) => {
 
@@ -34,14 +55,9 @@ const About = ({ content: { about, contact }, style }) => {
   return (
     <Section id="about">
 
-
       <SideSection title="Contact">
 
-        <Title style={{
-          ...style.title,
-          fontSize: '3rem',
-          letterSpacing: '-0.05em'
-        }}>
+        <Title style={{ ...style.title, fontSize: '3rem', letterSpacing: '-0.05em' }}>
           <span>Contact</span>
         </Title>
 
@@ -57,19 +73,12 @@ const About = ({ content: { about, contact }, style }) => {
 
       </SideSection>
 
-
-      <FillSection style={{ background: 'rgb(81, 81, 81)' }}>
+      <FillSection style={{ background: colors.MENU_DARK }}>
+        <div style={styles.before} />
 
         <Cell>
 
-          <BorderGrad style={{
-            top: '47%',
-            left: '49%',
-            width: '74%',
-            height: '65%',
-            transform: 'translate(-50%, -50%)',
-            boxShadow: '-0.4em 0.3em 1em -0.1em rgba(45, 45, 45, 0.7)'
-          }}>
+          <BorderGrad style={styles.aboutPanel}>
 
             <Title className="shadow" style={style.title}>
               ABOUT ME
@@ -85,9 +94,9 @@ const About = ({ content: { about, contact }, style }) => {
 
       </FillSection>
 
-
     </Section>
   );
 };
+
 
 export default About;

@@ -5,8 +5,7 @@ import colors from '../../../bin/colors';
 import Modernizr from '../../../../.modernizrrc';
 import { buttons, Cell, Title, FillSection } from '../../displayComponents';
 import { int, hypote, normal as _normal } from '../../../bin/utils';
-//:TODO do I really want to load the images this way??
-// i.e. with webpack and part of the bundle
+//:TODO do I really want to load the images from here??
 import imgs from '../../../bin/images';
 const  { Button } = buttons;
 
@@ -14,7 +13,7 @@ const  { Button } = buttons;
 const transform = Modernizr.prefixed('transform');
 
 
-// pseudo-styles for panel title
+// text shadow for pseudo-element
 let rgb = 46, textShadow = [];
 
 for (let a = 2, b = 3, c; a <= 13; c = a, a = b, b += c) {
@@ -32,6 +31,11 @@ const styles = {
     width: '100%',
     height: '100%',
 
+    WebkitTransformStyle: 'preserve-3d',
+    MozTransformStyle: 'preserve-3d',
+    OTransformStyle: 'preserve-3d',
+    transformStyle: 'preserve-3d',
+
     WebkitTransition: 'all ease-out .8s',
     MozTransition: 'all ease-out .8s',
     OTransition: 'all ease-out .8s',
@@ -44,21 +48,21 @@ const styles = {
     width: '100%',
     height: '100%',
     backgroundSize: 'auto 100%',
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: colors.MENU_DARKER,
   },
   parallaxWrapA: {
     position: 'relative',
     zIndex: 9,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgb(45, 45, 45)',
+    backgroundColor: colors.MENU_DARKER,
   },
   parallaxWrapB: {
     position: 'relative',
     zIndex: 9,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: '#fff',
 
     WebkitPerspectiveOrigin: '50% 50%',
     MozPerspectiveOrigin: '50% 50%',
@@ -90,12 +94,9 @@ const styles = {
     left: '50%',
     width: '100%',
     height: '33.33%',
-    backgroundColor: 'rgba(255, 255, 255, 0.38)',
+    backgroundColor: 'rgba(81, 81, 81, 0.62)',
 
-    WebkitTransform: '-webkit-translate(-50%, -50%)',
-    MozTransform: '-moz-translate(-50%, -50%)',
-    OTransform: '-o-translate(-50%, -50%)',
-    transform: 'translate(-50%, -50%)',
+    [ transform ]: 'translate(-50%, -50%)',
   },
 
   title: {
@@ -105,12 +106,15 @@ const styles = {
     fontStyle: 'italic',
     fontSize: '4rem',
     letterSpacing: '-0.1rem',
+
+    textShadow: `-3px -2px ${colors.AMETHYST}`,
+    backgroundImage: `linear-gradient(to top right, ${colors.MENU_DARKER} 62%, ${colors.OPERA_MAUVE} 162%)`
   },
   projectDescription: {
     fontSize: '1.62rem',
     fontWeight: 900,
     color: colors.OPERA_MAUVE,
-    textShadow // `2px 2px 1px ${colors.MENU_DARKER}`
+    textShadow
   },
   buttonWrap: {
     width: '13rem',
@@ -217,9 +221,7 @@ class ProjectPanel extends Component {
     // the distance of the mouse, from the center of the panel, as a cartesian coordinate
     let distance = hypote(mouseX, mouseY);
 
-    let perspective = panelWidth < panelHeight
-      ? int(panelHeight * 500 / panelWidth)
-      : int(panelWidth  * 500 / panelHeight);
+    let perspective = int(panelWidth  * 500 / panelHeight);
 
     const backgroundStyle = (parallax)
       ? {
@@ -240,20 +242,19 @@ class ProjectPanel extends Component {
             backgroundImg.map( (fileName, i) => {
               const  layer = i + 1;
 
+              const position = (parallaxVar) ? { left: -110 } : { left: 40 };
+
               const translateZ = (parallaxVar)
                 ? (distance / maxDistance) * (layer * -40)
                 : 2 * distance / maxDistance * Math.sqrt(perspective * layer);
 
-              const rotateY = (parallaxVar)
-                ? (mouseX) * (layer * 0.5 / panelWidth)
-                : (mouseX * -1) / panelWidth * layer;
+              const rotateY = (mouseX * -1) / panelWidth * layer;
 
-              const rotateX = (parallaxVar)
-                ? mouseY * (layer * 0.5 / panelHeight)
-                : mouseY / (panelHeight * layer);
+              const rotateX = mouseY / (panelHeight * layer);
 
               const parallaxDivStyle = {
                 ...styles.parallaxDiv,
+                ...position,
                 zIndex: layer,
                 [transform]: `
                   translateZ(${translateZ}px)
@@ -263,7 +264,7 @@ class ProjectPanel extends Component {
 
               return (
                 <div key={`bg-layer-${+i}-${fileName}`} style={parallaxDivStyle}>
-                  <img src={imgs[fileName]} alt={fileName} />
+                  <img src={imgs[fileName]} alt={fileName} height={panelHeight * 1.1} />
                 </div>
               );
             })
@@ -274,16 +275,7 @@ class ProjectPanel extends Component {
 
 
   render() {
-    let { parallaxVar } = this.state;
     let { toggleModal, project: { title, shortDescription } } = this.props;
-
-    let titleStyle = parallaxVar
-      ? styles.title
-      : {
-          ...styles.title,
-          textShadow: `-3px -2px ${colors.AMETHYST}`,
-          backgroundImage: `linear-gradient(to top right, ${colors.MENU_DARKER} 62%, ${colors.OPERA_MAUVE} 162%)`
-        };
 
     return (
       <FillSection className="project-panel" style={{padding: 0}}>
@@ -295,7 +287,7 @@ class ProjectPanel extends Component {
         <Cell style={styles.banner}>
           <div>
 
-            <Title style={titleStyle}>
+            <Title style={styles.title}>
               <span style={{ position: 'absolute', zIndex: -1, textShadow }}>{ title }</span>
               <span>{ title }</span>
             </Title>

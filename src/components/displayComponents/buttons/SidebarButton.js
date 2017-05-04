@@ -78,8 +78,9 @@ class SidebarButton extends Component {
       let i, boxShadow = [];
 
       for (i = Math.round(offset); i > 0; i--) {
+        let color = 45 +  i * i;
         let shadowOffset = offset - i + 1;
-        boxShadow.push(`rgb(45, 45, 45) ${shadowOffset}px ${shadowOffset}px`);
+        boxShadow.push(`rgb(${color}, ${color}, ${color}) ${shadowOffset}px ${shadowOffset}px`);
       }
 
       return (
@@ -88,7 +89,7 @@ class SidebarButton extends Component {
             ...styles.sidebarButton,
             boxShadow: boxShadow.join(', '),
             [ transform ]: `translate(-${offset}px, -${offset}px)`,
-            borderColor: `rgba(81, 81, 81, ${offset / 5})`,
+            borderColor: `rgba(45, 45, 45, ${offset / 5})`,
             backgroundColor: `rgb(${int(red)}, ${int(green)}, ${int(blue)})`,
             ...style
           }}

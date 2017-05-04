@@ -1,18 +1,18 @@
-<––––––––––––TODO TODO TODO TODO TODO––––––––––––>
+<––––––––TODO TODO TODO TODO TODO––––––––>
 
-• load the carousel images better!!!
-• Sidebar Width is not right....
+• load the carousel images in a different way or from a different location??
+• Sidebar width is not right!
 • SectionFoot styling....
 
 
 
-<–––––––––––––HIGHER ORDER COMPONENTS––––––––––––>
+<–––––––––HIGHER ORDER COMPONENTS––––––––>
 > clickSpin / hoverSpin
   • DRY DRY
 
 
 
-<––––––––––––––TOP LEVEL COMPONENTS––––––––––––––>
+<––––––––––TOP LEVEL COMPONENTS––––––––––>
 > Welcome
   • mouse hover triggers motion in letters
   • create title components by iterating instead of hard-coded
@@ -27,7 +27,6 @@
 >
 
 > Projects
-  • carousel bg sizes!!
   • Move Carousel navButtons to parent c as a
   • Sidebar styling?
   • ProjectModal styling...
@@ -50,7 +49,7 @@
 
 
 
-<––––––––––––––––––––Component Map––––––––––––––––––––>
+<–––––––––––––Component Map–––––––––––––>
 /src
 - index
 - App ∞

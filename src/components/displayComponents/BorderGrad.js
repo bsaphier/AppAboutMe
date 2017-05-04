@@ -3,8 +3,8 @@ import React from 'react';
 const styles = {
   sectionItem: {
     overflow: 'hidden',
-    padding: '2em 2em',
-    border: '0.162em solid',
+    padding: '1rem 2rem',
+    border: '2px solid',
     position: 'absolute',
     zIndex: 9,
     background: 'rgba(255, 255, 255, 1)',
