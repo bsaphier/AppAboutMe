@@ -24,15 +24,15 @@ const styles = {
   }
 };
 
-//  this c takes a prop, colors -  which is an object with two keys: baseColor & hoverColor which
+//  this c takes a prop, colors -  which is an object with two keys: upColor & downColor which
 // are arrays of RGB values
 class SidebarButton extends Component {
   constructor( props ) {
     super(props);
-    this.state = { buttonUp: false };
+    this.state = { buttonUp: true };
 
     this.buttonUp = this.buttonUp.bind(this);
-    this.buttondown = this.buttondown.bind(this);
+    this.buttonDown = this.buttonDown.bind(this);
   }
 
 
@@ -41,7 +41,7 @@ class SidebarButton extends Component {
   }
 
 
-  buttondown() {
+  buttonDown() {
     this.setState({ buttonUp: false });
   }
 
@@ -54,23 +54,22 @@ class SidebarButton extends Component {
       children,
       link = null,
       title = '_blank',
-      colors: {baseColor, hoverColor},
+      colors: {upColor, downColor},
       ...props
     } = this.props;
 
-    //:TODO get the bgColor from props
     let motion = (buttonUp)
       ? {
           offset:  spring(5, bounce),
-          red:     spring(hoverColor[0]),
-          green:   spring(hoverColor[1]),
-          blue:    spring(hoverColor[2])
+          red:     spring(downColor[0]),
+          green:   spring(downColor[1]),
+          blue:    spring(downColor[2])
         }
       : {
           offset:  spring(0, fade),
-          red:     spring(baseColor[0]),
-          green:   spring(baseColor[1]),
-          blue:    spring(baseColor[2])
+          red:     spring(upColor[0]),
+          green:   spring(upColor[1]),
+          blue:    spring(upColor[2])
         };
 
 
@@ -78,9 +77,9 @@ class SidebarButton extends Component {
       let i, boxShadow = [];
 
       for (i = Math.round(offset); i > 0; i--) {
-        let color = 45 +  i * i;
+        let rgb = 45 +  i * i;
         let shadowOffset = offset - i + 1;
-        boxShadow.push(`rgb(${color}, ${color}, ${color}) ${shadowOffset}px ${shadowOffset}px`);
+        boxShadow.push(`rgb(${rgb}, ${rgb}, ${rgb}) ${shadowOffset}px ${shadowOffset}px`);
       }
 
       return (
@@ -104,9 +103,9 @@ class SidebarButton extends Component {
       <div
         className="sidebar-button"
         onMouseUp={this.buttonUp}
-        onMouseOver={this.buttonUp}
-        onMouseOut={this.buttondown}
-        onMouseDown={this.buttondown}
+        onMouseDown={this.buttonUp}
+        onMouseOut={this.buttonUp}
+        onMouseOver={this.buttonDown}
         >
         <a href={link} title={title} target={target}>
           <Motion style={motion}>

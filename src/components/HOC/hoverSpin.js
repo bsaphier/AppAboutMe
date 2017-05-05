@@ -91,12 +91,12 @@ const hoverSpin = (Component) => {
             {({ red, blue, green, opac, degree, shadow, shadowX, shadowY }) => (
               <div style={{ [ transform ]: `rotateY(${degree}deg)` }}>
                 <Component
-                  {...this.props}
                   style={{
                     ...this.props.style,
                     boxShadow: `${shadowX}px ${shadowY}px 5px -1px rgba(81, 81, 81, ${shadow})`,
                     background: `rgba(${int(red)}, ${int(green)}, ${int(blue)}, ${opac})`
                   }}
+                  {...this.props}
                 />
               </div>
             )}

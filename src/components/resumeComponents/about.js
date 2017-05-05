@@ -1,99 +1,135 @@
 import React from 'react';
 
+//:TODO do I really want to load the images from here??
+import imgs from '../../bin/images';
 import colors from '../../bin/colors';
+import Modernizr from '../../../.modernizrrc';
 import { hoverSpin } from '../HOC';
 import {
   buttons,
   Cell,
   Title,
   Section,
-  Divider,
-  BorderGrad,
   FillSection,
   SideSection,
   SectionFoot
 } from '../displayComponents';
+
 const { IconButton } = buttons;
 const SocialButton = hoverSpin(IconButton);
+const transform = Modernizr.prefixed('transform');
 
 
 const styles = {
-  aboutPanel: {
-    top: '47%',
-    left: '49%',
-    width: '74%',
-    height: '65%',
-    transform: 'translate(-50%, -50%)',
-    boxShadow: '-0.4em 0.3em 1em -0.1em rgba(45, 45, 45, 0.7)'
+  background: {
+    position: 'absolute',
+    zIndex: 1,
+    top: -20,
+    left: -20,
+    width: '110%',
+    height: '110%',
+    backgroundSize: 'cover',
+    backgroundImage: `url(${imgs.spaceBg})`,
+
+    WebkitFilter: 'blur(4px)',
+    filter: 'blur(4px)',
   },
 
-  before: {
+  aboutPanel: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    zIndex: 9,
+    top: '50%',
+    left: '48%',
+    width: '50%',
+    height: '38%',
+    [ transform ]: 'translate(-50%, -50%)'
+  },
+  aboutPanelContent: {
+    position: 'relative',
+    zIndex: 9,
     width: '100%',
     height: '100%',
-    //:TODO backgroundBlurr
+    padding: '1rem 2rem',
+    overflow: 'hidden',
+    color: colors.CHINESE_VIOLET,
+    background: '#FFF',
+  },
+
+  socialButtons: {
+    position: 'absolute',
+    bottom: '20px',
+    cursor: 'default',
+    color: colors.MENU_DARK,
+    fontSize: '1.1rem',
+  },
+
+  // 3D shadow effect
+  before: {
+    zIndex: 1,
+    position: 'absolute',
+    left: '5px',
+    bottom: '15px',
+    width: '50%',
+    height: '15%',
+    maxHeight: '20px',
+
+    WebkitBoxShadow: '0 15px 10px rgba(0, 0, 0, 0.38)',
+    MozBoxShadow: '0 15px 10px rgba(0, 0, 0, 0.38)',
+    boxShadow: '0 15px 10px rgba(0, 0, 0, 0.38)',
+    [ transform ]: 'rotate(-3deg)',
+  },
+  after: {
+    right: '5px',
+    left: null,
+    [ transform ]: 'rotate(3deg)',
   }
 };
 
 
 const About = ({ content: { about, contact }, style }) => {
 
-  const socialButtons = contact.links.map( link =>
+  const socialButtons = contact.links.map( link => (
     <SocialButton
       url={link.url}
       key={link.name}
       name={link.name}
       icon={link.icon}
-      initialColor={[45, 45, 45]}
-      hoverColor={[255, 68, 62]}
+      hoverColor={[45, 45, 45]}
+      initialColor={[255, 68, 62]}
     />
-  );
-
+  ));
 
   return (
     <Section id="about">
+      <div className="background" style={styles.background} />
 
       <SideSection title="Contact">
-
         <Title style={{ ...style.title, fontSize: '3rem', letterSpacing: '-0.05em' }}>
           <span>Contact</span>
         </Title>
-
         <Cell style={{height: '62%'}}>
+
           <span>FILLER</span>
+
         </Cell>
-
-        <Divider />
-
-        <Cell style={{height: '21%', textAlign: 'center'}}>
-          { socialButtons }
-        </Cell>
-
+        <div style={styles.socialButtons}>{ socialButtons }</div>
       </SideSection>
 
-      <FillSection style={{ background: colors.MENU_DARK }}>
-        <div style={styles.before} />
+      <FillSection>
+        <div style={styles.aboutPanel}>
+          <div style={styles.before} />
 
-        <Cell>
-
-          <BorderGrad style={styles.aboutPanel}>
-
+          <div className="about-panel" style={styles.aboutPanelContent}>
             <Title className="shadow" style={style.title}>
-              ABOUT ME
+              <span>WHO I AM</span>
             </Title>
+            <p style={style.text}>{ about }</p>
+          </div>
 
-            <p style={style.text}>{about}</p>
-
-          </BorderGrad>
-
-        </Cell>
-
+          <div style={{...styles.before, ...styles.after}} />
+        </div>
         <SectionFoot to="projects" text="NEXT" />
-
       </FillSection>
-
     </Section>
   );
 };

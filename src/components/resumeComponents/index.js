@@ -7,12 +7,14 @@ import Projects from './projects';
 
 const styles = {
   title: {
+    cursor: 'default',
     fontWeight: 100,
     fontSize: '4rem',
     // letterSpacing: '0.1rem',
     marginLeft: 0
   },
   text: {
+    cursor: 'default',
     fontWeight: 900,
     fontSize: '1.6rem',
     paddingTop: '2rem',

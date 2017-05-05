@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import colors from '../../../bin/colors';
 import { buttons, Title, Divider, SideSection } from '../../displayComponents';
 import { rotateCarousel } from '../../../actions';
+
 const  { SidebarButton } = buttons;
 
 
@@ -47,10 +48,10 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
     return (
       <div
         key={`sidebar-item-projects${project.index}`}
-        onClick={navigate}
+        onMouseDown={navigate}
         style={styles.sidebarButton}>
 
-        <SidebarButton colors={{ baseColor: [45, 45, 45], hoverColor: [ 81, 81, 81] }}>
+        <SidebarButton colors={{ upColor: [45, 45, 45], downColor: [ 81, 81, 81] }}>
           <Title style={{ fontSize: '1.1rem' }}>
             <span>{ project.title }</span>
           </Title>

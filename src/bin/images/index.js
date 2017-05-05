@@ -13,6 +13,7 @@ import sot32 from './sot32.svg';
 import sot64 from './sot64.svg';
 
 import yImg from './youphonic-chinviolet.png';
+import spaceBg from './spaceBg.jpg';
 
 export default {
   rrwaRed,
@@ -27,5 +28,6 @@ export default {
   sot16,
   sot32,
   sot64,
-  yImg
+  yImg,
+  spaceBg
 };
