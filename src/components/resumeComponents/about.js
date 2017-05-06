@@ -7,7 +7,6 @@ import Modernizr from '../../../.modernizrrc';
 import { hoverSpin } from '../HOC';
 import {
   buttons,
-  Cell,
   Title,
   Section,
   Divider,
@@ -38,17 +37,29 @@ const styles = {
 
   aboutSidebarContent: {
     height: '78%',
-    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
-    padding: '20px 0',
-    fontSize: '1rem',
+    justifyContent: 'flex-start',
+    overflow: 'hidden',
+    padding: '0 1px ',
+    cursor: 'default',
+    fontSize: '1.1rem',
     fontWeight: '100',
+    color: colors.MENU_DARKER,
   },
-  aboutSidebarItem: {
-    display: 'flex',
-    margin: '0 0 40px 0',
-    justifyContent: 'space-between'
+  aboutSidebarLabel: {
+    display: 'block',
+    padding: '0 3px',
+    letterSpacing: '0.05rem',
+    textTransform: 'uppercase'
+  },
+  aboutSidebarInfo: {
+    display: 'block',
+    padding: '0 5px',
+    fontSize: '2rem',
+    fontWeight: 900,
+    textAlign: 'right',
+    letterSpacing: '-0.1rem'
   },
   socialButtons: {
     display: 'inline-flex',
@@ -61,6 +72,12 @@ const styles = {
   },
   socialButtonWrap: {
     textAlign: 'center',
+  },
+  socialButtonLabel: {
+    color: colors.MENU_DARKER,
+    fontSize: '0.7rem',
+    fontWeight: 400,
+    margin: '0 auto'
   },
 
   aboutPanel: {
@@ -79,7 +96,7 @@ const styles = {
     height: '100%',
     padding: '1rem 2rem',
     overflow: 'hidden',
-    color: colors.MENU_DARK,
+    color: colors.MENU_DARKER,
     background: '#FFF',
   },
 
@@ -114,12 +131,10 @@ const About = ({ content: { about, contact }, style }) => {
         url={link.url}
         name={link.name}
         icon={link.icon}
-        hoverColor={[45, 45, 45]}
-        initialColor={[255, 68, 62]}
+        hoverColor={[255, 68, 62]}
+        initialColor={[45, 45, 45]}
       />
-      <div style={{fontSize: '0.7rem', margin: '0 auto'}}>
-        <span>{link.name}</span>
-      </div>
+      <div style={styles.socialButtonLabel}><span>{ link.name }</span></div>
     </div>
   ));
 
@@ -128,24 +143,30 @@ const About = ({ content: { about, contact }, style }) => {
       <div className="background" style={styles.background} />
 
       <SideSection title="Contact">
-        <Title style={{ ...style.title, fontSize: '3rem', letterSpacing: '-0.05em' }}>
+        <Title style={style.title}>
           <span>Contact</span>
         </Title>
-        <Divider />
+        <Divider style={{background: colors.AMETHYST}} />
+
         <div style={styles.aboutSidebarContent}>
-
-          <div style={styles.aboutSidebarItem}>
-            <span style={{ fontStyle: 'italic' }}>Send Me An Email:</span>
-            <span style={{ fontWeight: 400 }}>{ contact.email }</span>
-          </div>
-          <div style={styles.aboutSidebarItem}>
-            <span style={{ fontStyle: 'italic' }}>My Home Base:</span>
-            <span style={{ fontWeight: 400 }}>{ contact.location }</span>
+          <div style={{margin: '30px 0'}}>
+            <span style={styles.aboutSidebarLabel}>Send Me An Email:</span>
+            <Divider style={{width: '62%', background: colors.CORAL_RED}} />
+            <span style={styles.aboutSidebarInfo}>{ contact.email }</span>
           </div>
 
+          <div style={{margin: '30px 0'}}>
+            <span style={styles.aboutSidebarLabel}>My Home Base:</span>
+            <Divider style={{width: '62%', background: colors.CORAL_RED}} />
+            <span style={styles.aboutSidebarInfo}>{ contact.location }</span>
+          </div>
+
+          <div style={{margin: '30px 0'}}>
+            <span style={styles.aboutSidebarLabel}>Social Media n' Stuff:</span>
+            <Divider style={{width: '62%', background: colors.CORAL_RED}} />
+            <div style={styles.socialButtons}>{ socialButtons }</div>
+          </div>
         </div>
-        <Divider />
-        <div style={styles.socialButtons}>{ socialButtons }</div>
       </SideSection>
 
       <FillSection>

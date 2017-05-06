@@ -7,6 +7,17 @@ import { rotateCarousel } from '../../../actions';
 
 const  { SidebarButton } = buttons;
 
+//:TODO do this with a helper func for modular color/blur/etc...
+// text shadow for pseudo-element
+let op = 1.0, textShadow = [];
+
+for (let a = 2, b = 3, c; a <= 13; c = a, a = b, b += c) {
+  textShadow.push(`${a}px ${a}px ${a}px rgba(127,90,131,${op})`);
+  op -= 0.15;
+}
+
+textShadow.join(', ');
+
 
 const styles = {
   sidebarButtonsWrapper: {
@@ -63,11 +74,8 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
 
   return (
     <SideSection title="Projects" style={{ background: colors.AMETHYST }}>
-      <Title style={{
-        ...style.title,
-        fontSize: '3rem',
-        letterSpacing: '-0.05em'
-      }}>
+      <Title style={style.title}>
+        <span style={{ position: 'absolute', zIndex: -1, textShadow }}>Projects</span>
         <span>Projects</span>
       </Title>
 

@@ -15114,17 +15114,29 @@ var styles = {
 
   aboutSidebarContent: {
     height: '78%',
-    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
-    padding: '20px 0',
-    fontSize: '1rem',
-    fontWeight: '100'
+    justifyContent: 'flex-start',
+    overflow: 'hidden',
+    padding: '0 1px ',
+    cursor: 'default',
+    fontSize: '1.1rem',
+    fontWeight: '100',
+    color: _colors2.default.MENU_DARKER
   },
-  aboutSidebarItem: {
-    display: 'flex',
-    margin: '0 0 40px 0',
-    justifyContent: 'space-between'
+  aboutSidebarLabel: {
+    display: 'block',
+    padding: '0 3px',
+    letterSpacing: '0.05rem',
+    textTransform: 'uppercase'
+  },
+  aboutSidebarInfo: {
+    display: 'block',
+    padding: '0 5px',
+    fontSize: '2rem',
+    fontWeight: 900,
+    textAlign: 'right',
+    letterSpacing: '-0.1rem'
   },
   socialButtons: {
     display: 'inline-flex',
@@ -15137,6 +15149,12 @@ var styles = {
   },
   socialButtonWrap: {
     textAlign: 'center'
+  },
+  socialButtonLabel: {
+    color: _colors2.default.MENU_DARKER,
+    fontSize: '0.7rem',
+    fontWeight: 400,
+    margin: '0 auto'
   },
 
   aboutPanel: _defineProperty({
@@ -15154,7 +15172,7 @@ var styles = {
     height: '100%',
     padding: '1rem 2rem',
     overflow: 'hidden',
-    color: _colors2.default.MENU_DARK,
+    color: _colors2.default.MENU_DARKER,
     background: '#FFF'
   },
 
@@ -15193,12 +15211,12 @@ var About = function About(_ref) {
         url: link.url,
         name: link.name,
         icon: link.icon,
-        hoverColor: [45, 45, 45],
-        initialColor: [255, 68, 62]
+        hoverColor: [255, 68, 62],
+        initialColor: [45, 45, 45]
       }),
       _react2.default.createElement(
         'div',
-        { style: { fontSize: '0.7rem', margin: '0 auto' } },
+        { style: styles.socialButtonLabel },
         _react2.default.createElement(
           'span',
           null,
@@ -15217,51 +15235,62 @@ var About = function About(_ref) {
       { title: 'Contact' },
       _react2.default.createElement(
         _displayComponents.Title,
-        { style: _extends({}, style.title, { fontSize: '3rem', letterSpacing: '-0.05em' }) },
+        { style: style.title },
         _react2.default.createElement(
           'span',
           null,
           'Contact'
         )
       ),
-      _react2.default.createElement(_displayComponents.Divider, null),
+      _react2.default.createElement(_displayComponents.Divider, { style: { background: _colors2.default.AMETHYST } }),
       _react2.default.createElement(
         'div',
         { style: styles.aboutSidebarContent },
         _react2.default.createElement(
           'div',
-          { style: styles.aboutSidebarItem },
+          { style: { margin: '30px 0' } },
           _react2.default.createElement(
             'span',
-            { style: { fontStyle: 'italic' } },
+            { style: styles.aboutSidebarLabel },
             'Send Me An Email:'
           ),
+          _react2.default.createElement(_displayComponents.Divider, { style: { width: '62%', background: _colors2.default.CORAL_RED } }),
           _react2.default.createElement(
             'span',
-            { style: { fontWeight: 400 } },
+            { style: styles.aboutSidebarInfo },
             contact.email
           )
         ),
         _react2.default.createElement(
           'div',
-          { style: styles.aboutSidebarItem },
+          { style: { margin: '30px 0' } },
           _react2.default.createElement(
             'span',
-            { style: { fontStyle: 'italic' } },
+            { style: styles.aboutSidebarLabel },
             'My Home Base:'
           ),
+          _react2.default.createElement(_displayComponents.Divider, { style: { width: '62%', background: _colors2.default.CORAL_RED } }),
           _react2.default.createElement(
             'span',
-            { style: { fontWeight: 400 } },
+            { style: styles.aboutSidebarInfo },
             contact.location
           )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: { margin: '30px 0' } },
+          _react2.default.createElement(
+            'span',
+            { style: styles.aboutSidebarLabel },
+            'Social Media n\' Stuff:'
+          ),
+          _react2.default.createElement(_displayComponents.Divider, { style: { width: '62%', background: _colors2.default.CORAL_RED } }),
+          _react2.default.createElement(
+            'div',
+            { style: styles.socialButtons },
+            socialButtons
+          )
         )
-      ),
-      _react2.default.createElement(_displayComponents.Divider, null),
-      _react2.default.createElement(
-        'div',
-        { style: styles.socialButtons },
-        socialButtons
       )
     ),
     _react2.default.createElement(
@@ -15335,9 +15364,9 @@ var styles = {
   title: {
     cursor: 'default',
     fontWeight: 100,
-    fontSize: '4rem',
-    // letterSpacing: '0.1rem',
-    margin: '0 auto 15px 0'
+    fontSize: '3rem',
+    letterSpacing: '0.09em',
+    margin: '0 auto 0 0'
   },
   text: {
     cursor: 'default',
@@ -15648,6 +15677,7 @@ var Button = _displayComponents.buttons.Button;
 
 var transform = _modernizrrc2.default.prefixed('transform');
 
+//:TODO do this with a helper func for modular color/blur/etc...
 // text shadow for pseudo-element
 var rgb = 46,
     textShadow = [];
@@ -15999,8 +16029,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -16019,6 +16047,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SidebarButton = _displayComponents.buttons.SidebarButton;
 
+//:TODO do this with a helper func for modular color/blur/etc...
+// text shadow for pseudo-element
+
+var op = 1.0,
+    textShadow = [];
+
+for (var a = 2, b = 3, c; a <= 13; c = a, a = b, b += c) {
+  textShadow.push(a + 'px ' + a + 'px ' + a + 'px rgba(127,90,131,' + op + ')');
+  op -= 0.15;
+}
+
+textShadow.join(', ');
 
 var styles = {
   sidebarButtonsWrapper: {
@@ -16094,10 +16134,12 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
     { title: 'Projects', style: { background: _colors2.default.AMETHYST } },
     _react2.default.createElement(
       _displayComponents.Title,
-      { style: _extends({}, style.title, {
-          fontSize: '3rem',
-          letterSpacing: '-0.05em'
-        }) },
+      { style: style.title },
+      _react2.default.createElement(
+        'span',
+        { style: { position: 'absolute', zIndex: -1, textShadow: textShadow } },
+        'Projects'
+      ),
       _react2.default.createElement(
         'span',
         null,

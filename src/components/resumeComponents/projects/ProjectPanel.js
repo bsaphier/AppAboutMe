@@ -12,7 +12,7 @@ const  { Button } = buttons;
 
 const transform = Modernizr.prefixed('transform');
 
-
+//:TODO do this with a helper func for modular color/blur/etc...
 // text shadow for pseudo-element
 let rgb = 46, textShadow = [];
 

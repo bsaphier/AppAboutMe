@@ -9,9 +9,9 @@ const styles = {
   title: {
     cursor: 'default',
     fontWeight: 100,
-    fontSize: '4rem',
-    // letterSpacing: '0.1rem',
-    margin: '0 auto 15px 0'
+    fontSize: '3rem',
+    letterSpacing: '0.09em',
+    margin: '0 auto 0 0'
   },
   text: {
     cursor: 'default',
