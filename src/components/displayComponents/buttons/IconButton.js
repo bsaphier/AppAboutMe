@@ -5,6 +5,7 @@ const styles = {
   iconStyle: {
     width: '1.5em',
     height: '1.5em',
+    margin: '0 auto',
     lineHeight: '1.5em',
     borderRadius: '50%',
     color: 'rgb(255, 255, 255)',

@@ -6,7 +6,7 @@ const styles = {
     zIndex: 9,
     float: 'right',
     height: '100%',
-    minWidth: '300px', //:TODO fix or replace this
+    width: '22rem', //:TODO fix or replace this
     maxWidth: '33.33%' //:TODO fix or replace this
   },
   rightSideContainer: {

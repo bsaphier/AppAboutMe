@@ -11,13 +11,12 @@ const styles = {
     fontWeight: 100,
     fontSize: '4rem',
     // letterSpacing: '0.1rem',
-    marginLeft: 0
+    margin: '0 auto 15px 0'
   },
   text: {
     cursor: 'default',
     fontWeight: 900,
-    fontSize: '1.6rem',
-    paddingTop: '2rem',
+    fontSize: '1.1rem',
     letterSpacing: '-0.02rem',
   }
 };

@@ -14477,7 +14477,7 @@ var styles = {
     zIndex: 9,
     float: 'right',
     height: '100%',
-    minWidth: '300px', //:TODO fix or replace this
+    width: '22rem', //:TODO fix or replace this
     maxWidth: '33.33%' //:TODO fix or replace this
   },
   rightSideContainer: {
@@ -14789,6 +14789,7 @@ var styles = {
   iconStyle: {
     width: '1.5em',
     height: '1.5em',
+    margin: '0 auto',
     lineHeight: '1.5em',
     borderRadius: '50%',
     color: 'rgb(255, 255, 255)',
@@ -15111,6 +15112,33 @@ var styles = {
     filter: 'blur(4px)'
   },
 
+  aboutSidebarContent: {
+    height: '78%',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px 0',
+    fontSize: '1rem',
+    fontWeight: '100'
+  },
+  aboutSidebarItem: {
+    display: 'flex',
+    margin: '0 0 40px 0',
+    justifyContent: 'space-between'
+  },
+  socialButtons: {
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    cursor: 'default',
+    margin: '15px 0 0',
+    color: _colors2.default.MENU_DARK,
+    fontSize: '1rem'
+  },
+  socialButtonWrap: {
+    textAlign: 'center'
+  },
+
   aboutPanel: _defineProperty({
     position: 'absolute',
     zIndex: 9,
@@ -15126,16 +15154,8 @@ var styles = {
     height: '100%',
     padding: '1rem 2rem',
     overflow: 'hidden',
-    color: _colors2.default.CHINESE_VIOLET,
-    background: '#FFF'
-  },
-
-  socialButtons: {
-    position: 'absolute',
-    bottom: '20px',
-    cursor: 'default',
     color: _colors2.default.MENU_DARK,
-    fontSize: '1.1rem'
+    background: '#FFF'
   },
 
   // 3D shadow effect
@@ -15166,14 +15186,26 @@ var About = function About(_ref) {
 
 
   var socialButtons = contact.links.map(function (link) {
-    return _react2.default.createElement(SocialButton, {
-      url: link.url,
-      key: link.name,
-      name: link.name,
-      icon: link.icon,
-      hoverColor: [45, 45, 45],
-      initialColor: [255, 68, 62]
-    });
+    return _react2.default.createElement(
+      'div',
+      { key: link.name, style: styles.socialButtonWrap },
+      _react2.default.createElement(SocialButton, {
+        url: link.url,
+        name: link.name,
+        icon: link.icon,
+        hoverColor: [45, 45, 45],
+        initialColor: [255, 68, 62]
+      }),
+      _react2.default.createElement(
+        'div',
+        { style: { fontSize: '0.7rem', margin: '0 auto' } },
+        _react2.default.createElement(
+          'span',
+          null,
+          link.name
+        )
+      )
+    );
   });
 
   return _react2.default.createElement(
@@ -15192,15 +15224,40 @@ var About = function About(_ref) {
           'Contact'
         )
       ),
+      _react2.default.createElement(_displayComponents.Divider, null),
       _react2.default.createElement(
-        _displayComponents.Cell,
-        { style: { height: '62%' } },
+        'div',
+        { style: styles.aboutSidebarContent },
         _react2.default.createElement(
-          'span',
-          null,
-          'FILLER'
+          'div',
+          { style: styles.aboutSidebarItem },
+          _react2.default.createElement(
+            'span',
+            { style: { fontStyle: 'italic' } },
+            'Send Me An Email:'
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: { fontWeight: 400 } },
+            contact.email
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: styles.aboutSidebarItem },
+          _react2.default.createElement(
+            'span',
+            { style: { fontStyle: 'italic' } },
+            'My Home Base:'
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: { fontWeight: 400 } },
+            contact.location
+          )
         )
       ),
+      _react2.default.createElement(_displayComponents.Divider, null),
       _react2.default.createElement(
         'div',
         { style: styles.socialButtons },
@@ -15280,13 +15337,12 @@ var styles = {
     fontWeight: 100,
     fontSize: '4rem',
     // letterSpacing: '0.1rem',
-    marginLeft: 0
+    margin: '0 auto 15px 0'
   },
   text: {
     cursor: 'default',
     fontWeight: 900,
-    fontSize: '1.6rem',
-    paddingTop: '2rem',
+    fontSize: '1.1rem',
     letterSpacing: '-0.02rem'
   }
 };

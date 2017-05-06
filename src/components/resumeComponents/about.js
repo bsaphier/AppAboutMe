@@ -10,6 +10,7 @@ import {
   Cell,
   Title,
   Section,
+  Divider,
   FillSection,
   SideSection,
   SectionFoot
@@ -35,6 +36,33 @@ const styles = {
     filter: 'blur(4px)',
   },
 
+  aboutSidebarContent: {
+    height: '78%',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px 0',
+    fontSize: '1rem',
+    fontWeight: '100',
+  },
+  aboutSidebarItem: {
+    display: 'flex',
+    margin: '0 0 40px 0',
+    justifyContent: 'space-between'
+  },
+  socialButtons: {
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    cursor: 'default',
+    margin: '15px 0 0',
+    color: colors.MENU_DARK,
+    fontSize: '1rem',
+  },
+  socialButtonWrap: {
+    textAlign: 'center',
+  },
+
   aboutPanel: {
     position: 'absolute',
     zIndex: 9,
@@ -51,16 +79,8 @@ const styles = {
     height: '100%',
     padding: '1rem 2rem',
     overflow: 'hidden',
-    color: colors.CHINESE_VIOLET,
-    background: '#FFF',
-  },
-
-  socialButtons: {
-    position: 'absolute',
-    bottom: '20px',
-    cursor: 'default',
     color: colors.MENU_DARK,
-    fontSize: '1.1rem',
+    background: '#FFF',
   },
 
   // 3D shadow effect
@@ -89,14 +109,18 @@ const styles = {
 const About = ({ content: { about, contact }, style }) => {
 
   const socialButtons = contact.links.map( link => (
-    <SocialButton
-      url={link.url}
-      key={link.name}
-      name={link.name}
-      icon={link.icon}
-      hoverColor={[45, 45, 45]}
-      initialColor={[255, 68, 62]}
-    />
+    <div key={link.name} style={styles.socialButtonWrap}>
+      <SocialButton
+        url={link.url}
+        name={link.name}
+        icon={link.icon}
+        hoverColor={[45, 45, 45]}
+        initialColor={[255, 68, 62]}
+      />
+      <div style={{fontSize: '0.7rem', margin: '0 auto'}}>
+        <span>{link.name}</span>
+      </div>
+    </div>
   ));
 
   return (
@@ -107,11 +131,20 @@ const About = ({ content: { about, contact }, style }) => {
         <Title style={{ ...style.title, fontSize: '3rem', letterSpacing: '-0.05em' }}>
           <span>Contact</span>
         </Title>
-        <Cell style={{height: '62%'}}>
+        <Divider />
+        <div style={styles.aboutSidebarContent}>
 
-          <span>FILLER</span>
+          <div style={styles.aboutSidebarItem}>
+            <span style={{ fontStyle: 'italic' }}>Send Me An Email:</span>
+            <span style={{ fontWeight: 400 }}>{ contact.email }</span>
+          </div>
+          <div style={styles.aboutSidebarItem}>
+            <span style={{ fontStyle: 'italic' }}>My Home Base:</span>
+            <span style={{ fontWeight: 400 }}>{ contact.location }</span>
+          </div>
 
-        </Cell>
+        </div>
+        <Divider />
         <div style={styles.socialButtons}>{ socialButtons }</div>
       </SideSection>
 
