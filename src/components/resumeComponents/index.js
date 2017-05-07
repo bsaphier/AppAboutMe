@@ -16,7 +16,7 @@ const styles = {
   },
   text: {
     cursor: 'default',
-    margin: '40px 0',
+    margin: '30px 0',
     fontWeight: 900,
     fontSize: '1.1rem',
     lineHeight: '1.62em',

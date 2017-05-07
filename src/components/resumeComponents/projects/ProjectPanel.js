@@ -101,7 +101,7 @@ const styles = {
 
   title: {
     padding: '0 4px',
-    marginLeft: 0,
+    margin: '0 auto',
     fontWeight: 600,
     fontStyle: 'italic',
     fontSize: '4rem',

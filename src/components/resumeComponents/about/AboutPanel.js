@@ -56,8 +56,13 @@ const AboutPanel = ({ style, content }) => (
     <div style={styles.aboutPanelBefore} />
     <div style={styles.aboutPanelContent}>
 
-      <Title style={{ ...style.title, fontStyle: 'italic', fontWeight: 600, letterSpacing: '0.05em' }}>
-        <span>WHO I AM</span>
+      <Title style={{
+        ...style.title,
+        padding: '0 0.08em',
+        fontSize: '4rem',
+        fontStyle: 'italic',
+        letterSpacing: '0.05em' }}>
+        <span>{`About  This  Site`}</span>
       </Title>
 
       <Divider style={{width: '62%', background: colors.AMETHYST}} />

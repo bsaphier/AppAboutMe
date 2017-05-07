@@ -29,11 +29,11 @@ const About = ({ content: { about, contact, siteInfo }, style }) => {
     <Section id="about">
       <div style={styles.aboutBackground} />
 
-      <AboutSidebar style={style} content={{...contact, siteInfo}} />
+      <AboutSidebar style={style} content={{...contact, about}} />
 
       <FillSection>
 
-        <AboutPanel style={style} content={about} />
+        <AboutPanel style={style} content={siteInfo} />
 
         <SectionFoot to="projects" text="NEXT" />
 

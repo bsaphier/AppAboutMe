@@ -1,7 +1,9 @@
 <––––––––TODO TODO TODO TODO TODO––––––––>
 
+• Make separate files for styles!!!!
+
 • load the carousel images in a different way or from a different location??
-• Sidebar width is not right!
+
 • SectionFoot styling....
 
 
@@ -20,30 +22,22 @@
 >
 
 > About
-  • Background Image
-  • Sidebar Information & styling...
-  • Edit the content
   •
 >
 
 > Projects
   • Move Carousel navButtons to parent c as a
   • Sidebar styling?
-  • ProjectModal styling...
   ! -> are the bg images are being fetched more than once? because of c updates?
 >
 
 > Skills
   • Title style?
-  • Skills content....
   • refactor from css transitions to React-Motion
 >
 
 > Footer
   • add social links
-  • signature - mini tech-stack descriptions
-  • copyright?
-  •
   •
 >
 

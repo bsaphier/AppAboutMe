@@ -58,7 +58,7 @@ const styles = {
 
 // label must be a string and info must be a valid react element
 const sidebarContentMap = ({ index, label, info }) => (
-  <div key={`about-sidebar-item${index}`} style={{margin: '30px 0'}}>
+  <div key={`about-sidebar-item${index}`} style={{margin: '1rem 0'}}>
     <span style={styles.aboutSidebarLabel}>{ label }</span>
     <Divider style={{width: '62%', background: colors.CORAL_RED}} />
     { info }
@@ -84,12 +84,12 @@ const AboutSidebar = ({ style, content }) => {
   const items = [
     {
       index: 0,
-      label: 'About This Site:',
+      label: 'Who I Am:',
       info: (
         <span style={{
           ...styles.aboutSidebarInfo,
-          fontSize: '1.62rem'
-        }}>{ content.siteInfo }</span>
+          fontSize: '1.5rem'
+        }}>{ content.about }</span>
       )
     }, {
       index: 1,

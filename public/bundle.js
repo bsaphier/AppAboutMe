@@ -15172,11 +15172,15 @@ var AboutPanel = function AboutPanel(_ref) {
       { style: styles.aboutPanelContent },
       _react2.default.createElement(
         _displayComponents.Title,
-        { style: _extends({}, style.title, { fontStyle: 'italic', fontWeight: 600, letterSpacing: '0.05em' }) },
+        { style: _extends({}, style.title, {
+            padding: '0 0.08em',
+            fontSize: '4rem',
+            fontStyle: 'italic',
+            letterSpacing: '0.05em' }) },
         _react2.default.createElement(
           'span',
           null,
-          'WHO I AM'
+          'About  This  Site'
         )
       ),
       _react2.default.createElement(_displayComponents.Divider, { style: { width: '62%', background: _colors2.default.AMETHYST } }),
@@ -15277,7 +15281,7 @@ var sidebarContentMap = function sidebarContentMap(_ref) {
       info = _ref.info;
   return _react2.default.createElement(
     'div',
-    { key: 'about-sidebar-item' + index, style: { margin: '30px 0' } },
+    { key: 'about-sidebar-item' + index, style: { margin: '1rem 0' } },
     _react2.default.createElement(
       'span',
       { style: styles.aboutSidebarLabel },
@@ -15318,13 +15322,13 @@ var AboutSidebar = function AboutSidebar(_ref2) {
 
   var items = [{
     index: 0,
-    label: 'About This Site:',
+    label: 'Who I Am:',
     info: _react2.default.createElement(
       'span',
       { style: _extends({}, styles.aboutSidebarInfo, {
-          fontSize: '1.62rem'
+          fontSize: '1.5rem'
         }) },
-      content.siteInfo
+      content.about
     )
   }, {
     index: 1,
@@ -15441,11 +15445,11 @@ var About = function About(_ref) {
     _displayComponents.Section,
     { id: 'about' },
     _react2.default.createElement('div', { style: styles.aboutBackground }),
-    _react2.default.createElement(_AboutSidebar2.default, { style: style, content: _extends({}, contact, { siteInfo: siteInfo }) }),
+    _react2.default.createElement(_AboutSidebar2.default, { style: style, content: _extends({}, contact, { about: about }) }),
     _react2.default.createElement(
       _displayComponents.FillSection,
       null,
-      _react2.default.createElement(_AboutPanel2.default, { style: style, content: about }),
+      _react2.default.createElement(_AboutPanel2.default, { style: style, content: siteInfo }),
       _react2.default.createElement(_displayComponents.SectionFoot, { to: 'projects', text: 'NEXT' })
     )
   );
@@ -15497,7 +15501,7 @@ var styles = {
   },
   text: {
     cursor: 'default',
-    margin: '40px 0',
+    margin: '30px 0',
     fontWeight: 900,
     fontSize: '1.1rem',
     lineHeight: '1.62em',
@@ -15895,7 +15899,7 @@ var styles = {
 
   title: {
     padding: '0 4px',
-    marginLeft: 0,
+    margin: '0 auto',
     fontWeight: 600,
     fontStyle: 'italic',
     fontSize: '4rem',
