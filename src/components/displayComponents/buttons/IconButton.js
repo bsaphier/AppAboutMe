@@ -54,6 +54,7 @@ const IconButton = ({ icon, style, url = null, name = '', target = '_blank' }) =
       href={url}
       title={name}
       target={target}
+      rel="noopener noreferrer"
       >
       <i className={`icon-${icon}`} style={iconStyle} />
     </a>

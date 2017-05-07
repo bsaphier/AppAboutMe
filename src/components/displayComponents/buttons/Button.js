@@ -99,7 +99,7 @@ class Button extends Component {
         onMouseDown={this.buttondown}
         onMouseOver={this.buttondown}
         >
-        <a href={link} title={title} target={target}>
+        <a href={link} title={title} target={target} rel="noopener noreferrer">
           <Motion style={motion}>
             { motionCallback }
           </Motion>

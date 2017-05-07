@@ -107,7 +107,7 @@ class SidebarButton extends Component {
         onMouseOut={this.buttonUp}
         onMouseOver={this.buttonDown}
         >
-        <a href={link} title={title} target={target}>
+        <a href={link} title={title} target={target} rel="noopener noreferrer">
           <Motion style={motion}>
             { motionCallback }
           </Motion>

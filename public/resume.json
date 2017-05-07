@@ -1,5 +1,6 @@
 {
   "name": "Benjamin Saphier",
+  "siteInfo": "I created and designed all of the components that make up this site. It's built with React & Redux. The source code is available on my Github.",
   "contact":
     {
       "location": "New York, NY",
@@ -30,7 +31,7 @@
     },
   "resume":
     {
-      "about": "A full stack web developer intrigued by the crossover between music and technology",
+      "about": "I am a full stack software engineer intrigued by the crossover between music and technology.",
       "experience":
         [
           {
@@ -124,7 +125,7 @@
             "date": "December 2016 - Present",
             "role": "Sole Developer",
             "link": "https://www.npmjs.com/package/react-redux-webaudio",
-            "shortDescription": "...brief description goes here",
+            "shortDescription": "A WIP for easy integration of the Web Audio API with a React-Redux app.",
             "description":
               [
                 "A package that provides an easy and intuitive way to create sounds in a React-Redux app",
@@ -147,7 +148,7 @@
             "date": "January 2017 - Present",
             "role": "Sole Developer",
             "link": "https://www.github.com/bsaphier/data-sonification",
-            "shortDescription": "...brief description goes here",
+            "shortDescription": "Exploring the representation of data with sound.",
             "description":
               [
                 "An experimental data-sonification engine built into a React-Redux app",
@@ -162,7 +163,7 @@
             "date": "January 2017 - February 2017",
             "role": "Developer",
             "link": "http://www.youphonic.co/$2a$10$c5nJeeamyBV2vcGmQ0NJuOY91OgHzuLNNOyTTeXevULcGmYufCDgu",
-            "shortDescription": "...brief description goes here",
+            "shortDescription": "A playground for creating musical compositions through a physical-based environment.",
             "description":
               [
                 "An online musical machine building interface where users make soundscapes and musical compositions using abstract shapes that interact in a physical-based environment",

@@ -5,6 +5,7 @@ const initialState = {
   name: '',
   contact: {},
   resume: {},
+  siteInfo: '',
   portfolio: {}
 };
 
@@ -20,6 +21,7 @@ export default (state = initialState, action) => {
       nextState.name = action.name;
       nextState.resume = action.resume;
       nextState.contact = action.contact;
+      nextState.siteInfo = action.siteInfo;
       return nextState;
 
     default:

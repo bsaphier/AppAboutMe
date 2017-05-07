@@ -36,11 +36,12 @@ export const fontsDidLoad = () => ({
 });
 
 
-export const resumeDidLoad = ({ name, contact, resume }) => ({
+export const resumeDidLoad = ({ name, contact, resume, siteInfo }) => ({
   type: RESUME_LOADED,
   name,
   resume,
-  contact
+  contact,
+  siteInfo
 });
 
 
