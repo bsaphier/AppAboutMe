@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Skill from './Skill';
+import SectionFoot from '../../SectionFoot';
 import colors from '../../../bin/colors';
 import Modernizr from '../../../../.modernizrrc';
-import { Cell, Title, Section, SectionFoot, FillSection } from '../../displayComponents';
+import { Cell, Title, Section, FillSection } from '../../displayComponents';
 
 
 const transform = Modernizr.prefixed('transform');

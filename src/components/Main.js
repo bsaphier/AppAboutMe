@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import Footer from './Footer';
 import Welcome from './Welcome';
+import SectionFoot from './SectionFoot';
 import ResumeComponents from './resumeComponents';
-import { Section, SectionFoot, FillSection } from './displayComponents';
+import { Section, FillSection } from './displayComponents';
 import { toggleWelcome } from '../actions';
 
 

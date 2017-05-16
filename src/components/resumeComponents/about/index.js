@@ -4,7 +4,8 @@ import AboutPanel from './AboutPanel';
 //:TODO do I really want to load the images from here??
 import imgs from '../../../bin/images';
 import AboutSidebar from './AboutSidebar';
-import { Section, FillSection, SectionFoot } from '../../displayComponents';
+import SectionFoot from '../../SectionFoot';
+import { Section, FillSection } from '../../displayComponents';
 
 
 const styles = {

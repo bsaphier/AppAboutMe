@@ -1,6 +1,6 @@
 {
   "name": "Benjamin Saphier",
-  "siteInfo": "I created and designed all of the components that make up this site. It's built with React & Redux. The source code is available on my Github.",
+  "siteInfo": "I created and designed all of the components that make up this site. It's built with React & Redux and then bundled with Webpack. The source code is available on my Github.",
   "contact":
     {
       "location": "New York, NY",

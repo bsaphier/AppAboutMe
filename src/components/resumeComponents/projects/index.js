@@ -1,8 +1,9 @@
 import React from 'react';
 
 import ProjectModal from './ProjectModal';
+import SectionFoot from '../../SectionFoot';
 import ProjectsSidebar from './ProjectsSidebar';
-import { Section, SectionFoot, FillSection } from '../../displayComponents';
+import { Section, FillSection } from '../../displayComponents';
 import { carousel3D } from '../../HOC';
 
 
