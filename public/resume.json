@@ -168,7 +168,7 @@
               [
                 "An online musical machine building interface where users make soundscapes and musical compositions using abstract shapes that interact in a physical-based environment",
                 "Node.js backend server built using Express and PostgreSQL with Sequelize ORM for the database",
-                "Frontend built with Paper.js and integrated with React-Re- dux through a custom React-Paper.js wrapper component",
+                "Frontend built with Paper.js and integrated with React-Redux through a custom React-Paper.js wrapper component",
                 "Built a custom physics engine",
                 "Designed sounds using Tone.js"
               ]
