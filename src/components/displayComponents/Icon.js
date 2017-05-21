@@ -44,11 +44,12 @@ const styles = {
 };
 
 
-const Icon = ({ icon, style, ...props }) => {
+const Icon = ({ icon, style }) => {
 
-  const iconStyle = { ...styles.iconStyle, ...style };
+  let iconStyle = { ...styles.iconStyle, ...style };
 
-  return <i className={`icon-${icon}`} style={iconStyle} {...props} />;
+  return <i className={`icon-${icon}`} style={iconStyle} />;
+
 };
 
 

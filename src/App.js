@@ -2,25 +2,37 @@ import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import store from './store';
 import Main from './components/Main';
 import { loadAppWithSpinner } from './components/HOC';
-import { fetchData } from './actions';
+import { fetchData, toggleWelcome } from './actions';
 
-//* TODO - convert styling to JS
-// this tells webpack to include all the Sass styling
+// import app-wide styles
 import './stylesheets/main.scss';
 
+/**
+* Production build is intended for a specific github repo
+*/
+let resumePath = '';
+if (process.env.NODE_ENV === 'production') { resumePath = '/app-about-me/public/resume.json'; }
+if (process.env.NODE_ENV !== 'production') { resumePath = '/public/resume.json'; }
 
-const loadAppHOC = loadAppWithSpinner( () => store.dispatch(fetchData()) )(Main);
+const RESUME_PATH = resumePath;
 
 
-const ResumeApp = connect(({ app: { isLoading }, resume: { resume, contact, siteInfo }, carousel: { panels } }) => ({
+const loadAppHOC = loadAppWithSpinner(Main);
+
+
+const ResumeApp = connect(
+  ({ app: { isLoading }, resume: { resume, contact, siteInfo }, carousel: { panels } }) => ({
     resume,
     panels,
     contact,
     siteInfo,
     isLoading,
+  }),
+  dispatch => ({
+    toggleWelcome: () => dispatch(toggleWelcome()),
+    fetchData: () => dispatch(fetchData(RESUME_PATH))
   })
 )(loadAppHOC);
 

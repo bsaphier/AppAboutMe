@@ -5,12 +5,11 @@ import Welcome from './Welcome';
 import SectionFoot from './SectionFoot';
 import ResumeComponents from './resumeComponents';
 import { Section, FillSection } from './displayComponents';
-import { toggleWelcome } from '../actions';
 
 
 class Main extends Component {
   componentDidMount() {
-    this.props.dispatch(toggleWelcome());
+    this.props.toggleWelcome();
   }
 
   render() {

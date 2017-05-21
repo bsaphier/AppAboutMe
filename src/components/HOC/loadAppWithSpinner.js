@@ -3,34 +3,27 @@ import React from 'react';
 import Preload from '../Preload';
 
 
-// this is a curried HOC to make the "fetchAction" modular
-// it receives a callback (action) used to load the component  --which is passed to the returning
-// function
-const loadAppWithSpinner = (fetchAction) => {
+const loadAppWithSpinner = (Component) => {
 
-  const loadAppWithSpinnerHOC = (Component) => {
+  let loaded = false;
 
-    const _loadComponent = ({ isLoading, ...props }) => {
+  return ({ isLoading, ...props }) => {
 
-      if (isLoading) {
+    if (isLoading && !loaded) {
 
-        // fake delay to test loading animation
-        setTimeout(fetchAction, 500);
+      // fake delay to test loading animation
+      setTimeout(props.fetchData, 500);
 
-        // only call the "fetchAction" once
-        fetchAction = () => {};
-      }
+      // only call the "fetchAction" once
+      loaded = true;
+    }
 
-      return isLoading
-        ? <Preload />
-        : <Component {...props} />;
+    return isLoading
+    ? <Preload />
+    : <Component {...props} />;
 
-    };
-
-    return _loadComponent;
   };
 
-  return loadAppWithSpinnerHOC;
 };
 
 

@@ -19,7 +19,7 @@ import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
  // -~-~-~-~-~-~- ACTION-CREATORS -~-~-~-~-~-~- \\
 // _____________________________________________ \\
 
-// *TODO call this using waypoint events
+// *TODO call this using scoll events
 export const sectionChange = (section) => ({
   type: SECTION_ENTER,
   section
@@ -86,9 +86,11 @@ export const preloadCarouselPanels = (panels) => ({
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
-export const createCarouselPanels = projects => dispatch => {
+// this guarantees that the background images have loaded before anything is displayed
+export const carouselPanelsCreator = projects => dispatch => {
+
   const toggleModal = () => dispatch(toggleProjectModal());
-  // this guarantees that the background images have loaded before anything is displayed
+
   const panels = projects.map( (project) => (
     <ProjectPanel
       key={`project-panel-${project.index}`}
@@ -96,18 +98,29 @@ export const createCarouselPanels = projects => dispatch => {
       toggleModal={toggleModal}
     />
   ));
-  dispatch(preloadCarouselPanels(panels));
+
+  return panels;
+
 };
 
 
-// *TODO _RESUME_PATH needs to change if running on local server vs gh-pages
-// '/app-about-me/public/resume.json'
-const _RESUME_PATH = '/public/resume.json';
+export const loadResume = resumeData => dispatch => {
 
-export const fetchData = () => dispatch =>
-  fetch(_RESUME_PATH)
+  dispatch(resumeDidLoad(resumeData));
+
+  // for use in a Promise chain i.e. fetchData
+  return resumeData;
+
+};
+
+
+export const fetchData = path => dispatch =>
+  fetch(path)
     .then( response => response.json() )
-    .then( json => { dispatch(resumeDidLoad(json)); return json; } )
-    .then( ({ resume: { projects } }) => dispatch(createCarouselPanels(projects)) )
+    .then( json => dispatch(loadResume(json)) )
+    .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
+    .then( panels => dispatch(preloadCarouselPanels(panels)) )
     .then( fontLoader(() => dispatch(fontsDidLoad())) )
-    .catch( err => console.log(`There was an error fetching the data. ERROR: ${err}`));
+    .catch( err =>
+      console.log(`There was an error fetching the data. ERROR: ${err}`)
+    );

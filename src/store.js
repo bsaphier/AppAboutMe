@@ -1,16 +1,32 @@
-import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from './reducers/root-reducer';
 
-// check node ENV if this should be applied . . .
-const reduxLogger = createLogger({collapsed: true});
 
-export default createStore(
-  rootReducer,
-  applyMiddleware(
-    thunkMiddleware,
-    reduxLogger
-  )
-);
+//:TODO conditional import??
+import createLogger from 'redux-logger';
+
+
+let middleware = [];
+
+if (process.env.NODE_ENV === 'production') {
+
+  middleware = [ thunkMiddleware ];
+
+}
+
+
+if (process.env.NODE_ENV !== 'production') {
+
+  const reduxLogger = createLogger({collapsed: true});
+
+  middleware = [ thunkMiddleware, reduxLogger ];
+
+}
+
+
+const _applyMiddleware = midware => applyMiddleware(...midware);
+
+
+export default createStore( rootReducer, _applyMiddleware(middleware) );

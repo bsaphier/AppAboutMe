@@ -5,10 +5,10 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: __dirname,
+    publicPath: '/app-about-me/',
     filename: './public/bundle.js'
   },
   context: __dirname,
-  devtool: 'source-map',
   module: {
     loaders: LOADERS
   },

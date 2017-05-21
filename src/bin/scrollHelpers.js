@@ -1,5 +1,4 @@
-import Scroll from 'react-scroll';
+import { animateScroll } from 'react-scroll';
 
-const { animateScroll } = Scroll;
 
 export const scrollToTop = () => animateScroll.scrollToTop();

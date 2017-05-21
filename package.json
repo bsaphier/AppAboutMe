@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "start": "npm run watch-server & npm run build-watch",
-    "build": "webpack --env prod",
-    "build-watch": "webpack -w --env dev",
+    "build": "webpack --config webpack.config.prod.js -p",
+    "build-watch": "webpack -w",
     "watch-server": "nodemon server/start.js --ignore src",
     "test": "echo \"Write some tests, FOOL!\" && exit 1"
   },
