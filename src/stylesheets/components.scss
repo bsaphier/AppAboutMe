@@ -1,0 +1,16 @@
+
+.side-section {
+
+  @include small {
+    display: none
+  }
+
+  @include medium {
+    display: none
+  }
+
+  @include large {
+    display: inherit;
+  }
+
+}
