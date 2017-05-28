@@ -59,7 +59,8 @@ const AboutPanel = ({ style, content }) => (
       <Title style={{
         ...style.title,
         padding: '0 0.08em',
-        fontSize: '4rem',
+        fontSize: '2rem',
+        fontWeight: '600',
         fontStyle: 'italic',
         letterSpacing: '0.05em' }}>
         <span>{`About  This  Site`}</span>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Footer from './Footer';
-import Welcome from './Welcome';
 import SectionFoot from './SectionFoot';
+import WelcomeTitle from './WelcomeTitle';
 import ResumeComponents from './resumeComponents';
 import { Section, FillSection } from './displayComponents';
 
@@ -19,7 +19,7 @@ class Main extends Component {
 
         <Section id="home">
           <FillSection>
-            <Welcome />
+            <WelcomeTitle />
             <SectionFoot to="about" text="ABOUT ME" />
           </FillSection>
         </Section>

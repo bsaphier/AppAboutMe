@@ -1,0 +1,15 @@
+{
+  "extends": "fullstack/react",
+  "rules": {
+    "semi": [1, "always"],
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "class-methods-use-this": "off",
+    "id-length": ["error", { "exceptions": ["a", "b", "c", "x", "y", "i"] }]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

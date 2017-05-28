@@ -1,7 +1,7 @@
 import React from 'react';
 import Scroll from 'react-scroll';
 
-import colors from '../bin/colors';
+// import colors from '../bin/colors';
 import Modernizr from '../../.modernizrrc';
 import { scrollToTop } from '../bin/scrollHelpers';
 import { Icon } from './displayComponents';
