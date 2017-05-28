@@ -1,8 +1,8 @@
 <––––––––TODO TODO TODO TODO TODO––––––––>
 
-• Make separate files for styles!!!!
+! -> -> adjust styles for different screens <- <- !
 
-• load the carousel images in a different way or from a different location??
+• Make separate files for styles
 
 • SectionFoot styling....
 
@@ -22,18 +22,18 @@
 >
 
 > About
-  •
+  • Font Sizing
 >
 
 > Projects
   • Move Carousel navButtons to parent c as a
-  • Sidebar styling?
+  ! -> Modal font styles!
   ! -> are the bg images are being fetched more than once? because of c updates?
 >
 
 > Skills
   • Title style?
-  • refactor from css transitions to React-Motion
+  • ?refactor from css transitions to React-Motion?
 >
 
 > Footer

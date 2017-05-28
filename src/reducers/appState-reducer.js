@@ -1,7 +1,6 @@
 import {
   FONTS_LOADED,
   RESUME_LOADED,
-  // CAROUSEL_INIT,
   SECTION_ENTER,
   TOGGLE_WELCOME,
   TOGGLE_PROJECT_MODAL,
@@ -11,6 +10,7 @@ import {
 
 const initialState = {
   isLoading: true,
+
   fontsDidLoad: false,
   resumeDidLoad: false,
   carouselPanelsDidLoad: false,

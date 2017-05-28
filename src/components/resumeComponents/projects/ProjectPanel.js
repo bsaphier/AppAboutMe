@@ -100,18 +100,19 @@ const styles = {
   },
 
   title: {
-    padding: '0 4px',
-    margin: '0 auto',
+    padding: '0 5px',
+    margin: 'auto',
     fontWeight: 600,
     fontStyle: 'italic',
-    fontSize: '4rem',
+    fontSize: '3rem',
     letterSpacing: '-0.1rem',
 
     textShadow: `-3px -2px ${colors.AMETHYST}`,
     backgroundImage: `linear-gradient(to top right, ${colors.MENU_DARKER} 62%, ${colors.OPERA_MAUVE} 162%)`
   },
   projectDescription: {
-    fontSize: '1.62rem',
+    margin: '0 5rem',
+    fontSize: '1.38rem',
     fontWeight: 900,
     color: colors.OPERA_MAUVE,
     textShadow
@@ -127,9 +128,10 @@ class ProjectPanel extends Component {
 
   constructor( props ) {
     super(props);
-    let { project: { backgroundImg }} = props;
+    let { currPanel, project: { backgroundImg }} = props;
 
     this.state = {
+      currPanel,
       mouseX: 0,
       mouseY: 0,
       panelWidth: 0,

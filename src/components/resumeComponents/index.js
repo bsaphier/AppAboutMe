@@ -9,10 +9,10 @@ const styles = {
   title: {
     cursor: 'default',
     margin: '0 auto 0 0',
-    fontWeight: 100,
+    // fontWeight: '400',
     fontSize: '3rem',
     lineHeight: '0.9em',
-    letterSpacing: '0.15em'
+    letterSpacing: '0.05em'
   },
   text: {
     cursor: 'default',

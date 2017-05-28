@@ -10,38 +10,36 @@ import { fetchData, toggleWelcome } from './actions';
 import './stylesheets/main.scss';
 
 /**
-* Production build is intended for a specific github repo
-*/
+  * Production build is intended for gh pages
+  */
 let resumePath = '';
 if (process.env.NODE_ENV === 'production') { resumePath = '/app-about-me/public/resume.json'; }
 if (process.env.NODE_ENV !== 'production') { resumePath = '/public/resume.json'; }
 
+
 const RESUME_PATH = resumePath;
 
 
-const loadAppHOC = loadAppWithSpinner(Main);
+const mapStateToProps = ({ app, resume, carousel }) => ({
+  resume: resume.resume,
+  panels: carousel.panels,
+  contact: resume.contact,
+  isLoading: app.isLoading,
+  siteInfo: resume.siteInfo,
+});
 
 
-const ResumeApp = connect(
-  ({ app: { isLoading }, resume: { resume, contact, siteInfo }, carousel: { panels } }) => ({
-    resume,
-    panels,
-    contact,
-    siteInfo,
-    isLoading,
-  }),
-  dispatch => ({
-    toggleWelcome: () => dispatch(toggleWelcome()),
-    fetchData: () => dispatch(fetchData(RESUME_PATH))
-  })
-)(loadAppHOC);
+const mapDispatchToProps = dispatch => ({
+  toggleWelcome: () => dispatch(toggleWelcome()),
+  fetchData: () => dispatch(fetchData(RESUME_PATH))
+});
 
 
-const App = () => (
+export default () => (
   <BrowserRouter basename="/my-site">
-    <Route component={ResumeApp} />
+    <Route component={
+      connect(mapStateToProps, mapDispatchToProps)(
+        loadAppWithSpinner(Main)
+      )} />
   </BrowserRouter>
 );
-
-
-export default App;

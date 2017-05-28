@@ -3,6 +3,7 @@ import * as buttons from './buttons';
 import FillSection from './FillSection';
 import SideSection from './SideSection';
 import BorderGrad from './BorderGrad';
+import TitleText from './TitleText';
 import Hexagon from './Hexagon';
 import Section from './Section';
 import Divider from './Divider';
@@ -19,7 +20,8 @@ export {
   Hexagon,
   Section,
   Divider,
+  TitleText,
   BorderGrad,
   FillSection,
-  SideSection
+  SideSection,
 };
