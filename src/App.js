@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default () => (
-  <BrowserRouter basename="/my-site">
+  <BrowserRouter basename="/">
     <Route component={
       connect(mapStateToProps, mapDispatchToProps)(
         loadAppWithSpinner(Main)

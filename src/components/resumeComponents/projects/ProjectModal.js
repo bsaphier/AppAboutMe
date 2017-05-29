@@ -22,7 +22,7 @@ const styles = {
   modal: {
     position: 'relative',
     zIndex: 9,
-    top: '38%',
+    top: '49%',
     left: '50%',
     width: '50%',
     color: colors.CHINESE_VIOLET,
@@ -31,7 +31,7 @@ const styles = {
   modalContent: {
     position: 'relative',
     zIndex: 9,
-    padding: '1rem 2rem',
+    padding: '1rem 1.6rem',
     minHeight: '33.3vh',
     background: '#FFF',
 
@@ -45,25 +45,33 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
-    height: '16%',
+    height: '2.5rem',
     width: '100%',
-    padding: '0.5rem 2rem',
+    whiteSpace: 'nowrap',
+    padding: '1rem 1.6rem',
 
-    fontStyle: 'italic',
     color: colors.MENU_DARKER,
     background: colors.AMETHYST,
 
+    fontStyle: 'italic',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
   modalTitle: {
     fontWeight: 600,
-    fontSize: '1.5rem',
+    fontSize: '2rem',
     alignSelf: 'center'
   },
+  modalSubTitle: {
+    width: '100%',
+    margin: '40px 0 0',
+    textAlign: 'right',
+    fontSize: '1.4rem',
+    fontStyle: 'italic'
+  },
   modalList: {
-    margin: '40px 0',
+    margin: '0 0 40px',
     fontWeight: 400,
     listStyleType: 'none',
   },
@@ -129,16 +137,17 @@ const ProjectModal = ({ currPanel, projects, toggleModal, projectModalOpen }) =>
             <h2 style={{ ...styles.modalTitle, textTransform: 'uppercase' }}>
               {projects[currPanel].title}
             </h2>
-            <div style={{...styles.modalTitle, flexGrow: 0.9, fontSize: '1rem'}}>
-              {` - ${projects[currPanel].date}`}
-            </div>
+          </div>
+
+          <div style={styles.modalSubTitle}>
+            { projects[currPanel].date }
           </div>
 
           <ul style={styles.modalList}>
             {
               projects[currPanel].description.map((bullet, idx) => (
-                <li key={`projMod-${projects[currPanel].title}-${+idx}`}>
-                  {bullet}
+                <li key={`projMod-${projects[currPanel].title}-${+idx}`} style={{margin: '5px 0'}}>
+                  {`– ${bullet}`}
                 </li>
               ))
             }

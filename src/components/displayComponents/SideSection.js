@@ -53,7 +53,7 @@ const styles = {
 
 const SideSection = ({ style, children }) => {
   return (
-    <div style={styles.rightSideWrapper}>
+    <div className="side-section" style={styles.rightSideWrapper}>
       <div style={styles.before} />
 
       <div style={{...styles.rightSideContainer, ...style}}>
