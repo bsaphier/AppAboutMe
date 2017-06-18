@@ -5,8 +5,10 @@ import AboutPanel from './AboutPanel';
 import imgs from '../../../bin/images';
 import AboutSidebar from './AboutSidebar';
 import SectionFoot from '../../SectionFoot';
-import { Section, FillSection } from '../../displayComponents';
+import { buttons, Section, FillSection } from '../../displayComponents';
 
+
+const { Button } = buttons;
 
 const styles = {
   aboutBackground: {
@@ -24,17 +26,44 @@ const styles = {
   }
 };
 
+const About = ({
+  style,
+  burger,
+  content: { about, contact, siteInfo },
+  ...props
+}) => {
 
-const About = ({ content: { about, contact, siteInfo }, style }) => {
+  let mql = (props.mql === 'MED') || (props.mql === 'SML');
+
   return (
     <Section id="about">
       <div style={styles.aboutBackground} />
 
-      <AboutSidebar style={style} content={{...contact, about}} />
+      <AboutSidebar
+        style={style}
+        burgerOpen={burger.about}
+        content={{...contact, about}} />
 
       <FillSection>
 
-        <AboutPanel style={style} content={siteInfo} />
+        {
+          mql ? (
+            <Button
+              className="burgerButton"
+              onClick={() => props.burgerToggle( burger.about )}
+              style={{
+                zIndex: 9999,
+                position: 'absolute',
+                top: '5%',
+                right: '5%'
+              }}>{'III'}</Button>
+          ) : null
+        }
+
+        <AboutPanel
+          style={style}
+          content={{siteInfo, ...contact}}
+          burgerOpen={burger.about} />
 
         <SectionFoot to="projects" text="NEXT" />
 

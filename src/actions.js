@@ -1,15 +1,18 @@
 import React from 'react';
 
 import {
+  OPEN_BURGER,
+  CLOSE_BURGER,
   FONTS_LOADED,
   CAROUSEL_INIT,
   RESUME_LOADED,
-  SECTION_ENTER,
+  SECTION_CHANGE,
   TOGGLE_WELCOME,
   CAROUSEL_ROTATE,
   CAROUSEL_RESIZE,
   CAROUSEL_LOAD_PANELS,
-  TOGGLE_PROJECT_MODAL
+  TOGGLE_PROJECT_MODAL,
+  CAROUSEL_ROTATE_AXIS
 } from './constants';
 import fontLoader from './bin/fontLoader';
 import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
@@ -19,9 +22,20 @@ import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
  // -~-~-~-~-~-~- ACTION-CREATORS -~-~-~-~-~-~- \\
 // _____________________________________________ \\
 
-// *TODO call this using scoll events
 export const sectionChange = (section) => ({
-  type: SECTION_ENTER,
+  type: SECTION_CHANGE,
+  section
+});
+
+
+export const openBurger = (section) => ({
+  type: OPEN_BURGER,
+  section
+});
+
+
+export const closeBurger = (section) => ({
+  type: CLOSE_BURGER,
   section
 });
 
@@ -79,6 +93,12 @@ export const rotateCarousel = (rotation, currPanel) => ({
 export const preloadCarouselPanels = (panels) => ({
   type: CAROUSEL_LOAD_PANELS,
   panels
+});
+
+
+export const rotateAxisCarousel = ( axis = 'Y' ) => ({
+  type: CAROUSEL_ROTATE_AXIS,
+  axis
 });
 
 

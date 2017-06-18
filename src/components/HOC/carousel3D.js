@@ -66,6 +66,9 @@ const styles = {
 };
 
 
+let created = false;
+
+
 // panels passed in here must be an array of valid React components. navButtons (optional) can
 // be a valid React component or an array of two valid React components. If navButtons is an
 // array, only the first two indexes will be used
@@ -75,7 +78,7 @@ const carousel3D = (panels, navButtons) => {
 
     constructor( props ) {
       super(props);
-      this.getSize = this.getSize.bind(this);
+      // this.getSize = this.getSize.bind(this);
       this.getElement = this.getElement.bind(this);
       this.getPanelIndex = this.getPanelIndex.bind(this);
       this.createNavButton = this.createNavButton.bind(this);
@@ -86,23 +89,35 @@ const carousel3D = (panels, navButtons) => {
     componentDidMount() {
       let { create, axis, resize } = this.props;
 
-      create(panels.length, this.getSize(axis));
+      let size = this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
 
-      window.addEventListener( 'resize', () => resize(panels.length, this.getSize(axis)));
+      if (!created) {
+        create(panels.length, size);
+        created = true;
+      }
+
+
+      window.addEventListener( 'resize', function() {
+        resize(panels.length, size);
+      });
     }
 
 
     componentWillUnmount() {
       let { axis, resize } = this.props;
 
-      window.removeEventListener( 'resize', () => resize(panels.length, this.getSize(axis)));
-    }
+      let size = this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
 
-
-    // get the size of the carousel DOM node
-    getSize( axis ) {
-      return this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
+      window.removeEventListener( 'resize', function() {
+        resize(panels.length, size);
+      });
     }
+    //
+    //
+    // // get the size of the carousel DOM node
+    // getSize( axis ) {
+    //   return this.domNode[axis === 'Y' ? 'offsetWidth' : 'offsetHeight'];
+    // }
 
 
     // create a refrence to the DOM node to listen for windowResize
@@ -161,7 +176,7 @@ const carousel3D = (panels, navButtons) => {
 
 
     render() {
-      let { axis, theta, radius, currPanel, rotation } = this.props;
+      let { axis, theta, radius, rotation } = this.props;
 
       const NavBack = this.createNavButton(true);
       const NavFwd = this.createNavButton(false);

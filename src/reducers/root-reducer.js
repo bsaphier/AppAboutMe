@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
 
-import appState from './appState-reducer';
-import resumeReducer from './resume-reducer';
-import carouselReducer from './carousel-reducer';
+import app from './appState-reducer';
+import burger from './burger-reducer';
+import resume from './resume-reducer';
+import carousel from './carousel-reducer';
 
-export default combineReducers({
-  app: appState,
-  resume: resumeReducer,
-  carousel: carouselReducer
-});
+export default combineReducers({ app, resume, burger, carousel });

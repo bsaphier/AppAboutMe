@@ -188,26 +188,26 @@ class ProjectPanel extends Component {
     let mouseX = this.normMouseX(clientX);
     let mouseY = this.normMouseY(clientY);
 
-    this.setState({ mouseX, mouseY });
+    this.setState(() => ({ mouseX, mouseY }));
   }
 
 
   handleResize() {
     let { offsetWidth, offsetHeight } = this.domNode;
-    this.setState({
+    this.setState(() => ({
       panelWidth: offsetWidth,
       panelHeight: offsetHeight
-    });
+    }));
   }
 
 
   // create a refrence to a DOM node to listen for mouseMove
   getElement( ref ) {
     this.domNode = ref;
-    this.setState({
+    this.setState(() => ({
       panelWidth: ref.offsetWidth,
       panelHeight: ref.offsetHeight
-    });
+    }));
   }
 
 

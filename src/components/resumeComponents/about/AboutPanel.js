@@ -2,7 +2,12 @@ import React from 'react';
 
 import colors from '../../../bin/colors';
 import Modernizr from '../../../../.modernizrrc';
-import { Title, Divider } from '../../displayComponents';
+import { Title, Divider, buttons } from '../../displayComponents';
+import { hoverSpin } from '../../HOC';
+
+
+const { IconButton } = buttons;
+const SocialButton = hoverSpin(IconButton);
 
 const transform = Modernizr.prefixed('transform');
 
@@ -26,6 +31,24 @@ const styles = {
     overflow: 'scroll',
     color: colors.MENU_DARKER,
     background: '#FFF',
+  },
+  socialButtons: {
+    display: 'inline-flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    cursor: 'default',
+    margin: '15px 0 0',
+    color: colors.MENU_DARK,
+    fontSize: '1rem',
+  },
+  socialButtonWrap: {
+    textAlign: 'center',
+  },
+  socialButtonLabel: {
+    color: colors.MENU_DARKER,
+    fontSize: '0.7rem',
+    fontWeight: 400,
+    margin: '0 auto'
   },
 
   // 3D shadow effect
@@ -51,29 +74,58 @@ const styles = {
 };
 
 
-const AboutPanel = ({ style, content }) => (
-  <div className="about-panel" style={styles.aboutPanel}>
-    <div style={styles.aboutPanelBefore} />
-    <div style={styles.aboutPanelContent}>
+const AboutPanel = ({ style, content, burgerOpen }) => {
 
-      <Title style={{
-        ...style.title,
-        padding: '0 0.08em',
-        fontSize: '2rem',
-        fontWeight: '600',
-        fontStyle: 'italic',
-        letterSpacing: '0.05em' }}>
-        <span>{`About  This  Site`}</span>
-      </Title>
+  let btnLinks;
 
-      <Divider style={{width: '62%', background: colors.AMETHYST}} />
+  if (!burgerOpen) {
 
-      <p style={style.text}>{ content }</p>
+    const socialButtons = content.links.map( link => (
+      <div key={link.name} style={styles.socialButtonWrap}>
+        <SocialButton
+          url={link.url}
+          name={link.name}
+          icon={link.icon}
+          hoverColor={[255, 68, 62]}
+          initialColor={[45, 45, 45]} />
+        <div style={styles.socialButtonLabel}><span>{ link.name }</span></div>
+      </div>
+    ));
 
+    btnLinks = (
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        { socialButtons }
+      </div>
+    );
+
+  }
+
+  return (
+    <div className="about-panel" style={styles.aboutPanel}>
+      <div style={styles.aboutPanelBefore} />
+      <div style={styles.aboutPanelContent}>
+
+        <Title style={{
+          ...style.title,
+          padding: '0 0.08em',
+          fontSize: '2rem',
+          fontWeight: '600',
+          fontStyle: 'italic',
+          letterSpacing: '0.05em' }}>
+          <span>{`About  This  Site`}</span>
+        </Title>
+
+        <Divider style={{width: '62%', background: colors.AMETHYST}} />
+
+        <p style={style.text}>{ content.siteInfo }</p>
+
+        { btnLinks }
+
+      </div>
+      <div style={{...styles.aboutPanelBefore, ...styles.aboutPanelAfter}} />
     </div>
-    <div style={{...styles.aboutPanelBefore, ...styles.aboutPanelAfter}} />
-  </div>
-);
+  );
+};
 
 
 export default AboutPanel;
