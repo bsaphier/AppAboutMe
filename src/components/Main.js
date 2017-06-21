@@ -7,10 +7,14 @@ import ResumeComponents from './resumeComponents';
 import { Section, FillSection } from './displayComponents';
 
 
-// ref.offsetTop
-// window.scrollY
-// sectionChange currSection
-let mounted;
+let mounted = false;
+
+/*
+ * equivalent to CSS media queries
+ */
+const SML = window ? window.matchMedia('only screen and (max-width: 799px)') : null;
+const MED = window ? window.matchMedia('only screen and (max-width: 1299px) and (min-width: 800px)') : null;
+const LRG = window ? window.matchMedia('only screen and (min-width: 1300px)') : null;
 
 
 class Main extends Component {
@@ -19,7 +23,6 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      media: 'LRG',
       sectionOffsetTop: {
         home: 0,
         about: 0,
@@ -37,51 +40,54 @@ class Main extends Component {
 
   componentDidMount() {
 
-    mounted = true;
-
-    this.getSectionOffsets();
-
     this.props.toggleWelcome();
 
-    window.addEventListener( 'scroll', this.scroll );
-    // window.matchMedia('(max-width: 799px)').addListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'SML'});
-    //   }
-    // });
-    // window.matchMedia('(min-width: 800px)').addListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'MED'});
-    //   }
-    // });
-    // window.matchMedia('(min-width: 1300px)').addListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'LRG'});
-    //   }
-    // });
+    if (!mounted) {
+
+      window.addEventListener( 'scroll', this.scroll );
+
+      SML.addListener(({ matches }) => {
+        if (matches) { this.props.resizeSML(); }
+      });
+
+      MED.addListener(({ matches }) => {
+        if (matches) { this.props.resizeMED(); }
+      });
+
+      LRG.addListener(({ matches }) => {
+        if (matches) { this.props.resizeLRG(); }
+      });
+
+      mounted = true;
+
+      this.getSectionOffsets();
+
+    }
 
   }
 
+
   componentWillUnmount() {
 
-    mounted = false;
+    if (mounted) {
 
-    window.removeEventListener( 'scroll', this.scroll );
-    // window.matchMedia('(max-width: 799px)').removeListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'SML'});
-    //   }
-    // });
-    // window.matchMedia('(max-width: 1299px) and (min-width: 800px)').removeListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'MED'});
-    //   }
-    // });
-    // window.matchMedia('(min-width: 1300px)').removeListener(({ matches }) => {
-    //   if (matches) {
-    //     this.setState({ media: 'LRG'});
-    //   }
-    // });
+      window.removeEventListener( 'scroll', this.scroll );
+
+      SML.removeListener(({ matches }) => {
+        if (matches) { this.props.resizeSML(); }
+      });
+
+      MED.removeListener(({ matches }) => {
+        if (matches) { this.props.resizeMED(); }
+      });
+
+      LRG.removeListener(({ matches }) => {
+        if (matches) { this.props.resizeLRG(); }
+      });
+
+      mounted = false;
+
+    }
 
   }
 
@@ -98,11 +104,8 @@ class Main extends Component {
           about: aboutY,
           projects: projectsY,
           skills: skillsY
-        }
-      });
-
+        }});
     }
-
   }
 
 
@@ -120,28 +123,19 @@ class Main extends Component {
         breakC = projects + half;
 
     if (scrollY <= breakA) {
-
       nextSection = 'home';
-
     } else if (scrollY > breakA && scrollY <= breakB) {
-
       nextSection = 'about';
-
     } else if (scrollY > breakB && scrollY <= breakC) {
-
       nextSection = 'projects';
-
     } else if (scrollY > breakC) {
-
       nextSection = 'skills';
-
     }
 
     if (currSection !== nextSection) {
-
       sectionChange( nextSection );
-
     }
+
   }
 
 
@@ -158,9 +152,8 @@ class Main extends Component {
 
   render() {
 
-    console.log(this.state.media);
-
     const { panels, siteInfo, contact, resume: { about, skills, projects }, ...props } = this.props;
+
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
 

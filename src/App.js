@@ -3,8 +3,9 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Main from './components/Main';
+import { SML, MED, LRG } from './constants';
 import { loadAppWithSpinner } from './components/HOC';
-import { fetchData, openBurger, closeBurger, sectionChange, toggleWelcome } from './actions';
+import { fetchData, openBurger, closeBurger, windowResize, sectionChange, toggleWelcome } from './actions';
 
 // import app-wide styles
 import './stylesheets/main.scss';
@@ -26,12 +27,16 @@ const mapStateToProps = ({ app, resume, burger, carousel }) => ({
   panels: carousel.panels,
   contact: resume.contact,
   siteInfo: resume.siteInfo,
+  mediaSize: app.media,
   isLoading: app.isLoading,
   currSection: app.currSection
 });
 
 
 const mapDispatchToProps = dispatch => ({
+  resizeSML:            () => dispatch(windowResize(SML)),
+  resizeMED:            () => dispatch(windowResize(MED)),
+  resizeLRG:            () => dispatch(windowResize(LRG)),
   closeBurger:   (section) => dispatch(closeBurger(section)),
   openBurger:    (section) => dispatch(openBurger(section)),
   sectionChange: (section) => dispatch(sectionChange(section)),

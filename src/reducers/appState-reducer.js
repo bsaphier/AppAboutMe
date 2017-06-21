@@ -1,4 +1,6 @@
 import {
+  LRG,
+  RESIZED,
   FONTS_LOADED,
   RESUME_LOADED,
   SECTION_CHANGE,
@@ -18,7 +20,8 @@ const initialState = {
   welcomeIn: false,
   projectModalOpen: false,
 
-  currSection: 'home'
+  currSection: 'home',
+  media: LRG
 };
 
 
@@ -28,6 +31,10 @@ export default (state = initialState, action) => {
 
 
   switch (action.type) {
+
+    case RESIZED:
+      nextState.media = action.nextSize;
+      break;
 
     case FONTS_LOADED:
       nextState.fontsDidLoad = true;

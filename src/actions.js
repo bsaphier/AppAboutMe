@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  RESIZED,
   OPEN_BURGER,
   CLOSE_BURGER,
   FONTS_LOADED,
@@ -25,6 +26,12 @@ import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
 export const sectionChange = (section) => ({
   type: SECTION_CHANGE,
   section
+});
+
+
+export const windowResize = (nextSize) => ({
+  type: RESIZED,
+  nextSize
 });
 
 

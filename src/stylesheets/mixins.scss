@@ -11,7 +11,7 @@
 
 @mixin medium {
 
-  @media screen and (min-width: 800px) {
+  @media screen and (max-width: 1299px) and (min-width: 800px) {
 
     @content;
 
