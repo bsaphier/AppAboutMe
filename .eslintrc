@@ -2,6 +2,7 @@
   "extends": "fullstack/react",
   "rules": {
     "semi": [1, "always"],
+    "guard-for-in": "off",
     "react/prop-types": "off",
     "react/display-name": "off",
     "class-methods-use-this": "off",

@@ -9,6 +9,17 @@ import { Section, FillSection } from './displayComponents';
 
 let mounted = false;
 
+
+const INIT_STATE = {
+  sectionOffsetTop: {
+    home: 0,
+    about: 0,
+    projects: 0,
+    skills: 0
+  }
+};
+
+
 /*
  * equivalent to CSS media queries
  */
@@ -22,16 +33,12 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      sectionOffsetTop: {
-        home: 0,
-        about: 0,
-        projects: 0,
-        skills: 0
-      }
-    };
+    this.state = INIT_STATE;
 
     this.scroll = this.scroll.bind(this);
+    this.resizeSML = this.resizeSML.bind(this);
+    this.resizeMED = this.resizeMED.bind(this);
+    this.resizeLRG = this.resizeLRG.bind(this);
     this.burgerToggle = this.burgerToggle.bind(this);
     this.getSectionOffsets = this.getSectionOffsets.bind(this);
 
@@ -46,23 +53,19 @@ class Main extends Component {
 
       window.addEventListener( 'scroll', this.scroll );
 
-      SML.addListener(({ matches }) => {
-        if (matches) { this.props.resizeSML(); }
-      });
+      SML.addListener(this.resizeSML);
 
-      MED.addListener(({ matches }) => {
-        if (matches) { this.props.resizeMED(); }
-      });
+      MED.addListener(this.resizeMED);
 
-      LRG.addListener(({ matches }) => {
-        if (matches) { this.props.resizeLRG(); }
-      });
+      LRG.addListener(this.resizeLRG);
 
       mounted = true;
 
       this.getSectionOffsets();
 
     }
+
+    console.log(this.props.mediaSize);
 
   }
 
@@ -73,19 +76,52 @@ class Main extends Component {
 
       window.removeEventListener( 'scroll', this.scroll );
 
-      SML.removeListener(({ matches }) => {
-        if (matches) { this.props.resizeSML(); }
-      });
+      SML.removeListener(this.resizeSML);
 
-      MED.removeListener(({ matches }) => {
-        if (matches) { this.props.resizeMED(); }
-      });
+      MED.removeListener(this.resizeMED);
 
-      LRG.removeListener(({ matches }) => {
-        if (matches) { this.props.resizeLRG(); }
-      });
+      LRG.removeListener(this.resizeLRG);
 
       mounted = false;
+
+    }
+
+  }
+
+
+  resizeSML({ matches }) {
+
+    if (matches) {
+
+      this.props.closeBurger();
+
+      this.props.resizeSML();
+
+    }
+
+  }
+
+
+  resizeMED({ matches }) {
+
+    if (matches) {
+
+      this.props.closeBurger();
+
+      this.props.resizeMED();
+
+    }
+
+  }
+
+
+  resizeLRG({ matches }) {
+
+    if (matches) {
+
+      this.props.openBurger();
+
+      this.props.resizeLRG();
 
     }
 
@@ -179,7 +215,9 @@ class Main extends Component {
 
       </main>
     );
+
   }
+
 }
 
 

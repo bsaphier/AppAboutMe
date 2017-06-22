@@ -10,6 +10,8 @@ import { buttons, Section, FillSection } from '../../displayComponents';
 
 const { Button } = buttons;
 
+const SECTION_NAME = 'about';
+
 const styles = {
   aboutBackground: {
     position: 'absolute',
@@ -33,10 +35,13 @@ const About = ({
   ...props
 }) => {
 
-  let mql = (props.mql === 'MED') || (props.mql === 'SML');
+  const toggleBurger = () => {
+    if (burger[SECTION_NAME]) { props.closeBurger(SECTION_NAME); }
+    else                      { props.openBurger( SECTION_NAME); }
+  };
 
   return (
-    <Section id="about">
+    <Section id={SECTION_NAME}>
       <div style={styles.aboutBackground} />
 
       <AboutSidebar
@@ -46,19 +51,15 @@ const About = ({
 
       <FillSection>
 
-        {
-          mql ? (
-            <Button
-              className="burgerButton"
-              onClick={() => props.burgerToggle( burger.about )}
-              style={{
-                zIndex: 9999,
-                position: 'absolute',
-                top: '5%',
-                right: '5%'
-              }}>{'III'}</Button>
-          ) : null
-        }
+      <Button
+        className="burgerButton"
+        onClick={toggleBurger}
+        style={{
+          zIndex: 9999,
+          position: 'absolute',
+          top: '5%',
+          right: '5%'
+        }}>{'III'}</Button>
 
         <AboutPanel
           style={style}

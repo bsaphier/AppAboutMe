@@ -34,13 +34,13 @@ const mapStateToProps = ({ app, resume, burger, carousel }) => ({
 
 
 const mapDispatchToProps = dispatch => ({
+  toggleWelcome:        () => dispatch(toggleWelcome()),
   resizeSML:            () => dispatch(windowResize(SML)),
   resizeMED:            () => dispatch(windowResize(MED)),
   resizeLRG:            () => dispatch(windowResize(LRG)),
   closeBurger:   (section) => dispatch(closeBurger(section)),
   openBurger:    (section) => dispatch(openBurger(section)),
   sectionChange: (section) => dispatch(sectionChange(section)),
-  toggleWelcome:        () => dispatch(toggleWelcome()),
   fetchData:            () => dispatch(fetchData(RESUME_PATH))
 });
 

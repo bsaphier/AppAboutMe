@@ -14,16 +14,32 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case OPEN_BURGER:
-      nextState[action.section] = true;
+
+      if (!action.section) {
+        for (let section in nextState) {
+          nextState[section] = true;
+        }
+      } else {
+        nextState[action.section] = true;
+      }
       break;
 
     case CLOSE_BURGER:
-      nextState[action.section] = false;
+
+      if (!action.section) {
+        for (let section in nextState) {
+          nextState[section] = false;
+        }
+      } else {
+        nextState[action.section] = false;
+      }
       break;
 
     default:
       return nextState;
+
   }
+
 
   return nextState;
 };

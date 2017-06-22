@@ -9,7 +9,9 @@ import { carousel3D } from '../../HOC';
 
 let Carousel3D, cachedCarouselPanels;
 
+
 const { Button } = buttons;
+const SECTION_NAME = 'projects';
 
 
 const Projects = ({
@@ -27,10 +29,13 @@ const Projects = ({
 
   }
 
-  let mql = (props.mql === 'MED') || (props.mql === 'SML');
+  const toggleBurger = () => {
+    if (burger[SECTION_NAME]) { props.closeBurger(SECTION_NAME); }
+    else                      { props.openBurger( SECTION_NAME); }
+  };
 
   return (
-    <Section id="projects">
+    <Section id={SECTION_NAME}>
 
       <ProjectsSidebar
         style={style}
@@ -39,19 +44,15 @@ const Projects = ({
 
       <FillSection style={{ padding: 0 }}>
 
-        {
-          mql ? (
-            <Button
-              className="burgerButton"
-              onClick={() => props.burgerToggle( burger.projects )}
-              style={{
-                zIndex: 9999,
-                position: 'absolute',
-                top: '5%',
-                right: '5%'
-              }}>{'III'}</Button>
-          ) : null
-        }
+      <Button
+        className="burgerButton"
+        onClick={toggleBurger}
+        style={{
+          zIndex: 9999,
+          position: 'absolute',
+          top: '5%',
+          right: '5%'
+        }}>{'III'}</Button>
 
         <ProjectModal />
 
