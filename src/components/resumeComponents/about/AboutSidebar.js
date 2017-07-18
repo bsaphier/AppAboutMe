@@ -66,7 +66,7 @@ const sidebarContentMap = ({ index, label, info }) => (
 );
 
 
-const AboutSidebar = ({ style, content }) => {
+const AboutSidebar = ({ style, content, burgerOpen }) => {
 
   const socialButtons = content.links.map( link => (
     <div key={link.name} style={styles.socialButtonWrap}>
@@ -111,7 +111,7 @@ const AboutSidebar = ({ style, content }) => {
   ];
 
   return (
-    <SideSection title="Contact">
+    <SideSection title="Contact" burger={{ open: burgerOpen }}>
 
       <Title style={style.title}><span>Contact</span></Title>
 

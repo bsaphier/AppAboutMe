@@ -3,20 +3,56 @@ import React from 'react';
 import ProjectModal from './ProjectModal';
 import SectionFoot from '../../SectionFoot';
 import ProjectsSidebar from './ProjectsSidebar';
-import { Section, FillSection } from '../../displayComponents';
+import { buttons, Section, FillSection } from '../../displayComponents';
 import { carousel3D } from '../../HOC';
 
 
-const Projects = ({ style, content: { projects, carouselPanels } }) => {
+let Carousel3D, cachedCarouselPanels;
 
-  const Carousel3D = carousel3D(carouselPanels);
+
+const { Button } = buttons;
+const SECTION_NAME = 'projects';
+
+
+const Projects = ({
+  style,
+  burger,
+  content: { projects, carouselPanels },
+  ...props
+}) => {
+
+  if (cachedCarouselPanels !== carouselPanels) {
+
+    cachedCarouselPanels = carouselPanels;
+
+    Carousel3D = carousel3D( cachedCarouselPanels );
+
+  }
+
+  const toggleBurger = () => {
+    if (burger[SECTION_NAME]) { props.closeBurger(SECTION_NAME); }
+    else                      { props.openBurger( SECTION_NAME); }
+  };
 
   return (
-    <Section id="projects">
+    <Section id={SECTION_NAME}>
 
-      <ProjectsSidebar style={style} content={projects} />
+      <ProjectsSidebar
+        style={style}
+        burgerOpen={burger.projects}
+        content={projects} />
 
       <FillSection style={{ padding: 0 }}>
+
+      <Button
+        className="burgerButton"
+        onClick={toggleBurger}
+        style={{
+          zIndex: 9999,
+          position: 'absolute',
+          top: '5%',
+          right: '5%'
+        }}>{'III'}</Button>
 
         <ProjectModal />
 

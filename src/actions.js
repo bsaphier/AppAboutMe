@@ -1,27 +1,50 @@
 import React from 'react';
+import { actionCreators as audioActionCreators } from 'react-redux-webaudio';
 
 import {
+  RESIZED,
+  OPEN_BURGER,
+  CLOSE_BURGER,
   FONTS_LOADED,
   CAROUSEL_INIT,
   RESUME_LOADED,
-  SECTION_ENTER,
+  SECTION_CHANGE,
   TOGGLE_WELCOME,
   CAROUSEL_ROTATE,
   CAROUSEL_RESIZE,
   CAROUSEL_LOAD_PANELS,
-  TOGGLE_PROJECT_MODAL
+  TOGGLE_PROJECT_MODAL,
+  CAROUSEL_ROTATE_AXIS
 } from './constants';
 import fontLoader from './bin/fontLoader';
 import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
+import { soundEvent } from './audio-funcs';
 
 
   // ––––––––––––––––––––––––––––––––––––––––– \\
  // -~-~-~-~-~-~- ACTION-CREATORS -~-~-~-~-~-~- \\
 // _____________________________________________ \\
 
-// *TODO call this using scoll events
 export const sectionChange = (section) => ({
-  type: SECTION_ENTER,
+  type: SECTION_CHANGE,
+  section
+});
+
+
+export const windowResize = (nextSize) => ({
+  type: RESIZED,
+  nextSize
+});
+
+
+export const openBurger = (section) => ({
+  type: OPEN_BURGER,
+  section
+});
+
+
+export const closeBurger = (section) => ({
+  type: CLOSE_BURGER,
   section
 });
 
@@ -82,11 +105,17 @@ export const preloadCarouselPanels = (panels) => ({
 });
 
 
+export const rotateAxisCarousel = ( axis = 'Y' ) => ({
+  type: CAROUSEL_ROTATE_AXIS,
+  axis
+});
+
+
   // ––––––––––––––––––––––––––––––––––––––––––––––––– \\
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
-// this guarantees that the background images have loaded before anything is displayed
+// guarantee that the background images have loaded before anything is displayed
 export const carouselPanelsCreator = projects => dispatch => {
 
   const toggleModal = () => dispatch(toggleProjectModal());
@@ -114,8 +143,8 @@ export const loadResume = resumeData => dispatch => {
 };
 
 
-export const fetchData = path => dispatch =>
-  fetch(path)
+export const fetchData = path => dispatch => {
+  return fetch(path)
     .then( response => response.json() )
     .then( json => dispatch(loadResume(json)) )
     .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
@@ -124,3 +153,10 @@ export const fetchData = path => dispatch =>
     .catch( err =>
       console.log(`There was an error fetching the data. ERROR: ${err}`)
     );
+};
+
+
+export const playSound = note => dispatch => {
+  let sineDing = soundEvent( note );
+  dispatch( audioActionCreators.emit( sineDing ) );
+};

@@ -1,7 +1,9 @@
 import {
+  LRG,
+  RESIZED,
   FONTS_LOADED,
   RESUME_LOADED,
-  SECTION_ENTER,
+  SECTION_CHANGE,
   TOGGLE_WELCOME,
   TOGGLE_PROJECT_MODAL,
   CAROUSEL_LOAD_PANELS
@@ -18,7 +20,8 @@ const initialState = {
   welcomeIn: false,
   projectModalOpen: false,
 
-  currSection: 'home'
+  currSection: 'home',
+  media: LRG
 };
 
 
@@ -28,6 +31,10 @@ export default (state = initialState, action) => {
 
 
   switch (action.type) {
+
+    case RESIZED:
+      nextState.media = action.nextSize;
+      break;
 
     case FONTS_LOADED:
       nextState.fontsDidLoad = true;
@@ -41,7 +48,7 @@ export default (state = initialState, action) => {
       nextState.carouselPanelsDidLoad = true;
       break;
 
-    case SECTION_ENTER:
+    case SECTION_CHANGE:
       nextState.currSection = action.section;
       break;
 

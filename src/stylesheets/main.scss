@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 @import './mixins';
-@import './components';
+// @import './components';
 
 * {
   margin: 0;
@@ -32,4 +32,24 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+.hamburger.hide {
+  transform: translateX(130%);
+  transition-timing-function: ease-in;
+  transition: 0.2s;
+}
+
+
+.hamburger {
+  transition: 0.25s;
+  transition-timing-function: ease-out;
+
+  transform: translateX(0);
 }

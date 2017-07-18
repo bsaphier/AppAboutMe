@@ -3,35 +3,35 @@ import { presets, spring } from 'react-motion';
 export const welcome = {
   initial: {
     top: -42,
-    letterSpacing0: 21,
-    letterSpacing1: 13,
-    letterSpacing2: 8,
-    letterSpacing3: 5,
-    letterSpacing4: 3,
-    letterSpacing5: 2,
-    letterSpacing6: 1,
-    letterSpacing7: 1
+    title0: 21,
+    title1: 13,
+    title2: 8,
+    title3: 5,
+    title4: 3,
+    title5: 2,
+    title6: 1,
+    title7: 1
   },
   exit: {
     top: spring(-42, presets.stiff),
-    letterSpacing0: spring(1, presets.wobbly),
-    letterSpacing1: spring(1, presets.wobbly),
-    letterSpacing2: spring(1, presets.wobbly),
-    letterSpacing3: spring(1, presets.wobbly),
-    letterSpacing4: spring(1, presets.wobbly),
-    letterSpacing5: spring(1, presets.wobbly),
-    letterSpacing6: spring(1, presets.wobbly),
-    letterSpacing7: spring(1, presets.wobbly)
+    title0: spring(1, presets.wobbly),
+    title1: spring(1, presets.wobbly),
+    title2: spring(1, presets.wobbly),
+    title3: spring(1, presets.wobbly),
+    title4: spring(1, presets.wobbly),
+    title5: spring(1, presets.wobbly),
+    title6: spring(1, presets.wobbly),
+    title7: spring(1, presets.wobbly)
   },
   enter: {
     top: spring(42, presets.stiff),
-    letterSpacing0: spring(-0.055, presets.wobbly),
-    letterSpacing1: spring(0.175, presets.gentle),
-    letterSpacing2: spring(-0.06, presets.wobbly),
-    letterSpacing3: spring(-0.08, presets.gentle),
-    letterSpacing4: spring(-0.048, presets.gentle),
-    letterSpacing5: spring(-0.1, presets.gentle),
-    letterSpacing6: spring(-0.091, presets.gentle),
-    letterSpacing7: spring(-0.1, presets.gentle)
+    title0: spring(-0.055, presets.wobbly),
+    title1: spring(0.175, presets.gentle),
+    title2: spring(-0.06, presets.wobbly),
+    title3: spring(-0.08, presets.gentle),
+    title4: spring(-0.048, presets.gentle),
+    title5: spring(-0.1, presets.gentle),
+    title6: spring(-0.091, presets.gentle),
+    title7: spring(-0.1, presets.gentle)
   }
 };

@@ -27,10 +27,10 @@ const styles = {
 };
 
 
-const TitleText = ({ id, hover, leave, style, children }) => (
+const TitleText = ({ id, sound, hover, leave, style, children }) => (
   <div
     style={styles.title}
-    onMouseOver={hover ? () => hover(id) : null}
+    onMouseOver={hover ? () => hover(id, sound) : null}
     onMouseLeave={leave ? () => leave(id) : null}
     >
     <span style={{ ...styles.text, ...style }}>

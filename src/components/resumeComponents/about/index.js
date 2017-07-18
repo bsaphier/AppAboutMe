@@ -5,8 +5,12 @@ import AboutPanel from './AboutPanel';
 import imgs from '../../../bin/images';
 import AboutSidebar from './AboutSidebar';
 import SectionFoot from '../../SectionFoot';
-import { Section, FillSection } from '../../displayComponents';
+import { buttons, Section, FillSection } from '../../displayComponents';
 
+
+const { Button } = buttons;
+
+const SECTION_NAME = 'about';
 
 const styles = {
   aboutBackground: {
@@ -24,17 +28,43 @@ const styles = {
   }
 };
 
+const About = ({
+  style,
+  burger,
+  content: { about, contact, siteInfo },
+  ...props
+}) => {
 
-const About = ({ content: { about, contact, siteInfo }, style }) => {
+  const toggleBurger = () => {
+    if (burger[SECTION_NAME]) { props.closeBurger(SECTION_NAME); }
+    else                      { props.openBurger( SECTION_NAME); }
+  };
+
   return (
-    <Section id="about">
+    <Section id={SECTION_NAME}>
       <div style={styles.aboutBackground} />
 
-      <AboutSidebar style={style} content={{...contact, about}} />
+      <AboutSidebar
+        style={style}
+        burgerOpen={burger.about}
+        content={{...contact, about}} />
 
       <FillSection>
 
-        <AboutPanel style={style} content={siteInfo} />
+      <Button
+        className="burgerButton"
+        onClick={toggleBurger}
+        style={{
+          zIndex: 9999,
+          position: 'absolute',
+          top: '5%',
+          right: '5%'
+        }}>{'III'}</Button>
+
+        <AboutPanel
+          style={style}
+          content={{siteInfo, ...contact}}
+          burgerOpen={burger.about} />
 
         <SectionFoot to="projects" text="NEXT" />
 

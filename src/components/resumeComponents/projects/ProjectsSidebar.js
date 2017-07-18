@@ -40,7 +40,8 @@ const styles = {
 };
 
 
-const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel }) => {
+const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel, burgerOpen }) => {
+
   let { length } = content;
 
   const getPanelMovement = index => {
@@ -73,7 +74,11 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
   });
 
   return (
-    <SideSection title="Projects" style={{ background: colors.AMETHYST }}>
+    <SideSection
+      title="Projects"
+      burger={{ open: burgerOpen }}
+      style={{ background: colors.AMETHYST }}>
+
       <Title style={style.title}>
         <span style={{ position: 'absolute', zIndex: -1, textShadow }}>Projects</span>
         <span>Projects</span>
@@ -84,6 +89,7 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel })
       <div style={styles.sidebarButtonsWrapper}>
         { sidebarItems }
       </div>
+
     </SideSection>
   );
 };

@@ -1,0 +1,61 @@
+<––––––––TODO TODO TODO TODO TODO––––––––>
+
+! -> -> adjust styles for different screens <- <- !
+
+• Make separate files for styles
+
+• SectionFoot styling....
+
+
+
+<–––––––––HIGHER ORDER COMPONENTS––––––––>
+> clickSpin / hoverSpin
+  • DRY DRY
+
+
+> carousel
+  • pass in navButtons as props instead of hard-coded
+
+
+
+<––––––––––TOP LEVEL COMPONENTS––––––––––>
+> Welcome
+  • create title components by iterating instead of hard-coded
+
+
+> About
+  • Font Sizing
+
+
+> Projects
+  • Move Carousel navButtons to parent c as a
+  ! -> Modal font styles!
+  ! -> are the bg images are being fetched more than once? because of c updates?
+
+
+> Skills
+  • ?refactor from css transitions to React-Motion?
+
+
+> Footer
+  • add social links
+
+
+
+
+<–––––––––––––Component Map–––––––––––––>
+/src
+- index
+- App ∞
+  /components
+  - Main
+    - Welcome ∞
+    - ResumeComponents
+      - About
+      - Projects
+        - carousel3D-HOC ∞
+        - ProjectsPanel ∞
+        - ProjectsModal ∞
+        - ProjectsSidebar ∞
+      - Skills
+    - Footer

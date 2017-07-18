@@ -2,7 +2,8 @@ import {
   CAROUSEL_INIT,
   CAROUSEL_ROTATE,
   CAROUSEL_RESIZE,
-  CAROUSEL_LOAD_PANELS
+  CAROUSEL_LOAD_PANELS,
+  CAROUSEL_ROTATE_AXIS
 } from '../constants';
 
 
@@ -40,6 +41,10 @@ export default (state = initialState, { type, ...action }) => {
     case CAROUSEL_ROTATE:
       nextState.currPanel = action.currPanel;
       nextState.rotation = action.rotation;
+      return nextState;
+
+    case CAROUSEL_ROTATE_AXIS:
+      nextState.axis = action.axis;
       return nextState;
 
     case CAROUSEL_RESIZE:
