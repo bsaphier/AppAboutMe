@@ -8,8 +8,7 @@ import rootReducer from './reducers/root-reducer';
 import createLogger from 'redux-logger';
 
 
-let myStore,
-    middleware = [];
+let myStore;
 
 
 if (process.env.NODE_ENV === 'production') {

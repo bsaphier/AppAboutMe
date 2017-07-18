@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component }     from 'react';
+import { RRWAEngine }           from 'react-redux-webaudio';
 
-import Footer from './Footer';
-import SectionFoot from './SectionFoot';
-import WelcomeTitle from './WelcomeTitle';
-import ResumeComponents from './resumeComponents';
+import Footer                   from './Footer';
+import SectionFoot              from './SectionFoot';
+import WelcomeTitle             from './WelcomeTitle';
+import ResumeComponents         from './resumeComponents';
 import { Section, FillSection } from './displayComponents';
 
 
@@ -65,7 +66,9 @@ class Main extends Component {
 
     }
 
+    /**************REMOVE**************/
     console.log(this.props.mediaSize);
+    /**********************************/
 
   }
 
@@ -192,6 +195,8 @@ class Main extends Component {
 
     return (
       <main style={{ fontFamily: '"Roboto", sans-serif' }}>
+
+        <RRWAEngine />
 
         <Section id="home">
           <FillSection>

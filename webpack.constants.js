@@ -19,10 +19,7 @@ const LOADERS = [{
   loader: 'modernizr-loader!json-loader'
 }, {
   test: /\.(jpe?g|png|gif|svg)$/i,
-  loader: 'file-loader?name=public/bin/images/[name].[ext]',
-  // query: {
-  //   useRelativePath: process.env.NODE_ENV === 'production'
-  // }
+  loader: 'file-loader?name=public/bin/images/[name].[ext]'
 }];
 
 

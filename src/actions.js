@@ -1,4 +1,5 @@
 import React from 'react';
+import { actionCreators as audioActionCreators } from 'react-redux-webaudio';
 
 import {
   RESIZED,
@@ -17,6 +18,7 @@ import {
 } from './constants';
 import fontLoader from './bin/fontLoader';
 import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
+import { soundEvent } from './audio-funcs';
 
 
   // ––––––––––––––––––––––––––––––––––––––––– \\
@@ -113,7 +115,7 @@ export const rotateAxisCarousel = ( axis = 'Y' ) => ({
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
-// this guarantees that the background images have loaded before anything is displayed
+// guarantee that the background images have loaded before anything is displayed
 export const carouselPanelsCreator = projects => dispatch => {
 
   const toggleModal = () => dispatch(toggleProjectModal());
@@ -141,8 +143,8 @@ export const loadResume = resumeData => dispatch => {
 };
 
 
-export const fetchData = path => dispatch =>
-  fetch(path)
+export const fetchData = path => dispatch => {
+  return fetch(path)
     .then( response => response.json() )
     .then( json => dispatch(loadResume(json)) )
     .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
@@ -151,3 +153,10 @@ export const fetchData = path => dispatch =>
     .catch( err =>
       console.log(`There was an error fetching the data. ERROR: ${err}`)
     );
+};
+
+
+export const playSound = note => dispatch => {
+  let sineDing = soundEvent( note );
+  dispatch( audioActionCreators.emit( sineDing ) );
+};
