@@ -1,55 +1,56 @@
 @charset 'UTF-8';
 
 @import './mixins';
-// @import './components';
+
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  @include small {
-    font-size: 14px;
-  }
-  @include medium {
-    font-size: 16px;
-  }
-  @include large {
-    font-size: 18.5px;
-  }
+    @include xs               { font-size: 8px; }
+    @include sm               { font-size: 12px; }
+    @include md               { font-size: 15px; }
+    @include lg               { font-size: 16px; }
+    @include xs-thin          { font-size: 4px; }
+    @include sm-thin          { font-size: 8px; }
+    @include md-thin          { font-size: 10px; }
+    @include lg-thin          { font-size: 12px; }
+    @include mobile-portrait  { font-size: 24px; };
+    @include mobile-landscape { font-size: 10px; };
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  background-color: #FFF;
+    margin:  0;
+    padding: 0;
+    border:  0;
+    outline: 0;
+    background-color: #FFF;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
+
+
+/**~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~**/
 
 
 .hidden {
-  display: none;
+    display: none;
 }
-
 
 .hamburger.hide {
-  transform: translateX(130%);
-  transition-timing-function: ease-in;
-  transition: 0.2s;
+    transform: translateX(130%);
+    transition-timing-function: ease-in;
+    transition: 0.2s;
 }
 
-
 .hamburger {
-  transition: 0.25s;
-  transition-timing-function: ease-out;
-
-  transform: translateX(0);
+    transition: 0.25s;
+    transition-timing-function: ease-out;
+    transform: translateX(0);
 }

@@ -22,34 +22,33 @@ const RESUME_PATH = resumePath;
 
 
 const mapStateToProps = ({ app, resume, burger, carousel }) => ({
-  burger: burger,
-  resume: resume.resume,
-  panels: carousel.panels,
-  contact: resume.contact,
-  siteInfo: resume.siteInfo,
-  mediaSize: app.media,
-  isLoading: app.isLoading,
-  currSection: app.currSection
+    burger: burger,
+    resume: resume.resume,
+    panels: carousel.panels,
+    contact: resume.contact,
+    siteInfo: resume.siteInfo,
+    mediaSize: app.media,
+    isLoading: app.isLoading,
+    currSection: app.currSection
 });
 
 
 const mapDispatchToProps = dispatch => ({
-  toggleWelcome:        () => dispatch(toggleWelcome()),
-  resizeSML:            () => dispatch(windowResize(SML)),
-  resizeMED:            () => dispatch(windowResize(MED)),
-  resizeLRG:            () => dispatch(windowResize(LRG)),
-  closeBurger:   (section) => dispatch(closeBurger(section)),
-  openBurger:    (section) => dispatch(openBurger(section)),
-  sectionChange: (section) => dispatch(sectionChange(section)),
-  fetchData:            () => dispatch(fetchData(RESUME_PATH))
+    toggleWelcome:        () => dispatch(toggleWelcome()),
+    resizeSML:            () => dispatch(windowResize(SML)),
+    resizeMED:            () => dispatch(windowResize(MED)),
+    resizeLRG:            () => dispatch(windowResize(LRG)),
+    closeBurger:   (section) => dispatch(closeBurger(section)),
+    openBurger:    (section) => dispatch(openBurger(section)),
+    sectionChange: (section) => dispatch(sectionChange(section)),
+    fetchData:            () => dispatch(fetchData(RESUME_PATH))
 });
 
 
 export default () => (
-  <BrowserRouter basename="/">
-    <Route component={
-      connect(mapStateToProps, mapDispatchToProps)(
-        loadAppWithSpinner(Main)
-      )} />
-  </BrowserRouter>
+    <BrowserRouter basename="/">
+        <Route component={
+            connect(mapStateToProps, mapDispatchToProps)(loadAppWithSpinner(Main))
+        } />
+    </BrowserRouter>
 );
