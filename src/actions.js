@@ -26,88 +26,74 @@ import { soundEvent } from './audio-funcs';
 // _____________________________________________ \\
 
 export const sectionChange = (section) => ({
-  type: SECTION_CHANGE,
-  section
+    type: SECTION_CHANGE,
+    section
 });
-
 
 export const windowResize = (nextSize) => ({
-  type: RESIZED,
-  nextSize
+    type: RESIZED,
+    nextSize
 });
-
 
 export const openBurger = (section) => ({
-  type: OPEN_BURGER,
-  section
+    type: OPEN_BURGER,
+    section
 });
-
 
 export const closeBurger = (section) => ({
-  type: CLOSE_BURGER,
-  section
+    type: CLOSE_BURGER,
+    section
 });
-
 
 export const toggleWelcome = () => ({
-  type: TOGGLE_WELCOME
+    type: TOGGLE_WELCOME
 });
-
 
 export const fontsDidLoad = () => ({
-  type: FONTS_LOADED
+    type: FONTS_LOADED
 });
-
 
 export const resumeDidLoad = ({ name, contact, resume, siteInfo }) => ({
-  type: RESUME_LOADED,
-  name,
-  resume,
-  contact,
-  siteInfo
+    type: RESUME_LOADED,
+    name,
+    resume,
+    contact,
+    siteInfo
 });
-
 
 export const toggleProjectModal = () => ({
-  type: TOGGLE_PROJECT_MODAL
+    type: TOGGLE_PROJECT_MODAL
 });
-
 
 export const createCarousel = (panelsCount, panelSize) => ({
-  type: CAROUSEL_INIT,
-  radius: Math.round( ( panelSize / 2 ) /
-          Math.tan( Math.PI / panelsCount ) ),
-  theta: 360 / panelsCount,
-  currPanel: 0,
-  panelSize
+    type: CAROUSEL_INIT,
+    radius: Math.round( ( panelSize / 2 ) / Math.tan( Math.PI / panelsCount ) ),
+    theta: 360 / panelsCount,
+    currPanel: 0,
+    panelSize
 });
-
 
 export const resizeCarousel = (panelsCount, panelSize) => ({
-  type: CAROUSEL_RESIZE,
-  radius: Math.round( ( panelSize / 2 ) /
-    Math.tan( Math.PI / panelsCount ) ),
-  panelsCount,
-  panelSize
+    type: CAROUSEL_RESIZE,
+    radius: Math.round( ( panelSize / 2 ) / Math.tan( Math.PI / panelsCount ) ),
+    panelsCount,
+    panelSize
 });
-
 
 export const rotateCarousel = (rotation, currPanel) => ({
-  type: CAROUSEL_ROTATE,
-  currPanel,
-  rotation
+    type: CAROUSEL_ROTATE,
+    currPanel,
+    rotation
 });
-
 
 export const preloadCarouselPanels = (panels) => ({
-  type: CAROUSEL_LOAD_PANELS,
-  panels
+    type: CAROUSEL_LOAD_PANELS,
+    panels
 });
 
-
 export const rotateAxisCarousel = ( axis = 'Y' ) => ({
-  type: CAROUSEL_ROTATE_AXIS,
-  axis
+    type: CAROUSEL_ROTATE_AXIS,
+    axis
 });
 
 
@@ -115,48 +101,42 @@ export const rotateAxisCarousel = ( axis = 'Y' ) => ({
  // ~-~-~-~-~-~-~-~-~- ACTION-THUNKS -~-~-~-~-~-~-~-~-~ \\
 // _____________________________________________________ \\
 
+export const playSound = note => dispatch => {
+    let sineDing = soundEvent( note );
+    dispatch( audioActionCreators.emit( sineDing ) );
+};
+
+
 // guarantee that the background images have loaded before anything is displayed
 export const carouselPanelsCreator = projects => dispatch => {
-
-  const toggleModal = () => dispatch(toggleProjectModal());
-
-  const panels = projects.map( (project) => (
-    <ProjectPanel
-      key={`project-panel-${project.index}`}
-      project={project}
-      toggleModal={toggleModal}
-    />
-  ));
-
-  return panels;
-
+    const toggleModal = () => dispatch( toggleProjectModal() );
+    const panels = projects.map( (project) => (
+        <ProjectPanel
+            key={`project-panel-${project.index}`}
+            project={project}
+            toggleModal={toggleModal}
+        />
+    ));
+    return panels;
 };
 
 
 export const loadResume = resumeData => dispatch => {
+    dispatch(resumeDidLoad(resumeData));
 
-  dispatch(resumeDidLoad(resumeData));
-
-  // for use in a Promise chain i.e. fetchData
-  return resumeData;
-
+    // for use in a Promise chain i.e. fetchData
+    return resumeData;
 };
 
 
 export const fetchData = path => dispatch => {
-  return fetch(path)
-    .then( response => response.json() )
-    .then( json => dispatch(loadResume(json)) )
-    .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
-    .then( panels => dispatch(preloadCarouselPanels(panels)) )
-    .then( fontLoader(() => dispatch(fontsDidLoad())) )
-    .catch( err =>
-      console.log(`There was an error fetching the data. ERROR: ${err}`)
-    );
-};
-
-
-export const playSound = note => dispatch => {
-  let sineDing = soundEvent( note );
-  dispatch( audioActionCreators.emit( sineDing ) );
+    return fetch(path)
+        .then( response => response.json() )
+        .then( json => dispatch(loadResume(json)) )
+        .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
+        .then( panels => dispatch(preloadCarouselPanels(panels)) )
+        .then( fontLoader(() => dispatch(fontsDidLoad())) )
+        .catch( err => {
+            console.log(`There was an error fetching the data. ERROR: ${err}`);
+        });
 };

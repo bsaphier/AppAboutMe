@@ -24,3 +24,5 @@ export const CAROUSEL_LOAD_PANELS = 'CAROUSEL_LOAD_PANELS';
 export const SML = 'SML';
 export const MED = 'MED';
 export const LRG = 'LRG';
+export const PRT = 'PRT';
+export const LND = 'LND';

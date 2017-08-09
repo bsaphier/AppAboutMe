@@ -3,7 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Main from './components/Main';
-import { SML, MED, LRG } from './constants';
+import { SML, MED, LRG, PRT, LND } from './constants';
 import { loadAppWithSpinner } from './components/HOC';
 import { fetchData, openBurger, closeBurger, windowResize, sectionChange, toggleWelcome } from './actions';
 
@@ -38,6 +38,8 @@ const mapDispatchToProps = dispatch => ({
     resizeSML:            () => dispatch(windowResize(SML)),
     resizeMED:            () => dispatch(windowResize(MED)),
     resizeLRG:            () => dispatch(windowResize(LRG)),
+    resizePRT:            () => dispatch(windowResize(PRT)),
+    resizeLND:            () => dispatch(windowResize(LND)),
     closeBurger:   (section) => dispatch(closeBurger(section)),
     openBurger:    (section) => dispatch(openBurger(section)),
     sectionChange: (section) => dispatch(sectionChange(section)),
