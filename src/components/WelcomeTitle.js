@@ -45,7 +45,7 @@ class WelcomeTitle extends Component {
         return (
             <Motion style={this.state.motion}>
                 {(interpStyle) => (
-                    <div id="welcome" style={{...styles.cell, top: `${interpStyle.top}%`}}>
+                    <div id="welcome" style={{...styles.welcomeCell, top: `${interpStyle.top}%`}}>
                         <TitleText
                             hover={this.hover}
                             leave={this.leave}

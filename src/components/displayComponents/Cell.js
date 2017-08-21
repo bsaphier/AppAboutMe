@@ -1,17 +1,11 @@
 import React from 'react';
+import { styles } from '../../styles';
 
-const styles = {
-  cell: {
-    height: '100%',
-    overflow: 'hidden',
-    position: 'relative'
-  }
-};
 
 const Cell = ({ children, style, ...props }) => (
-  <div className="cell" style={{...styles.cell, ...style}} {...props}>
-    { children }
-  </div>
+    <div className="cell" style={{...styles.cell, ...style}} {...props}>
+        { children }
+    </div>
 );
 
 export default Cell;

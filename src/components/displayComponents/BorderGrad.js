@@ -1,22 +1,11 @@
 import React from 'react';
+import { styles } from '../../styles';
 
-const styles = {
-  sectionItem: {
-    overflow: 'hidden',
-    padding: '1rem 2rem',
-    border: '2px solid',
-    position: 'absolute',
-    zIndex: 9,
-    background: 'rgba(255, 255, 255, 1)',
-    borderImage: 'linear-gradient(to top right, rgb(255, 64, 64) 62%, rgb(252, 255, 88) 162%)',
-    borderImageSlice: 1
-  }
-};
 
 const BorderGrad = ({ children, style }) => (
-  <div style={{...styles.sectionItem, ...style}}>
-    { children }
-  </div>
+    <div style={{...styles.sectionItem, ...style}}>
+        { children }
+    </div>
 );
 
 export default BorderGrad;

@@ -1,32 +1,13 @@
 import React from 'react';
-
 import AboutPanel from './AboutPanel';
-//:TODO do I really want to load the images from here??
-import imgs from '../../../bin/images';
 import AboutSidebar from './AboutSidebar';
 import SectionFoot from '../../SectionFoot';
 import { buttons, Section, FillSection } from '../../displayComponents';
+import { styles } from '../../../styles';
 
 
 const { Button } = buttons;
-
 const SECTION_NAME = 'about';
-
-const styles = {
-  aboutBackground: {
-    position: 'absolute',
-    zIndex: 1,
-    top: -20,
-    left: -20,
-    width: '110%',
-    height: '110%',
-    backgroundSize: 'cover',
-    backgroundImage: `url(${imgs.spaceBg})`,
-
-    WebkitFilter: 'blur(4px)',
-    filter: 'blur(4px)',
-  }
-};
 
 const About = ({
   style,
@@ -42,7 +23,7 @@ const About = ({
 
   return (
     <Section id={SECTION_NAME}>
-      <div style={styles.aboutBackground} />
+      <div style={styles.resumeComponents.about.aboutBackground} />
 
       <AboutSidebar
         style={style}

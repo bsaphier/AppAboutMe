@@ -1,17 +1,6 @@
 import React from 'react';
+import { styles } from '../styles';
 
-const styles = {
-  footer: {
-    margin: '10px',
-    padding: '20px 10px',
-    fontSize: '0.8rem'
-  },
-  credit: {
-    width: '62%',
-    margin: '0 auto',
-    textAlign: 'center'
-  }
-};
 
 const Footer = () => {
   return (
