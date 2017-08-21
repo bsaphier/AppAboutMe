@@ -39081,46 +39081,46 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.welcome = undefined;
 
 var _reactMotion = __webpack_require__(25);
 
 var welcome = exports.welcome = {
-  initial: {
-    top: -42,
-    title0: 21,
-    title1: 13,
-    title2: 8,
-    title3: 5,
-    title4: 3,
-    title5: 2,
-    title6: 1,
-    title7: 1
-  },
-  exit: {
-    top: (0, _reactMotion.spring)(-42, _reactMotion.presets.stiff),
-    title0: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title1: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title2: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title3: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title4: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title5: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title6: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
-    title7: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly)
-  },
-  enter: {
-    top: (0, _reactMotion.spring)(42, _reactMotion.presets.stiff),
-    title0: (0, _reactMotion.spring)(-0.055, _reactMotion.presets.wobbly),
-    title1: (0, _reactMotion.spring)(0.175, _reactMotion.presets.gentle),
-    title2: (0, _reactMotion.spring)(-0.06, _reactMotion.presets.wobbly),
-    title3: (0, _reactMotion.spring)(-0.08, _reactMotion.presets.gentle),
-    title4: (0, _reactMotion.spring)(-0.048, _reactMotion.presets.gentle),
-    title5: (0, _reactMotion.spring)(-0.1, _reactMotion.presets.gentle),
-    title6: (0, _reactMotion.spring)(-0.091, _reactMotion.presets.gentle),
-    title7: (0, _reactMotion.spring)(-0.1, _reactMotion.presets.gentle)
-  }
+    initial: {
+        top: -42,
+        title0: 21,
+        title1: 13,
+        title2: 8,
+        title3: 5,
+        title4: 3,
+        title5: 2,
+        title6: 1,
+        title7: 1
+    },
+    exit: {
+        top: (0, _reactMotion.spring)(-42, _reactMotion.presets.stiff),
+        title0: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title1: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title2: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title3: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title4: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title5: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title6: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly),
+        title7: (0, _reactMotion.spring)(1, _reactMotion.presets.wobbly)
+    },
+    enter: {
+        top: (0, _reactMotion.spring)(42, _reactMotion.presets.stiff),
+        title0: (0, _reactMotion.spring)(-0.055, _reactMotion.presets.wobbly),
+        title1: (0, _reactMotion.spring)(0.175, _reactMotion.presets.gentle),
+        title2: (0, _reactMotion.spring)(-0.06, _reactMotion.presets.wobbly),
+        title3: (0, _reactMotion.spring)(-0.08, _reactMotion.presets.gentle),
+        title4: (0, _reactMotion.spring)(-0.048, _reactMotion.presets.gentle),
+        title5: (0, _reactMotion.spring)(-0.1, _reactMotion.presets.gentle),
+        title6: (0, _reactMotion.spring)(-0.091, _reactMotion.presets.gentle),
+        title7: (0, _reactMotion.spring)(-0.1, _reactMotion.presets.gentle)
+    }
 };
 
 /***/ }),
