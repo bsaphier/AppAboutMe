@@ -7,5 +7,6 @@ public/bundle.js.map
 public/bin/images/*
 
 src/_notInUse
+src/components/_inProgress
 
 node_modules

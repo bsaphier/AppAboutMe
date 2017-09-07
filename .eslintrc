@@ -1,16 +1,12 @@
 {
+  "parser": "babel-eslint",
   "extends": "fullstack/react",
+  "root": true,
   "rules": {
     "semi": [1, "always"],
-    "guard-for-in": "off",
     "react/prop-types": "off",
     "react/display-name": "off",
     "class-methods-use-this": "off",
     "id-length": ["warn", { "exceptions": ["a", "b", "c", "x", "y", "i"] }]
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
   }
 }
