@@ -6,7 +6,6 @@ import {
   SECTION_CHANGE,
   TOGGLE_WELCOME,
   TOGGLE_PROJECT_MODAL,
-  CAROUSEL_LOAD_PANELS
 } from '../constants';
 
 
@@ -16,7 +15,6 @@ const INIT_STATE = {
     currSection: 'home',
     fontsDidLoad: false,
     resumeDidLoad: false,
-    carouselPanelsDidLoad: false,
     projectModalOpen: false,
     media: LRG,
 };
@@ -34,9 +32,6 @@ export default (state = INIT_STATE, action) => {
         case RESUME_LOADED:
             nextState.resumeDidLoad = true;
             break;
-        case CAROUSEL_LOAD_PANELS:
-            nextState.carouselPanelsDidLoad = true;
-            break;
         case SECTION_CHANGE:
             nextState.currSection = action.section;
             break;
@@ -47,8 +42,8 @@ export default (state = INIT_STATE, action) => {
             nextState.projectModalOpen = !nextState.projectModalOpen;
             break;
         default:
-            return nextState;
+            break;
     }
-    nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad && nextState.carouselPanelsDidLoad);
+    nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad);
     return nextState;
 };

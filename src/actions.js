@@ -1,8 +1,6 @@
-import React from 'react';
 import { actionCreators as audioActionCreators } from 'react-redux-webaudio';
 import fontLoader from './bin/fontLoader';
-import ProjectPanel from './components/resumeComponents/projects/ProjectPanel';
-import { RESIZED, OPEN_BURGER, CLOSE_BURGER, FONTS_LOADED, CAROUSEL_INIT, RESUME_LOADED, SECTION_CHANGE, TOGGLE_WELCOME, CAROUSEL_ROTATE, CAROUSEL_RESIZE, CAROUSEL_LOAD_PANELS, TOGGLE_PROJECT_MODAL, CAROUSEL_ROTATE_AXIS } from './constants';
+import { RESIZED, OPEN_BURGER, CLOSE_BURGER, FONTS_LOADED, CAROUSEL_INIT, RESUME_LOADED, SECTION_CHANGE, TOGGLE_WELCOME, CAROUSEL_ROTATE, CAROUSEL_RESIZE, TOGGLE_PROJECT_MODAL, CAROUSEL_ROTATE_AXIS } from './constants';
 import { soundEvent } from './audio-funcs';
 
 
@@ -71,11 +69,6 @@ export const rotateCarousel = (rotation, currPanel) => ({
     rotation
 });
 
-// export const preloadCarouselPanels = (panels) => ({
-//     type: CAROUSEL_LOAD_PANELS,
-//     panels
-// });
-
 export const rotateAxisCarousel = ( axis = 'Y' ) => ({
     type: CAROUSEL_ROTATE_AXIS,
     axis
@@ -91,31 +84,15 @@ export const playSound = note => dispatch => {
     dispatch( audioActionCreators.emit( sineDing ) );
 };
 
-/*
-// guarantee that the background images have loaded before anything is displayed
-export const carouselPanelsCreator = projects => dispatch => {
-    const panels = projects.map( (project) => (
-        <ProjectPanel
-            key={`project-panel-${project.index}`}
-            project={project}
-        />
-    ));
-    return panels;
+export const loadResume = resumeData => dispatch => {
+    dispatch(resumeDidLoad(resumeData));
+    return resumeData;  // for use in a Promise chain i.e. fetchData
 };
-*/
-
-// export const loadResume = resumeData => dispatch => {
-//     dispatch(resumeDidLoad(resumeData));
-//     return resumeData;  // for use in a Promise chain i.e. fetchData
-// };
-
 
 export const fetchData = path => dispatch => {
     return fetch(path)
-        .then(response => dispatch( resumeDidLoad( response.json() )))
-        // .then( json => dispatch(loadResume(json)) )
-        // .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
-        // .then( panels => dispatch(preloadCarouselPanels(panels)) )
+        .then(response => response.json())
+        .then(json => dispatch(loadResume(json)))
         .then( fontLoader(() => dispatch( fontsDidLoad() )))
         .catch( err => {
             console.log(`There was an error fetching the data. ERROR: ${err}`);

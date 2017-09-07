@@ -31,7 +31,7 @@ export default class Main extends Component {
         this.burgerToggle = this.burgerToggle.bind(this);
         this.onMediaChange = this.onMediaChange.bind(this);
         this.getSectionOffsets = this.getSectionOffsets.bind(this);
-        
+
         /** window size, for styling **/
         this.sml = sml;
         this.med = med;
@@ -161,7 +161,7 @@ export default class Main extends Component {
     }
 
     render() {
-        const { panels, siteInfo, contact, resume: { about, skills, projects }, ...props } = this.props;
+        const { siteInfo, contact, resume: { about, skills, projects }, ...props } = this.props;
         return (
             <main style={{ fontFamily: '"Roboto", sans-serif' }}>
                 <RRWAEngine />
@@ -176,7 +176,7 @@ export default class Main extends Component {
                     skills={skills}
                     contact={contact}
                     siteInfo={siteInfo}
-                    projects={{ projects, carouselPanels: panels}}
+                    projects={projects}
                     burgerToggle={this.burgerToggle}
                     {...props} />
                 <Footer />

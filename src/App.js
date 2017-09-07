@@ -21,10 +21,9 @@ if (process.env.NODE_ENV !== 'production') { resumePath = '/public/resume.json';
 const RESUME_PATH = resumePath;
 
 
-const mapStateToProps = ({ app, resume, burger, carousel }) => ({
+const mapStateToProps = ({ app, resume, burger }) => ({
     burger: burger,
     resume: resume.resume,
-    panels: carousel.panels,
     contact: resume.contact,
     siteInfo: resume.siteInfo,
     mediaSize: app.media,

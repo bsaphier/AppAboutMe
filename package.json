@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "npm run watch-server & npm run build-watch",
-    "build": "webpack --config webpack.config.prod.js -p",
+    "build": "webpack --config webpack.config.prod.js --optimize-minize --define process.env.NODE_ENV=\"'production'\"",
     "build-watch": "webpack -w",
     "watch-server": "nodemon server/start.js --ignore src",
     "test": "echo \"Write some tests, FOOL!\" && exit 1"

@@ -41,7 +41,7 @@ const ProjectsSidebar = ({ style, rotate, theta, content, rotation, currPanel, b
             burger={{ open: burgerOpen }}
             style={{ background: colors.AMETHYST }}>
             <Title style={style.title}>
-                <span style={styles.resumeComponents.projects}>Projects</span>
+                <span style={styles.resumeComponents.projects.sidebarTitle}>Projects</span>
                 <span>Projects</span>
             </Title>
             <Divider />

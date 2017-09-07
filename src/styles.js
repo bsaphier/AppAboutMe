@@ -345,7 +345,7 @@ export const styles = {
             sidebarTitle: {
                 position: 'absolute',
                 zIndex: -1,
-                textShadow2
+                textShadow: textShadow2
             }
         },
         /* Skills */

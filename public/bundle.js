@@ -807,7 +807,7 @@ var styles = exports.styles = {
             sidebarTitle: {
                 position: 'absolute',
                 zIndex: -1,
-                textShadow2: textShadow2
+                textShadow: textShadow2
             }
         },
         /* Skills */
@@ -4678,21 +4678,13 @@ exports.loadAppWithSpinner = _loadAppWithSpinner2.default;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.fetchData = exports.playSound = exports.rotateAxisCarousel = exports.rotateCarousel = exports.resizeCarousel = exports.createCarousel = exports.toggleProjectModal = exports.resumeDidLoad = exports.fontsDidLoad = exports.toggleWelcome = exports.closeBurger = exports.openBurger = exports.windowResize = exports.sectionChange = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
+exports.fetchData = exports.loadResume = exports.playSound = exports.rotateAxisCarousel = exports.rotateCarousel = exports.resizeCarousel = exports.createCarousel = exports.toggleProjectModal = exports.resumeDidLoad = exports.fontsDidLoad = exports.toggleWelcome = exports.closeBurger = exports.openBurger = exports.windowResize = exports.sectionChange = undefined;
 
 var _reactReduxWebaudio = __webpack_require__(83);
 
 var _fontLoader = __webpack_require__(387);
 
 var _fontLoader2 = _interopRequireDefault(_fontLoader);
-
-var _ProjectPanel = __webpack_require__(389);
-
-var _ProjectPanel2 = _interopRequireDefault(_ProjectPanel);
 
 var _constants = __webpack_require__(26);
 
@@ -4791,11 +4783,6 @@ var rotateCarousel = exports.rotateCarousel = function rotateCarousel(rotation, 
     };
 };
 
-// export const preloadCarouselPanels = (panels) => ({
-//     type: CAROUSEL_LOAD_PANELS,
-//     panels
-// });
-
 var rotateAxisCarousel = exports.rotateAxisCarousel = function rotateAxisCarousel() {
     var axis = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Y';
     return {
@@ -4815,34 +4802,20 @@ var playSound = exports.playSound = function playSound(note) {
     };
 };
 
-/*
-// guarantee that the background images have loaded before anything is displayed
-export const carouselPanelsCreator = projects => dispatch => {
-    const panels = projects.map( (project) => (
-        <ProjectPanel
-            key={`project-panel-${project.index}`}
-            project={project}
-        />
-    ));
-    return panels;
+var loadResume = exports.loadResume = function loadResume(resumeData) {
+    return function (dispatch) {
+        dispatch(resumeDidLoad(resumeData));
+        return resumeData; // for use in a Promise chain i.e. fetchData
+    };
 };
-*/
-
-// export const loadResume = resumeData => dispatch => {
-//     dispatch(resumeDidLoad(resumeData));
-//     return resumeData;  // for use in a Promise chain i.e. fetchData
-// };
-
 
 var fetchData = exports.fetchData = function fetchData(path) {
     return function (dispatch) {
         return fetch(path).then(function (response) {
-            return dispatch(resumeDidLoad(response.json()));
-        })
-        // .then( json => dispatch(loadResume(json)) )
-        // .then( ({ resume: { projects } }) => dispatch(carouselPanelsCreator(projects)) )
-        // .then( panels => dispatch(preloadCarouselPanels(panels)) )
-        .then((0, _fontLoader2.default)(function () {
+            return response.json();
+        }).then(function (json) {
+            return dispatch(loadResume(json));
+        }).then((0, _fontLoader2.default)(function () {
             return dispatch(fontsDidLoad());
         })).catch(function (err) {
             console.log('There was an error fetching the data. ERROR: ' + err);
@@ -30711,12 +30684,10 @@ var RESUME_PATH = resumePath;
 var mapStateToProps = function mapStateToProps(_ref) {
     var app = _ref.app,
         resume = _ref.resume,
-        burger = _ref.burger,
-        carousel = _ref.carousel;
+        burger = _ref.burger;
     return {
         burger: burger,
         resume: resume.resume,
-        panels: carousel.panels,
         contact: resume.contact,
         siteInfo: resume.siteInfo,
         mediaSize: app.media,
@@ -33278,14 +33249,13 @@ var Main = function (_Component) {
         key: 'render',
         value: function render() {
             var _props3 = this.props,
-                panels = _props3.panels,
                 siteInfo = _props3.siteInfo,
                 contact = _props3.contact,
                 _props3$resume = _props3.resume,
                 about = _props3$resume.about,
                 skills = _props3$resume.skills,
                 projects = _props3$resume.projects,
-                props = _objectWithoutProperties(_props3, ['panels', 'siteInfo', 'contact', 'resume']);
+                props = _objectWithoutProperties(_props3, ['siteInfo', 'contact', 'resume']);
 
             return _react2.default.createElement(
                 'main',
@@ -33306,7 +33276,7 @@ var Main = function (_Component) {
                     skills: skills,
                     contact: contact,
                     siteInfo: siteInfo,
-                    projects: { projects: projects, carouselPanels: panels },
+                    projects: projects,
                     burgerToggle: this.burgerToggle
                 }, props)),
                 _react2.default.createElement(_Footer2.default, null)
@@ -39791,6 +39761,10 @@ var _ProjectsSidebar = __webpack_require__(403);
 
 var _ProjectsSidebar2 = _interopRequireDefault(_ProjectsSidebar);
 
+var _ProjectPanel = __webpack_require__(389);
+
+var _ProjectPanel2 = _interopRequireDefault(_ProjectPanel);
+
 var _displayComponents = __webpack_require__(12);
 
 var _HOC = __webpack_require__(35);
@@ -39800,8 +39774,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var Carousel3D = void 0,
-    cachedCarouselPanels = void 0;
-
+    loaded = false;
 var Button = _displayComponents.buttons.Button;
 
 var SECTION_NAME = 'projects';
@@ -39809,14 +39782,16 @@ var SECTION_NAME = 'projects';
 var Projects = function Projects(_ref) {
     var style = _ref.style,
         burger = _ref.burger,
-        _ref$content = _ref.content,
-        projects = _ref$content.projects,
-        carouselPanels = _ref$content.carouselPanels,
+        content = _ref.content,
         props = _objectWithoutProperties(_ref, ['style', 'burger', 'content']);
 
-    if (cachedCarouselPanels !== carouselPanels) {
-        cachedCarouselPanels = carouselPanels;
-        Carousel3D = (0, _HOC.carousel3D)(cachedCarouselPanels);
+    if (!loaded) {
+        var carouselPanels = content.map(function (project) {
+            return _react2.default.createElement(_ProjectPanel2.default, { key: 'project-panel-' + project.index, project: project });
+        });
+        Carousel3D = (0, _HOC.carousel3D)(carouselPanels);
+        // ensure that the Carousel is only created once
+        loaded = true;
     }
     var toggleBurger = function toggleBurger() {
         if (burger[SECTION_NAME]) {
@@ -39831,7 +39806,7 @@ var Projects = function Projects(_ref) {
         _react2.default.createElement(_ProjectsSidebar2.default, {
             style: style,
             burgerOpen: burger.projects,
-            content: projects }),
+            content: content }),
         _react2.default.createElement(
             _displayComponents.FillSection,
             { style: { padding: 0 } },
@@ -39845,7 +39820,7 @@ var Projects = function Projects(_ref) {
                         position: 'absolute',
                         top: '5%',
                         right: '5%' } },
-                'III'
+                'placeholder'
             ),
             _react2.default.createElement(_ProjectModal2.default, null),
             _react2.default.createElement(Carousel3D, null),
@@ -40069,7 +40044,7 @@ var ProjectsSidebar = function ProjectsSidebar(_ref) {
             { style: style.title },
             _react2.default.createElement(
                 'span',
-                { style: _styles.styles.resumeComponents.projects },
+                { style: _styles.styles.resumeComponents.projects.sidebarTitle },
                 'Projects'
             ),
             _react2.default.createElement(
@@ -40606,7 +40581,6 @@ var INIT_STATE = {
     currSection: 'home',
     fontsDidLoad: false,
     resumeDidLoad: false,
-    carouselPanelsDidLoad: false,
     projectModalOpen: false,
     media: _constants.LRG
 };
@@ -40626,9 +40600,6 @@ exports.default = function () {
         case _constants.RESUME_LOADED:
             nextState.resumeDidLoad = true;
             break;
-        case _constants.CAROUSEL_LOAD_PANELS:
-            nextState.carouselPanelsDidLoad = true;
-            break;
         case _constants.SECTION_CHANGE:
             nextState.currSection = action.section;
             break;
@@ -40639,9 +40610,9 @@ exports.default = function () {
             nextState.projectModalOpen = !nextState.projectModalOpen;
             break;
         default:
-            return nextState;
+            break;
     }
-    nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad && nextState.carouselPanelsDidLoad);
+    nextState.isLoading = !(nextState.fontsDidLoad && nextState.resumeDidLoad);
     return nextState;
 };
 
@@ -40712,7 +40683,7 @@ exports.default = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -40720,32 +40691,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _constants = __webpack_require__(26);
 
 var initialState = {
-  name: '',
-  contact: {},
-  resume: {},
-  siteInfo: '',
-  portfolio: {}
+    name: '',
+    contact: {},
+    resume: {},
+    siteInfo: '',
+    portfolio: {}
 };
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
 
-
-  var nextState = _extends({}, state);
-
-  switch (action.type) {
-
-    case _constants.RESUME_LOADED:
-      nextState.name = action.name;
-      nextState.resume = action.resume;
-      nextState.contact = action.contact;
-      nextState.siteInfo = action.siteInfo;
-      return nextState;
-
-    default:
-      return nextState;
-  }
+    var nextState = _extends({}, state);
+    switch (action.type) {
+        case _constants.RESUME_LOADED:
+            nextState.name = action.name;
+            nextState.resume = action.resume;
+            nextState.contact = action.contact;
+            nextState.siteInfo = action.siteInfo;
+            return nextState;
+        default:
+            return nextState;
+    }
 };
 
 /***/ }),
