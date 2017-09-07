@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "npm run watch-server & npm run build-watch",
-    "build": "webpack --config webpack.config.prod.js --optimize-minize --define process.env.NODE_ENV=\"'production'\"",
+    "build": "webpack --config webpack.config.prod.js --optimize-minimize --define process.env.NODE_ENV=\"'production'\"",
     "build-watch": "webpack -w",
     "watch-server": "nodemon server/start.js --ignore src",
     "test": "echo \"Write some tests, FOOL!\" && exit 1"
@@ -36,8 +36,8 @@
     "webpack": "^3.5.6"
   },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0-rc.2",
+    "react-dom": "^16.0.0-rc.2",
     "react-motion": "^0.4.8",
     "react-redux": "^5.0.6",
     "react-redux-webaudio": "^1.0.1",
