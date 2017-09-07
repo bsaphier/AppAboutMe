@@ -13,15 +13,15 @@ import Cell from './Cell';
 
 
 export {
-  Cell,
-  Icon,
-  Title,
-  buttons,
-  Hexagon,
-  Section,
-  Divider,
-  TitleText,
-  BorderGrad,
-  FillSection,
-  SideSection,
+    Cell,
+    Icon,
+    Title,
+    buttons,
+    Hexagon,
+    Section,
+    Divider,
+    TitleText,
+    BorderGrad,
+    FillSection,
+    SideSection,
 };

@@ -1,14 +1,8 @@
-import {
-  CAROUSEL_INIT,
-  CAROUSEL_ROTATE,
-  CAROUSEL_RESIZE,
-  CAROUSEL_LOAD_PANELS,
-  CAROUSEL_ROTATE_AXIS
-} from '../constants';
+import { CAROUSEL_INIT, CAROUSEL_ROTATE, CAROUSEL_RESIZE, CAROUSEL_ROTATE_AXIS } from '../constants';
 
 
 const initialState = {
-  // these get set when the component mounts and only stateful for future use
+  // these get set when the component mounts and only stored in state for future use
   theta: 0,
   axis: 'Y',
 
@@ -21,7 +15,7 @@ const initialState = {
   currPanel: 0,
 
   // store the Panel components in the reducer to preload the images when the App loads
-  panels: []
+  // panels: []
 };
 
 
@@ -52,9 +46,9 @@ export default (state = initialState, { type, ...action }) => {
       nextState.radius = action.radius;
       return nextState;
 
-    case CAROUSEL_LOAD_PANELS:
-      nextState.panels = action.panels;
-      return nextState;
+    // case CAROUSEL_LOAD_PANELS:
+    //   nextState.panels = action.panels;
+    //   return nextState;
 
     default:
       return nextState;
